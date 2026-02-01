@@ -25,7 +25,8 @@
     h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
 
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
-    .logo{display:flex;align-items:center;gap:1rem}
+    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit}
+    .logo:focus{outline:2px solid rgba(212,175,55,0.35);outline-offset:6px}
     .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
     .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
     .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
@@ -36,7 +37,7 @@
     .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;text-decoration:none;display:inline-block}
     .nav-cta:hover{background:var(--gold);color:var(--black)}
 
-    .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+    .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;background:transparent;border:none;padding:0}
     .mobile-toggle span{width:25px;height:1px;background:var(--gold);transition:all 0.3s}
     .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--black);flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:1000}
     .mobile-menu.active{display:flex}
@@ -173,12 +174,15 @@
 
 <body>
   <nav>
-    <div class="logo">
+    <!-- Make logo clickable back to home -->
+    <a class="logo" href="index.html" aria-label="Pinnacle Risk Advisors Home">
       <div class="logo-icon">P</div>
       <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-    </div>
+    </a>
 
+    <!-- Desktop nav (Home tab added) -->
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About Us</a></li>
       <li><a href="#team">Team</a></li>
@@ -193,7 +197,9 @@
     </button>
   </nav>
 
+  <!-- Mobile menu (Home tab added) -->
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" data-close>Home</a>
     <a href="#services" data-close>Services</a>
     <a href="#about" data-close>About</a>
     <a href="#team" data-close>Team</a>
@@ -434,12 +440,22 @@
         <ul class="contact-list">
           <li>
             <div class="contact-icon">☎</div>
-            <div><div class="contact-label">Direct Line</div><div class="contact-value"><a href="tel:9432393439" style="color:inherit;text-decoration:none">(943) 239-3439</a></div></div>
+            <div>
+              <div class="contact-label">Direct Line</div>
+              <div class="contact-value">
+                <a href="tel:9432393439" style="color:inherit;text-decoration:none">(943) 239-3439</a>
+              </div>
+            </div>
           </li>
 
           <li>
             <div class="contact-icon">✉</div>
-            <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:dbrown@pinnacleriskad.com" style="color:inherit;text-decoration:none">dbrown@pinnacleriskad.com</a></div></div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:dbrown@pinnacleriskad.com" style="color:inherit;text-decoration:none">dbrown@pinnacleriskad.com</a>
+              </div>
+            </div>
           </li>
 
           <li>
@@ -485,7 +501,7 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
-        <div class="logo">
+        <div class="logo" style="text-decoration:none;color:inherit">
           <div class="logo-icon">P</div>
           <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
         </div>
@@ -541,6 +557,9 @@
     (function () {
       const toggle = document.getElementById('mobileToggle');
       const menu = document.getElementById('mobileMenu');
+
+      // Prevent errors if elements change
+      if (!toggle || !menu) return;
 
       function setOpen(open) {
         menu.classList.toggle('active', open);
