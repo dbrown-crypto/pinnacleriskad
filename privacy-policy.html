@@ -6,100 +6,276 @@
   <title>Privacy Policy | Pinnacle Risk Advisors LLC</title>
   <meta name="description" content="Privacy Policy for Pinnacle Risk Advisors LLC." />
   <link rel="canonical" href="https://pinnacleriskad.com/privacy-policy.html" />
+
+  <meta property="og:title" content="Privacy Policy | Pinnacle Risk Advisors LLC" />
+  <meta property="og:description" content="Learn how Pinnacle Risk Advisors LLC collects, uses, and protects your information." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pinnacleriskad.com/privacy-policy.html" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--white:#fff;--text-light:#b0b0b0}
+    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.75}
-    main{max-width:900px;margin:0 auto;padding:5.5rem 5% 4rem}
-    h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
-    h1{font-size:2.6rem;margin-bottom:0.25rem}
-    .meta{color:var(--text-light);font-size:0.95rem;margin-bottom:2rem}
-    h2{font-size:1.75rem;margin-top:2.25rem;margin-bottom:0.75rem;color:var(--white)}
-    h3{font-size:1.25rem;margin-top:1.75rem;margin-bottom:0.5rem;color:var(--gold)}
+    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.8}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
+    a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
+    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit}
+    .logo:focus{outline:2px solid rgba(212,175,55,0.35);outline-offset:6px}
+    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
+    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
+    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
+
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;text-decoration:none;display:inline-block}
+    .nav-cta:hover{background:var(--gold);color:var(--black)}
+
+    .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;background:transparent;border:none;padding:0}
+    .mobile-toggle span{width:25px;height:1px;background:var(--gold);transition:all 0.3s}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--black);flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:1000}
+    .mobile-menu.active{display:flex}
+    .mobile-menu a{color:var(--white);text-decoration:none;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase}
+    .mobile-menu a:hover{color:var(--gold)}
+
+    main{max-width:980px;margin:0 auto;padding:7.5rem 5% 4rem}
+    .tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.75rem}
+    h1{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:0.75rem}
+    .meta{color:var(--text-muted);font-size:0.95rem;margin-bottom:2.25rem}
+
+    .card{background:var(--charcoal);border:1px solid rgba(212,175,55,0.12);padding:2.5rem}
+    h2{font-size:1.65rem;margin-top:2rem;margin-bottom:0.75rem}
+    h3{font-size:1.1rem;color:var(--gold);margin-top:1.5rem;margin-bottom:0.5rem}
     p,li{color:var(--text-light);font-size:0.98rem}
-    ul{padding-left:1.25rem;margin-top:0.75rem}
-    a{color:var(--gold);text-decoration:underline}
-    .toplinks{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.25rem}
-    .btn{border:1px solid rgba(212,175,55,0.35);padding:0.65rem 1rem;color:var(--white);text-decoration:none;letter-spacing:1px;font-size:0.85rem}
-    .btn:hover{border-color:var(--gold);color:var(--gold)}
-    .card{background:var(--charcoal);border:1px solid rgba(255,255,255,0.06);padding:1.25rem 1.25rem;margin-top:1.25rem}
+    ul{padding-left:1.25rem;margin:0.75rem 0}
+
+    .notice{border-left:3px solid rgba(212,175,55,0.65);padding:1rem 1.25rem;background:rgba(10,10,10,0.35);margin:1.25rem 0}
+    .notice p{margin:0}
+
+    footer{background:var(--charcoal);padding:4rem 5% 1.5rem;border-top:1px solid rgba(212,175,55,0.1)}
+    .footer-content{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+    .footer-brand p{color:var(--text-muted);font-size:0.85rem;margin-top:1.5rem;line-height:1.7}
+    .footer-column h4{font-size:0.7rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
+    .footer-column ul{list-style:none}
+    .footer-column li{margin-bottom:0.75rem}
+    .footer-column a{color:var(--text-light);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
+    .footer-column a:hover{color:var(--gold)}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding-top:1.5rem}
+    .footer-bottom p{color:var(--text-muted);font-size:0.75rem}
+    .footer-bottom a{color:var(--text-muted);text-decoration:none}
+    .footer-bottom a:hover{color:var(--gold)}
+    .footer-social{display:flex;gap:0.75rem}
+    .footer-social a{width:40px;height:40px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;transition:all 0.3s}
+    .footer-social a:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+
+    @media(max-width:1024px){.footer-content{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.mobile-toggle{display:flex}.footer-content{grid-template-columns:1fr;text-align:center}.footer-bottom{flex-direction:column;gap:1rem}}
   </style>
 </head>
-<body>
-  <main>
-    <div class="toplinks">
-      <a class="btn" href="index.html">← Home</a>
-      <a class="btn" href="terms-of-service.html">Terms of Service</a>
-      <a class="btn" href="quote.html">Get a Quote</a>
-    </div>
 
-    <h1>Privacy Policy</h1>
+<body>
+  <nav>
+    <a class="logo" href="index.html" aria-label="Pinnacle Risk Advisors Home">
+      <div class="logo-icon">P</div>
+      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="index.html#testimonials">Testimonials</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <a href="quote.html" class="nav-cta">Get a Quote</a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" data-close>Home</a>
+    <a href="index.html#services" data-close>Services</a>
+    <a href="index.html#about" data-close>About</a>
+    <a href="index.html#team" data-close>Team</a>
+    <a href="index.html#testimonials" data-close>Testimonials</a>
+    <a href="index.html#contact" data-close>Contact</a>
+    <a href="quote.html" data-close>Get a Quote</a>
+  </div>
+
+  <main>
+    <div class="tag">Privacy Policy</div>
+    <h1>Pinnacle Risk Advisors LLC</h1>
     <div class="meta"><strong>Effective Date:</strong> January 31, 2026</div>
 
-    <p>Pinnacle Risk Advisors LLC ("we," "us," "our") is committed to protecting your privacy.</p>
-
-    <h2>Information We Collect</h2>
-    <p>We collect information you provide when filling out forms, including:</p>
-    <ul>
-      <li>Name, email address, phone number</li>
-      <li>Company name and business details</li>
-      <li>Coverage preferences and insurance needs</li>
-      <li>Communications with us via email, phone, or text</li>
-    </ul>
-
-    <h2>How We Use Your Information</h2>
-    <ul>
-      <li>Provide insurance quotes and policy services</li>
-      <li>Respond to your inquiries and requests</li>
-      <li>Send relevant information about insurance products</li>
-      <li>Communicate via SMS if you provide express consent</li>
-      <li>Comply with legal and regulatory requirements</li>
-      <li>Improve our services and website</li>
-    </ul>
-
-    <h2>SMS/Text Message Communications (TCPA Compliance)</h2>
     <div class="card">
-      <p><strong>Consent:</strong> By providing your phone number and checking the SMS consent box, you expressly consent to receive automated text messages from Pinnacle Risk Advisors LLC at the number provided. <strong>Consent is not a condition of purchase.</strong></p>
-      <p><strong>Message Frequency:</strong> Message frequency varies based on your interaction with us. You may receive appointment reminders, quote updates, policy information, and promotional messages.</p>
-      <p><strong>Message &amp; Data Rates:</strong> Standard message and data rates may apply based on your mobile carrier plan.</p>
-      <p><strong>Opt-Out:</strong> You may opt out at any time by replying STOP to any message. You will receive a confirmation message of your opt-out.</p>
-      <p><strong>Help:</strong> For assistance, reply HELP or contact us at (943) 239-3439 or <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>.</p>
-      <p><strong>Supported Carriers:</strong> Compatible with major US carriers. Carrier fees may apply.</p>
-      <p><strong>Age Restriction:</strong> You must be 18 years or older to consent to receive text messages.</p>
+      <p>
+        Pinnacle Risk Advisors LLC (“Pinnacle,” “we,” “us,” “our”) is committed to protecting your privacy.
+        This Privacy Policy explains what information we collect, how we use it, and the choices you may have.
+      </p>
+
+      <h2>1. Information We Collect</h2>
+      <p>We may collect information you provide directly to us, including:</p>
+      <ul>
+        <li>Name, email address, phone number</li>
+        <li>Company name and business details</li>
+        <li>Coverage preferences and insurance needs</li>
+        <li>Communications with us (email, phone, SMS)</li>
+      </ul>
+
+      <h3>Information Collected Automatically</h3>
+      <p>
+        Our website may collect limited technical information automatically (for example, browser type, device type, and basic usage analytics)
+        to help maintain and improve the Site.
+      </p>
+
+      <h2>2. How We Use Your Information</h2>
+      <ul>
+        <li>Provide quotes, policy services, and insurance support</li>
+        <li>Respond to inquiries and requests</li>
+        <li>Communicate about your quote, policy, or service needs</li>
+        <li>Improve website functionality and user experience</li>
+        <li>Comply with legal and regulatory requirements</li>
+      </ul>
+
+      <h2>3. SMS/Text Messaging (TCPA)</h2>
+      <div class="notice">
+        <p>
+          <strong>Consent:</strong> If you check the SMS consent box on our forms, you expressly consent to receive text messages from Pinnacle Risk Advisors LLC
+          at the number provided. Consent is not a condition of purchase.
+        </p>
+      </div>
+      <ul>
+        <li><strong>Message frequency:</strong> varies based on your interaction with us</li>
+        <li><strong>Rates:</strong> message and data rates may apply</li>
+        <li><strong>Opt out:</strong> reply <strong>STOP</strong> to unsubscribe</li>
+        <li><strong>Help:</strong> reply <strong>HELP</strong> or contact us directly</li>
+        <li><strong>Eligibility:</strong> you must be 18+ to consent</li>
+      </ul>
+
+      <h2>4. Information Sharing</h2>
+      <p>We do not sell your personal information. We may share information with:</p>
+      <ul>
+        <li>Insurance carriers for quote and policy purposes</li>
+        <li>Service providers that support our operations (e.g., form processing)</li>
+        <li>Legal authorities when required by law</li>
+      </ul>
+
+      <h2>5. Data Security</h2>
+      <p>
+        We implement reasonable administrative, technical, and physical safeguards designed to protect your information.
+        However, no method of transmission or storage is 100% secure.
+      </p>
+
+      <h2>6. Your Choices and Rights</h2>
+      <ul>
+        <li>Request access to the personal information we maintain about you</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion (subject to legal/retention requirements)</li>
+        <li>Opt out of marketing communications at any time</li>
+      </ul>
+
+      <h2>7. Cookies and Tracking</h2>
+      <p>
+        Our website may use cookies for basic functionality and analytics. You can control cookies through your browser settings.
+      </p>
+
+      <h2>8. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. The effective date indicates the most recent revision.
+      </p>
+
+      <h2>9. Contact Us</h2>
+      <p>
+        <strong>Pinnacle Risk Advisors LLC</strong><br />
+        Phone: <a href="tel:9432393439">(943) 239-3439</a><br />
+        Email: <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>
+      </p>
+
+      <p style="margin-top:2rem;color:var(--text-muted);font-size:0.9rem">
+        Related: <a href="terms-of-service.html">Terms of Service</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo" style="text-decoration:none;color:inherit">
+          <div class="logo-icon">P</div>
+          <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
+        </div>
+        <p>A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Commercial Insurance</a></li>
+          <li><a href="index.html#services">Property Insurance</a></li>
+          <li><a href="index.html#services">Casualty Insurance</a></li>
+          <li><a href="index.html#services">Trucking Insurance</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#team">Team</a></li>
+          <li><a href="index.html#testimonials">Testimonials</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:9432393439">(943) 239-3439</a></li>
+          <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
+        </ul>
+      </div>
     </div>
 
-    <h2>Information Sharing</h2>
-    <p>We do not sell your personal information. We may share your information with:</p>
-    <ul>
-      <li>Insurance carriers for quote and policy purposes</li>
-      <li>Service providers who assist our business operations</li>
-      <li>Legal authorities when required by law</li>
-    </ul>
+    <div class="footer-bottom">
+      <p>
+        © 2026 Pinnacle Risk Advisors LLC. All rights reserved. |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-of-service.html">Terms of Service</a>
+      </p>
 
-    <h2>Data Security</h2>
-    <p>We implement reasonable security measures to protect your information from unauthorized access, disclosure, or destruction.</p>
+      <div class="footer-social" aria-label="Social links">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">𝕏</a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+      </div>
+    </div>
+  </footer>
 
-    <h2>Your Rights</h2>
-    <p>You have the right to:</p>
-    <ul>
-      <li>Access the personal information we hold about you</li>
-      <li>Request correction of inaccurate information</li>
-      <li>Request deletion of your information (subject to legal retention requirements)</li>
-      <li>Opt out of marketing communications at any time</li>
-    </ul>
+  <script>
+    (function () {
+      const toggle = document.getElementById('mobileToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
 
-    <h2>Cookies and Tracking</h2>
-    <p>Our website may use cookies for analytics and functionality. You can control cookies through your browser settings.</p>
+      function setOpen(open) {
+        menu.classList.toggle('active', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.setAttribute('aria-hidden', String(!open));
+      }
 
-    <h2>Changes to This Policy</h2>
-    <p>We may update this Privacy Policy periodically. The effective date at the top indicates the last revision.</p>
-
-    <h2>Contact Us</h2>
-    <p><strong>Pinnacle Risk Advisors LLC</strong><br>
-      Phone: (943) 239-3439<br>
-      Email: <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>
-    </p>
-  </main>
+      toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
+      menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    })();
+  </script>
 </body>
 </html>
