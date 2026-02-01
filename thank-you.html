@@ -1,45 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You | Pinnacle Risk Advisors LLC</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--white:#fff;--text-light:#b0b0b0}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
-.container{max-width:600px}
-.checkmark{width:100px;height:100px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:3rem;color:var(--gold)}
-h1{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;margin-bottom:1.5rem}
-h1 em{color:var(--gold);font-style:italic}
-p{color:var(--text-light);font-size:1rem;line-height:1.8;margin-bottom:2rem}
-.btn{background:var(--gold);color:var(--black);padding:1rem 2.5rem;font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all 0.3s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,175,55,0.3)}
-.contact-info{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1)}
-.contact-info p{margin-bottom:0.5rem;font-size:0.9rem}
-.contact-info a{color:var(--gold);text-decoration:none}
-.contact-info a:hover{text-decoration:underline}
-.logo{display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:3rem}
-.logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--gold)}
-.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Thank You | Pinnacle Risk Advisors LLC</title>
+  <meta name="description" content="Thank you for contacting Pinnacle Risk Advisors LLC. We will respond within 24 hours." />
+  <link rel="canonical" href="https://pinnacleriskad.com/thank-you.html" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.7}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
+    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit}
+    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
+    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
+    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
+    .nav-links{display:flex;gap:1rem;align-items:center}
+    .nav-links a{color:var(--text-light);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.25rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;text-decoration:none}
+    .nav-cta:hover{background:var(--gold);color:var(--black)}
+
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 5% 4rem;background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.08) 0%,transparent 50%),linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
+    .card{max-width:900px;width:100%;background:rgba(26,26,26,0.85);border:1px solid rgba(212,175,55,0.12);padding:3.25rem 2.5rem;text-align:center}
+    .tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem}
+    h1{font-size:clamp(2.2rem,4vw,3.3rem);font-weight:300;line-height:1.1;margin-bottom:0.75rem}
+    h1 em{color:var(--gold);font-style:italic}
+    .sub{color:var(--text-light);font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;margin-bottom:1.5rem}
+    .info{max-width:680px;margin:0 auto;color:var(--text-light);font-size:0.95rem;line-height:1.9}
+
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2.25rem 0 2.5rem}
+    .step{border:1px solid rgba(255,255,255,0.06);padding:1.5rem 1.25rem;background:rgba(10,10,10,0.35);text-align:left}
+    .step .n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:rgba(212,175,55,0.25);margin-bottom:0.5rem}
+    .step h3{font-size:1.25rem;margin-bottom:0.35rem}
+    .step p{color:var(--text-light);font-size:0.9rem;line-height:1.7}
+
+    .btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+    .btn-lux{background:var(--gold);color:var(--black);padding:1rem 2.2rem;font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block}
+    .btn-lux:hover{background:var(--gold-light);transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--white);padding:1rem 2.2rem;font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.25);text-decoration:none;transition:all 0.3s}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+    .contactline{margin-top:1.75rem;color:var(--text-muted);font-size:0.9rem}
+    .contactline a{color:var(--gold);text-decoration:underline}
+
+    footer{background:var(--charcoal);padding:2.5rem 5% 2rem;border-top:1px solid rgba(212,175,55,0.1)}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+    .footer-inner p{color:var(--text-muted);font-size:0.75rem}
+    .footer-inner a{color:var(--text-muted);text-decoration:none}
+    .footer-inner a:hover{color:var(--gold)}
+
+    @media(max-width:900px){.steps{grid-template-columns:1fr}}
+  </style>
 </head>
+
 <body>
-<div class="container">
-<div class="logo">
-<div class="logo-icon">P</div>
-<div class="logo-text">Pinnacle Risk Advisors</div>
-</div>
-<div class="checkmark">✓</div>
-<h1>Thank You for Your <em>Quote Request!</em></h1>
-<p>We've received your information and will be in touch within 24 hours. One of our advisors will review your needs and provide you with a customized insurance quote.</p>
-<a href="https://pinnacleriskad.com" class="btn">Return to Homepage</a>
-<div class="contact-info">
-<p>Need immediate assistance?</p>
-<p><a href="tel:9432393439">(943) 239-3439</a> | <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></p>
-</div>
-</div>
+  <nav>
+    <a class="logo" href="index.html" aria-label="Pinnacle Risk Advisors Home">
+      <div class="logo-icon">P</div>
+      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
+    </a>
+
+    <div class="nav-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a class="nav-cta" href="quote.html">Get a Quote</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="tag">Submission Received</div>
+      <h1>Thank You — Your Request Is <em>Confirmed</em></h1>
+      <p class="sub">We’ll respond within 24 hours.</p>
+
+      <p class="info">
+        We’ve received your information and a Pinnacle advisor will contact you shortly.
+        If you requested an insurance quote, we may reach out for a few details to ensure accuracy.
+      </p>
+
+      <div class="steps" aria-label="What happens next">
+        <div class="step">
+          <div class="n">01</div>
+          <h3>Review</h3>
+          <p>We review your submission and identify the best carrier options based on your operations.</p>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <h3>Clarify</h3>
+          <p>If needed, we’ll contact you for missing details (vehicles, payroll, locations, limits, etc.).</p>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <h3>Quote</h3>
+          <p>You’ll receive a tailored quote and recommendations with next steps to bind coverage.</p>
+        </div>
+      </div>
+
+      <div class="btns">
+        <a class="btn-lux" href="quote.html">Request Another Quote</a>
+        <a class="btn-outline" href="index.html">Return to Homepage</a>
+      </div>
+
+      <div class="contactline">
+        Need help now? Call <a href="tel:9432393439">(943) 239-3439</a> or email
+        <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
+      <p>
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-of-service.html">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
