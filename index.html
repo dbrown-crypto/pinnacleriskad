@@ -3,252 +3,677 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
   <title>Pinnacle Risk Advisors LLC | Commercial, Property & Casualty Insurance</title>
-  <meta name="description" content="Pinnacle Risk Advisors LLC provides commercial, property, casualty, and trucking insurance for small businesses in Georgia and Florida. Call (943) 239-3439." />
+  <meta name="description" content="Commercial, property, casualty, and trucking insurance for small businesses in Georgia and Florida. Call (943) 239-3439." />
   <link rel="canonical" href="https://pinnacleriskad.com/" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pinnacle Risk Advisors LLC" />
-  <meta property="og:description" content="Commercial, Property, Casualty, and Trucking Insurance for small businesses in Georgia & Florida." />
+  <meta property="og:description" content="Commercial, property, casualty, and trucking insurance for small businesses in Georgia & Florida." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pinnacleriskad.com/" />
 
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- LocalBusiness Schema (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InsuranceAgency",
+    "name": "Pinnacle Risk Advisors LLC",
+    "url": "https://pinnacleriskad.com/",
+    "telephone": "+1-943-239-3439",
+    "email": "dbrown@pinnacleriskad.com",
+    "areaServed": ["Georgia", "Florida"],
+    "sameAs": [],
+    "description": "Commercial, property, casualty, and trucking insurance for small businesses in Georgia and Florida."
+  }
+  </script>
+
   <style>
-    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
+    :root{
+      --black:#0a0a0a;
+      --charcoal:#1a1a1a;
+      --gold:#d4af37;
+      --gold-light:#e8c95a;
+      --white:#ffffff;
+      --text-light:#b0b0b0;
+      --text-muted:#888;
+      --border:rgba(255,255,255,.08);
+      --border-gold:rgba(212,175,55,.18);
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1200px;
+    }
+
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.7}
+    body{
+      font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--black);
+      color:var(--white);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
     h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
     a{color:inherit}
+    img{max-width:100%;display:block}
+
+    /* Utilities */
+    .container{max-width:var(--max);margin:0 auto}
+    .section{padding:6rem 5%}
+    .tag{
+      color:var(--gold);
+      font-size:.65rem;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      margin-bottom:1rem;
+    }
+    .section-header{
+      text-align:center;
+      max-width:720px;
+      margin:0 auto 3.5rem;
+    }
+    .section-header h2{
+      font-size:clamp(2rem,4vw,2.75rem);
+      font-weight:300;
+      margin-bottom:1rem;
+    }
+    .section-header p{color:var(--text-light)}
+
+    .btn{
+      display:inline-block;
+      padding:1.05rem 2.35rem;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-decoration:none;
+      transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+      border-radius:999px;
+    }
+    .btn-primary{
+      background:var(--gold);
+      color:var(--black);
+      border:1px solid transparent;
+    }
+    .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+    .btn-ghost{
+      background:transparent;
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.28);
+    }
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* Skip link */
+    .skip-link{
+      position:absolute;left:-999px;top:0;
+      background:var(--gold);color:var(--black);
+      padding:.75rem 1rem;
+      z-index:9999;
+      border-radius:8px;
+    }
+    .skip-link:focus{left:12px;top:12px;outline:none}
 
     /* Nav */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:1000;
-      padding:1.5rem 5%;
-      display:flex;justify-content:space-between;align-items:center;
-      background:rgba(10,10,10,0.95);
-      border-bottom:1px solid rgba(212,175,55,0.1)
+      padding:1.2rem 5%;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(10,10,10,.92);
+      border-bottom:1px solid var(--border-gold);
+      backdrop-filter:saturate(160%) blur(10px);
     }
-    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit}
-    .logo:focus{outline:2px solid rgba(212,175,55,0.35);outline-offset:6px}
-    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
-    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
-    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
+    .brand{display:flex;align-items:center;gap:1rem;text-decoration:none}
+    .brand:focus{outline:2px solid rgba(212,175,55,.35);outline-offset:6px}
+    .brand-mark{
+      width:46px;height:46px;
+      border:1px solid var(--gold);
+      display:grid;place-items:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.6rem;color:var(--gold);
+      border-radius:12px;
+    }
+    .brand-text{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.25rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      line-height:1.05;
+    }
+    .brand-text span{
+      display:block;
+      font-family:'Montserrat',sans-serif;
+      font-size:.55rem;
+      letter-spacing:3px;
+      color:var(--gold);
+      margin-top:4px;
+    }
 
-    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links{list-style:none;display:flex;gap:2.3rem}
     .nav-links a{
-      color:var(--text-light);text-decoration:none;
-      font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-      transition:color 0.3s
+      color:var(--text-light);
+      text-decoration:none;
+      font-size:.7rem;
+      font-weight:600;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      transition:color .2s ease;
     }
     .nav-links a:hover{color:var(--gold)}
     .nav-cta{
-      background:transparent;border:1px solid var(--gold);color:var(--gold);
-      padding:0.75rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;
-      letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;
-      text-decoration:none;display:inline-block
+      padding:.75rem 1.35rem;
+      border:1px solid var(--gold);
+      color:var(--gold);
+      text-decoration:none;
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      border-radius:999px;
+      transition:background .2s ease,color .2s ease, transform .2s ease;
     }
-    .nav-cta:hover{background:var(--gold);color:var(--black)}
+    .nav-cta:hover{background:var(--gold);color:var(--black);transform:translateY(-1px)}
 
     /* Mobile menu */
-    .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;background:transparent;border:none;padding:0}
-    .mobile-toggle span{width:25px;height:1px;background:var(--gold);transition:all 0.3s}
+    .mobile-toggle{
+      display:none;
+      flex-direction:column;
+      gap:6px;
+      background:transparent;
+      border:none;
+      padding:0;
+      cursor:pointer;
+      z-index:1001;
+    }
+    .mobile-toggle span{width:26px;height:1.5px;background:var(--gold)}
     .mobile-menu{
-      display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--black);
-      flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:1000
+      display:none;
+      position:fixed;inset:0;
+      background:var(--black);
+      z-index:1000;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:2rem;
+      padding:6rem 10%;
     }
     .mobile-menu.active{display:flex}
-    .mobile-menu a{color:var(--white);text-decoration:none;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase}
+    .mobile-menu a{
+      color:var(--white);
+      text-decoration:none;
+      font-size:1.15rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
     .mobile-menu a:hover{color:var(--gold)}
 
     /* Hero */
     .hero{
-      min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
-      padding:6rem 5%;
-      background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.08) 0%,transparent 50%),
-                linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      text-align:center;
+      padding:7.5rem 5% 4rem;
+      background:
+        radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.09) 0%,transparent 52%),
+        linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%);
     }
-    .hero-content{max-width:900px}
-    .hero-tag{color:var(--gold);font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:2rem}
-    .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1rem;font-weight:300}
+    .hero .container{max-width:980px}
+    .hero h1{
+      font-size:clamp(2.6rem,6vw,4.6rem);
+      font-weight:300;
+      line-height:1.08;
+      margin-bottom:1rem;
+    }
     .hero h1 em{color:var(--gold);font-style:italic}
-    .hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--text-light);font-style:italic;margin-bottom:1rem}
-    .hero-locations{font-size:0.75rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:2.5rem}
-    .hero-buttons{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
-    .btn-luxury{
-      background:var(--gold);color:var(--black);padding:1.1rem 2.5rem;
-      font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-      border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block
+    .hero-sub{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.35rem;
+      color:var(--text-light);
+      font-style:italic;
+      margin-bottom:.85rem;
     }
-    .btn-luxury:hover{background:var(--gold-light);transform:translateY(-2px)}
-    .btn-outline{
-      background:transparent;color:var(--white);padding:1.1rem 2.5rem;
-      font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-      border:1px solid rgba(255,255,255,0.3);
-      text-decoration:none;transition:all 0.3s;display:inline-block
+    .hero-loc{
+      font-size:.75rem;
+      color:var(--gold);
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin-bottom:2.25rem;
     }
-    .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-    .hero-stats{display:flex;justify-content:center;gap:4rem;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,0.08)}
-    .stat{text-align:center}
-    .stat-number{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--white)}
-    .stat-label{font-size:0.65rem;color:var(--gold);margin-top:0.5rem;letter-spacing:2px;text-transform:uppercase}
-
-    /* Sections */
-    section{padding:6rem 5%}
-    .section-header{text-align:center;max-width:650px;margin:0 auto 4rem}
-    .section-tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem}
-    .section-header h2{font-size:clamp(2rem,4vw,2.75rem);margin-bottom:1rem;font-weight:300}
-    .section-header p{color:var(--text-light);font-size:0.95rem}
+    .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .hero-stats{
+      margin-top:3.6rem;
+      padding-top:2.8rem;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:center;
+      gap:3.25rem;
+      flex-wrap:wrap;
+    }
+    .stat{text-align:center;min-width:140px}
+    .stat strong{
+      display:block;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.75rem;
+      font-weight:400;
+    }
+    .stat span{
+      display:block;
+      margin-top:.35rem;
+      font-size:.65rem;
+      color:var(--gold);
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
 
     /* Services */
     .services{background:var(--charcoal)}
-    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1400px;margin:0 auto}
-    .service-card{padding:2.5rem 2rem;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}
-    .service-card:hover{border-color:rgba(212,175,55,0.3)}
-    .service-number{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(212,175,55,0.2);margin-bottom:1.5rem}
-    .service-card h3{font-size:1.4rem;margin-bottom:1rem;color:var(--white)}
-    .service-card p{color:var(--text-light);font-size:0.9rem;margin-bottom:1.5rem}
-    .service-link{color:var(--gold);text-decoration:none;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-    .trucking-tags{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.05)}
-    .trucking-tags span{display:inline-block;font-size:0.6rem;color:var(--gold);letter-spacing:1px;margin-right:0.75rem;margin-bottom:0.5rem;padding:0.2rem 0.5rem;border:1px solid rgba(212,175,55,0.3)}
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1.35rem;
+      max-width:1400px;
+      margin:0 auto;
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:2.25rem 1.9rem;
+      background:rgba(0,0,0,.12);
+      box-shadow:none;
+      transition:border-color .2s ease, transform .2s ease;
+    }
+    .card:hover{border-color:rgba(212,175,55,.32);transform:translateY(-2px)}
+    .card .num{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.9rem;
+      color:rgba(212,175,55,.22);
+      margin-bottom:1.2rem;
+    }
+    .card h3{font-size:1.35rem;margin-bottom:.85rem}
+    .card p{color:var(--text-light);font-size:.92rem;margin-bottom:1.25rem}
+    .card a.link{
+      color:var(--gold);
+      text-decoration:none;
+      font-size:.7rem;
+      font-weight:800;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+    .tags{
+      margin-top:1rem;
+      padding-top:1rem;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .tags span{
+      display:inline-block;
+      font-size:.6rem;
+      color:var(--gold);
+      border:1px solid rgba(212,175,55,.32);
+      padding:.22rem .55rem;
+      border-radius:999px;
+      margin:0 .5rem .5rem 0;
+      letter-spacing:1px;
+    }
 
     /* About */
     .about{background:var(--black)}
-    .about-content{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1200px;margin:0 auto;align-items:center}
-    .about-image{height:500px;background:linear-gradient(135deg,var(--charcoal),#2a2a2a);display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,0.1)}
-    .about-image span{color:var(--text-muted);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase}
-    .about-text h2{font-size:2.5rem;margin-bottom:1.5rem;font-weight:300}
-    .about-text h2 em{color:var(--gold);font-style:italic}
-    .about-text p{color:var(--text-light);margin-bottom:1.5rem;line-height:1.9}
-    .about-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0}
-    .about-feature{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-    .checkmark{color:var(--gold)}
-    .about-feature span{font-size:0.85rem}
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4.5rem;
+      align-items:center;
+      max-width:var(--max);
+      margin:0 auto;
+    }
+    .media{
+      height:520px;
+      border-radius:var(--radius);
+      border:1px solid var(--border-gold);
+      background:linear-gradient(135deg,var(--charcoal), #2a2a2a);
+      display:grid;place-items:center;
+      color:var(--text-muted);
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-size:.7rem;
+    }
+    .about h2{
+      font-size:2.55rem;
+      font-weight:300;
+      margin-bottom:1.15rem;
+    }
+    .about h2 em{color:var(--gold);font-style:italic}
+    .about p{color:var(--text-light);margin-bottom:1.2rem}
+    .features{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin:1.85rem 0 2rem;
+    }
+    .feat{
+      display:flex;gap:.75rem;align-items:center;
+      padding:.85rem 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--white);
+    }
+    .feat i{color:var(--gold);font-style:normal}
 
     /* Team */
     .team{background:var(--charcoal)}
-    .team-card{max-width:350px;margin:0 auto;text-align:center}
-    .team-avatar{width:120px;height:120px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);margin:0 auto 1.5rem}
-    .team-card h4{font-size:1.5rem;margin-bottom:0.5rem}
-    .team-role{color:var(--gold);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem}
-    .team-bio{color:var(--text-light);font-size:0.9rem}
+    .profile{
+      max-width:380px;margin:0 auto;text-align:center;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:2.6rem 2rem;
+      background:rgba(0,0,0,.10);
+    }
+    .avatar{
+      width:126px;height:126px;margin:0 auto 1.35rem;
+      border-radius:999px;
+      border:1px solid var(--gold);
+      display:grid;place-items:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.6rem;
+      color:var(--gold);
+    }
+    .role{
+      color:var(--gold);
+      font-size:.7rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin:.35rem 0 1rem;
+    }
+    .bio{color:var(--text-light)}
 
     /* Testimonials */
     .testimonials{background:var(--black)}
-    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1200px;margin:0 auto}
-    .testimonial-card{background:var(--charcoal);padding:2.5rem;border:1px solid rgba(255,255,255,0.05)}
-    .testimonial-quote{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold);opacity:0.5;margin-bottom:0.5rem}
-    .testimonial-text{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--white);margin-bottom:1.5rem;line-height:1.7}
-    .testimonial-author{display:flex;align-items:center;gap:1rem}
-    .author-avatar{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold)}
-    .author-name{font-size:0.95rem}
-    .author-title{font-size:0.65rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-top:0.25rem}
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.6rem;
+      max-width:var(--max);
+      margin:0 auto;
+    }
+    .quote{
+      background:var(--charcoal);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:2.35rem 2.1rem;
+    }
+    .quote .mark{
+      font-family:'Cormorant Garamond',serif;
+      font-size:3rem;
+      color:var(--gold);
+      opacity:.55;
+      line-height:1;
+      margin-bottom:.6rem;
+    }
+    .quote p{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.15rem;
+      font-style:italic;
+      line-height:1.7;
+      margin-bottom:1.35rem;
+    }
+    .author{display:flex;gap:1rem;align-items:center}
+    .author .badge{
+      width:44px;height:44px;
+      border:1px solid var(--gold);
+      border-radius:12px;
+      display:grid;place-items:center;
+      font-family:'Cormorant Garamond',serif;
+      color:var(--gold);
+    }
+    .author small{
+      display:block;
+      margin-top:.25rem;
+      color:var(--gold);
+      font-size:.65rem;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
 
-    /* Quote */
+    /* Quote section */
     .quote-section{background:var(--charcoal)}
-    .quote-content{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1200px;margin:0 auto}
-    .quote-info h2{font-size:2.5rem;margin-bottom:1.5rem;font-weight:300}
-    .quote-info h2 em{color:var(--gold);font-style:italic}
-    .quote-info>p{color:var(--text-light);margin-bottom:2rem}
-    .quote-features{list-style:none}
-    .quote-features li{display:flex;align-items:center;gap:1rem;color:var(--white);margin-bottom:1rem;font-size:0.9rem}
-    .quote-features .check{color:var(--gold)}
-    .quote-form-box{background:var(--black);padding:3rem;border:1px solid rgba(212,175,55,0.1)}
-    .quote-form-box h3{font-size:1.5rem;margin-bottom:0.5rem}
-    .quote-form-box>p{color:var(--text-muted);margin-bottom:2rem;font-size:0.85rem}
+    .quote-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4.5rem;
+      max-width:var(--max);
+      margin:0 auto;
+      align-items:start;
+    }
+    .quote-wrap h2{
+      font-size:2.55rem;
+      font-weight:300;
+      margin-bottom:1.15rem;
+    }
+    .quote-wrap h2 em{color:var(--gold);font-style:italic}
+    .bullets{list-style:none;margin-top:1.25rem}
+    .bullets li{display:flex;gap:.85rem;align-items:flex-start;margin:.7rem 0}
+    .bullets b{color:var(--gold)}
+    .form-box{
+      background:var(--black);
+      border:1px solid var(--border-gold);
+      border-radius:var(--radius);
+      padding:2.6rem;
+      box-shadow:var(--shadow);
+    }
+    .form-box h3{font-size:1.55rem;margin-bottom:.4rem}
+    .muted{color:var(--text-muted)}
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.1rem;
+      margin-top:1.65rem;
+    }
+    .full{grid-column:span 2}
+    label{
+      display:block;
+      font-size:.65rem;
+      color:var(--gold);
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:.45rem;
+    }
+    input,select,textarea{
+      width:100%;
+      padding:1rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:transparent;
+      color:var(--white);
+      font-family:inherit;
+      font-size:.95rem;
+      transition:border-color .2s ease;
+    }
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+    select{appearance:none;cursor:pointer}
+    select option{background:var(--black)}
+    textarea{min-height:110px;resize:vertical}
 
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-    .form-group.full{grid-column:span 2}
-    .form-group label{display:block;font-size:0.65rem;color:var(--gold);margin-bottom:0.5rem;letter-spacing:2px;text-transform:uppercase}
-    .form-group input,.form-group select,.form-group textarea{width:100%;padding:1rem;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:'Montserrat',sans-serif;font-size:0.9rem;color:var(--white);transition:border 0.3s}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold)}
-    .form-group select{cursor:pointer;appearance:none}
-    .form-group select option{background:var(--black)}
-    .form-group textarea{resize:vertical;min-height:100px}
+    .consent{
+      margin-top:.25rem;
+      display:flex;
+      gap:.75rem;
+      align-items:flex-start;
+    }
+    .consent input{width:auto;margin-top:.25rem}
+    .consent p{
+      font-size:.72rem;
+      color:var(--text-light);
+      line-height:1.55;
+    }
+    .consent a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 
-    .consent-box{margin-top:1rem}
-    .consent-label{display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer}
-    .consent-label input{display:none}
-    .consent-check{flex-shrink:0;width:18px;height:18px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-top:2px}
-    .consent-label input:checked+.consent-check::after{content:'✓';color:var(--gold);font-size:0.75rem}
-    .consent-text{font-size:0.7rem;color:var(--text-light);line-height:1.5}
-    .consent-text a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
-
-    .form-submit{width:100%;background:var(--gold);color:var(--black);padding:1.1rem;border:none;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:1.5rem}
-    .form-submit:hover{background:var(--gold-light)}
+    .submit{
+      width:100%;
+      margin-top:1.25rem;
+      border:none;
+      background:var(--gold);
+      color:var(--black);
+      padding:1.1rem;
+      border-radius:999px;
+      font-size:.7rem;
+      font-weight:900;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:background .2s ease, transform .2s ease;
+    }
+    .submit:hover{background:var(--gold-light);transform:translateY(-1px)}
 
     /* Contact */
     .contact{background:var(--black)}
-    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;max-width:1200px;margin:0 auto}
-    .contact-info h2{font-size:2rem;margin-bottom:1rem}
-    .contact-info>p{color:var(--text-light);margin-bottom:2rem}
-    .contact-list{list-style:none}
-    .contact-list li{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.05)}
-    .contact-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold)}
-    .contact-label{font-size:0.65rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.25rem}
-    .contact-value{font-size:0.95rem}
-    .contact-form-box{background:var(--charcoal);padding:3rem;border:1px solid rgba(255,255,255,0.05)}
-    .contact-form-box h3{font-size:1.3rem;margin-bottom:1.5rem}
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:1fr 1.35fr;
+      gap:3.8rem;
+      max-width:var(--max);
+      margin:0 auto;
+      align-items:start;
+    }
+    .contact h2{font-size:2.05rem;margin-bottom:.8rem}
+    .contact p{color:var(--text-light);margin-bottom:1.9rem}
+    .list{list-style:none}
+    .list li{
+      display:flex;gap:1rem;align-items:flex-start;
+      padding:1.35rem 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .icon{
+      width:44px;height:44px;
+      border:1px solid var(--gold);
+      border-radius:12px;
+      display:grid;place-items:center;
+      color:var(--gold);
+      flex-shrink:0;
+    }
+    .label{
+      color:var(--gold);
+      font-size:.65rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:.25rem;
+    }
+    .value{font-size:.98rem}
+    .contact-box{
+      background:var(--charcoal);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:2.6rem;
+    }
 
     /* Footer */
-    footer{background:var(--charcoal);padding:4rem 5% 1.5rem;border-top:1px solid rgba(212,175,55,0.1)}
-    .footer-content{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.05)}
-    .footer-brand p{color:var(--text-muted);font-size:0.85rem;margin-top:1.5rem;line-height:1.7}
-    .footer-column h4{font-size:0.7rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
-    .footer-column ul{list-style:none}
-    .footer-column li{margin-bottom:0.75rem}
-    .footer-column a{color:var(--text-light);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
-    .footer-column a:hover{color:var(--gold)}
-    .footer-bottom{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding-top:1.5rem}
-    .footer-bottom p{color:var(--text-muted);font-size:0.75rem}
-    .footer-bottom a{color:var(--text-muted);text-decoration:none}
-    .footer-bottom a:hover{color:var(--gold)}
-    .footer-social{display:flex;gap:0.75rem}
-    .footer-social a{width:40px;height:40px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;transition:all 0.3s}
-    .footer-social a:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
-
-    /* Responsive */
-    @media(max-width:1024px){
-      .services-grid,.testimonials-grid{grid-template-columns:1fr 1fr}
-      .about-content,.quote-content,.contact-grid{grid-template-columns:1fr}
-      .footer-content{grid-template-columns:1fr 1fr}
+    footer{
+      background:var(--charcoal);
+      border-top:1px solid var(--border-gold);
+      padding:4rem 5% 1.6rem;
     }
-    @media(max-width:768px){
+    .foot-grid{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:2.6rem;
+      padding-bottom:2.75rem;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .foot-grid h4{
+      color:var(--gold);
+      font-size:.7rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:1.25rem;
+    }
+    .foot-grid ul{list-style:none}
+    .foot-grid li{margin-bottom:.7rem}
+    .foot-grid a{color:var(--text-light);text-decoration:none}
+    .foot-grid a:hover{color:var(--gold)}
+    .foot-brand p{color:var(--text-muted);margin-top:1.2rem;font-size:.9rem}
+
+    .foot-bottom{
+      max-width:var(--max);
+      margin:0 auto;
+      padding-top:1.35rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .foot-bottom p{color:var(--text-muted);font-size:.78rem}
+    .social{display:flex;gap:.7rem}
+    .social a{
+      width:40px;height:40px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      display:grid;place-items:center;
+      text-decoration:none;
+      color:var(--white);
+      transition:background .2s ease,border-color .2s ease,color .2s ease;
+    }
+    .social a:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+
+    /* Mobile */
+    @media (max-width:1024px){
+      .grid-4{grid-template-columns:1fr 1fr}
+      .grid-3{grid-template-columns:1fr 1fr}
+      .two-col,.quote-wrap,.contact-wrap{grid-template-columns:1fr}
+      .foot-grid{grid-template-columns:1fr 1fr}
+      .media{height:420px}
+    }
+    @media (max-width:768px){
       .nav-links,.nav-cta{display:none}
       .mobile-toggle{display:flex}
-      .services-grid,.testimonials-grid{grid-template-columns:1fr}
+      .grid-4,.grid-3{grid-template-columns:1fr}
       .form-grid{grid-template-columns:1fr}
-      .form-group.full{grid-column:span 1}
-      .hero-stats{flex-direction:column;gap:2rem}
-      .footer-content{grid-template-columns:1fr;text-align:center}
-      .footer-bottom{flex-direction:column;gap:1rem}
-      .about-features{grid-template-columns:1fr}
+      .full{grid-column:span 1}
+      .hero-stats{gap:1.8rem}
+      .features{grid-template-columns:1fr}
+      .foot-grid{grid-template-columns:1fr;text-align:center}
+      .foot-bottom{flex-direction:column;text-align:center}
     }
   </style>
 </head>
 
 <body>
+  <!-- If someone lands on /index.html, send them to / (GitHub Pages friendly) -->
+  <script>
+    (function () {
+      if (location.pathname.endsWith('/index.html')) {
+        location.replace('/');
+      }
+    })();
+  </script>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <nav>
-    <!-- Use / instead of index.html to avoid /index.html showing -->
-    <a class="logo" href="/" aria-label="Pinnacle Risk Advisors Home">
-      <div class="logo-icon">P</div>
-      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
+    <a class="brand" href="/" aria-label="Pinnacle Risk Advisors Home">
+      <div class="brand-mark">P</div>
+      <div class="brand-text">Pinnacle<span>Risk Advisors</span></div>
     </a>
 
-    <ul class="nav-links">
+    <ul class="nav-links" aria-label="Primary navigation">
       <li><a href="/">Home</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#about">About Us</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
-    <a href="quote.html" class="nav-cta">Get a Quote</a>
+    <a class="nav-cta" href="quote.html">Get a Quote</a>
 
     <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
       <span></span><span></span><span></span>
@@ -265,315 +690,332 @@
     <a href="quote.html" data-close>Get a Quote</a>
   </div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-tag">— Premium Insurance Solutions —</div>
-      <h1>Elevating <em>Protection</em> to an Art Form</h1>
-      <p class="hero-subtitle">Where exceptional service meets comprehensive coverage</p>
-      <p class="hero-locations">Proudly Serving Georgia & Florida</p>
+  <main id="main">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="container">
+        <div class="tag">— Premium Insurance Solutions —</div>
+        <h1>Elevating <em>Protection</em> to an Art Form</h1>
+        <p class="hero-sub">Where exceptional service meets comprehensive coverage</p>
+        <p class="hero-loc">Proudly Serving Georgia & Florida</p>
 
-      <div class="hero-buttons">
-        <a href="quote.html" class="btn-luxury">Get a Free Quote</a>
-        <a href="#services" class="btn-outline">Discover Services</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat"><div class="stat-number">$1M+</div><div class="stat-label">Assets Insured</div></div>
-        <div class="stat"><div class="stat-number">98%</div><div class="stat-label">Client Retention</div></div>
-        <div class="stat"><div class="stat-number">24hr</div><div class="stat-label">Response Time</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="services" id="services">
-    <div class="section-header">
-      <div class="section-tag">Our Expertise</div>
-      <h2>Bespoke Coverage Solutions</h2>
-      <p>Tailored insurance programs designed to protect your small business.</p>
-    </div>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-number">01</div>
-        <h3>Commercial Insurance</h3>
-        <p>Comprehensive business protection including general liability and professional liability coverage.</p>
-        <a href="quote.html" class="service-link">Get Quote →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">02</div>
-        <h3>Property Insurance</h3>
-        <p>Protect your building, equipment, and inventory against fire, theft, and natural disasters.</p>
-        <a href="quote.html" class="service-link">Get Quote →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">03</div>
-        <h3>Casualty Insurance</h3>
-        <p>Liability protection for accidents—from customer injuries to property damage claims.</p>
-        <a href="quote.html" class="service-link">Get Quote →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-number">04</div>
-        <h3>Trucking Insurance</h3>
-        <p>Specialized coverage for trucking operations including liability, cargo, and physical damage.</p>
-        <div class="trucking-tags">
-          <span>General Freight</span><span>Hotshot</span><span>Long Haul</span>
-        </div>
-        <a href="quote.html" class="service-link" style="display:block;margin-top:1rem">Get Quote →</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="about-content">
-      <div class="about-image"><span>Our Team</span></div>
-
-      <div class="about-text">
-        <div class="section-tag">About Us</div>
-        <h2>A Modern Approach to <em>Risk Advisory</em></h2>
-        <p>Pinnacle Risk Advisors was founded with a clear vision: to bring a fresh, client-first approach to commercial insurance. We combine modern technology with personalized service.</p>
-        <p>Serving businesses across Georgia and Florida, we offer dedicated attention, rapid response times, and genuine partnership that larger firms can't match.</p>
-
-        <div class="about-features">
-          <div class="about-feature"><span class="checkmark">✓</span><span>Licensed Elite Advisors</span></div>
-          <div class="about-feature"><span class="checkmark">✓</span><span>Bespoke Risk Assessment</span></div>
-          <div class="about-feature"><span class="checkmark">✓</span><span>Dedicated Claims Advocacy</span></div>
-          <div class="about-feature"><span class="checkmark">✓</span><span>Trucking Specialists</span></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="quote.html">Get a Free Quote</a>
+          <a class="btn btn-ghost" href="#services">Discover Services</a>
         </div>
 
-        <a href="quote.html" class="btn-luxury">Get Your Free Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="team" id="team">
-    <div class="section-header">
-      <div class="section-tag">Leadership</div>
-      <h2>Meet Your Advisor</h2>
-      <p>Dedicated to exceptional service and tailored protection.</p>
-    </div>
-
-    <div class="team-card">
-      <div class="team-avatar">DB</div>
-      <h4>Derrick Brown</h4>
-      <div class="team-role">Principal Agent</div>
-      <p class="team-bio">Founder of Pinnacle Risk Advisors, dedicated to providing personalized commercial insurance solutions across Georgia and Florida.</p>
-    </div>
-  </section>
-
-  <section class="testimonials" id="testimonials">
-    <div class="section-header">
-      <div class="section-tag">Client Testimonials</div>
-      <h2>Words from Our Clients</h2>
-      <p>See what business owners have to say about working with us.</p>
-    </div>
-
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">Pinnacle has transformed how we approach risk management. Their responsiveness makes them indispensable partners.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">RH</div>
-          <div><div class="author-name">Robert Hansen</div><div class="author-title">Hansen's Auto Repair</div></div>
+        <div class="hero-stats" aria-label="Key highlights">
+          <div class="stat"><strong>$1M+</strong><span>Assets Insured</span></div>
+          <div class="stat"><strong>98%</strong><span>Client Retention</span></div>
+          <div class="stat"><strong>24hr</strong><span>Response Time</span></div>
         </div>
       </div>
+    </header>
 
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache—until I found Pinnacle. Derrick understood our unique needs.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MT</div>
-          <div><div class="author-name">Marcus Thompson</div><div class="author-title">Thompson Freight LLC</div></div>
-        </div>
+    <!-- SERVICES -->
+    <section class="section services" id="services">
+      <div class="section-header">
+        <div class="tag">Our Expertise</div>
+        <h2>Bespoke Coverage Solutions</h2>
+        <p>Tailored insurance programs designed to protect your small business.</p>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">SJ</div>
-          <div><div class="author-name">Sandra Johnson</div><div class="author-title">Peachtree Bakery</div></div>
-        </div>
+      <div class="grid-4">
+        <article class="card">
+          <div class="num">01</div>
+          <h3>Commercial Insurance</h3>
+          <p>Business protection including general liability and professional liability options.</p>
+          <a class="link" href="quote.html">Get Quote →</a>
+        </article>
+
+        <article class="card">
+          <div class="num">02</div>
+          <h3>Property Insurance</h3>
+          <p>Protect buildings, equipment, and inventory against fire, theft, and named perils.</p>
+          <a class="link" href="quote.html">Get Quote →</a>
+        </article>
+
+        <article class="card">
+          <div class="num">03</div>
+          <h3>Casualty Insurance</h3>
+          <p>Liability protection for accidents—from injuries to property damage claims.</p>
+          <a class="link" href="quote.html">Get Quote →</a>
+        </article>
+
+        <article class="card">
+          <div class="num">04</div>
+          <h3>Trucking Insurance</h3>
+          <p>Specialized coverage for trucking operations including liability, cargo, and physical damage.</p>
+          <div class="tags">
+            <span>General Freight</span><span>Hotshot</span><span>Long Haul</span>
+          </div>
+          <div style="margin-top:1.05rem">
+            <a class="link" href="quote.html">Get Quote →</a>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="quote-section" id="quote">
-    <div class="quote-content">
-      <div class="quote-info">
-        <div class="section-tag">Get Started</div>
-        <h2>Request Your <em>Free Quote</em></h2>
-        <p>Take the first step toward comprehensive protection. We'll provide a customized quote within 24 hours.</p>
-        <ul class="quote-features">
-          <li><span class="check">✓</span> No obligation, completely free</li>
-          <li><span class="check">✓</span> Customized coverage options</li>
-          <li><span class="check">✓</span> Competitive rates from top carriers</li>
-          <li><span class="check">✓</span> Response within 24 hours</li>
-          <li><span class="check">✓</span> Serving Georgia & Florida</li>
-        </ul>
-      </div>
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+      <div class="two-col">
+        <div class="media" aria-label="Team image placeholder">Our Team</div>
 
-      <div class="quote-form-box">
-        <h3>Get Your Free Quote</h3>
-        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+        <div>
+          <div class="tag">About Us</div>
+          <h2>A Modern Approach to <em>Risk Advisory</em></h2>
+          <p>Pinnacle Risk Advisors was founded with a clear vision: to bring a fresh, client-first approach to commercial insurance—combining modern technology with personalized service.</p>
+          <p>Serving businesses across Georgia and Florida, we offer dedicated attention, rapid response times, and genuine partnership that larger firms can’t match.</p>
 
-        <form action="https://formspree.io/f/xojqornl" method="POST">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input id="firstName" type="text" name="firstName" required />
-            </div>
-
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" name="lastName" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input id="email" type="email" name="email" required />
-            </div>
-
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input id="phone" type="tel" name="phone" required />
-            </div>
-
-            <div class="form-group full">
-              <label for="company">Company Name</label>
-              <input id="company" type="text" name="company" required />
-            </div>
-
-            <div class="form-group full">
-              <label for="coverageType">Coverage Interest</label>
-              <select id="coverageType" name="coverageType" required>
-                <option value="">Select coverage type</option>
-                <option value="Commercial Insurance">Commercial Insurance</option>
-                <option value="Property Insurance">Property Insurance</option>
-                <option value="Casualty Insurance">Casualty Insurance</option>
-                <option value="Trucking Insurance">Trucking Insurance</option>
-                <option value="Not Sure">Not Sure / Need Guidance</option>
-              </select>
-            </div>
-
-            <div class="form-group full">
-              <label for="message">Additional Details</label>
-              <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
-            </div>
-
-            <!-- A2P-style consent + age confirmation -->
-            <div class="form-group full consent-box">
-              <label class="consent-label" for="smsConsent">
-                <input id="smsConsent" type="checkbox" name="smsConsent" value="Yes" />
-                <span class="consent-check" aria-hidden="true"></span>
-                <span class="consent-text">
-                  By checking this box, I confirm I am <strong>18+</strong> and I agree to receive <strong>SMS/text messages</strong> from
-                  Pinnacle Risk Advisors LLC at the phone number provided, including messages about
-                  <strong>quotes</strong>, <strong>policy/service updates</strong>, <strong>appointment reminders</strong>, and <strong>customer support</strong>.
-                  <strong>Marketing/promotional</strong> texts may be sent only if I have provided consent for marketing.
-                  Message frequency varies. Message &amp; data rates may apply. Reply <strong>STOP</strong> to unsubscribe or <strong>HELP</strong> for help.
-                  Consent is not a condition of purchase. View our
-                  <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
-                  <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
-                </span>
-              </label>
-            </div>
+          <div class="features" aria-label="Key strengths">
+            <div class="feat"><i>✓</i> Licensed Elite Advisors</div>
+            <div class="feat"><i>✓</i> Bespoke Risk Assessment</div>
+            <div class="feat"><i>✓</i> Dedicated Claims Advocacy</div>
+            <div class="feat"><i>✓</i> Trucking Specialists</div>
           </div>
 
-          <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Website" />
-          <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
-
-          <button type="submit" class="form-submit">Submit Request</button>
-        </form>
+          <a class="btn btn-primary" href="quote.html">Get Your Free Quote</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="contact" id="contact">
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="section-tag">Contact</div>
-        <h2>Connect With Us</h2>
-        <p>Ready to discuss your insurance needs? We're here to help protect your business.</p>
-
-        <ul class="contact-list">
-          <li>
-            <div class="contact-icon">☎</div>
-            <div>
-              <div class="contact-label">Direct Line</div>
-              <div class="contact-value">
-                <a href="tel:9432393439" style="color:inherit;text-decoration:none">(943) 239-3439</a>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <div class="contact-icon">✉</div>
-            <div>
-              <div class="contact-label">Email</div>
-              <div class="contact-value">
-                <a href="mailto:dbrown@pinnacleriskad.com" style="color:inherit;text-decoration:none">dbrown@pinnacleriskad.com</a>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <div class="contact-icon">⚲</div>
-            <div>
-              <div class="contact-label">Service Areas</div>
-              <div class="contact-value">Georgia & Florida</div>
-            </div>
-          </li>
-        </ul>
+    <!-- TEAM -->
+    <section class="section team" id="team">
+      <div class="section-header">
+        <div class="tag">Leadership</div>
+        <h2>Meet Your Advisor</h2>
+        <p>Dedicated to exceptional service and tailored protection.</p>
       </div>
 
-      <div class="contact-form-box">
-        <h3>Send a Message</h3>
-        <form action="https://formspree.io/f/xojqornl" method="POST">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="contactName">Your Name</label>
-              <input id="contactName" type="text" name="name" required />
-            </div>
+      <div class="profile">
+        <div class="avatar" aria-hidden="true">DB</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.65rem;">Derrick Brown</h3>
+        <div class="role">Principal Agent</div>
+        <p class="bio">Founder of Pinnacle Risk Advisors, dedicated to providing personalized commercial insurance solutions across Georgia and Florida.</p>
+      </div>
+    </section>
 
-            <div class="form-group">
-              <label for="contactEmail">Email</label>
-              <input id="contactEmail" type="email" name="email" required />
-            </div>
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials" id="testimonials">
+      <div class="section-header">
+        <div class="tag">Client Testimonials</div>
+        <h2>Words from Our Clients</h2>
+        <p>See what business owners have to say about working with us.</p>
+      </div>
 
-            <div class="form-group full">
-              <label for="subject">Subject</label>
-              <input id="subject" type="text" name="subject" required />
-            </div>
-
-            <div class="form-group full">
-              <label for="contactMessage">Message</label>
-              <textarea id="contactMessage" name="message" placeholder="How can we help?" required></textarea>
+      <div class="grid-3">
+        <article class="quote">
+          <div class="mark">"</div>
+          <p>Pinnacle has transformed how we approach risk management. Their responsiveness makes them indispensable partners.</p>
+          <div class="author">
+            <div class="badge">RH</div>
+            <div>
+              <div>Robert Hansen</div>
+              <small>Hansen's Auto Repair</small>
             </div>
           </div>
+        </article>
 
-          <input type="hidden" name="_subject" value="New Contact Message - Pinnacle Website" />
-          <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
+        <article class="quote">
+          <div class="mark">"</div>
+          <p>As a trucking company owner, finding the right insurance was always a headache—until I found Pinnacle. Derrick understood our unique needs.</p>
+          <div class="author">
+            <div class="badge">MT</div>
+            <div>
+              <div>Marcus Thompson</div>
+              <small>Thompson Freight LLC</small>
+            </div>
+          </div>
+        </article>
 
-          <button type="submit" class="form-submit">Send Message</button>
-        </form>
+        <article class="quote">
+          <div class="mark">"</div>
+          <p>Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p>
+          <div class="author">
+            <div class="badge">SJ</div>
+            <div>
+              <div>Sandra Johnson</div>
+              <small>Peachtree Bakery</small>
+            </div>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="section quote-section" id="quote">
+      <div class="quote-wrap">
+        <div>
+          <div class="tag">Get Started</div>
+          <h2>Request Your <em>Free Quote</em></h2>
+          <p style="color:var(--text-light);margin-bottom:1rem">
+            Take the first step toward comprehensive protection. We’ll provide a customized quote within 24 hours.
+          </p>
+
+          <ul class="bullets">
+            <li><b>✓</b> No obligation, completely free</li>
+            <li><b>✓</b> Customized coverage options</li>
+            <li><b>✓</b> Competitive rates from top carriers</li>
+            <li><b>✓</b> Response within 24 hours</li>
+            <li><b>✓</b> Serving Georgia & Florida</li>
+          </ul>
+        </div>
+
+        <div class="form-box">
+          <h3>Get Your Free Quote</h3>
+          <p class="muted">Fill out the form below and we’ll get back to you within 24 hours.</p>
+
+          <form action="https://formspree.io/f/xojqornl" method="POST">
+            <div class="form-grid">
+              <div>
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" name="firstName" required />
+              </div>
+
+              <div>
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" name="lastName" required />
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" required />
+              </div>
+
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" type="tel" name="phone" required />
+              </div>
+
+              <div class="full">
+                <label for="company">Company Name</label>
+                <input id="company" type="text" name="company" required />
+              </div>
+
+              <div class="full">
+                <label for="coverageType">Coverage Interest</label>
+                <select id="coverageType" name="coverageType" required>
+                  <option value="">Select coverage type</option>
+                  <option value="Commercial Insurance">Commercial Insurance</option>
+                  <option value="Property Insurance">Property Insurance</option>
+                  <option value="Casualty Insurance">Casualty Insurance</option>
+                  <option value="Trucking Insurance">Trucking Insurance</option>
+                  <option value="Not Sure">Not Sure / Need Guidance</option>
+                </select>
+              </div>
+
+              <div class="full">
+                <label for="message">Additional Details</label>
+                <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
+              </div>
+
+              <div class="full">
+                <label class="consent">
+                  <input id="smsConsent" type="checkbox" name="smsConsent" value="Yes" />
+                  <p>
+                    I confirm I am <strong>18+</strong> and agree to receive <strong>SMS/text messages</strong> from
+                    Pinnacle Risk Advisors LLC at the phone number provided, including messages about
+                    <strong>quotes</strong>, <strong>policy/service updates</strong>, <strong>appointment reminders</strong>, and <strong>customer support</strong>.
+                    Message frequency varies. Message &amp; data rates may apply. Reply <strong>STOP</strong> to unsubscribe or <strong>HELP</strong> for help.
+                    Consent is not a condition of purchase. View our
+                    <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
+                    <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                  </p>
+                </label>
+              </div>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Website" />
+            <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
+
+            <button class="submit" type="submit">Submit Request</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="contact-wrap">
+        <div>
+          <div class="tag">Contact</div>
+          <h2>Connect With Us</h2>
+          <p>Ready to discuss your insurance needs? We’re here to help protect your business.</p>
+
+          <ul class="list">
+            <li>
+              <div class="icon">☎</div>
+              <div>
+                <div class="label">Direct Line</div>
+                <div class="value"><a href="tel:9432393439" style="text-decoration:none">(943) 239-3439</a></div>
+              </div>
+            </li>
+
+            <li>
+              <div class="icon">✉</div>
+              <div>
+                <div class="label">Email</div>
+                <div class="value"><a href="mailto:dbrown@pinnacleriskad.com" style="text-decoration:none">dbrown@pinnacleriskad.com</a></div>
+              </div>
+            </li>
+
+            <li>
+              <div class="icon">⚲</div>
+              <div>
+                <div class="label">Service Areas</div>
+                <div class="value">Georgia & Florida</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-box">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.55rem;margin-bottom:1rem;">Send a Message</h3>
+
+          <form action="https://formspree.io/f/xojqornl" method="POST">
+            <div class="form-grid">
+              <div>
+                <label for="contactName">Your Name</label>
+                <input id="contactName" type="text" name="name" required />
+              </div>
+
+              <div>
+                <label for="contactEmail">Email</label>
+                <input id="contactEmail" type="email" name="email" required />
+              </div>
+
+              <div class="full">
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" name="subject" required />
+              </div>
+
+              <div class="full">
+                <label for="contactMessage">Message</label>
+                <textarea id="contactMessage" name="message" placeholder="How can we help?" required></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Contact Message - Pinnacle Website" />
+            <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
+
+            <button class="submit" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-brand">
-        <div class="logo" style="text-decoration:none;color:inherit">
-          <div class="logo-icon">P</div>
-          <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-        </div>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="/" style="justify-content:center;text-decoration:none">
+          <div class="brand-mark">P</div>
+          <div class="brand-text">Pinnacle<span>Risk Advisors</span></div>
+        </a>
         <p>A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Services</h4>
         <ul>
           <li><a href="#services">Commercial Insurance</a></li>
@@ -583,17 +1025,17 @@
         </ul>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="#about">About Us</a></li>
+          <li><a href="#about">About</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:9432393439">(943) 239-3439</a></li>
@@ -602,14 +1044,14 @@
       </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="foot-bottom">
       <p>
         © 2026 Pinnacle Risk Advisors LLC. All rights reserved. |
         <a href="privacy-policy.html">Privacy Policy</a> |
         <a href="terms-of-service.html">Terms of Service</a>
       </p>
 
-      <div class="footer-social" aria-label="Social links">
+      <div class="social" aria-label="Social links">
         <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
         <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">𝕏</a>
         <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
@@ -619,12 +1061,6 @@
 
   <script>
     (function () {
-      // Clean /index.html from the address bar
-      if (window.location.pathname.endsWith('/index.html')) {
-        window.history.replaceState(null, '', '/');
-      }
-
-      // Mobile menu
       const toggle = document.getElementById('mobileToggle');
       const menu = document.getElementById('mobileMenu');
       if (!toggle || !menu) return;
@@ -635,17 +1071,9 @@
         menu.setAttribute('aria-hidden', String(!open));
       }
 
-      toggle.addEventListener('click', () => {
-        setOpen(!menu.classList.contains('active'));
-      });
-
-      menu.querySelectorAll('[data-close]').forEach(a => {
-        a.addEventListener('click', () => setOpen(false));
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
-      });
+      toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
+      menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
     })();
   </script>
 </body>
