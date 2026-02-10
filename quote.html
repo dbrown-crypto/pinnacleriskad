@@ -165,7 +165,8 @@
             Fill out the form below. We’ll contact you shortly.
           </p>
 
-          <form action="https://formspree.io/f/xojqornl" method="POST">
+          <!-- UPDATED: Phone not required. Required only if SMS consent is checked -->
+          <form id="quoteForm" action="https://formspree.io/f/xojqornl" method="POST" novalidate>
             <div class="form-grid">
               <div class="form-group">
                 <label for="firstName">First Name</label>
@@ -183,8 +184,15 @@
               </div>
 
               <div class="form-group">
-                <label for="phone">Phone</label>
-                <input id="phone" type="tel" name="phone" required />
+                <label for="phone">Phone (optional)</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  placeholder="Optional (required only if you opt into SMS)"
+                />
               </div>
 
               <div class="form-group full">
@@ -209,12 +217,13 @@
                 <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
               </div>
 
-              <!-- UPDATED A2P-COMPLIANT CONSENT TEXT + 18+ -->
+              <!-- UPDATED CONSENT: Explicitly says phone is optional, only needed if opting in -->
               <div class="form-group full consent-box">
                 <label class="consent-label" for="smsConsent">
                   <input id="smsConsent" type="checkbox" name="smsConsent" value="Yes" />
                   <span class="consent-check" aria-hidden="true"></span>
                   <span class="consent-text">
+                    <strong>Phone number is optional.</strong> If you want text updates, please provide a phone number and check this box.
                     By checking this box, I confirm I am <strong>18+</strong> and I agree to receive <strong>SMS/text messages</strong> from
                     Pinnacle Risk Advisors LLC at the phone number provided, including messages about
                     <strong>quotes</strong>, <strong>policy/service updates</strong>, <strong>appointment reminders</strong>, and <strong>customer support</strong>.
@@ -298,19 +307,48 @@
 
   <script>
     (function () {
+      // Mobile menu
       const toggle = document.getElementById('mobileToggle');
       const menu = document.getElementById('mobileMenu');
-      if (!toggle || !menu) return;
-
-      function setOpen(open) {
-        menu.classList.toggle('active', open);
-        toggle.setAttribute('aria-expanded', String(open));
-        menu.setAttribute('aria-hidden', String(!open));
+      if (toggle && menu) {
+        function setOpen(open) {
+          menu.classList.toggle('active', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          menu.setAttribute('aria-hidden', String(!open));
+        }
+        toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
+        menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
       }
 
-      toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
-      menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+      // A2P fix: phone is only required if SMS consent is checked
+      const form = document.getElementById('quoteForm');
+      if (!form) return;
+
+      const phone = document.getElementById('phone');
+      const smsConsent = document.getElementById('smsConsent');
+      if (!phone || !smsConsent) return;
+
+      function syncPhoneRequirement() {
+        const wantsSms = smsConsent.checked;
+        phone.required = wantsSms;
+        phone.setAttribute('aria-required', wantsSms ? 'true' : 'false');
+        phone.placeholder = wantsSms
+          ? 'Required for SMS updates'
+          : 'Optional (required only if you opt into SMS)';
+      }
+
+      smsConsent.addEventListener('change', syncPhoneRequirement);
+
+      form.addEventListener('submit', function (e) {
+        if (smsConsent.checked && !phone.value.trim()) {
+          e.preventDefault();
+          alert('Please enter a phone number to receive SMS/text messages.');
+          phone.focus();
+        }
+      });
+
+      syncPhoneRequirement();
     })();
   </script>
 </body>
