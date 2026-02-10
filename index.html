@@ -851,6 +851,12 @@
         </div>
 
         <div class="form-box">
+          <div style="background:rgba(212,175,55,0.15);border:1px solid var(--gold);padding:0.8rem;border-radius:12px;margin-bottom:1.5rem;text-align:center;">
+            <p style="color:var(--gold);font-weight:700;font-size:0.8rem;margin:0;text-transform:uppercase;letter-spacing:1px;">
+              SMS is only sent to those who give their consent
+            </p>
+          </div>
+
           <h3>Get Your Free Quote</h3>
           <p class="muted">Fill out the form below and we’ll get back to you within 24 hours.</p>
 
@@ -1020,7 +1026,6 @@
     (function () {
       const toggle = document.getElementById('mobileToggle');
       const menu = document.getElementById('mobileMenu');
-      const links = menu ? menu.querySelectorAll('[data-close]') : [];
       if (!toggle || !menu) return;
 
       function setOpen(open) {
@@ -1030,7 +1035,7 @@
       }
 
       toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
-      links.forEach(a => a.addEventListener('click', () => setOpen(false)));
+      menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
     })();
   </script>
