@@ -12,184 +12,282 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pinnacleriskad.com/quote.html" />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='58' fill='white' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E" />
 
   <style>
-    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.7}
-    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
-    a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+    :root{
+      --bg:#070707;
+      --panel:#0f0f0f;
+      --text:#f4f4f4;
+      --muted:#b9b9b9;
+      --line:rgba(255,255,255,.10);
+      --accent:#d4af37;
+      --accent2:#b9932b;
+      --radius:22px;
+      --radius2:16px;
+      --max:980px;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(900px 700px at 15% 5%, rgba(212,175,55,.10), transparent 60%),
+        radial-gradient(800px 700px at 85% 25%, rgba(212,175,55,.06), transparent 60%),
+        linear-gradient(180deg, #050505, #090909 40%, #060606);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,7,7,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height:78px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .brand-mark{
+      width:40px; height:40px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(212,175,55,.98), rgba(185,147,43,.95));
+      color:#0b0b0b;
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .brand-text{display:flex; flex-direction:column; line-height:1.05}
+    .brand-text strong{font-size:14px; letter-spacing:.5px}
+    .brand-text span{font-size:12px; color:var(--muted)}
+    nav ul{
+      display:flex; gap:16px; list-style:none; padding:0; margin:0;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+      padding:10px 10px;
+      border-radius:12px;
+      transition:.25s;
+    }
+    nav a:hover{color:var(--text); background:rgba(255,255,255,.04)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:14px 18px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      text-decoration:none;
+      font-weight:700;
+      transition:.25s ease;
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: rgba(212,175,55,.55);
+      color:#0b0b0b;
+    }
+    main{padding:46px 0}
+    .chip{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+    h1{margin:14px 0 8px; font-size:42px; line-height:1.1}
+    p.lead{margin:0 0 16px; color:var(--muted)}
+    .panel{
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding:22px;
+      box-shadow: var(--shadow);
+    }
+    .grid{display:grid; gap:18px}
+    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700}
+    .note{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
 
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
-    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit}
-    .logo:focus{outline:2px solid rgba(212,175,55,0.35);outline-offset:6px}
-    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
-    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
-    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
+    form{display:grid; gap:12px; margin-top:18px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:650px){.row{grid-template-columns:1fr}}
+    label{display:block; font-weight:800; font-size:12px; color:var(--muted); margin-bottom:6px; letter-spacing:.4px; text-transform:uppercase}
+    input, textarea, select{
+      width:100%;
+      padding:13px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      outline:none;
+      transition:.2s;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus, textarea:focus, select:focus{border-color: rgba(212,175,55,.45); box-shadow: 0 0 0 4px rgba(212,175,55,.10)}
 
-    .nav-links{display:flex;gap:2.5rem;list-style:none}
-    .nav-links a{color:var(--text-light);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
-    .nav-links a:hover{color:var(--gold)}
-    .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;text-decoration:none;display:inline-block}
-    .nav-cta:hover{background:var(--gold);color:var(--black)}
+    .consent-box{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      border-radius: 18px;
+      padding:12px 12px;
+    }
+    .consent-label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      cursor:pointer;
+      user-select:none;
+    }
+    .consent-label input{margin-top:4px}
+    .consent-text{color:var(--muted); font-weight:700; font-size:12.5px; line-height:1.45}
+    .consent-text a{color:rgba(212,175,55,.95); font-weight:900; text-decoration:none}
+    .consent-text a:hover{text-decoration:underline}
 
-    .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;background:transparent;border:none;padding:0}
-    .mobile-toggle span{width:25px;height:1px;background:var(--gold);transition:all 0.3s}
-    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--black);flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:1000}
-    .mobile-menu.active{display:flex}
-    .mobile-menu a{color:var(--white);text-decoration:none;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase}
-    .mobile-menu a:hover{color:var(--gold)}
-
-    main{padding:7.5rem 5% 4rem;background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.08) 0%,transparent 50%),linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
-    .container{max-width:1100px;margin:0 auto}
-    .header{text-align:center;max-width:760px;margin:0 auto 2.75rem}
-    .tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.75rem}
-    h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.1;margin-bottom:0.75rem}
-    h1 em{color:var(--gold);font-style:italic}
-    .sub{color:var(--text-light);font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic}
-
-    .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:2.5rem}
-    .panel{background:rgba(26,26,26,0.85);border:1px solid rgba(212,175,55,0.12);padding:2.5rem}
-    .panel h2{font-size:1.8rem;margin-bottom:1rem;font-weight:300}
-    .panel p{color:var(--text-light);line-height:1.9}
-
-    .features{list-style:none;margin-top:1.25rem}
-    .features li{display:flex;gap:0.8rem;align-items:flex-start;color:var(--text-light);margin:0.65rem 0;font-size:0.95rem}
-    .check{color:var(--gold)}
-
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-    .form-group.full{grid-column:span 2}
-    label{display:block;font-size:0.65rem;color:var(--gold);margin-bottom:0.5rem;letter-spacing:2px;text-transform:uppercase}
-    input,select,textarea{width:100%;padding:1rem;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:'Montserrat',sans-serif;font-size:0.9rem;color:var(--white);transition:border 0.3s}
-    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
-    select{cursor:pointer;appearance:none}
-    select option{background:var(--black)}
-    textarea{resize:vertical;min-height:110px}
-
-    .consent-box{margin-top:1rem}
-    .consent-label{display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer}
-    .consent-label input{display:none}
-    .consent-check{flex-shrink:0;width:18px;height:18px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-top:2px}
-    .consent-label input:checked+.consent-check::after{content:'✓';color:var(--gold);font-size:0.75rem}
-    .consent-text{font-size:0.7rem;color:var(--text-light);line-height:1.5}
-
-    .submit{width:100%;background:var(--gold);color:var(--black);padding:1.1rem;border:none;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:1.25rem}
-    .submit:hover{background:var(--gold-light)}
-
-    footer{background:var(--charcoal);padding:4rem 5% 1.5rem;border-top:1px solid rgba(212,175,55,0.1)}
-    .footer-content{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.05)}
-    .footer-brand p{color:var(--text-muted);font-size:0.85rem;margin-top:1.5rem;line-height:1.7}
-    .footer-column h4{font-size:0.7rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
-    .footer-column ul{list-style:none}
-    .footer-column li{margin-bottom:0.75rem}
-    .footer-column a{color:var(--text-light);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
-    .footer-column a:hover{color:var(--gold)}
-    .footer-bottom{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding-top:1.5rem}
-    .footer-bottom p{color:var(--text-muted);font-size:0.75rem}
-    .footer-bottom a{color:var(--text-muted);text-decoration:none}
-    .footer-bottom a:hover{color:var(--gold)}
-    .footer-social{display:flex;gap:0.75rem}
-    .footer-social a{width:40px;height:40px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;transition:all 0.3s}
-    .footer-social a:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
-
-    @media(max-width:1024px){.grid{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr 1fr}}
-    @media(max-width:768px){.nav-links,.nav-cta{display:none}.mobile-toggle{display:flex}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:span 1}.footer-content{grid-template-columns:1fr;text-align:center}.footer-bottom{flex-direction:column;gap:1rem}}
+    footer{
+      border-top:1px solid var(--line);
+      background: rgba(7,7,7,.85);
+      padding:48px 0 26px;
+      margin-top:42px;
+    }
+    .foot-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr .8fr;
+      gap:18px;
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+    @media (max-width: 980px){.foot-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 600px){.foot-grid{grid-template-columns:1fr}}
+    footer h4{margin:0 0 10px}
+    footer ul{list-style:none; padding:0; margin:0; display:grid; gap:8px}
+    footer a{text-decoration:none; color:var(--muted); font-weight:700}
+    footer a:hover{color:var(--text)}
+    .foot-bottom{
+      max-width:1180px;
+      margin:24px auto 0;
+      padding:18px 20px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-weight:700;
+      font-size:12px;
+    }
+    .social{display:flex; gap:10px}
+    .social a{
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      display:grid; place-items:center;
+      color:var(--muted);
+    }
+    .social a:hover{border-color:rgba(212,175,55,.3); color:var(--text)}
   </style>
 </head>
-
 <body>
-  <nav>
-    <a class="logo" href="index.html" aria-label="Pinnacle Risk Advisors Home">
-      <div class="logo-icon">P</div>
-      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-    </a>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="/">
+        <div class="brand-mark">P</div>
+        <div class="brand-text">
+          <strong>Pinnacle Risk Advisors</strong>
+          <span>Premium Insurance Solutions</span>
+        </div>
+      </a>
 
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#services">Services</a></li>
-      <li><a href="index.html#about">About Us</a></li>
-      <li><a href="index.html#team">Team</a></li>
-      <li><a href="index.html#testimonials">Testimonials</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#about">About Us</a></li>
+          <li><a href="/#team">Team</a></li>
+          <li><a href="/#testimonials">Testimonials</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-    <a href="quote.html" class="nav-cta">Get a Quote</a>
-
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="index.html" data-close>Home</a>
-    <a href="index.html#services" data-close>Services</a>
-    <a href="index.html#about" data-close>About</a>
-    <a href="index.html#team" data-close>Team</a>
-    <a href="index.html#testimonials" data-close>Testimonials</a>
-    <a href="index.html#contact" data-close>Contact</a>
-    <a href="quote.html" data-close>Get a Quote</a>
-  </div>
+      <a class="btn primary" href="/quote.html">Get a Quote</a>
+    </div>
+  </header>
 
   <main>
-    <div class="container">
-      <div class="header">
-        <div class="tag">Get Started</div>
-        <h1>Request Your <em>Free Quote</em></h1>
-        <div class="sub">Tailored coverage. Fast response. Georgia & Florida.</div>
-      </div>
-
+    <div class="wrap">
       <div class="grid">
         <div class="panel">
-          <h2>What to Expect</h2>
-          <p>
-            Provide a few details and we’ll respond within 24 hours. If anything is missing, we’ll reach out quickly to confirm
-            exposure details so you get accurate options and pricing.
+          <div class="chip">Get Started</div>
+          <h1>Request Your Free Quote</h1>
+          <p class="lead">Tailored coverage. Fast response. Georgia & Florida.</p>
+
+          <h2 style="margin:16px 0 8px; font-size:18px">What to Expect</h2>
+          <p class="lead" style="margin:0 0 8px">
+            Provide a few details and we’ll respond within 24 hours. If anything is missing, we’ll reach out quickly to confirm exposure details so you get accurate options and pricing.
           </p>
-          <ul class="features">
-            <li><span class="check">✓</span> No obligation, completely free</li>
-            <li><span class="check">✓</span> Customized coverage options</li>
-            <li><span class="check">✓</span> Competitive rates from top carriers</li>
-            <li><span class="check">✓</span> Advisor response within 24 hours</li>
+
+          <ul class="list">
+            <li>No obligation, completely free</li>
+            <li>Customized coverage options</li>
+            <li>Competitive rates from top carriers</li>
+            <li>Advisor response within 24 hours</li>
           </ul>
-          <p style="margin-top:1.5rem;color:var(--text-muted);font-size:0.9rem;line-height:1.7">
+
+          <div class="note">
             Note: Submitting this form does not bind coverage. Coverage is subject to underwriting and carrier approval.
-          </p>
+          </div>
         </div>
 
         <div class="panel">
-          <h2>Quote Request Form</h2>
-
-          <div style="background:rgba(212,175,55,0.15);border:1px solid var(--gold);padding:0.8rem;border-radius:12px;margin-bottom:1.5rem;text-align:center;">
-            <p style="color:var(--gold);font-weight:700;font-size:0.8rem;margin:0;text-transform:uppercase;letter-spacing:1px;">
-              SMS is only sent to those who give their consent
-            </p>
-          </div>
-
-          <p style="margin-bottom:1.25rem;color:var(--text-light)">
-            Fill out the form below. We’ll contact you shortly.
+          <h2 style="margin:0 0 6px; font-size:18px">Quote Request Form</h2>
+          <p class="lead" style="margin:0 0 12px">
+            <strong style="color:rgba(212,175,55,.95)">SMS is only sent to those who give their consent</strong>
           </p>
+          <p class="lead" style="margin:0 0 16px">Fill out the form below. We’ll contact you shortly.</p>
 
-          <form id="quoteForm" action="https://formspree.io/f/xojqornl" method="POST" novalidate>
-            <div class="form-grid">
-              <div class="form-group">
+          <form action="https://formsubmit.co/dbrown@pinnacleriskad.com" method="POST">
+            <div class="row">
+              <div>
                 <label for="firstName">First Name</label>
                 <input id="firstName" type="text" name="firstName" required />
               </div>
-
-              <div class="form-group">
+              <div>
                 <label for="lastName">Last Name</label>
                 <input id="lastName" type="text" name="lastName" required />
               </div>
+            </div>
 
-              <div class="form-group">
+            <div class="row">
+              <div>
                 <label for="email">Email</label>
                 <input id="email" type="email" name="email" required />
               </div>
-
-              <div class="form-group">
+              <div>
                 <label for="phone">Phone (optional)</label>
                 <input
                   id="phone"
@@ -200,58 +298,59 @@
                   placeholder="Optional (required only if you opt into SMS)"
                 />
               </div>
+            </div>
 
-              <div class="form-group full">
-                <label for="company">Company Name</label>
-                <input id="company" type="text" name="company" required />
-              </div>
+            <div>
+              <label for="company">Company Name</label>
+              <input id="company" type="text" name="company" />
+            </div>
 
-              <div class="form-group full">
-                <label for="coverageType">Coverage Interest</label>
-                <select id="coverageType" name="coverageType" required>
-                  <option value="">Select coverage type</option>
-                  <option value="Commercial Insurance">Commercial Insurance</option>
-                  <option value="Property Insurance">Property Insurance</option>
-                  <option value="Casualty Insurance">Casualty Insurance</option>
-                  <option value="Trucking Insurance">Trucking Insurance</option>
-                  <option value="Not Sure">Not Sure / Need Guidance</option>
-                </select>
-              </div>
+            <div>
+              <label for="coverage">Coverage Interest</label>
+              <select id="coverage" name="coverage">
+                <option value="">Select coverage type</option>
+                <option>Commercial Insurance</option>
+                <option>Property Insurance</option>
+                <option>Casualty Insurance</option>
+                <option>Trucking Insurance</option>
+                <option>Not Sure / Need Guidance</option>
+              </select>
+            </div>
 
-              <div class="form-group full">
-                <label for="message">Additional Details</label>
-                <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
-              </div>
+            <div>
+              <label for="message">Additional Details</label>
+              <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
+            </div>
 
-              <div class="form-group full consent-box">
-                <label class="consent-label" for="smsConsent1">
-                  <input id="smsConsent1" type="checkbox" name="smsConsent1" value="Yes" />
-                  <span class="consent-check" aria-hidden="true"></span>
-                  <span class="consent-text">
-                    I confirm I am <strong>18+</strong> and agree to receive text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
-                  </span>
-                </label>
-              </div>
+            <div class="form-group full consent-box">
+              <label class="consent-label" for="smsConsent1">
+                <input id="smsConsent1" type="checkbox" name="smsConsent1" value="Yes" />
+                <span class="consent-text">
+                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                </span>
+              </label>
+            </div>
 
-              <div class="form-group full consent-box" style="margin-top:0.75rem">
-                <label class="consent-label" for="smsConsent2">
-                  <input id="smsConsent2" type="checkbox" name="smsConsent2" value="Yes" />
-                  <span class="consent-check" aria-hidden="true"></span>
-                  <span class="consent-text">
-                    I agree to receive occasional marketing and educational text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
-                  </span>
-                </label>
-              </div>
+            <div class="form-group full consent-box" style="margin-top:0.75rem">
+              <label class="consent-label" for="smsConsent2">
+                <input id="smsConsent2" type="checkbox" name="smsConsent2" value="Yes" />
+                <span class="consent-text">
+                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. <strong>Consent is not a condition of purchase.</strong> View our <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                </span>
+              </label>
             </div>
 
             <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Website" />
+            <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
 
-            <button type="submit" class="submit">Submit Request</button>
+            <button class="btn primary" type="submit" style="width:100%; border:none; cursor:pointer">
+              Submit Request
+            </button>
           </form>
 
-          <p style="margin-top:1.25rem;color:var(--text-muted);font-size:0.9rem;line-height:1.7">
-            Prefer to call? <a href="tel:9432393439">(943) 239-3439</a> • Email: <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>
+          <p class="lead" style="margin-top:14px">
+            Prefer to call? <strong>(943) 239-3439</strong> • Email: <strong>dbrown@pinnacleriskad.com</strong>
           </p>
         </div>
       </div>
@@ -259,89 +358,68 @@
   </main>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-brand">
-        <div class="logo" style="text-decoration:none;color:inherit">
-          <div class="logo-icon">P</div>
-          <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-        </div>
-        <p>A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/" style="text-decoration:none">
+          <div class="brand-mark">P</div>
+          <div class="brand-text">
+            <strong>Pinnacle Risk Advisors</strong>
+            <span>A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</span>
+          </div>
+        </a>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Services</h4>
         <ul>
-          <li><a href="index.html#services">Commercial Insurance</a></li>
-          <li><a href="index.html#services">Property Insurance</a></li>
-          <li><a href="index.html#services">Casualty Insurance</a></li>
-          <li><a href="index.html#services">Trucking Insurance</a></li>
+          <li><a href="/#services">Commercial Insurance</a></li>
+          <li><a href="/#services">Property Insurance</a></li>
+          <li><a href="/#services">Casualty Insurance</a></li>
+          <li><a href="/#services">Trucking Insurance</a></li>
         </ul>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="index.html#about">About Us</a></li>
-          <li><a href="index.html#team">Team</a></li>
-          <li><a href="index.html#testimonials">Testimonials</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="/#about">About Us</a></li>
+          <li><a href="/#team">Team</a></li>
+          <li><a href="/#testimonials">Testimonials</a></li>
+          <li><a href="/#contact">Contact</a></li>
         </ul>
       </div>
 
-      <div class="footer-column">
+      <div>
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:9432393439">(943) 239-3439</a></li>
           <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
+          <li><span>REPLACE WITH YOUR BUSINESS ADDRESS, City, State ZIP</span></li>
         </ul>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <p>
-        © 2026 Pinnacle Risk Advisors LLC. All rights reserved. |
-        <a href="privacy-policy.html">Privacy Policy</a> |
-        <a href="terms-of-service.html">Terms of Service</a>
-      </p>
-
-      <div class="footer-social" aria-label="Social links">
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">𝕏</a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+    <div class="foot-bottom">
+      <div>© 2026 Pinnacle Risk Advisors LLC. All rights reserved. | <a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a></div>
+      <div class="social">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
       </div>
     </div>
   </footer>
 
   <script>
     (function () {
-      // Mobile menu
-      const toggle = document.getElementById('mobileToggle');
-      const menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        function setOpen(open) {
-          menu.classList.toggle('active', open);
-          toggle.setAttribute('aria-expanded', String(open));
-          menu.setAttribute('aria-hidden', String(!open));
-        }
-        toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
-        menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-      }
-
-      // A2P fix: phone is only required if either SMS consent box is checked
-      const form = document.getElementById('quoteForm');
-      if (!form) return;
-
+      const form = document.querySelector('form[action*="formsubmit.co"]');
       const phone = document.getElementById('phone');
       const smsConsent1 = document.getElementById('smsConsent1');
       const smsConsent2 = document.getElementById('smsConsent2');
-      
-      if (!phone || !smsConsent1 || !smsConsent2) return;
+      if (!form || !phone || !smsConsent1 || !smsConsent2) return;
 
       function syncPhoneRequirement() {
         // If EITHER consent box is checked, phone is required
         const wantsSms = smsConsent1.checked || smsConsent2.checked;
-        
+
         phone.required = wantsSms;
         phone.setAttribute('aria-required', wantsSms ? 'true' : 'false');
         phone.placeholder = wantsSms
@@ -353,11 +431,10 @@
       smsConsent2.addEventListener('change', syncPhoneRequirement);
 
       form.addEventListener('submit', function (e) {
-        // Double check requirement on submit
         if ((smsConsent1.checked || smsConsent2.checked) && !phone.value.trim()) {
           e.preventDefault();
-          alert('Please enter a phone number to receive SMS/text messages.');
           phone.focus();
+          alert('Please enter a phone number if you opt into SMS updates.');
         }
       });
 
