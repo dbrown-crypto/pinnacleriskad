@@ -8,22 +8,195 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --gold: #C9A94E;
+      --gold-light: #E2CA7B;
+      --gold-dark: #A68B3A;
+      --gold-glow: rgba(201, 169, 78, 0.15);
+      --black: #0A0A0A;
+      --black-light: #0E0E0E;
+      --black-card: #131313;
+      --black-elevated: #1A1A1A;
+      --gray-900: #1C1C1C;
+      --gray-800: #282828;
+      --gray-700: #383838;
+      --gray-600: #555;
+      --gray-400: #8A8A8A;
+      --gray-300: #AAA;
+      --gray-200: #CCC;
+      --white: #F5F2EB;
+      --white-pure: #FFF;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Raleway', 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+      --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: 0.4s var(--ease-out);
+      --transition-fast: 0.25s var(--ease-smooth);
+      --shadow-gold: 0 4px 40px rgba(201, 169, 78, 0.07);
+      --section-pad: clamp(80px, 10vw, 140px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--gray-300);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    a { color: var(--gold); text-decoration: none; transition: var(--transition-fast); }
+    a:hover { color: var(--gold-light); }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4, h5 { font-family: var(--font-display); color: var(--white); line-height: 1.15; font-weight: 500; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+    .section-label { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: inline-block; }
+    .section-title { font-size: clamp(1.9rem, 3.8vw, 3rem); margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-desc { color: var(--gray-400); max-width: 540px; font-size: 0.95rem; line-height: 1.75; }
+    .gold-rule { width: 48px; height: 1px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); margin-bottom: 28px; }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
+
+    /* HEADER */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 10, 0.88); backdrop-filter: blur(24px) saturate(1.2); -webkit-backdrop-filter: blur(24px) saturate(1.2); border-bottom: 1px solid rgba(201, 169, 78, 0.06); transition: var(--transition); }
+    header.scrolled { background: rgba(10, 10, 10, 0.96); border-bottom-color: rgba(201, 169, 78, 0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); letter-spacing: 0.3px; }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); transition: var(--transition); }
+    .logo:hover .logo-icon { background: var(--gold); color: var(--black); }
+    .logo span { color: var(--gold); font-weight: 400; }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-400); position: relative; padding: 4px 0; }
+    nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.35s var(--ease-smooth); }
+    nav a:hover { color: var(--gold-light); }
+    nav a:hover::after { width: 100%; }
+    .nav-cta { padding: 10px 28px !important; border: 1px solid var(--gold) !important; color: var(--gold) !important; margin-left: 8px; transition: var(--transition) !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-cta::after { display: none !important; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 22px; position: relative; z-index: 1001; }
+    .menu-toggle span { display: block; width: 100%; height: 1.5px; background: var(--gold); position: absolute; left: 0; transition: var(--transition); }
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3) { bottom: 0; }
+    .menu-toggle.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 42px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
+    .btn-primary:hover { background: var(--gold-light); color: var(--black); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
+    .btn-primary:hover::before { transform: translateX(100%); }
+
+    /* QUOTE PAGE HERO */
+    .quote-page-hero { padding: 150px 0 64px; text-align: center; position: relative; overflow: hidden; }
+    .quote-page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 78, 0.04) 0%, transparent 50%); }
+    .quote-page-hero .container { position: relative; z-index: 2; }
+    .quote-page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 14px; }
+    .quote-page-hero h1 em { font-style: italic; color: var(--gold); }
+    .quote-page-hero .page-desc { font-family: var(--font-accent); font-size: 1.2rem; color: var(--gray-400); }
+
+    /* QUOTE FORM LAYOUT */
+    .quote-page-body { padding: 0 0 var(--section-pad); }
+    .quote-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start; padding-top: 64px; }
+    .quote-info { padding-top: 12px; }
+    .quote-benefits { list-style: none; margin: 32px 0; }
+    .quote-benefits li { font-size: 0.88rem; color: var(--gray-300); padding: 9px 0; display: flex; align-items: center; gap: 14px; }
+    .quote-benefits li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sms-notice { margin-top: 24px; padding: 16px 20px; border-left: 2px solid var(--gold-dark); background: rgba(201, 169, 78, 0.03); font-size: 0.8rem; color: var(--gray-400); line-height: 1.65; }
+    .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); display: inline-block; }
+    .contact-fallback { margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); }
+    .contact-fallback p { font-size: 0.84rem; color: var(--gray-400); margin-bottom: 12px; }
+
+    /* FORM */
+    .quote-form-wrapper { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.08); padding: 48px; position: relative; }
+    .quote-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); }
+    .quote-form-wrapper h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .quote-form-wrapper > p { font-size: 0.84rem; color: var(--gray-600); margin-bottom: 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+    .form-group label .req { color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; background: var(--gray-900); border: 1px solid var(--gray-800); color: var(--white); font-family: var(--font-body); font-size: 0.88rem; transition: var(--transition-fast); outline: none; border-radius: 0; -webkit-appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(201, 169, 78, 0.1); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-700); }
+    .form-group select { cursor: pointer; color: var(--gray-400); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .consent-section { margin-top: 10px; margin-bottom: 24px; }
+    .consent-heading { font-size: 0.68rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 14px; }
+    .consent-group { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; padding: 14px 16px; border: 1px solid var(--gray-800); background: rgba(201, 169, 78, 0.015); transition: var(--transition-fast); }
+    .consent-group:hover { border-color: rgba(201, 169, 78, 0.12); }
+    .consent-group input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
+    .consent-group label { font-size: 0.78rem; color: var(--gray-400); line-height: 1.6; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .consent-group label a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    .form-submit { width: 100%; padding: 17px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.74rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
+    .form-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
+    .form-submit:hover::before { transform: translateX(100%); }
+    .form-footer-note { font-size: 0.72rem; color: var(--gray-700); text-align: center; margin-top: 16px; line-height: 1.6; }
+    .form-footer-note a { font-size: 0.72rem; }
+
+    /* FOOTER */
+    footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+    .footer-brand .logo { margin-bottom: 18px; }
+    .footer-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.75; }
+    .footer-heading { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.85rem; color: var(--gray-400); }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(201, 169, 78, 0.06); flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 0.78rem; color: var(--gray-700); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 0.78rem; color: var(--gray-600); }
+    .footer-legal a:hover { color: var(--gold); }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
+    .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .quote-grid { gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); justify-content: center; align-items: center; gap: 28px; z-index: 1000; }
+      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
+      .menu-toggle { display: block; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .quote-form-wrapper { padding: 32px 22px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header id="header">
     <div class="container nav-inner">
-      <a href="/" class="logo">
-        <div class="logo-icon">P</div>
-        Pinnacle<span>Risk Advisors</span>
-      </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
       <nav id="mainNav">
-        <a href="index.html#home">Home</a>
+        <a href="index.html">Home</a>
         <a href="index.html#services">Services</a>
         <a href="index.html#about">About</a>
         <a href="index.html#testimonials">Testimonials</a>
@@ -33,29 +206,27 @@
     </div>
   </header>
 
-  <!-- QUOTE PAGE HERO -->
+  <!-- PAGE HERO -->
   <section class="quote-page-hero">
     <div class="container">
       <div class="section-label">Free &amp; No Obligation</div>
       <h1>Request Your <em>Free Quote</em></h1>
-      <p class="hero-desc">Complete the form below and we&rsquo;ll provide a customized quote within 24 hours.</p>
+      <p class="page-desc">Complete the form below and we&rsquo;ll provide a customized quote within 24 hours.</p>
     </div>
   </section>
 
   <div class="section-divider"></div>
 
-  <!-- QUOTE PAGE BODY -->
+  <!-- QUOTE BODY -->
   <section class="quote-page-body">
     <div class="container">
-      <div class="quote-grid" style="padding-top: 64px;">
+      <div class="quote-grid">
 
-        <!-- Left: Info -->
+        <!-- LEFT INFO -->
         <div class="quote-info reveal">
           <h2 class="section-title" style="font-size: clamp(1.5rem, 3vw, 2rem);">Why Choose <em>Pinnacle</em></h2>
           <div class="gold-rule"></div>
-          <p class="section-desc" style="margin-bottom: 0;">
-            We combine deep industry expertise with a personal touch. Every policy is tailored to your specific business needs.
-          </p>
+          <p class="section-desc" style="margin-bottom: 0;">We combine deep industry expertise with a personal touch. Every policy is tailored to your specific business needs.</p>
           <ul class="quote-benefits">
             <li>No obligation, completely free</li>
             <li>Customized coverage options</li>
@@ -64,12 +235,9 @@
             <li>Serving Georgia &amp; Florida</li>
             <li>Commercial trucking specialists</li>
           </ul>
+          <div class="sms-notice">SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply. You may opt out at any time by replying STOP.</div>
 
-          <div class="sms-notice">
-            SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply. You may opt out at any time by replying STOP.
-          </div>
-
-          <!-- Trust signals -->
+          <!-- Coverage tags -->
           <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(201,169,78,0.08);">
             <p style="font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 16px;">Coverage Areas</p>
             <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -83,18 +251,14 @@
           </div>
 
           <!-- Contact fallback -->
-          <div style="margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201,169,78,0.06);">
-            <p style="font-size: 0.84rem; color: var(--gray-400); margin-bottom: 12px;">Prefer to talk? Reach us directly:</p>
-            <p style="margin-bottom: 6px;">
-              <a href="tel:9432393439" style="font-family: var(--font-accent); font-size: 1.1rem; color: var(--white);">(943) 239-3439</a>
-            </p>
-            <p>
-              <a href="mailto:dbrown@pinnacleriskad.com" style="font-size: 0.88rem; color: var(--gold);">dbrown@pinnacleriskad.com</a>
-            </p>
+          <div class="contact-fallback">
+            <p>Prefer to talk? Reach us directly:</p>
+            <p style="margin-bottom: 6px;"><a href="tel:9432393439" style="font-family: var(--font-accent); font-size: 1.1rem; color: var(--white);">(943) 239-3439</a></p>
+            <p style="margin-bottom: 0;"><a href="mailto:dbrown@pinnacleriskad.com" style="font-size: 0.88rem; color: var(--gold);">dbrown@pinnacleriskad.com</a></p>
           </div>
         </div>
 
-        <!-- Right: Form -->
+        <!-- RIGHT FORM -->
         <div class="quote-form-wrapper reveal">
           <h3>Tell Us About Your Business</h3>
           <p>All fields marked with <span style="color: var(--gold);">*</span> are required. Everything else is optional.</p>
@@ -110,7 +274,6 @@
                 <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
               </div>
             </div>
-
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email <span class="req">*</span></label>
@@ -121,7 +284,6 @@
                 <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
               </div>
             </div>
-
             <div class="form-row">
               <div class="form-group">
                 <label for="company">Company Name</label>
@@ -137,7 +299,6 @@
                 </select>
               </div>
             </div>
-
             <div class="form-group">
               <label for="coverage">Coverage Interest <span class="req">*</span></label>
               <select id="coverage" name="coverage" required>
@@ -145,32 +306,29 @@
                 <option value="commercial">Commercial Insurance</option>
                 <option value="property">Property Insurance</option>
                 <option value="casualty">Casualty Insurance</option>
-                <option value="trucking-general">Trucking — General Freight</option>
-                <option value="trucking-hotshot">Trucking — Hotshot</option>
-                <option value="trucking-longhaul">Trucking — Long Haul</option>
+                <option value="trucking-general">Trucking &mdash; General Freight</option>
+                <option value="trucking-hotshot">Trucking &mdash; Hotshot</option>
+                <option value="trucking-longhaul">Trucking &mdash; Long Haul</option>
                 <option value="workers-comp">Workers' Compensation</option>
                 <option value="builders-risk">Builder's Risk</option>
                 <option value="multiple">Multiple Coverages</option>
                 <option value="guidance">Not Sure / Need Guidance</option>
               </select>
             </div>
-
             <div class="form-group">
               <label for="details">Tell Us More About Your Needs</label>
               <textarea id="details" name="details" rows="5" placeholder="Describe your business, number of vehicles, property details, current coverage, or any specific concerns..."></textarea>
             </div>
 
-            <!-- ═══ A2P COMPLIANT SMS CONSENT ═══ -->
+            <!-- A2P COMPLIANT CONSENT -->
             <div class="consent-section">
               <div class="consent-heading">SMS Communication Preferences (Optional)</div>
-
               <div class="consent-group">
                 <input type="checkbox" id="smsService" name="smsService" value="yes">
                 <label for="smsService">
                   I confirm I am <strong>18+</strong> and agree to receive text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
                 </label>
               </div>
-
               <div class="consent-group">
                 <input type="checkbox" id="smsMarketing" name="smsMarketing" value="yes">
                 <label for="smsMarketing">
@@ -180,12 +338,7 @@
             </div>
 
             <button type="submit" class="form-submit">Submit Quote Request</button>
-
-            <p style="font-size: 0.72rem; color: var(--gray-700); text-align: center; margin-top: 16px; line-height: 1.6;">
-              By submitting this form you agree to our
-              <a href="privacy-policy.html" style="font-size: 0.72rem;">Privacy Policy</a> and
-              <a href="terms-of-service.html" style="font-size: 0.72rem;">Terms of Service</a>.
-            </p>
+            <p class="form-footer-note">By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.</p>
           </form>
         </div>
       </div>
@@ -196,51 +349,22 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
-          <p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
-        </div>
-        <div>
-          <h5 class="footer-heading">Services</h5>
-          <ul class="footer-links">
-            <li><a href="index.html#services">Commercial Insurance</a></li>
-            <li><a href="index.html#services">Property Insurance</a></li>
-            <li><a href="index.html#services">Casualty Insurance</a></li>
-            <li><a href="index.html#services">Trucking Insurance</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="footer-heading">Company</h5>
-          <ul class="footer-links">
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#team">Team</a></li>
-            <li><a href="index.html#testimonials">Testimonials</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="footer-heading">Contact</h5>
-          <ul class="footer-links">
-            <li><a href="tel:9432393439">(943) 239-3439</a></li>
-            <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
-          </ul>
-        </div>
+        <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a><p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p></div>
+        <div><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="index.html#services">Commercial Insurance</a></li><li><a href="index.html#services">Property Insurance</a></li><li><a href="index.html#services">Casualty Insurance</a></li><li><a href="index.html#services">Trucking Insurance</a></li></ul></div>
+        <div><h5 class="footer-heading">Company</h5><ul class="footer-links"><li><a href="index.html#about">About</a></li><li><a href="index.html#team">Team</a></li><li><a href="index.html#testimonials">Testimonials</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+        <div><h5 class="footer-heading">Contact</h5><ul class="footer-links"><li><a href="tel:9432393439">(943) 239-3439</a></li><li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
-        <div class="footer-legal">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-service.html">Terms of Service</a>
-        </div>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">&#120143;</a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-        </div>
+        <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
+        <div class="footer-socials"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">X</a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a></div>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>50)});var menuToggle=document.getElementById('menuToggle'),mainNav=document.getElementById('mainNav');menuToggle.addEventListener('click',function(){menuToggle.classList.toggle('active');mainNav.classList.toggle('open');document.body.style.overflow=mainNav.classList.contains('open')?'hidden':''});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menuToggle.classList.remove('active');mainNav.classList.remove('open');document.body.style.overflow=''})});var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
+    var qf=document.getElementById('quoteForm');if(qf){qf.addEventListener('submit',function(e){e.preventDefault();var fd=new FormData(this);var d=Object.fromEntries(fd.entries());var ss=document.getElementById('smsService');var sm=document.getElementById('smsMarketing');if(ss)d.smsServiceConsent=ss.checked;if(sm)d.smsMarketingConsent=sm.checked;console.log('Form submitted:',d);var btn=this.querySelector('.form-submit');var ot=btn.textContent;btn.textContent='REQUEST SUBMITTED \u2713';btn.style.background='#2d8a4e';btn.style.pointerEvents='none';setTimeout(function(){btn.textContent=ot;btn.style.background='';btn.style.pointerEvents='';qf.reset()},3000)})}
+  </script>
 </body>
 </html>
