@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --gold: #C9A94E;
@@ -194,7 +195,7 @@
   <header id="header">
     <div class="container nav-inner">
       <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <nav id="mainNav">
         <a href="index.html">Home</a>
         <a href="index.html#services">Services</a>
@@ -235,7 +236,10 @@
             <li>Serving Georgia &amp; Florida</li>
             <li>Commercial trucking specialists</li>
           </ul>
-          <div class="sms-notice">SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply. You may opt out at any time by replying STOP.</div>
+          <div class="sms-notice">
+            SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply.
+            You may opt out at any time by replying STOP, or reply HELP for assistance.
+          </div>
 
           <!-- Coverage tags -->
           <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(201,169,78,0.08);">
@@ -263,7 +267,8 @@
           <h3>Tell Us About Your Business</h3>
           <p>All fields marked with <span style="color: var(--gold);">*</span> are required. Everything else is optional.</p>
 
-          <form id="quoteForm" action="#" method="POST">
+          <!-- NOTE: FormSubmit sends the form to your email. Change email if needed. -->
+          <form id="quoteForm" action="https://formsubmit.co/dbrown@pinnacleriskad.com" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name <span class="req">*</span></label>
@@ -274,16 +279,18 @@
                 <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
               </div>
             </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email <span class="req">*</span></label>
                 <input type="email" id="email" name="email" placeholder="john@company.com" required>
               </div>
               <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                <label for="phone">Phone <span id="phoneReqMark" class="req" style="display:none">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" inputmode="tel">
               </div>
             </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="company">Company Name</label>
@@ -299,6 +306,7 @@
                 </select>
               </div>
             </div>
+
             <div class="form-group">
               <label for="coverage">Coverage Interest <span class="req">*</span></label>
               <select id="coverage" name="coverage" required>
@@ -315,32 +323,52 @@
                 <option value="guidance">Not Sure / Need Guidance</option>
               </select>
             </div>
+
             <div class="form-group">
               <label for="details">Tell Us More About Your Needs</label>
               <textarea id="details" name="details" rows="5" placeholder="Describe your business, number of vehicles, property details, current coverage, or any specific concerns..."></textarea>
             </div>
 
-            <!-- A2P COMPLIANT CONSENT -->
+            <!-- A2P / 10DLC CONSENT (Optional) -->
             <div class="consent-section">
               <div class="consent-heading">SMS Communication Preferences (Optional)</div>
+
               <div class="consent-group">
                 <input type="checkbox" id="smsService" name="smsService" value="yes">
                 <label for="smsService">
-                  I confirm I am <strong>18+</strong> and agree to receive text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our
+                  <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
+                  <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
                 </label>
               </div>
+
               <div class="consent-group">
                 <input type="checkbox" id="smsMarketing" name="smsMarketing" value="yes">
                 <label for="smsMarketing">
-                  I agree to receive occasional marketing and educational text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
+                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
+                  <strong>Consent is not a condition of purchase.</strong> View our
+                  <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
+                  <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
                 </label>
               </div>
+
+              <!-- Hidden fields to help prove opt-in capture in submissions -->
+              <input type="hidden" id="smsOptInTimestamp" name="smsOptInTimestamp" value="">
+              <input type="hidden" id="smsOptInSource" name="smsOptInSource" value="Website quote form (quote.html)">
             </div>
 
+            <!-- FormSubmit settings -->
+            <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Quote Page">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
+
             <button type="submit" class="form-submit">Submit Quote Request</button>
-            <p class="form-footer-note">By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.</p>
+            <p class="form-footer-note">
+              By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
+            </p>
           </form>
         </div>
+
       </div>
     </div>
   </section>
@@ -349,22 +377,145 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a><p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p></div>
-        <div><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="index.html#services">Commercial Insurance</a></li><li><a href="index.html#services">Property Insurance</a></li><li><a href="index.html#services">Casualty Insurance</a></li><li><a href="index.html#services">Trucking Insurance</a></li></ul></div>
-        <div><h5 class="footer-heading">Company</h5><ul class="footer-links"><li><a href="index.html#about">About</a></li><li><a href="index.html#team">Team</a></li><li><a href="index.html#testimonials">Testimonials</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
-        <div><h5 class="footer-heading">Contact</h5><ul class="footer-links"><li><a href="tel:9432393439">(943) 239-3439</a></li><li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li></ul></div>
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
+          <p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
+        </div>
+
+        <div>
+          <h5 class="footer-heading">Services</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Commercial Insurance</a></li>
+            <li><a href="index.html#services">Property Insurance</a></li>
+            <li><a href="index.html#services">Casualty Insurance</a></li>
+            <li><a href="index.html#services">Trucking Insurance</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-heading">Company</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#team">Team</a></li>
+            <li><a href="index.html#testimonials">Testimonials</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-heading">Contact</h5>
+          <ul class="footer-links">
+            <li><a href="tel:9432393439">(943) 239-3439</a></li>
+            <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
+            <li><span style="font-size: 0.85rem; color: var(--gray-400);">2200 PARKLAKE DR NE, ATLANTA, GA 30345</span></li>
+          </ul>
+        </div>
       </div>
+
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
-        <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
-        <div class="footer-socials"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">X</a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a></div>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">X</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
-    var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>50)});var menuToggle=document.getElementById('menuToggle'),mainNav=document.getElementById('mainNav');menuToggle.addEventListener('click',function(){menuToggle.classList.toggle('active');mainNav.classList.toggle('open');document.body.style.overflow=mainNav.classList.contains('open')?'hidden':''});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menuToggle.classList.remove('active');mainNav.classList.remove('open');document.body.style.overflow=''})});var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
-    var qf=document.getElementById('quoteForm');if(qf){qf.addEventListener('submit',function(e){e.preventDefault();var fd=new FormData(this);var d=Object.fromEntries(fd.entries());var ss=document.getElementById('smsService');var sm=document.getElementById('smsMarketing');if(ss)d.smsServiceConsent=ss.checked;if(sm)d.smsMarketingConsent=sm.checked;console.log('Form submitted:',d);var btn=this.querySelector('.form-submit');var ot=btn.textContent;btn.textContent='REQUEST SUBMITTED \u2713';btn.style.background='#2d8a4e';btn.style.pointerEvents='none';setTimeout(function(){btn.textContent=ot;btn.style.background='';btn.style.pointerEvents='';qf.reset()},3000)})}
+    // Header scroll state + mobile menu
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    var menuToggle = document.getElementById('menuToggle'),
+        mainNav = document.getElementById('mainNav');
+
+    menuToggle.addEventListener('click', function () {
+      menuToggle.classList.toggle('active');
+      mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', mainNav.classList.contains('open') ? 'true' : 'false');
+      document.body.style.overflow = mainNav.classList.contains('open') ? 'hidden' : '';
+    });
+
+    mainNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        menuToggle.classList.remove('active');
+        mainNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Reveal animations
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ro.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { ro.observe(el); });
+
+    // A2P improvement: phone is only required if user opts into SMS
+    (function () {
+      var form = document.getElementById('quoteForm');
+      var phone = document.getElementById('phone');
+      var phoneReqMark = document.getElementById('phoneReqMark');
+      var smsService = document.getElementById('smsService');
+      var smsMarketing = document.getElementById('smsMarketing');
+      var ts = document.getElementById('smsOptInTimestamp');
+
+      if (!form || !phone || !smsService || !smsMarketing || !ts) return;
+
+      function wantsSms() {
+        return smsService.checked || smsMarketing.checked;
+      }
+
+      function syncPhoneRequirement() {
+        var required = wantsSms();
+        phone.required = required;
+        if (phoneReqMark) phoneReqMark.style.display = required ? 'inline' : 'none';
+        phone.placeholder = required ? 'Required for SMS updates' : '(555) 123-4567';
+      }
+
+      function setTimestampIfNeeded() {
+        // If any SMS box is checked, set timestamp; else clear it.
+        ts.value = wantsSms() ? new Date().toISOString() : '';
+      }
+
+      smsService.addEventListener('change', function () {
+        syncPhoneRequirement();
+        setTimestampIfNeeded();
+      });
+
+      smsMarketing.addEventListener('change', function () {
+        syncPhoneRequirement();
+        setTimestampIfNeeded();
+      });
+
+      form.addEventListener('submit', function (e) {
+        // If they opted into SMS, ensure phone is present
+        if (wantsSms() && !phone.value.trim()) {
+          e.preventDefault();
+          phone.focus();
+          alert('Please enter a phone number if you opt into SMS messages.');
+          return;
+        }
+        setTimestampIfNeeded();
+      });
+
+      syncPhoneRequirement();
+      setTimestampIfNeeded();
+    })();
   </script>
 </body>
 </html>
