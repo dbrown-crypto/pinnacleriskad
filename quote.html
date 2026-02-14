@@ -196,11 +196,41 @@
       .quote-grid { gap: 48px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
+
+    /* ✅ FIXED MOBILE MENU (iOS SAFE) */
     @media (max-width: 768px) {
       nav { display: none; }
-      nav.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); justify-content: center; align-items: center; gap: 28px; z-index: 1000; }
-      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
       .menu-toggle { display: block; }
+
+      /* make header become the full-screen overlay */
+      header.menu-open {
+        height: 100dvh; /* iOS-safe viewport */
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      /* allow nav-inner to wrap so nav can sit below the top bar */
+      header.menu-open .nav-inner {
+        height: 100%;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+      }
+
+      /* nav takes full width below header row */
+      #mainNav.open {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        width: 100%;
+        height: calc(100dvh - 76px);
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+      }
+      #mainNav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
+
       .quote-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .quote-form-wrapper { padding: 32px 22px; }
@@ -216,7 +246,6 @@
     <div class="container nav-inner">
       <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
 
-      <!-- ✅ accessibility + better state mgmt -->
       <button class="menu-toggle" id="menuToggle"
         aria-label="Toggle navigation"
         aria-controls="mainNav"
@@ -299,7 +328,6 @@
           <h3>Tell Us About Your Business</h3>
           <p>All fields marked with <span style="color: var(--gold);">*</span> are required. Everything else is optional.</p>
 
-          <!-- NOTE: FormSubmit sends the form to your email. Change email if needed. -->
           <form id="quoteForm" action="https://formsubmit.co/dbrown@pinnacleriskad.com" method="POST">
             <div class="form-row">
               <div class="form-group">
@@ -481,22 +509,44 @@
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ✅ Mobile menu with proper state + ESC + outside click
+    // ✅ iOS-safe mobile menu overlay + scroll lock (matches index.html behavior)
     var menuToggle = document.getElementById('menuToggle'),
         mainNav = document.getElementById('mainNav');
+
+    var _scrollY = 0;
+
+    function lockScroll() {
+      _scrollY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = (-_scrollY) + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+
+    function unlockScroll() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, _scrollY);
+    }
 
     function closeMenu() {
       menuToggle.classList.remove('active');
       mainNav.classList.remove('open');
+      header.classList.remove('menu-open');
       menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      unlockScroll();
     }
 
     function openMenu() {
       menuToggle.classList.add('active');
       mainNav.classList.add('open');
+      header.classList.add('menu-open');
       menuToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     }
 
     menuToggle.addEventListener('click', function () {
