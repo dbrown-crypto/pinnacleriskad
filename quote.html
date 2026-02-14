@@ -295,6 +295,7 @@
               </div>
               <div class="form-group">
                 <label for="phone">Phone <span id="phoneReqMark" class="req" style="display:none">*</span></label>
+                <!-- IMPORTANT: phone is NOT required unless SMS consent is checked -->
                 <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" inputmode="tel">
               </div>
             </div>
@@ -368,6 +369,9 @@
               <input type="hidden" id="smsOptInTimestamp" name="smsOptInTimestamp" value="">
               <input type="hidden" id="smsOptInSource" name="smsOptInSource" value="Website quote form (quote.html)">
               <input type="hidden" id="smsOptInPageUrl" name="smsOptInPageUrl" value="">
+
+              <!-- NEW: capture phone used for opt-in (recommended for audits) -->
+              <input type="hidden" id="smsOptInPhone" name="smsOptInPhone" value="">
 
               <!-- Explicit boolean fields (because unchecked checkboxes are not posted) -->
               <input type="hidden" id="smsServiceConsent" name="smsServiceConsent" value="false">
@@ -494,10 +498,11 @@
       var smsMarketing = document.getElementById('smsMarketing');
       var ts = document.getElementById('smsOptInTimestamp');
 
-      // New proof fields
+      // Proof fields
       var pageUrl = document.getElementById('smsOptInPageUrl');
       var svcBool = document.getElementById('smsServiceConsent');
       var mktBool = document.getElementById('smsMarketingConsent');
+      var optPhone = document.getElementById('smsOptInPhone');
 
       if (!form || !phone || !smsService || !smsMarketing || !ts) return;
 
@@ -520,6 +525,9 @@
         // explicit booleans for audit trails
         if (svcBool) svcBool.value = smsService.checked ? 'true' : 'false';
         if (mktBool) mktBool.value = smsMarketing.checked ? 'true' : 'false';
+
+        // capture phone used for opt-in (recommended)
+        if (optPhone) optPhone.value = wantsSms() ? (phone.value || '').trim() : '';
       }
 
       smsService.addEventListener('change', function () {
