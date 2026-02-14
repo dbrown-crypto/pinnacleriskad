@@ -8,20 +8,284 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --gold: #C9A94E;
+      --gold-light: #E2CA7B;
+      --gold-dark: #A68B3A;
+      --gold-glow: rgba(201, 169, 78, 0.15);
+      --black: #0A0A0A;
+      --black-light: #0E0E0E;
+      --black-card: #131313;
+      --black-elevated: #1A1A1A;
+      --gray-900: #1C1C1C;
+      --gray-800: #282828;
+      --gray-700: #383838;
+      --gray-600: #555;
+      --gray-400: #8A8A8A;
+      --gray-300: #AAA;
+      --gray-200: #CCC;
+      --white: #F5F2EB;
+      --white-pure: #FFF;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Raleway', 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+      --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: 0.4s var(--ease-out);
+      --transition-fast: 0.25s var(--ease-smooth);
+      --shadow-gold: 0 4px 40px rgba(201, 169, 78, 0.07);
+      --section-pad: clamp(80px, 10vw, 140px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--gray-300);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    a { color: var(--gold); text-decoration: none; transition: var(--transition-fast); }
+    a:hover { color: var(--gold-light); }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4, h5 { font-family: var(--font-display); color: var(--white); line-height: 1.15; font-weight: 500; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+    .section-label {
+      font-family: var(--font-body); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px; display: inline-block;
+    }
+    .section-title { font-size: clamp(1.9rem, 3.8vw, 3rem); margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-desc { color: var(--gray-400); max-width: 540px; font-size: 0.95rem; line-height: 1.75; }
+    .section-desc.center { margin-left: auto; margin-right: auto; }
+    .gold-rule { width: 48px; height: 1px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); margin-bottom: 28px; }
+    .gold-rule.center { margin-left: auto; margin-right: auto; }
+    .ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 0 auto 32px; width: fit-content; }
+    .ornament::before, .ornament::after { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+    .ornament::after { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+    .ornament span { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(24px) saturate(1.2);
+      -webkit-backdrop-filter: blur(24px) saturate(1.2);
+      border-bottom: 1px solid rgba(201, 169, 78, 0.06);
+      transition: var(--transition);
+    }
+    header.scrolled { background: rgba(10, 10, 10, 0.96); border-bottom-color: rgba(201, 169, 78, 0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); letter-spacing: 0.3px; }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); transition: var(--transition); }
+    .logo:hover .logo-icon { background: var(--gold); color: var(--black); }
+    .logo span { color: var(--gold); font-weight: 400; }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-400); position: relative; padding: 4px 0; }
+    nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.35s var(--ease-smooth); }
+    nav a:hover { color: var(--gold-light); }
+    nav a:hover::after { width: 100%; }
+    .nav-cta { padding: 10px 28px !important; border: 1px solid var(--gold) !important; color: var(--gold) !important; margin-left: 8px; transition: var(--transition) !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-cta::after { display: none !important; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 22px; position: relative; z-index: 1001; }
+    .menu-toggle span { display: block; width: 100%; height: 1.5px; background: var(--gold); position: absolute; left: 0; transition: var(--transition); }
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3) { bottom: 0; }
+    .menu-toggle.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 42px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
+    .btn-primary:hover { background: var(--gold-light); color: var(--black); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
+    .btn-primary:hover::before { transform: translateX(100%); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 42px; background: transparent; color: var(--white); font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; border: 1px solid var(--gray-700); cursor: pointer; transition: var(--transition); }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 100px 0 80px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 45%, rgba(201, 169, 78, 0.05) 0%, transparent 55%), radial-gradient(ellipse at 85% 15%, rgba(201, 169, 78, 0.03) 0%, transparent 45%), radial-gradient(ellipse at 50% 100%, rgba(201, 169, 78, 0.02) 0%, transparent 40%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201, 169, 78, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 78, 0.025) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); }
+    .hero .container { position: relative; z-index: 2; }
+    .hero-content { max-width: 700px; }
+    .hero-label { font-family: var(--font-body); font-size: 0.62rem; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 18px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+    .hero-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+    .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.2rem); font-weight: 400; line-height: 1.08; margin-bottom: 28px; letter-spacing: -0.5px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-desc { font-family: var(--font-accent); font-size: 1.3rem; color: var(--gray-400); margin-bottom: 14px; letter-spacing: 0.3px; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+    .hero-serving { font-size: 0.75rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 44px; opacity: 0; animation: fadeUp 0.8s 0.75s forwards; }
+    .hero-buttons { display: flex; gap: 18px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.85s forwards; }
+    .hero-stats { display: flex; gap: 56px; margin-top: 72px; padding-top: 36px; border-top: 1px solid rgba(201, 169, 78, 0.08); opacity: 0; animation: fadeUp 0.8s 1.05s forwards; }
+    .hero-stat strong { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--gold); letter-spacing: -0.5px; }
+    .hero-stat span { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); }
+
+    /* SERVICES */
+    .services { padding: var(--section-pad) 0; background: var(--black-light); }
+    .services-header { text-align: center; margin-bottom: 72px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .service-card { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); padding: 44px 30px 40px; transition: var(--transition); position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-smooth); }
+    .service-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 80px; height: 80px; background: radial-gradient(circle, rgba(201, 169, 78, 0.04) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s ease; }
+    .service-card:hover { border-color: rgba(201, 169, 78, 0.15); transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.4), var(--shadow-gold); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover::after { opacity: 1; }
+    .service-number { font-family: var(--font-display); font-size: 0.82rem; color: var(--gold-dark); margin-bottom: 22px; opacity: 0.5; }
+    .service-card h3 { font-size: 1.25rem; margin-bottom: 14px; }
+    .service-card p { font-size: 0.88rem; color: var(--gray-400); margin-bottom: 22px; line-height: 1.7; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); }
+    .service-link { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-fast); }
+    .service-link:hover { gap: 14px; color: var(--gold-light); }
+
+    /* ABOUT */
+    .about { padding: var(--section-pad) 0; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
+    .about-text { font-size: 0.92rem; color: var(--gray-400); margin-bottom: 28px; line-height: 1.85; }
+    .about-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 40px; }
+    .about-features li { font-size: 0.84rem; font-weight: 500; color: var(--gray-300); display: flex; align-items: center; gap: 10px; }
+    .about-features li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .about-visual { position: relative; }
+    .about-image-box { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.08); padding: 64px 48px; text-align: center; position: relative; overflow: hidden; }
+    .about-image-box::before { content: ''; position: absolute; top: -14px; right: -14px; bottom: 14px; left: 14px; border: 1px solid rgba(201, 169, 78, 0.1); z-index: 0; pointer-events: none; }
+    .about-image-box::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(201, 169, 78, 0.04) 0%, transparent 60%); z-index: 0; }
+    .about-monogram { width: 100px; height: 100px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-family: var(--font-display); font-size: 2.4rem; font-weight: 400; color: var(--gold); position: relative; z-index: 1; transform: rotate(45deg); }
+    .about-monogram span { transform: rotate(-45deg); }
+    .about-image-box h4 { font-family: var(--font-accent); font-size: 1.5rem; font-weight: 400; font-style: italic; color: var(--gold-light); margin-bottom: 6px; position: relative; z-index: 1; }
+    .about-tagline { font-size: 0.72rem; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gray-600); position: relative; z-index: 1; }
+
+    /* TEAM */
+    .team { padding: var(--section-pad) 0; background: var(--black-light); }
+    .team-inner { text-align: center; max-width: 580px; margin: 0 auto; }
+    .team-avatar { width: 110px; height: 110px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--gold); background: var(--black-card); position: relative; }
+    .team-avatar::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(201, 169, 78, 0.1); }
+    .team-inner h3 { font-size: 1.7rem; margin-bottom: 4px; }
+    .team-role { font-family: var(--font-accent); font-size: 1.1rem; font-style: italic; color: var(--gold); margin-bottom: 20px; }
+    .team-bio { font-size: 0.92rem; color: var(--gray-400); line-height: 1.85; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: var(--section-pad) 0; }
+    .testimonials-header { text-align: center; margin-bottom: 72px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); padding: 44px 34px; transition: var(--transition); display: flex; flex-direction: column; }
+    .testimonial-card:hover { border-color: rgba(201, 169, 78, 0.15); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3), var(--shadow-gold); }
+    .testimonial-quote { font-family: var(--font-display); font-size: 2.8rem; color: var(--gold); line-height: 1; margin-bottom: 16px; opacity: 0.35; }
+    .testimonial-text { font-family: var(--font-accent); font-size: 1.08rem; font-style: italic; color: var(--gray-300); line-height: 1.8; margin-bottom: 28px; flex: 1; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid rgba(201, 169, 78, 0.08); }
+    .testimonial-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--gray-800); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; color: var(--gold); flex-shrink: 0; }
+    .testimonial-name { font-size: 0.88rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+    .testimonial-company { font-size: 0.76rem; color: var(--gray-600); }
+
+    /* QUOTE SECTION */
+    .quote-section { padding: var(--section-pad) 0; background: var(--black-light); }
+    .quote-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start; }
+    .quote-info { padding-top: 12px; }
+    .quote-benefits { list-style: none; margin: 32px 0; }
+    .quote-benefits li { font-size: 0.88rem; color: var(--gray-300); padding: 9px 0; display: flex; align-items: center; gap: 14px; }
+    .quote-benefits li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .sms-notice { margin-top: 24px; padding: 16px 20px; border-left: 2px solid var(--gold-dark); background: rgba(201, 169, 78, 0.03); font-size: 0.8rem; color: var(--gray-400); line-height: 1.65; }
+    .quote-form-wrapper { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.08); padding: 48px; position: relative; }
+    .quote-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); }
+    .quote-form-wrapper h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .quote-form-wrapper > p { font-size: 0.84rem; color: var(--gray-600); margin-bottom: 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+    .form-group label .req { color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; background: var(--gray-900); border: 1px solid var(--gray-800); color: var(--white); font-family: var(--font-body); font-size: 0.88rem; transition: var(--transition-fast); outline: none; border-radius: 0; -webkit-appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(201, 169, 78, 0.1); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-700); }
+    .form-group select { cursor: pointer; color: var(--gray-400); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .consent-section { margin-top: 10px; margin-bottom: 24px; }
+    .consent-heading { font-size: 0.68rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 14px; }
+    .consent-group { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; padding: 14px 16px; border: 1px solid var(--gray-800); background: rgba(201, 169, 78, 0.015); transition: var(--transition-fast); }
+    .consent-group:hover { border-color: rgba(201, 169, 78, 0.12); }
+    .consent-group input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
+    .consent-group label { font-size: 0.78rem; color: var(--gray-400); line-height: 1.6; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .consent-group label a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    .form-submit { width: 100%; padding: 17px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.74rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
+    .form-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
+    .form-submit:hover::before { transform: translateX(100%); }
+
+    /* CONTACT */
+    .contact-bar { padding: 80px 0 var(--section-pad); }
+    .contact-header { text-align: center; margin-bottom: 56px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 880px; margin: 0 auto; }
+    .contact-item { text-align: center; padding: 36px 24px; background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); transition: var(--transition); }
+    .contact-item:hover { border-color: rgba(201, 169, 78, 0.15); transform: translateY(-3px); }
+    .contact-icon { font-size: 1.5rem; margin-bottom: 14px; }
+    .contact-item h4 { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 8px; }
+    .contact-item a, .contact-item p { font-family: var(--font-accent); font-size: 1.1rem; color: var(--white); }
+
+    /* FOOTER */
+    footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+    .footer-brand .logo { margin-bottom: 18px; }
+    .footer-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.75; }
+    .footer-heading { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.85rem; color: var(--gray-400); }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(201, 169, 78, 0.06); flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 0.78rem; color: var(--gray-700); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 0.78rem; color: var(--gray-600); }
+    .footer-legal a:hover { color: var(--gold); }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
+    .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.12s; }
+    .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.2s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid, .quote-grid { gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); justify-content: center; align-items: center; gap: 28px; z-index: 1000; }
+      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
+      .menu-toggle { display: block; }
+      .hero-stats { flex-wrap: wrap; gap: 28px; }
+      .services-grid, .about-grid, .testimonials-grid, .quote-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .quote-form-wrapper { padding: 32px 22px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header id="header">
     <div class="container nav-inner">
-      <a href="/" class="logo">
-        <div class="logo-icon">P</div>
-        Pinnacle<span>Risk Advisors</span>
-      </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
       <nav id="mainNav">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
@@ -34,7 +298,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-grid"></div>
     <div class="container">
@@ -58,7 +321,6 @@
 
   <div class="section-divider"></div>
 
-  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="container">
       <div class="services-header reveal">
@@ -68,42 +330,16 @@
         <p class="section-desc center">Tailored insurance programs designed to protect your small business.</p>
       </div>
       <div class="services-grid reveal-stagger">
-        <div class="service-card reveal">
-          <div class="service-number">01</div>
-          <h3>Commercial Insurance</h3>
-          <p>Business protection including general liability and professional liability options.</p>
-          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-number">02</div>
-          <h3>Property Insurance</h3>
-          <p>Protect buildings, equipment, and inventory against fire, theft, and named perils.</p>
-          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-number">03</div>
-          <h3>Casualty Insurance</h3>
-          <p>Liability protection for accidents&mdash;from injuries to property damage claims.</p>
-          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-number">04</div>
-          <h3>Trucking Insurance</h3>
-          <p>Specialized coverage for trucking operations including liability, cargo, and physical damage.</p>
-          <div class="service-tags">
-            <span class="service-tag">General Freight</span>
-            <span class="service-tag">Hotshot</span>
-            <span class="service-tag">Long Haul</span>
-          </div>
-          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
-        </div>
+        <div class="service-card reveal"><div class="service-number">01</div><h3>Commercial Insurance</h3><p>Business protection including general liability and professional liability options.</p><a href="quote.html" class="service-link">Get Quote &rarr;</a></div>
+        <div class="service-card reveal"><div class="service-number">02</div><h3>Property Insurance</h3><p>Protect buildings, equipment, and inventory against fire, theft, and named perils.</p><a href="quote.html" class="service-link">Get Quote &rarr;</a></div>
+        <div class="service-card reveal"><div class="service-number">03</div><h3>Casualty Insurance</h3><p>Liability protection for accidents&mdash;from injuries to property damage claims.</p><a href="quote.html" class="service-link">Get Quote &rarr;</a></div>
+        <div class="service-card reveal"><div class="service-number">04</div><h3>Trucking Insurance</h3><p>Specialized coverage for trucking operations including liability, cargo, and physical damage.</p><div class="service-tags"><span class="service-tag">General Freight</span><span class="service-tag">Hotshot</span><span class="service-tag">Long Haul</span></div><a href="quote.html" class="service-link">Get Quote &rarr;</a></div>
       </div>
     </div>
   </section>
 
   <div class="section-divider"></div>
 
-  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
       <div class="about-grid">
@@ -113,20 +349,11 @@
           <div class="gold-rule"></div>
           <p class="about-text">Pinnacle Risk Advisors was founded with a clear vision: to bring a fresh, client-first approach to commercial insurance&mdash;combining modern technology with personalized service.</p>
           <p class="about-text">Serving businesses across Georgia and Florida, we offer dedicated attention, rapid response times, and genuine partnership that larger firms can&rsquo;t match.</p>
-          <ul class="about-features">
-            <li>Licensed Elite Advisors</li>
-            <li>Bespoke Risk Assessment</li>
-            <li>Dedicated Claims Advocacy</li>
-            <li>Trucking Specialists</li>
-          </ul>
+          <ul class="about-features"><li>Licensed Elite Advisors</li><li>Bespoke Risk Assessment</li><li>Dedicated Claims Advocacy</li><li>Trucking Specialists</li></ul>
           <a href="quote.html" class="btn-primary">Get Your Free Quote</a>
         </div>
         <div class="about-visual reveal">
-          <div class="about-image-box">
-            <div class="about-monogram"><span>P</span></div>
-            <h4>Pinnacle Risk Advisors</h4>
-            <p class="about-tagline">Est. Georgia &amp; Florida</p>
-          </div>
+          <div class="about-image-box"><div class="about-monogram"><span>P</span></div><h4>Pinnacle Risk Advisors</h4><p class="about-tagline">Est. Georgia &amp; Florida</p></div>
         </div>
       </div>
     </div>
@@ -134,7 +361,6 @@
 
   <div class="section-divider"></div>
 
-  <!-- TEAM -->
   <section class="team" id="team">
     <div class="container">
       <div class="services-header reveal">
@@ -154,7 +380,6 @@
 
   <div class="section-divider"></div>
 
-  <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="testimonials-header reveal">
@@ -163,37 +388,15 @@
         <div class="ornament"><span></span></div>
       </div>
       <div class="testimonials-grid reveal-stagger">
-        <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">Pinnacle has transformed how we approach risk management. Their responsiveness makes them indispensable partners.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">RH</div>
-            <div><div class="testimonial-name">Robert Hansen</div><div class="testimonial-company">Hansen&rsquo;s Auto Repair</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache&mdash;until I found Pinnacle. Derrick understood our unique needs.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MT</div>
-            <div><div class="testimonial-name">Marcus Thompson</div><div class="testimonial-company">Thompson Freight LLC</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SJ</div>
-            <div><div class="testimonial-name">Sandra Johnson</div><div class="testimonial-company">Peachtree Bakery</div></div>
-          </div>
-        </div>
+        <div class="testimonial-card reveal"><div class="testimonial-quote">&ldquo;</div><p class="testimonial-text">Pinnacle has transformed how we approach risk management. Their responsiveness makes them indispensable partners.</p><div class="testimonial-author"><div class="testimonial-avatar">RH</div><div><div class="testimonial-name">Robert Hansen</div><div class="testimonial-company">Hansen&rsquo;s Auto Repair</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="testimonial-quote">&ldquo;</div><p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache&mdash;until I found Pinnacle. Derrick understood our unique needs.</p><div class="testimonial-author"><div class="testimonial-avatar">MT</div><div><div class="testimonial-name">Marcus Thompson</div><div class="testimonial-company">Thompson Freight LLC</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="testimonial-quote">&ldquo;</div><p class="testimonial-text">Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p><div class="testimonial-author"><div class="testimonial-avatar">SJ</div><div><div class="testimonial-name">Sandra Johnson</div><div class="testimonial-company">Peachtree Bakery</div></div></div></div>
       </div>
     </div>
   </section>
 
   <div class="section-divider"></div>
 
-  <!-- CONTACT -->
   <section class="contact-bar" id="contact">
     <div class="container">
       <div class="contact-header reveal">
@@ -210,55 +413,24 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
-          <p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
-        </div>
-        <div>
-          <h5 class="footer-heading">Services</h5>
-          <ul class="footer-links">
-            <li><a href="#services">Commercial Insurance</a></li>
-            <li><a href="#services">Property Insurance</a></li>
-            <li><a href="#services">Casualty Insurance</a></li>
-            <li><a href="#services">Trucking Insurance</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="footer-heading">Company</h5>
-          <ul class="footer-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="footer-heading">Contact</h5>
-          <ul class="footer-links">
-            <li><a href="tel:9432393439">(943) 239-3439</a></li>
-            <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
-          </ul>
-        </div>
+        <div class="footer-brand"><a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a><p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p></div>
+        <div><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="#services">Commercial Insurance</a></li><li><a href="#services">Property Insurance</a></li><li><a href="#services">Casualty Insurance</a></li><li><a href="#services">Trucking Insurance</a></li></ul></div>
+        <div><h5 class="footer-heading">Company</h5><ul class="footer-links"><li><a href="#about">About</a></li><li><a href="#team">Team</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div><h5 class="footer-heading">Contact</h5><ul class="footer-links"><li><a href="tel:9432393439">(943) 239-3439</a></li><li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
-        <div class="footer-legal">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-service.html">Terms of Service</a>
-        </div>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">&#120143;</a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-        </div>
+        <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
+        <div class="footer-socials"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">X</a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a></div>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>50)});var menuToggle=document.getElementById('menuToggle'),mainNav=document.getElementById('mainNav');menuToggle.addEventListener('click',function(){menuToggle.classList.toggle('active');mainNav.classList.toggle('open');document.body.style.overflow=mainNav.classList.contains('open')?'hidden':''});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menuToggle.classList.remove('active');mainNav.classList.remove('open');document.body.style.overflow=''})});var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
+  </script>
 </body>
 </html>
