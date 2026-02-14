@@ -187,29 +187,12 @@
     .hero-stat span { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); }
 
     /* HERO — lock true centering */
-    .hero .container{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-content{
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hero-label{
-      justify-content: center; /* because it’s display:flex */
-    }
-    .hero-buttons{
-      justify-content: center;
-    }
-    .hero-stats{
-      justify-content: center;
-      text-align: center;
-    }
-    .hero-stat{
-      text-align: center;
-      min-width: 140px;
-    }
+    .hero .container{ display: flex; flex-direction: column; align-items: center; }
+    .hero-content{ margin: 0 auto; text-align: center; }
+    .hero-label{ justify-content: center; }
+    .hero-buttons{ justify-content: center; }
+    .hero-stats{ justify-content: center; text-align: center; }
+    .hero-stat{ text-align: center; min-width: 140px; }
 
     /* SERVICES */
     .services { padding: var(--section-pad) 0; background: var(--black-light); }
@@ -230,13 +213,8 @@
     .service-link:hover { gap: 14px; color: var(--gold-light); }
 
     /* SERVICES — equal-height cards + aligned CTA */
-    .service-card{
-      display: flex;
-      flex-direction: column;
-    }
-    .service-link{
-      margin-top: auto; /* pushes CTA to bottom on every card */
-    }
+    .service-card{ display: flex; flex-direction: column; }
+    .service-link{ margin-top: auto; }
 
     /* ABOUT */
     .about { padding: var(--section-pad) 0; }
@@ -328,22 +306,39 @@
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
+    /* ✅ FIXED MOBILE MENU (iOS SAFE) */
     @media (max-width: 768px) {
       nav { display: none; }
-      nav.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        inset: 0;
+      .menu-toggle { display: block; }
+
+      /* make header become the full-screen overlay */
+      header.menu-open {
+        height: 100dvh; /* iOS-safe viewport */
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      /* allow nav-inner to wrap so nav can sit below the top bar */
+      header.menu-open .nav-inner {
+        height: 100%;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+      }
+
+      /* nav takes full width below header row */
+      #mainNav.open {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        width: 100%;
+        height: calc(100dvh - 76px);
         justify-content: center;
         align-items: center;
         gap: 28px;
-        z-index: 1000;
       }
-      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
-      .menu-toggle { display: block; }
+      #mainNav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
 
       .hero-stats { flex-wrap: wrap; gap: 28px; }
       .services-grid, .about-grid, .testimonials-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
@@ -649,22 +644,44 @@
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu with proper state + ESC + outside click
+    // ✅ iOS-safe mobile menu overlay + scroll lock
     var menuToggle = document.getElementById('menuToggle'),
         mainNav = document.getElementById('mainNav');
+
+    var _scrollY = 0;
+
+    function lockScroll() {
+      _scrollY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = (-_scrollY) + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+
+    function unlockScroll() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, _scrollY);
+    }
 
     function closeMenu() {
       menuToggle.classList.remove('active');
       mainNav.classList.remove('open');
+      header.classList.remove('menu-open');
       menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      unlockScroll();
     }
 
     function openMenu() {
       menuToggle.classList.add('active');
       mainNav.classList.add('open');
+      header.classList.add('menu-open');
       menuToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     }
 
     menuToggle.addEventListener('click', function () {
@@ -681,7 +698,7 @@
       if (e.key === 'Escape' && mainNav.classList.contains('open')) closeMenu();
     });
 
-    // Close if user taps outside the nav/toggle while open
+    // Close if user taps outside the nav/toggle while open (kept, iOS-safe)
     document.addEventListener('click', function (e) {
       if (!mainNav.classList.contains('open')) return;
       var clickedToggle = menuToggle.contains(e.target);
