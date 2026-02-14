@@ -12,97 +12,475 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pinnacleriskad.com/thank-you.html" />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23C9A94E' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
+  <!-- Match site typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
-    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.7}
-    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
-    a{color:inherit}
+    :root {
+      --gold: #C9A94E;
+      --gold-light: #E2CA7B;
+      --gold-dark: #A68B3A;
+      --gold-glow: rgba(201, 169, 78, 0.15);
+      --black: #0A0A0A;
+      --black-light: #0E0E0E;
+      --black-card: #131313;
+      --black-elevated: #1A1A1A;
+      --gray-900: #1C1C1C;
+      --gray-800: #282828;
+      --gray-700: #383838;
+      --gray-600: #555;
+      --gray-400: #8A8A8A;
+      --gray-300: #AAA;
+      --gray-200: #CCC;
+      --white: #F5F2EB;
+      --white-pure: #FFF;
 
-    nav{position:sticky;top:0;z-index:1000;padding:1.25rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
-    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none}
-    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
-    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
-    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Raleway', 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
 
-    .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.25rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;text-decoration:none;display:inline-block}
-    .nav-cta:hover{background:var(--gold);color:var(--black)}
+      --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: 0.4s var(--ease-out);
+      --transition-fast: 0.25s var(--ease-smooth);
+      --shadow-gold: 0 4px 40px rgba(201, 169, 78, 0.07);
+      --section-pad: clamp(80px, 10vw, 140px);
+    }
 
-    main{min-height:calc(100vh - 160px);display:flex;align-items:center;justify-content:center;padding:5rem 5%;background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.08) 0%,transparent 50%),linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
-    .card{max-width:900px;width:100%;border:1px solid rgba(212,175,55,0.15);background:rgba(26,26,26,0.65);backdrop-filter: blur(6px);padding:3.25rem 2.5rem}
-    .tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem}
-    h1{font-size:clamp(2.25rem,4.5vw,3.25rem);font-weight:300;line-height:1.15;margin-bottom:0.75rem}
-    h1 em{color:var(--gold);font-style:italic}
-    p{color:var(--text-light);margin-bottom:1.25rem}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
-    .box{border:1px solid rgba(255,255,255,0.08);padding:1.25rem}
-    .label{color:var(--gold);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.5rem}
-    .value{color:var(--white)}
-    .actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-    .btn{display:inline-block;text-decoration:none;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:1rem 1.75rem;transition:all 0.3s}
-    .btn-primary{background:var(--gold);color:var(--black);border:none}
-    .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
-    .btn-outline{border:1px solid rgba(255,255,255,0.25);color:var(--white)}
-    .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    footer{background:var(--charcoal);padding:2.5rem 5%;border-top:1px solid rgba(212,175,55,0.1)}
-    .foot{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-    .muted{color:var(--text-muted);font-size:0.8rem}
-    .links a{color:var(--text-muted);text-decoration:none;margin-right:0.75rem}
-    .links a:hover{color:var(--gold)}
-    @media(max-width:800px){.grid{grid-template-columns:1fr}.card{padding:2.5rem 1.5rem}}
+    html{
+      scroll-behavior:smooth;
+      font-size:16px;
+      scroll-padding-top: 90px;
+    }
+
+    body{
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--gray-300);
+      line-height: 1.7;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: var(--transition-fast); }
+    a:hover { color: var(--gold-light); }
+
+    h1,h2,h3,h4,h5{
+      font-family: var(--font-display);
+      color: var(--white);
+      line-height: 1.15;
+      font-weight: 500;
+    }
+
+    /* ✅ accessibility polish */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%);
+      opacity: 0.2;
+    }
+
+    /* HEADER (match homepage/quote) */
+    header{
+      position: fixed; top:0; left:0; right:0; z-index: 1000;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(24px) saturate(1.2);
+      -webkit-backdrop-filter: blur(24px) saturate(1.2);
+      border-bottom: 1px solid rgba(201, 169, 78, 0.06);
+      transition: var(--transition);
+    }
+    header.scrolled{
+      background: rgba(10,10,10,0.96);
+      border-bottom-color: rgba(201,169,78,0.1);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; height: 76px; }
+    .logo {
+      display:flex; align-items:center; gap:12px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.3px;
+    }
+    .logo-icon{
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--gold);
+      display:flex; align-items:center; justify-content:center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      transition: var(--transition);
+    }
+    .logo:hover .logo-icon{ background: var(--gold); color: var(--black); }
+    .logo span{ color: var(--gold); font-weight: 400; }
+
+    nav { display:flex; align-items:center; gap: 32px; }
+    nav a{
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      position: relative;
+      padding: 4px 0;
+    }
+    nav a::after{
+      content:'';
+      position:absolute; bottom:0; left:0;
+      width:0; height:1px;
+      background: var(--gold);
+      transition: width 0.35s var(--ease-smooth);
+    }
+    nav a:hover{ color: var(--gold-light); }
+    nav a:hover::after{ width: 100%; }
+
+    .nav-cta{
+      padding: 10px 28px !important;
+      border: 1px solid var(--gold) !important;
+      color: var(--gold) !important;
+      margin-left: 8px;
+      transition: var(--transition) !important;
+    }
+    .nav-cta:hover{ background: var(--gold) !important; color: var(--black) !important; }
+    .nav-cta::after{ display:none !important; }
+
+    .menu-toggle{
+      display:none;
+      background:none; border:none; cursor:pointer;
+      width: 28px; height: 22px;
+      position: relative; z-index: 1001;
+    }
+    .menu-toggle span{
+      display:block;
+      width:100%; height: 1.5px;
+      background: var(--gold);
+      position:absolute; left:0;
+      transition: var(--transition);
+    }
+    .menu-toggle span:nth-child(1){ top:0; }
+    .menu-toggle span:nth-child(2){ top:50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3){ bottom:0; }
+    .menu-toggle.active span:nth-child(1){ top:50%; transform: translateY(-50%) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2){ opacity:0; }
+    .menu-toggle.active span:nth-child(3){ bottom:50%; transform: translateY(50%) rotate(-45deg); }
+
+    /* HERO / MAIN */
+    main{
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      padding: 140px 0 84px;
+      position: relative;
+      overflow:hidden;
+      background: radial-gradient(ellipse at 15% 45%, rgba(201, 169, 78, 0.05) 0%, transparent 55%),
+                  radial-gradient(ellipse at 85% 15%, rgba(201, 169, 78, 0.03) 0%, transparent 45%),
+                  radial-gradient(ellipse at 50% 100%, rgba(201, 169, 78, 0.02) 0%, transparent 40%),
+                  linear-gradient(180deg, var(--black) 0%, var(--black-light) 100%);
+    }
+    .hero-grid{
+      position:absolute; inset:0;
+      background-image: linear-gradient(rgba(201, 169, 78, 0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201, 169, 78, 0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      pointer-events:none;
+    }
+
+    .card{
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid rgba(201, 169, 78, 0.10);
+      background: rgba(19, 19, 19, 0.68);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: clamp(34px, 5vw, 56px);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.45), var(--shadow-gold);
+    }
+    .card::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    }
+
+    .tag{ color: var(--gold); font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 14px; }
+    h1{ font-size: clamp(2.2rem, 4.6vw, 3.3rem); font-weight: 400; line-height: 1.08; margin-bottom: 14px; letter-spacing: -0.5px; }
+    h1 em{ color: var(--gold); font-style: italic; }
+    p{ color: var(--gray-400); margin-bottom: 14px; font-size: 0.95rem; }
+    p strong{ color: var(--white); font-weight: 600; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .box{
+      border: 1px solid rgba(201, 169, 78, 0.08);
+      background: rgba(10,10,10,0.35);
+      padding: 18px 18px;
+    }
+    .label{
+      color: var(--gray-600);
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .value{ color: var(--white); font-family: var(--font-accent); font-size: 1.05rem; }
+
+    .actions{ display:flex; gap: 14px; flex-wrap:wrap; margin-top: 26px; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 34px;
+      transition: var(--transition);
+      position: relative;
+      overflow:hidden;
+    }
+    .btn-primary{
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+    }
+    .btn-primary::before{
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s var(--ease-smooth);
+    }
+    .btn-primary:hover{
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25);
+    }
+    .btn-primary:hover::before{ transform: translateX(100%); }
+
+    .btn-outline{
+      border: 1px solid var(--gray-700);
+      color: var(--white);
+      background: transparent;
+    }
+    .btn-outline:hover{
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER (match homepage/quote) */
+    footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 0; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 0.78rem; color: var(--gray-700); line-height: 1.6; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 0.78rem; color: var(--gray-600); }
+    .footer-legal a:hover { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media(max-width: 800px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        z-index: 1000;
+      }
+      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
+      .menu-toggle { display: block; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ✅ Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
   </style>
 </head>
+
 <body>
-  <nav>
-    <a class="logo" href="index.html" aria-label="Return to home">
-      <div class="logo-icon">P</div>
-      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-    </a>
-    <a href="quote.html" class="nav-cta">Get a Quote</a>
-  </nav>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo" aria-label="Return to home">
+        <div class="logo-icon">P</div>
+        Pinnacle<span>Risk Advisors</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Toggle navigation"
+        aria-controls="mainNav"
+        aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="quote.html" class="nav-cta">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <div class="card" role="status" aria-live="polite">
-      <div class="tag">— Request Received —</div>
-      <h1>Thank you. Your request is <em>submitted</em>.</h1>
-      <p>
-        We’ve received your message. A licensed advisor will follow up as soon as possible — typically within <strong>24 hours</strong>.
-      </p>
-      <p>
-        If you opted in to SMS, you may receive a confirmation text and updates about your quote. You can reply <strong>STOP</strong> to opt out at any time.
-      </p>
+    <div class="hero-grid"></div>
 
-      <div class="grid">
-        <div class="box">
-          <div class="label">Direct Line</div>
-          <div class="value"><a href="tel:9432393439" style="text-decoration:none">(943) 239-3439</a></div>
-        </div>
-        <div class="box">
-          <div class="label">Email</div>
-          <div class="value"><a href="mailto:dbrown@pinnacleriskad.com" style="text-decoration:none">dbrown@pinnacleriskad.com</a></div>
-        </div>
-      </div>
+    <div class="container">
+      <div class="card" role="status" aria-live="polite">
+        <div class="tag">— Request Received —</div>
+        <h1>Thank you. Your request is <em>submitted</em>.</h1>
 
-      <div class="actions">
-        <a class="btn btn-primary" href="quote.html">Request Another Quote</a>
-        <a class="btn btn-outline" href="index.html">Back to Home</a>
+        <p>
+          We’ve received your message. A licensed advisor will follow up as soon as possible — typically within <strong>24 hours</strong>.
+        </p>
+        <p>
+          If you opted in to SMS, you may receive a confirmation text and updates about your quote. You can reply <strong>STOP</strong> to opt out at any time.
+        </p>
+
+        <div class="grid" aria-label="Contact options">
+          <div class="box">
+            <div class="label">Direct Line</div>
+            <div class="value">
+              <a href="tel:+19432393439" style="color:var(--white)">(943) 239-3439</a>
+            </div>
+          </div>
+          <div class="box">
+            <div class="label">Email</div>
+            <div class="value">
+              <a href="mailto:dbrown@pinnacleriskad.com" style="color:var(--white)">dbrown@pinnacleriskad.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="quote.html">Request Another Quote</a>
+          <a class="btn btn-outline" href="index.html">Back to Home</a>
+        </div>
       </div>
     </div>
   </main>
 
+  <div class="section-divider"></div>
+
   <footer>
-    <div class="foot">
-      <div class="muted">© 2026 Pinnacle Risk Advisors LLC. All rights reserved.</div>
-      <div class="links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.<br>
+          <span style="color:#666;font-size:.72rem;">
+            Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.
+          </span>
+        </p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Header scroll state
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu with proper state + ESC + outside click
+    var menuToggle = document.getElementById('menuToggle'),
+        mainNav = document.getElementById('mainNav');
+
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      mainNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+      menuToggle.classList.add('active');
+      mainNav.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    menuToggle.addEventListener('click', function () {
+      var isOpen = mainNav.classList.contains('open');
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    mainNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mainNav.classList.contains('open')) closeMenu();
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mainNav.classList.contains('open')) return;
+      var clickedToggle = menuToggle.contains(e.target);
+      var clickedNav = mainNav.contains(e.target);
+      if (!clickedToggle && !clickedNav) closeMenu();
+    });
+  </script>
 </body>
 </html>
