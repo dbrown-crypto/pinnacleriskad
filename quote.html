@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get a Free Quote | Pinnacle Risk Advisors LLC</title>
   <meta name="description" content="Request a free, no-obligation commercial insurance quote from Pinnacle Risk Advisors LLC. Serving businesses across Georgia and Florida.">
+
+  <!-- A2P helper: clear page identity + stable URL for Trust Center -->
+  <link rel="canonical" href="https://pinnacleriskad.com/quote.html">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -114,7 +118,6 @@
     .quote-benefits { list-style: none; margin: 32px 0; }
     .quote-benefits li { font-size: 0.88rem; color: var(--gray-300); padding: 9px 0; display: flex; align-items: center; gap: 14px; }
     .quote-benefits li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
-
     .sms-notice { margin-top: 24px; padding: 16px 20px; border-left: 2px solid var(--gold-dark); background: rgba(201, 169, 78, 0.03); font-size: 0.8rem; color: var(--gray-400); line-height: 1.65; }
     .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); display: inline-block; }
     .contact-fallback { margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); }
@@ -237,11 +240,9 @@
             <li>Serving Georgia &amp; Florida</li>
             <li>Commercial trucking specialists</li>
           </ul>
-
-          <!-- A2P consistency improvement: includes "automated", STOP/HELP, freq -->
           <div class="sms-notice">
-            SMS messaging is only available to those who provide their explicit consent to receive automated messages.
-            Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help.
+            SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply.
+            You may opt out at any time by replying STOP, or reply HELP for assistance.
           </div>
 
           <!-- Coverage tags -->
@@ -260,8 +261,12 @@
           <!-- Contact fallback -->
           <div class="contact-fallback">
             <p>Prefer to talk? Reach us directly:</p>
-            <p style="margin-bottom: 6px;"><a href="tel:9432393439" style="font-family: var(--font-accent); font-size: 1.1rem; color: var(--white);">(943) 239-3439</a></p>
-            <p style="margin-bottom: 0;"><a href="mailto:dbrown@pinnacleriskad.com" style="font-size: 0.88rem; color: var(--gold);">dbrown@pinnacleriskad.com</a></p>
+            <p style="margin-bottom: 6px;">
+              <a href="tel:+19432393439" style="font-family: var(--font-accent); font-size: 1.1rem; color: var(--white);">(943) 239-3439</a>
+            </p>
+            <p style="margin-bottom: 0;">
+              <a href="mailto:dbrown@pinnacleriskad.com" style="font-size: 0.88rem; color: var(--gold);">dbrown@pinnacleriskad.com</a>
+            </p>
           </div>
         </div>
 
@@ -333,13 +338,16 @@
             </div>
 
             <!-- A2P / 10DLC CONSENT (Optional) -->
-            <div class="consent-section">
+            <!-- IMPORTANT: This ID is for your Trust Center Opt-In Form URL -->
+            <div class="consent-section" id="sms-consent">
               <div class="consent-heading">SMS Communication Preferences (Optional)</div>
 
               <div class="consent-group">
                 <input type="checkbox" id="smsService" name="smsService" value="yes">
                 <label for="smsService">
-                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our
+                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support.
+                  Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
+                  Consent is not a condition of purchase. View our
                   <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
                   <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
                 </label>
@@ -348,16 +356,25 @@
               <div class="consent-group">
                 <input type="checkbox" id="smsMarketing" name="smsMarketing" value="yes">
                 <label for="smsMarketing">
-                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
+                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates.
+                  Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
                   <strong>Consent is not a condition of purchase.</strong> View our
                   <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
                   <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
                 </label>
               </div>
 
-              <!-- Hidden fields to help prove opt-in capture in submissions -->
+              <!-- A2P proof fields: always submit explicit yes/no + timestamp + source -->
               <input type="hidden" id="smsOptInTimestamp" name="smsOptInTimestamp" value="">
               <input type="hidden" id="smsOptInSource" name="smsOptInSource" value="Website quote form (quote.html)">
+              <input type="hidden" id="smsOptInPageUrl" name="smsOptInPageUrl" value="">
+
+              <!-- Explicit boolean fields (because unchecked checkboxes are not posted) -->
+              <input type="hidden" id="smsServiceConsent" name="smsServiceConsent" value="false">
+              <input type="hidden" id="smsMarketingConsent" name="smsMarketingConsent" value="false">
+
+              <!-- Optional: disclosure versioning for audits -->
+              <input type="hidden" id="smsDisclosureVersion" name="smsDisclosureVersion" value="v1">
             </div>
 
             <!-- FormSubmit settings -->
@@ -366,12 +383,8 @@
             <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
 
             <button type="submit" class="form-submit">Submit Quote Request</button>
-
-            <!-- A2P consistency improvement: rel=noopener and same pages -->
             <p class="form-footer-note">
-              By submitting this form you agree to our
-              <a href="privacy-policy.html" rel="noopener">Privacy Policy</a> and
-              <a href="terms-of-service.html" rel="noopener">Terms of Service</a>.
+              By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
             </p>
           </form>
         </div>
@@ -409,12 +422,12 @@
           </ul>
         </div>
 
-        <!-- A2P cleanup: removed empty address line item -->
         <div>
           <h5 class="footer-heading">Contact</h5>
           <ul class="footer-links">
-            <li><a href="tel:9432393439">(943) 239-3439</a></li>
+            <li><a href="tel:+19432393439">(943) 239-3439</a></li>
             <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
+            <!-- Business address removed as requested -->
           </ul>
         </div>
       </div>
@@ -422,8 +435,8 @@
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
         <div class="footer-legal">
-          <a href="privacy-policy.html" rel="noopener">Privacy Policy</a>
-          <a href="terms-of-service.html" rel="noopener">Terms of Service</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
         </div>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
@@ -481,6 +494,11 @@
       var smsMarketing = document.getElementById('smsMarketing');
       var ts = document.getElementById('smsOptInTimestamp');
 
+      // New proof fields
+      var pageUrl = document.getElementById('smsOptInPageUrl');
+      var svcBool = document.getElementById('smsServiceConsent');
+      var mktBool = document.getElementById('smsMarketingConsent');
+
       if (!form || !phone || !smsService || !smsMarketing || !ts) return;
 
       function wantsSms() {
@@ -494,19 +512,24 @@
         phone.placeholder = required ? 'Required for SMS updates' : '(555) 123-4567';
       }
 
-      function setTimestampIfNeeded() {
-        // If any SMS box is checked, set timestamp; else clear it.
+      function setProofFields() {
+        // timestamp only when opted in
         ts.value = wantsSms() ? new Date().toISOString() : '';
+        if (pageUrl) pageUrl.value = window.location.href;
+
+        // explicit booleans for audit trails
+        if (svcBool) svcBool.value = smsService.checked ? 'true' : 'false';
+        if (mktBool) mktBool.value = smsMarketing.checked ? 'true' : 'false';
       }
 
       smsService.addEventListener('change', function () {
         syncPhoneRequirement();
-        setTimestampIfNeeded();
+        setProofFields();
       });
 
       smsMarketing.addEventListener('change', function () {
         syncPhoneRequirement();
-        setTimestampIfNeeded();
+        setProofFields();
       });
 
       form.addEventListener('submit', function (e) {
@@ -517,11 +540,11 @@
           alert('Please enter a phone number if you opt into SMS messages.');
           return;
         }
-        setTimestampIfNeeded();
+        setProofFields();
       });
 
       syncPhoneRequirement();
-      setTimestampIfNeeded();
+      setProofFields();
     })();
   </script>
 </body>
