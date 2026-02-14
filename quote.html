@@ -1,445 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Get a Quote | Pinnacle Risk Advisors LLC</title>
-  <meta name="description" content="Request a free insurance quote from Pinnacle Risk Advisors LLC. Serving Georgia and Florida." />
-  <link rel="canonical" href="https://pinnacleriskad.com/quote.html" />
-
-  <meta property="og:title" content="Get a Quote | Pinnacle Risk Advisors LLC" />
-  <meta property="og:description" content="Request a free quote for commercial, property, casualty, and trucking insurance." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pinnacleriskad.com/quote.html" />
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='58' fill='white' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E" />
-
-  <style>
-    :root{
-      --bg:#070707;
-      --panel:#0f0f0f;
-      --text:#f4f4f4;
-      --muted:#b9b9b9;
-      --line:rgba(255,255,255,.10);
-      --accent:#d4af37;
-      --accent2:#b9932b;
-      --radius:22px;
-      --radius2:16px;
-      --max:980px;
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(900px 700px at 15% 5%, rgba(212,175,55,.10), transparent 60%),
-        radial-gradient(800px 700px at 85% 25%, rgba(212,175,55,.06), transparent 60%),
-        linear-gradient(180deg, #050505, #090909 40%, #060606);
-      color:var(--text);
-      line-height:1.5;
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,7,7,.72);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      height:78px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      text-decoration:none;
-    }
-    .brand-mark{
-      width:40px; height:40px;
-      border-radius:12px;
-      background:linear-gradient(135deg, rgba(212,175,55,.98), rgba(185,147,43,.95));
-      color:#0b0b0b;
-      display:grid; place-items:center;
-      font-weight:900;
-    }
-    .brand-text{display:flex; flex-direction:column; line-height:1.05}
-    .brand-text strong{font-size:14px; letter-spacing:.5px}
-    .brand-text span{font-size:12px; color:var(--muted)}
-    nav ul{
-      display:flex; gap:16px; list-style:none; padding:0; margin:0;
-      align-items:center;
-    }
-    nav a{
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:600;
-      font-size:14px;
-      padding:10px 10px;
-      border-radius:12px;
-      transition:.25s;
-    }
-    nav a:hover{color:var(--text); background:rgba(255,255,255,.04)}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:14px 18px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      text-decoration:none;
-      font-weight:700;
-      transition:.25s ease;
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-color: rgba(212,175,55,.55);
-      color:#0b0b0b;
-    }
-    main{padding:46px 0}
-    .chip{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      font-weight:700;
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.4px;
-    }
-    h1{margin:14px 0 8px; font-size:42px; line-height:1.1}
-    p.lead{margin:0 0 16px; color:var(--muted)}
-    .panel{
-      background: rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      padding:22px;
-      box-shadow: var(--shadow);
-    }
-    .grid{display:grid; gap:18px}
-    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700}
-    .note{
-      margin-top:12px;
-      padding:12px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      color:var(--muted);
-      font-weight:700;
-      font-size:13px;
-    }
-
-    form{display:grid; gap:12px; margin-top:18px}
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    @media (max-width:650px){.row{grid-template-columns:1fr}}
-    label{display:block; font-weight:800; font-size:12px; color:var(--muted); margin-bottom:6px; letter-spacing:.4px; text-transform:uppercase}
-    input, textarea, select{
-      width:100%;
-      padding:13px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.35);
-      color:var(--text);
-      outline:none;
-      transition:.2s;
-    }
-    textarea{min-height:110px; resize:vertical}
-    input:focus, textarea:focus, select:focus{border-color: rgba(212,175,55,.45); box-shadow: 0 0 0 4px rgba(212,175,55,.10)}
-
-    .consent-box{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      border-radius: 18px;
-      padding:12px 12px;
-    }
-    .consent-label{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      cursor:pointer;
-      user-select:none;
-    }
-    .consent-label input{margin-top:4px}
-    .consent-text{color:var(--muted); font-weight:700; font-size:12.5px; line-height:1.45}
-    .consent-text a{color:rgba(212,175,55,.95); font-weight:900; text-decoration:none}
-    .consent-text a:hover{text-decoration:underline}
-
-    footer{
-      border-top:1px solid var(--line);
-      background: rgba(7,7,7,.85);
-      padding:48px 0 26px;
-      margin-top:42px;
-    }
-    .foot-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr .8fr .8fr;
-      gap:18px;
-      max-width:1180px;
-      margin:0 auto;
-      padding:0 20px;
-    }
-    @media (max-width: 980px){.foot-grid{grid-template-columns:1fr 1fr}}
-    @media (max-width: 600px){.foot-grid{grid-template-columns:1fr}}
-    footer h4{margin:0 0 10px}
-    footer ul{list-style:none; padding:0; margin:0; display:grid; gap:8px}
-    footer a{text-decoration:none; color:var(--muted); font-weight:700}
-    footer a:hover{color:var(--text)}
-    .foot-bottom{
-      max-width:1180px;
-      margin:24px auto 0;
-      padding:18px 20px 0;
-      border-top:1px solid rgba(255,255,255,.08);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
-      color:var(--muted);
-      font-weight:700;
-      font-size:12px;
-    }
-    .social{display:flex; gap:10px}
-    .social a{
-      width:40px; height:40px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      display:grid; place-items:center;
-      color:var(--muted);
-    }
-    .social a:hover{border-color:rgba(212,175,55,.3); color:var(--text)}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get a Free Quote | Pinnacle Risk Advisors LLC</title>
+  <meta name="description" content="Request a free, no-obligation commercial insurance quote from Pinnacle Risk Advisors LLC. Serving businesses across Georgia and Florida.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="/">
-        <div class="brand-mark">P</div>
-        <div class="brand-text">
-          <strong>Pinnacle Risk Advisors</strong>
-          <span>Premium Insurance Solutions</span>
-        </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">P</div>
+        Pinnacle<span>Risk Advisors</span>
       </a>
-
-      <nav aria-label="Primary navigation">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/#services">Services</a></li>
-          <li><a href="/#about">About Us</a></li>
-          <li><a href="/#team">Team</a></li>
-          <li><a href="/#testimonials">Testimonials</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="quote.html" class="nav-cta">Get a Quote</a>
       </nav>
-
-      <a class="btn primary" href="/quote.html">Get a Quote</a>
     </div>
   </header>
 
-  <main>
-    <div class="wrap">
-      <div class="grid">
-        <div class="panel">
-          <div class="chip">Get Started</div>
-          <h1>Request Your Free Quote</h1>
-          <p class="lead">Tailored coverage. Fast response. Georgia & Florida.</p>
+  <!-- QUOTE PAGE HERO -->
+  <section class="quote-page-hero">
+    <div class="container">
+      <div class="section-label">Free &amp; No Obligation</div>
+      <h1>Request Your <em>Free Quote</em></h1>
+      <p class="hero-desc">Complete the form below and we&rsquo;ll provide a customized quote within 24 hours.</p>
+    </div>
+  </section>
 
-          <h2 style="margin:16px 0 8px; font-size:18px">What to Expect</h2>
-          <p class="lead" style="margin:0 0 8px">
-            Provide a few details and we’ll respond within 24 hours. If anything is missing, we’ll reach out quickly to confirm exposure details so you get accurate options and pricing.
+  <div class="section-divider"></div>
+
+  <!-- QUOTE PAGE BODY -->
+  <section class="quote-page-body">
+    <div class="container">
+      <div class="quote-grid" style="padding-top: 64px;">
+
+        <!-- Left: Info -->
+        <div class="quote-info reveal">
+          <h2 class="section-title" style="font-size: clamp(1.5rem, 3vw, 2rem);">Why Choose <em>Pinnacle</em></h2>
+          <div class="gold-rule"></div>
+          <p class="section-desc" style="margin-bottom: 0;">
+            We combine deep industry expertise with a personal touch. Every policy is tailored to your specific business needs.
           </p>
-
-          <ul class="list">
+          <ul class="quote-benefits">
             <li>No obligation, completely free</li>
             <li>Customized coverage options</li>
             <li>Competitive rates from top carriers</li>
-            <li>Advisor response within 24 hours</li>
+            <li>Response within 24 hours</li>
+            <li>Serving Georgia &amp; Florida</li>
+            <li>Commercial trucking specialists</li>
           </ul>
 
-          <div class="note">
-            Note: Submitting this form does not bind coverage. Coverage is subject to underwriting and carrier approval.
+          <div class="sms-notice">
+            SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply. You may opt out at any time by replying STOP.
+          </div>
+
+          <!-- Trust signals -->
+          <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(201,169,78,0.08);">
+            <p style="font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 16px;">Coverage Areas</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="service-tag">Commercial</span>
+              <span class="service-tag">Property</span>
+              <span class="service-tag">Casualty</span>
+              <span class="service-tag">Trucking</span>
+              <span class="service-tag">General Liability</span>
+              <span class="service-tag">Cargo</span>
+            </div>
+          </div>
+
+          <!-- Contact fallback -->
+          <div style="margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201,169,78,0.06);">
+            <p style="font-size: 0.84rem; color: var(--gray-400); margin-bottom: 12px;">Prefer to talk? Reach us directly:</p>
+            <p style="margin-bottom: 6px;">
+              <a href="tel:9432393439" style="font-family: var(--font-accent); font-size: 1.1rem; color: var(--white);">(943) 239-3439</a>
+            </p>
+            <p>
+              <a href="mailto:dbrown@pinnacleriskad.com" style="font-size: 0.88rem; color: var(--gold);">dbrown@pinnacleriskad.com</a>
+            </p>
           </div>
         </div>
 
-        <div class="panel">
-          <h2 style="margin:0 0 6px; font-size:18px">Quote Request Form</h2>
-          <p class="lead" style="margin:0 0 12px">
-            <strong style="color:rgba(212,175,55,.95)">SMS is only sent to those who give their consent</strong>
-          </p>
-          <p class="lead" style="margin:0 0 16px">Fill out the form below. We’ll contact you shortly.</p>
+        <!-- Right: Form -->
+        <div class="quote-form-wrapper reveal">
+          <h3>Tell Us About Your Business</h3>
+          <p>All fields marked with <span style="color: var(--gold);">*</span> are required. Everything else is optional.</p>
 
-          <form action="https://formsubmit.co/dbrown@pinnacleriskad.com" method="POST">
-            <div class="row">
-              <div>
-                <label for="firstName">First Name</label>
-                <input id="firstName" type="text" name="firstName" required />
+          <form id="quoteForm" action="#" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name <span class="req">*</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" required>
               </div>
-              <div>
-                <label for="lastName">Last Name</label>
-                <input id="lastName" type="text" name="lastName" required />
+              <div class="form-group">
+                <label for="lastName">Last Name <span class="req">*</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
               </div>
             </div>
 
-            <div class="row">
-              <div>
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" required />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="john@company.com" required>
               </div>
-              <div>
-                <label for="phone">Phone (optional)</label>
-                <input
-                  id="phone"
-                  type="tel"
-                  name="phone"
-                  inputmode="tel"
-                  autocomplete="tel"
-                  placeholder="Optional (required only if you opt into SMS)"
-                />
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
               </div>
             </div>
 
-            <div>
-              <label for="company">Company Name</label>
-              <input id="company" type="text" name="company" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company" placeholder="Your Business Name">
+              </div>
+              <div class="form-group">
+                <label for="state">State <span class="req">*</span></label>
+                <select id="state" name="state" required>
+                  <option value="" disabled selected>Select state</option>
+                  <option value="GA">Georgia</option>
+                  <option value="FL">Florida</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
 
-            <div>
-              <label for="coverage">Coverage Interest</label>
-              <select id="coverage" name="coverage">
-                <option value="">Select coverage type</option>
-                <option>Commercial Insurance</option>
-                <option>Property Insurance</option>
-                <option>Casualty Insurance</option>
-                <option>Trucking Insurance</option>
-                <option>Not Sure / Need Guidance</option>
+            <div class="form-group">
+              <label for="coverage">Coverage Interest <span class="req">*</span></label>
+              <select id="coverage" name="coverage" required>
+                <option value="" disabled selected>Select coverage type</option>
+                <option value="commercial">Commercial Insurance</option>
+                <option value="property">Property Insurance</option>
+                <option value="casualty">Casualty Insurance</option>
+                <option value="trucking-general">Trucking — General Freight</option>
+                <option value="trucking-hotshot">Trucking — Hotshot</option>
+                <option value="trucking-longhaul">Trucking — Long Haul</option>
+                <option value="workers-comp">Workers' Compensation</option>
+                <option value="builders-risk">Builder's Risk</option>
+                <option value="multiple">Multiple Coverages</option>
+                <option value="guidance">Not Sure / Need Guidance</option>
               </select>
             </div>
 
-            <div>
-              <label for="message">Additional Details</label>
-              <textarea id="message" name="message" placeholder="Tell us about your business..."></textarea>
+            <div class="form-group">
+              <label for="details">Tell Us More About Your Needs</label>
+              <textarea id="details" name="details" rows="5" placeholder="Describe your business, number of vehicles, property details, current coverage, or any specific concerns..."></textarea>
             </div>
 
-            <div class="form-group full consent-box">
-              <label class="consent-label" for="smsConsent1">
-                <input id="smsConsent1" type="checkbox" name="smsConsent1" value="Yes" />
-                <span class="consent-text">
-                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
-                </span>
-              </label>
+            <!-- ═══ A2P COMPLIANT SMS CONSENT ═══ -->
+            <div class="consent-section">
+              <div class="consent-heading">SMS Communication Preferences (Optional)</div>
+
+              <div class="consent-group">
+                <input type="checkbox" id="smsService" name="smsService" value="yes">
+                <label for="smsService">
+                  I confirm I am <strong>18+</strong> and agree to receive text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent is not a condition of purchase. View our <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+                </label>
+              </div>
+
+              <div class="consent-group">
+                <input type="checkbox" id="smsMarketing" name="smsMarketing" value="yes">
+                <label for="smsMarketing">
+                  I agree to receive occasional marketing and educational text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
+                </label>
+              </div>
             </div>
 
-            <div class="form-group full consent-box" style="margin-top:0.75rem">
-              <label class="consent-label" for="smsConsent2">
-                <input id="smsConsent2" type="checkbox" name="smsConsent2" value="Yes" />
-                <span class="consent-text">
-                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. <strong>Consent is not a condition of purchase.</strong> View our <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
-                </span>
-              </label>
-            </div>
+            <button type="submit" class="form-submit">Submit Quote Request</button>
 
-            <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Website" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html" />
-
-            <button class="btn primary" type="submit" style="width:100%; border:none; cursor:pointer">
-              Submit Request
-            </button>
+            <p style="font-size: 0.72rem; color: var(--gray-700); text-align: center; margin-top: 16px; line-height: 1.6;">
+              By submitting this form you agree to our
+              <a href="privacy-policy.html" style="font-size: 0.72rem;">Privacy Policy</a> and
+              <a href="terms-of-service.html" style="font-size: 0.72rem;">Terms of Service</a>.
+            </p>
           </form>
-
-          <p class="lead" style="margin-top:14px">
-            Prefer to call? <strong>(943) 239-3439</strong> • Email: <strong>dbrown@pinnacleriskad.com</strong>
-          </p>
         </div>
       </div>
     </div>
-  </main>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
-    <div class="foot-grid">
-      <div>
-        <a class="brand" href="/" style="text-decoration:none">
-          <div class="brand-mark">P</div>
-          <div class="brand-text">
-            <strong>Pinnacle Risk Advisors</strong>
-            <span>A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</span>
-          </div>
-        </a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
+          <p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
+        </div>
+        <div>
+          <h5 class="footer-heading">Services</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Commercial Insurance</a></li>
+            <li><a href="index.html#services">Property Insurance</a></li>
+            <li><a href="index.html#services">Casualty Insurance</a></li>
+            <li><a href="index.html#services">Trucking Insurance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="footer-heading">Company</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#team">Team</a></li>
+            <li><a href="index.html#testimonials">Testimonials</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="footer-heading">Contact</h5>
+          <ul class="footer-links">
+            <li><a href="tel:9432393439">(943) 239-3439</a></li>
+            <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="/#services">Commercial Insurance</a></li>
-          <li><a href="/#services">Property Insurance</a></li>
-          <li><a href="/#services">Casualty Insurance</a></li>
-          <li><a href="/#services">Trucking Insurance</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/#about">About Us</a></li>
-          <li><a href="/#team">Team</a></li>
-          <li><a href="/#testimonials">Testimonials</a></li>
-          <li><a href="/#contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:9432393439">(943) 239-3439</a></li>
-          <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
-          <li><span>REPLACE WITH YOUR BUSINESS ADDRESS, City, State ZIP</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="foot-bottom">
-      <div>© 2026 Pinnacle Risk Advisors LLC. All rights reserved. | <a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a></div>
-      <div class="social">
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">&#120143;</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    (function () {
-      const form = document.querySelector('form[action*="formsubmit.co"]');
-      const phone = document.getElementById('phone');
-      const smsConsent1 = document.getElementById('smsConsent1');
-      const smsConsent2 = document.getElementById('smsConsent2');
-      if (!form || !phone || !smsConsent1 || !smsConsent2) return;
-
-      function syncPhoneRequirement() {
-        // If EITHER consent box is checked, phone is required
-        const wantsSms = smsConsent1.checked || smsConsent2.checked;
-
-        phone.required = wantsSms;
-        phone.setAttribute('aria-required', wantsSms ? 'true' : 'false');
-        phone.placeholder = wantsSms
-          ? 'Required for SMS updates'
-          : 'Optional (required only if you opt into SMS)';
-      }
-
-      smsConsent1.addEventListener('change', syncPhoneRequirement);
-      smsConsent2.addEventListener('change', syncPhoneRequirement);
-
-      form.addEventListener('submit', function (e) {
-        if ((smsConsent1.checked || smsConsent2.checked) && !phone.value.trim()) {
-          e.preventDefault();
-          phone.focus();
-          alert('Please enter a phone number if you opt into SMS updates.');
-        }
-      });
-
-      syncPhoneRequirement();
-    })();
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
