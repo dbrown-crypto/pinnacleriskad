@@ -1,173 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service | Pinnacle Risk Advisors LLC</title>
-  <meta name="description" content="Terms of Service for Pinnacle Risk Advisors LLC, including SMS/Text Messaging terms." />
-  <link rel="canonical" href="https://pinnacleriskad.com/terms-of-service.html" />
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a0a' width='100' height='100'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='50' fill='%23d4af37' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <meta name="description" content="Terms of Service for Pinnacle Risk Advisors LLC including SMS messaging program terms and conditions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    :root{--black:#0a0a0a;--charcoal:#1a1a1a;--gold:#d4af37;--gold-light:#e8c95a;--white:#fff;--text-light:#b0b0b0;--text-muted:#888}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);line-height:1.8}
-    h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
-    a{color:var(--gold);text-decoration:none}
-    a:hover{text-decoration:underline}
+    :root {
+      --gold: #C9A94E; --gold-light: #E2CA7B; --gold-dark: #A68B3A;
+      --black: #0A0A0A; --black-light: #0E0E0E; --black-card: #131313;
+      --gray-900: #1C1C1C; --gray-800: #282828; --gray-700: #383838;
+      --gray-600: #555; --gray-400: #8A8A8A; --gray-300: #AAA;
+      --white: #F5F2EB;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Raleway', 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+      --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: 0.4s var(--ease-out);
+      --transition-fast: 0.25s var(--ease-smooth);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.022; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    a { color: var(--gold); text-decoration: none; transition: var(--transition-fast); }
+    a:hover { color: var(--gold-light); }
+    h1, h2, h3, h4, h5 { font-family: var(--font-display); color: var(--white); line-height: 1.15; font-weight: 500; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
 
-    nav{position:sticky;top:0;z-index:1000;padding:1.25rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(212,175,55,0.1)}
-    .logo{display:flex;align-items:center;gap:1rem;text-decoration:none}
-    .logo-icon{width:45px;height:45px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
-    .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);letter-spacing:2px;text-transform:uppercase}
-    .logo-text span{display:block;font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:3px;color:var(--gold);margin-top:3px}
-    .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.25rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all 0.3s}
-    .nav-cta:hover{background:var(--gold);color:var(--black)}
+    /* HEADER */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10,10,10,0.88); backdrop-filter: blur(24px) saturate(1.2); -webkit-backdrop-filter: blur(24px) saturate(1.2); border-bottom: 1px solid rgba(201,169,78,0.06); transition: var(--transition); }
+    header.scrolled { background: rgba(10,10,10,0.96); border-bottom-color: rgba(201,169,78,0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); letter-spacing: 0.3px; }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); transition: var(--transition); }
+    .logo:hover .logo-icon { background: var(--gold); color: var(--black); }
+    .logo span { color: var(--gold); font-weight: 400; }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-400); position: relative; padding: 4px 0; }
+    nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.35s var(--ease-smooth); }
+    nav a:hover { color: var(--gold-light); }
+    nav a:hover::after { width: 100%; }
+    .nav-cta { padding: 10px 28px !important; border: 1px solid var(--gold) !important; color: var(--gold) !important; margin-left: 8px; transition: var(--transition) !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-cta::after { display: none !important; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 22px; position: relative; z-index: 1001; }
+    .menu-toggle span { display: block; width: 100%; height: 1.5px; background: var(--gold); position: absolute; left: 0; transition: var(--transition); }
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3) { bottom: 0; }
+    .menu-toggle.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
 
-    header{padding:4rem 5% 2rem;background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.08) 0%,transparent 50%),linear-gradient(180deg,var(--black) 0%,var(--charcoal) 100%)}
-    .wrap{max-width:1000px;margin:0 auto}
-    .tag{color:var(--gold);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem}
-    h1{font-size:clamp(2.25rem,4.5vw,3.25rem);font-weight:300;line-height:1.15;margin-bottom:0.75rem}
-    .sub{color:var(--text-light);max-width:850px}
-    main{padding:2.5rem 5% 5rem}
-    .card{max-width:1000px;margin:0 auto;border:1px solid rgba(212,175,55,0.15);background:rgba(26,26,26,0.65);padding:2.75rem}
-    h2{font-size:1.75rem;margin-top:1.75rem;margin-bottom:0.75rem}
-    h3{font-size:1.15rem;color:var(--gold);margin-top:1.25rem;margin-bottom:0.5rem}
-    p,li{color:var(--text-light)}
-    ul{padding-left:1.25rem;margin:0.5rem 0 1rem}
-    .muted{color:var(--text-muted);font-size:0.9rem;margin-top:1rem}
-    footer{background:var(--charcoal);padding:2.5rem 5%;border-top:1px solid rgba(212,175,55,0.1)}
-    .foot{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-    .foot a{color:var(--text-muted)}
-    .foot a:hover{color:var(--gold)}
-    @media(max-width:700px){.card{padding:1.75rem}}
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 56px; text-align: center; position: relative; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(201,169,78,0.04) 0%, transparent 50%); }
+    .page-hero .container { position: relative; z-index: 2; }
+    .page-hero .section-label { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: inline-block; }
+    .page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 14px; }
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+    .page-hero .page-desc { font-family: var(--font-accent); font-size: 1.15rem; color: var(--gray-400); }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
+
+    /* LEGAL CONTENT */
+    .legal-body { padding: 64px 0 clamp(80px, 10vw, 140px); }
+    .legal-content { max-width: 780px; margin: 0 auto; }
+    .legal-content .effective { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 40px; font-weight: 500; letter-spacing: 0.5px; }
+    .legal-content h2 { font-size: 1.3rem; margin-top: 48px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(201,169,78,0.08); }
+    .legal-content h2:first-of-type { margin-top: 0; }
+    .legal-content h3 { font-size: 1.05rem; margin-top: 32px; margin-bottom: 12px; color: var(--gold-light); }
+    .legal-content p { font-size: 0.9rem; color: var(--gray-300); margin-bottom: 16px; line-height: 1.85; }
+    .legal-content ul, .legal-content ol { margin: 12px 0 20px 24px; }
+    .legal-content li { font-size: 0.9rem; color: var(--gray-300); margin-bottom: 8px; line-height: 1.75; }
+    .legal-content strong { color: var(--white); font-weight: 600; }
+    .legal-content .highlight-box { margin: 28px 0; padding: 20px 24px; border-left: 2px solid var(--gold); background: rgba(201,169,78,0.03); }
+    .legal-content .highlight-box p { margin-bottom: 0; }
+    .legal-content table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; }
+    .legal-content th { text-align: left; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); padding: 12px 16px; border-bottom: 1px solid rgba(201,169,78,0.15); background: rgba(201,169,78,0.03); }
+    .legal-content td { font-size: 0.88rem; color: var(--gray-300); padding: 12px 16px; border-bottom: 1px solid var(--gray-800); }
+
+    /* FOOTER */
+    footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201,169,78,0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+    .footer-brand .logo { margin-bottom: 18px; }
+    .footer-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.75; }
+    .footer-heading { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.85rem; color: var(--gray-400); }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(201,169,78,0.06); flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 0.78rem; color: var(--gray-700); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 0.78rem; color: var(--gray-600); }
+    .footer-legal a:hover { color: var(--gold); }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
+    .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(10,10,10,0.98); backdrop-filter: blur(20px); justify-content: center; align-items: center; gap: 28px; z-index: 1000; }
+      nav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
+      .menu-toggle { display: block; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a class="logo" href="index.html" aria-label="Return to home">
-      <div class="logo-icon">P</div>
-      <div class="logo-text">Pinnacle<span>Risk Advisors</span></div>
-    </a>
-    <a href="quote.html" class="nav-cta">Get a Quote</a>
-  </nav>
 
-  <header>
-    <div class="wrap">
-      <div class="tag">— Legal —</div>
-      <h1>Terms of Service</h1>
-      <p class="sub">
-        These Terms govern your use of our website and services. Please read them carefully. If you do not agree, do not use the site.
-      </p>
-      <p class="muted"><strong>Effective Date:</strong> January 31, 2026</p>
+  <header id="header">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <nav id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="quote.html" class="nav-cta">Get a Quote</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <div class="card">
-      <h2>1. Company Information</h2>
-      <p>
-        <strong>Pinnacle Risk Advisors LLC</strong><br />
-        Phone: <a href="tel:9432393439">(943) 239-3439</a><br />
-        Email: <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a><br />
-        Service Areas: Georgia &amp; Florida
-      </p>
-
-      <h2>2. No Binding Coverage</h2>
-      <p>
-        Quotes and information provided through this website are for informational purposes only and do not bind coverage.
-        Coverage is not in force unless and until confirmed in writing by an authorized carrier and all underwriting requirements are satisfied.
-      </p>
-
-      <h2>3. Use of Website</h2>
-      <p>
-        You agree not to misuse the website, attempt unauthorized access, or interfere with its operation. We may suspend access if misuse is detected.
-      </p>
-
-      <h2>4. Disclaimers</h2>
-      <p>
-        We provide information “as is” without warranties of any kind. We do not guarantee availability, accuracy, or uninterrupted access.
-      </p>
-
-      <h2>5. SMS/Text Messaging Terms</h2>
-      <p>
-        If you opt in to receive text messages, the following terms apply.
-      </p>
-
-      <h3>5.1 Program Description (SMS Use Cases)</h3>
-      <p>
-        If you opt in, Pinnacle Risk Advisors LLC may send text messages related to:
-        (1) insurance quote follow-ups,
-        (2) policy and service updates,
-        (3) appointment reminders, and
-        (4) customer support communications.
-        If you separately consent to marketing, we may also send occasional promotional messages.
-      </p>
-
-      <h3>5.2 Opt-In</h3>
-      <p>
-        You can opt in by submitting a website form and checking the SMS consent checkbox (unchecked by default). Consent is not a condition of purchase.
-      </p>
-
-      <h3>5.3 Age Restriction (18+)</h3>
-      <p>
-        You must be at least <strong>18 years old</strong> to opt in to receive SMS/text messages from Pinnacle Risk Advisors LLC.
-      </p>
-
-      <h3>5.4 Message Frequency</h3>
-      <p>Message frequency varies based on your requests and account activity.</p>
-
-      <h3>5.5 Message &amp; Data Rates</h3>
-      <p>Message and data rates may apply depending on your mobile carrier plan.</p>
-
-      <h3>5.6 Opt-Out Instructions</h3>
-      <p>
-        Reply <strong>STOP</strong> to cancel at any time. You will receive a confirmation message.
-      </p>
-
-      <h3>5.7 Help / Customer Support</h3>
-      <p>
-        Reply <strong>HELP</strong> for help, or contact us at
-        <a href="tel:9432393439">(943) 239-3439</a> or
-        <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>.
-      </p>
-
-      <h3>5.8 Carrier Liability Disclaimer</h3>
-      <p>
-        Carriers are not liable for delayed or undelivered messages.
-      </p>
-
-      <h2>6. Limitation of Liability</h2>
-      <p>
-        To the fullest extent permitted by law, Pinnacle Risk Advisors LLC will not be liable for indirect, incidental, special, or consequential damages.
-      </p>
-
-      <h2>7. Changes</h2>
-      <p>
-        We may update these Terms from time to time. The effective date above reflects the most recent revision.
-      </p>
-
-      <h2>8. Contact</h2>
-      <p>
-        Questions? Contact us at <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>.
-      </p>
-
-      <p class="muted">
-        This page is provided for general informational purposes and does not constitute legal advice.
-      </p>
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-label">Legal</div>
+      <h1>Terms of <em>Service</em></h1>
+      <p class="page-desc">Terms and conditions governing your use of our website and services</p>
     </div>
-  </main>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="legal-body">
+    <div class="container">
+      <div class="legal-content">
+
+        <p class="effective">Effective Date: February 13, 2026 &nbsp;|&nbsp; Last Updated: February 13, 2026</p>
+
+        <p>Welcome to the website of Pinnacle Risk Advisors LLC (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By accessing or using our website at <a href="https://pinnacleriskad.com">pinnacleriskad.com</a> (the &ldquo;Site&rdquo;) or any of our services, you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not agree to these Terms, please do not use our Site or services.</p>
+
+        <h2>1. Services Overview</h2>
+        <p>Pinnacle Risk Advisors LLC is an independent insurance agency licensed in Georgia and Florida. We provide commercial property and casualty insurance brokerage services, including but not limited to commercial general liability, property insurance, casualty insurance, trucking insurance, workers&rsquo; compensation, and builder&rsquo;s risk coverage.</p>
+        <p>Our Site allows you to learn about our services, request insurance quotes, and contact us. Submitting a quote request does not constitute an insurance application or bind any coverage. All insurance policies are subject to underwriting approval by the applicable insurance carrier.</p>
+
+        <h2>2. Eligibility</h2>
+        <p>You must be at least 18 years of age to use our Site and services. By using the Site, you represent and warrant that you are at least 18 years old and have the legal capacity to enter into these Terms.</p>
+
+        <h2>3. Use of the Website</h2>
+        <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+        <ul>
+          <li>Use the Site in any way that violates any applicable federal, state, or local law or regulation</li>
+          <li>Submit false, misleading, or fraudulent information through any form on the Site</li>
+          <li>Attempt to interfere with, compromise the security of, or disrupt the Site or its servers</li>
+          <li>Use any automated system (including bots, scrapers, or crawlers) to access the Site without our express written permission</li>
+          <li>Transmit any viruses, malware, or other harmful code</li>
+        </ul>
+
+        <h2>4. Quote Requests and Insurance Services</h2>
+        <p>When you submit a quote request through our Site, you agree to provide accurate and complete information. We will use the information you provide to prepare insurance quotes and communicate with you regarding your coverage needs.</p>
+        <p>Please understand that:</p>
+        <ul>
+          <li>Quote requests are not insurance applications and do not bind any coverage</li>
+          <li>Insurance quotes are estimates and may change based on underwriting review</li>
+          <li>Final coverage, terms, and pricing are determined by the insurance carrier</li>
+          <li>We act as your insurance agent/broker, not as the insurance carrier</li>
+        </ul>
+
+        <h2>5. SMS/Text Messaging Program Terms</h2>
+
+        <div class="highlight-box">
+          <p><strong>By opting in to receive SMS/text messages from Pinnacle Risk Advisors LLC, you agree to the following terms in addition to our <a href="privacy-policy.html">Privacy Policy</a>.</strong></p>
+        </div>
+
+        <h3>5.1 Program Description</h3>
+        <p>Pinnacle Risk Advisors LLC offers two categories of SMS messaging, each requiring separate, explicit opt-in consent:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Message Type</th>
+              <th>Description</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Service Messages</strong></td>
+              <td>Transactional and service-related communications</td>
+              <td>Quote follow-ups, policy updates, renewal reminders, appointment confirmations, customer support</td>
+            </tr>
+            <tr>
+              <td><strong>Marketing Messages</strong></td>
+              <td>Promotional and educational communications</td>
+              <td>Coverage tips, risk management resources, promotional offers, industry updates</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5.2 Opt-In and Consent</h3>
+        <ul>
+          <li>You may opt in to SMS messaging by checking the appropriate consent checkbox(es) on our website quote form at <a href="https://pinnacleriskad.com/quote.html">pinnacleriskad.com/quote.html</a>.</li>
+          <li>SMS consent checkboxes are <strong>not pre-checked</strong> and are <strong>not required</strong> to submit a quote request or receive any insurance service.</li>
+          <li>Service messages and marketing messages require <strong>separate consent</strong>. Opting in to one does not opt you in to the other.</li>
+          <li>Consent to receive SMS messages is <strong>not a condition of purchase</strong> of any insurance product or service.</li>
+        </ul>
+
+        <h3>5.3 Message Frequency and Costs</h3>
+        <ul>
+          <li><strong>Message frequency varies</strong> based on your interactions, policy activity, and the type of messages you have opted in to receive.</li>
+          <li><strong>Message and data rates may apply</strong> depending on your mobile carrier and plan. Pinnacle Risk Advisors LLC is not responsible for any charges from your carrier.</li>
+        </ul>
+
+        <h3>5.4 Opt-Out Instructions</h3>
+        <ul>
+          <li>You may opt out of SMS messages at any time by replying <strong>STOP</strong> to any message you receive from us.</li>
+          <li>After opting out, you will receive one final confirmation message. No further messages will be sent unless you opt in again.</li>
+          <li>Opting out of SMS does not affect your ability to receive services from us through other channels (phone, email).</li>
+        </ul>
+
+        <h3>5.5 Help and Support</h3>
+        <ul>
+          <li>Reply <strong>HELP</strong> to any message for assistance.</li>
+          <li>You may also contact us directly at <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a> or <a href="tel:9432393439">(943) 239-3439</a>.</li>
+        </ul>
+
+        <h3>5.6 Privacy and Data Sharing</h3>
+        <p>Your phone number and SMS consent information will not be sold, rented, or shared with any third parties or affiliates for their marketing purposes. For full details, see our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+
+        <h3>5.7 Supported Carriers</h3>
+        <p>Our SMS program is supported by major U.S. carriers including AT&amp;T, T-Mobile, Verizon, Sprint, and others. Carriers are not liable for delayed or undelivered messages.</p>
+
+        <h2>6. Intellectual Property</h2>
+        <p>All content on the Site, including text, graphics, logos, images, and software, is the property of Pinnacle Risk Advisors LLC or its licensors and is protected by United States and international copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content on the Site without our prior written consent.</p>
+
+        <h2>7. Disclaimer of Warranties</h2>
+        <p>The Site and all information, content, and services provided on the Site are provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis without warranties of any kind, either express or implied. We do not warrant that the Site will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
+        <p>Insurance-related information on the Site is provided for general informational purposes only and does not constitute professional insurance advice. Coverage descriptions are summaries only; actual coverage is determined by the terms and conditions of the insurance policy.</p>
+
+        <h2>8. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by applicable law, Pinnacle Risk Advisors LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Site or services, even if we have been advised of the possibility of such damages.</p>
+
+        <h2>9. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless Pinnacle Risk Advisors LLC, its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, or expenses arising out of or related to your use of the Site or violation of these Terms.</p>
+
+        <h2>10. Third-Party Links</h2>
+        <p>The Site may contain links to third-party websites or services that are not owned or controlled by us. We are not responsible for the content, privacy policies, or practices of any third-party websites. Use of third-party links is at your own risk.</p>
+
+        <h2>11. Governing Law</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of the State of Georgia, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be resolved in the state or federal courts located in Georgia.</p>
+
+        <h2>12. Changes to These Terms</h2>
+        <p>We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting to the Site with an updated &ldquo;Last Updated&rdquo; date. Your continued use of the Site after any changes constitutes your acceptance of the revised Terms.</p>
+
+        <h2>13. Severability</h2>
+        <p>If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions shall continue in full force and effect.</p>
+
+        <h2>14. Contact Us</h2>
+        <p>If you have any questions about these Terms of Service, please contact us:</p>
+        <p>
+          <strong>Pinnacle Risk Advisors LLC</strong><br>
+          Email: <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a><br>
+          Phone: <a href="tel:9432393439">(943) 239-3439</a><br>
+          Website: <a href="https://pinnacleriskad.com">pinnacleriskad.com</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="foot">
-      <div class="muted">© 2026 Pinnacle Risk Advisors LLC. All rights reserved.</div>
-      <div>
-        <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp;
-        <a href="terms-of-service.html">Terms of Service</a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a><p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p></div>
+        <div><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="index.html#services">Commercial Insurance</a></li><li><a href="index.html#services">Property Insurance</a></li><li><a href="index.html#services">Casualty Insurance</a></li><li><a href="index.html#services">Trucking Insurance</a></li></ul></div>
+        <div><h5 class="footer-heading">Company</h5><ul class="footer-links"><li><a href="index.html#about">About</a></li><li><a href="index.html#team">Team</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="quote.html">Get a Quote</a></li></ul></div>
+        <div><h5 class="footer-heading">Contact</h5><ul class="footer-links"><li><a href="tel:9432393439">(943) 239-3439</a></li><li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
+        <div class="footer-legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
+        <div class="footer-socials"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">X</a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a></div>
       </div>
     </div>
   </footer>
+
+  <script>
+    var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>50)});var menuToggle=document.getElementById('menuToggle'),mainNav=document.getElementById('mainNav');menuToggle.addEventListener('click',function(){menuToggle.classList.toggle('active');mainNav.classList.toggle('open');document.body.style.overflow=mainNav.classList.contains('open')?'hidden':''});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menuToggle.classList.remove('active');mainNav.classList.remove('open');document.body.style.overflow=''})});
+  </script>
 </body>
 </html>
