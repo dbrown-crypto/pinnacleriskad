@@ -114,6 +114,7 @@
     .quote-benefits { list-style: none; margin: 32px 0; }
     .quote-benefits li { font-size: 0.88rem; color: var(--gray-300); padding: 9px 0; display: flex; align-items: center; gap: 14px; }
     .quote-benefits li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
     .sms-notice { margin-top: 24px; padding: 16px 20px; border-left: 2px solid var(--gold-dark); background: rgba(201, 169, 78, 0.03); font-size: 0.8rem; color: var(--gray-400); line-height: 1.65; }
     .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); display: inline-block; }
     .contact-fallback { margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); }
@@ -236,9 +237,11 @@
             <li>Serving Georgia &amp; Florida</li>
             <li>Commercial trucking specialists</li>
           </ul>
+
+          <!-- A2P consistency improvement: includes "automated", STOP/HELP, freq -->
           <div class="sms-notice">
-            SMS messaging is only available to those who provide their explicit consent. Message and data rates may apply.
-            You may opt out at any time by replying STOP, or reply HELP for assistance.
+            SMS messaging is only available to those who provide their explicit consent to receive automated messages.
+            Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help.
           </div>
 
           <!-- Coverage tags -->
@@ -363,8 +366,12 @@
             <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
 
             <button type="submit" class="form-submit">Submit Quote Request</button>
+
+            <!-- A2P consistency improvement: rel=noopener and same pages -->
             <p class="form-footer-note">
-              By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
+              By submitting this form you agree to our
+              <a href="privacy-policy.html" rel="noopener">Privacy Policy</a> and
+              <a href="terms-of-service.html" rel="noopener">Terms of Service</a>.
             </p>
           </form>
         </div>
@@ -402,12 +409,12 @@
           </ul>
         </div>
 
+        <!-- A2P cleanup: removed empty address line item -->
         <div>
           <h5 class="footer-heading">Contact</h5>
           <ul class="footer-links">
             <li><a href="tel:9432393439">(943) 239-3439</a></li>
             <li><a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a></li>
-            <li><span style="font-size: 0.85rem; color: var(--gray-400);"></span></li>
           </ul>
         </div>
       </div>
@@ -415,8 +422,8 @@
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
         <div class="footer-legal">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="privacy-policy.html" rel="noopener">Privacy Policy</a>
+          <a href="terms-of-service.html" rel="noopener">Terms of Service</a>
         </div>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
