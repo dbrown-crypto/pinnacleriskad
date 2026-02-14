@@ -45,7 +45,7 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
-      scroll-padding-top: 90px; /* ✅ prevents anchor headings being hidden by fixed header */
+      scroll-padding-top: 90px; /* prevents anchor headings being hidden by fixed header */
     }
 
     body {
@@ -53,7 +53,7 @@
       background: var(--black);
       color: var(--gray-300);
       line-height: 1.7;
-      overflow-x: clip; /* ✅ avoids micro horizontal scroll */
+      overflow-x: clip; /* avoids micro horizontal scroll */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -97,6 +97,12 @@
     .ornament span { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
 
     .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
+
+    /* Accessibility polish: visible focus */
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
 
     /* HEADER */
     header {
@@ -180,6 +186,31 @@
     .hero-stat strong { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--gold); letter-spacing: -0.5px; }
     .hero-stat span { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); }
 
+    /* HERO — lock true centering */
+    .hero .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-content{
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-label{
+      justify-content: center; /* because it’s display:flex */
+    }
+    .hero-buttons{
+      justify-content: center;
+    }
+    .hero-stats{
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-stat{
+      text-align: center;
+      min-width: 140px;
+    }
+
     /* SERVICES */
     .services { padding: var(--section-pad) 0; background: var(--black-light); }
     .services-header { text-align: center; margin-bottom: 72px; }
@@ -197,6 +228,15 @@
     .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); }
     .service-link { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-fast); }
     .service-link:hover { gap: 14px; color: var(--gold-light); }
+
+    /* SERVICES — equal-height cards + aligned CTA */
+    .service-card{
+      display: flex;
+      flex-direction: column;
+    }
+    .service-link{
+      margin-top: auto; /* pushes CTA to bottom on every card */
+    }
 
     /* ABOUT */
     .about { padding: var(--section-pad) 0; }
@@ -274,7 +314,7 @@
     .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.12s; }
     .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.2s; }
 
-    /* ✅ Reduced motion support */
+    /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1 !important; transform: none !important; }
@@ -284,6 +324,7 @@
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { gap: 48px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
@@ -307,7 +348,7 @@
       .hero-stats { flex-wrap: wrap; gap: 28px; }
       .services-grid, .about-grid, .testimonials-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
 
-      /* ✅ make about bullets breathe on mobile */
+      /* make about bullets breathe on mobile */
       .about-features { grid-template-columns: 1fr; }
 
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -321,7 +362,6 @@
     <div class="container nav-inner">
       <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
 
-      <!-- ✅ accessibility + better state management -->
       <button class="menu-toggle" id="menuToggle"
         aria-label="Toggle navigation"
         aria-controls="mainNav"
@@ -583,7 +623,12 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.</p>
+        <p class="footer-copy">
+          &copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.<br>
+          <span style="color:#666;font-size:.72rem;">
+            Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.
+          </span>
+        </p>
         <div class="footer-legal">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>
@@ -604,7 +649,7 @@
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu with proper state + ESC close
+    // Mobile menu with proper state + ESC + outside click
     var menuToggle = document.getElementById('menuToggle'),
         mainNav = document.getElementById('mainNav');
 
@@ -615,11 +660,17 @@
       document.body.style.overflow = '';
     }
 
+    function openMenu() {
+      menuToggle.classList.add('active');
+      mainNav.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
     menuToggle.addEventListener('click', function () {
-      var isOpen = mainNav.classList.toggle('open');
-      menuToggle.classList.toggle('active', isOpen);
-      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      var isOpen = mainNav.classList.contains('open');
+      if (isOpen) closeMenu();
+      else openMenu();
     });
 
     mainNav.querySelectorAll('a').forEach(function (a) {
@@ -627,7 +678,15 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
+      if (e.key === 'Escape' && mainNav.classList.contains('open')) closeMenu();
+    });
+
+    // Close if user taps outside the nav/toggle while open
+    document.addEventListener('click', function (e) {
+      if (!mainNav.classList.contains('open')) return;
+      var clickedToggle = menuToggle.contains(e.target);
+      var clickedNav = mainNav.contains(e.target);
+      if (!clickedToggle && !clickedNav) closeMenu();
     });
 
     // Reveal animations
