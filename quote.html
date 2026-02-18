@@ -111,11 +111,6 @@
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
 
-    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 42px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
-    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
-    .btn-primary:hover { background: var(--gold-light); color: var(--black); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
-    .btn-primary:hover::before { transform: translateX(100%); }
-
     .quote-page-hero { padding: 150px 0 64px; text-align: center; position: relative; overflow: hidden; }
     .quote-page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 78, 0.04) 0%, transparent 50%); }
     .quote-page-hero .container { position: relative; z-index: 2; }
@@ -155,7 +150,7 @@
     .consent-group label { font-size: 0.78rem; color: var(--gray-400); line-height: 1.6; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
     .consent-group label a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
 
-    /* ✅ NEW: carrier-friendly visible URLs under consent */
+    /* carrier-friendly visible URLs under consent */
     .sms-links {
       margin-top: 10px;
       padding: 10px 12px;
@@ -175,8 +170,6 @@
     .form-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
     .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
     .form-submit:hover::before { transform: translateX(100%); }
-    .form-footer-note { font-size: 0.72rem; color: var(--gray-700); text-align: center; margin-top: 16px; line-height: 1.6; }
-    .form-footer-note a { font-size: 0.72rem; }
 
     footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
@@ -404,7 +397,7 @@
                 </label>
               </div>
 
-              <!-- ✅ Direct visible URLs (carrier review friendly) -->
+              <!-- Visible URLs (carrier review friendly) -->
               <div class="sms-links">
                 <div>
                   Terms of Service:
@@ -435,9 +428,7 @@
             <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
 
             <button type="submit" class="form-submit">Submit Quote Request</button>
-            <p class="form-footer-note">
-              By submitting this form you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
-            </p>
+            <!-- ✅ Removed: Terms/Privacy line above the submit button -->
           </form>
         </div>
 
