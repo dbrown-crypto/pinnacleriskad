@@ -314,6 +314,40 @@
       transform: translateY(-2px);
     }
 
+    /* ✅ NEW: SMS disclosure block (carrier-friendly) */
+    .sms-disclosure{
+      margin-top: 26px;
+      border: 1px solid rgba(201, 169, 78, 0.10);
+      background: rgba(10,10,10,0.28);
+      padding: 18px 18px;
+    }
+    .sms-disclosure-title{
+      color: var(--gold);
+      font-size: 0.70rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .sms-disclosure p{
+      margin-bottom: 10px;
+      font-size: 0.90rem;
+      line-height: 1.75;
+    }
+    .sms-links{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(201, 169, 78, 0.08);
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+    .sms-links a{
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      word-break: break-word;
+    }
+
     /* FOOTER (match homepage/quote) */
     footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 0; flex-wrap: wrap; gap: 16px; }
@@ -390,9 +424,6 @@
         <p>
           We’ve received your message. A licensed advisor will follow up as soon as possible — typically within <strong>24 hours</strong>.
         </p>
-        <p>
-          If you opted in to SMS, you may receive a confirmation text and updates about your quote. You can reply <strong>STOP</strong> to opt out at any time.
-        </p>
 
         <div class="grid" aria-label="Contact options">
           <div class="box">
@@ -413,6 +444,46 @@
           <a class="btn btn-primary" href="quote.html">Request Another Quote</a>
           <a class="btn btn-outline" href="index.html">Back to Home</a>
         </div>
+
+        <!-- ✅ REQUIRED: SMS PROGRAM DISCLOSURE -->
+        <section class="sms-disclosure" aria-labelledby="smsProgramTitle">
+          <div class="sms-disclosure-title" id="smsProgramTitle">SMS Program Disclosure</div>
+
+          <!-- Program / program description + recurring/program disclosure -->
+          <p>
+            If you opted into the <strong>Pinnacle Risk Advisors LLC SMS program</strong>, you may receive confirmation texts and updates about your quote request.
+            Message frequency varies.
+          </p>
+
+          <!-- Customer care contact + HELP -->
+          <p>
+            Reply <strong>HELP</strong> for assistance or contact customer care at
+            <a href="tel:+19432393439">(943) 239-3439</a>.
+          </p>
+
+          <!-- Opt-out instructions -->
+          <p>
+            Reply <strong>STOP</strong> to opt out at any time.
+          </p>
+
+          <!-- Message/data rates disclosure -->
+          <p>
+            Message and data rates may apply.
+          </p>
+
+          <!-- Optional: carrier-friendly visible URLs -->
+          <div class="sms-links">
+            Terms of Service:
+            <a href="https://pinnacleriskad.com/terms-of-service.html" target="_blank" rel="noopener">
+              https://pinnacleriskad.com/terms-of-service.html
+            </a>
+            <br>
+            Privacy Policy:
+            <a href="https://pinnacleriskad.com/privacy-policy.html" target="_blank" rel="noopener">
+              https://pinnacleriskad.com/privacy-policy.html
+            </a>
+          </div>
+        </section>
       </div>
     </div>
   </main>
