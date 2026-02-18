@@ -31,8 +31,6 @@
     a:hover { color: var(--gold-light); }
     h1, h2, h3, h4, h5 { font-family: var(--font-display); color: var(--white); line-height: 1.15; font-weight: 500; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
-
-    /* HEADER */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10,10,10,0.88); backdrop-filter: blur(24px) saturate(1.2); -webkit-backdrop-filter: blur(24px) saturate(1.2); border-bottom: 1px solid rgba(201,169,78,0.06); transition: var(--transition); }
     header.scrolled { background: rgba(10,10,10,0.96); border-bottom-color: rgba(201,169,78,0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
@@ -56,8 +54,6 @@
     .menu-toggle.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
-
-    /* PAGE HERO */
     .page-hero { padding: 150px 0 56px; text-align: center; position: relative; }
     .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(201,169,78,0.04) 0%, transparent 50%); }
     .page-hero .container { position: relative; z-index: 2; }
@@ -66,8 +62,6 @@
     .page-hero h1 em { font-style: italic; color: var(--gold); }
     .page-hero .page-desc { font-family: var(--font-accent); font-size: 1.15rem; color: var(--gray-400); }
     .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
-
-    /* LEGAL CONTENT */
     .legal-body { padding: 64px 0 clamp(80px, 10vw, 140px); }
     .legal-content { max-width: 780px; margin: 0 auto; }
     .legal-content .effective { font-size: 0.82rem; color: var(--gray-600); margin-bottom: 40px; font-weight: 500; letter-spacing: 0.5px; }
@@ -80,8 +74,6 @@
     .legal-content strong { color: var(--white); font-weight: 600; }
     .legal-content .highlight-box { margin: 28px 0; padding: 20px 24px; border-left: 2px solid var(--gold); background: rgba(201,169,78,0.03); }
     .legal-content .highlight-box p { margin-bottom: 0; }
-
-    /* FOOTER */
     footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201,169,78,0.06); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
     .footer-brand .logo { margin-bottom: 18px; }
@@ -99,7 +91,6 @@
     .footer-socials { display: flex; gap: 12px; }
     .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
     .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
-
     @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
     @media (max-width: 768px) {
       nav { display: none; }
@@ -193,7 +184,7 @@
 
         <p>If you opt in to receive SMS/text messages from Pinnacle Risk Advisors LLC, the following applies:</p>
         <ul>
-          <li><strong>Service Messages:</strong> With your consent, we may send text messages related to quote requests, policy updates, renewal reminders, appointment scheduling, and customer support.</li>
+          <li><strong>Non-Marketing Messages:</strong> With your consent, we may send text messages related to quote requests, policy updates, renewal reminders, appointment scheduling, and customer support.</li>
           <li><strong>Marketing Messages:</strong> Only with your separate, explicit consent, we may send occasional marketing messages including coverage tips, risk management resources, and promotional updates.</li>
           <li><strong>Message Frequency:</strong> Message frequency varies based on your interactions and the type of messages you have opted in to receive.</li>
           <li><strong>Costs:</strong> Message and data rates may apply depending on your mobile carrier and plan.</li>
