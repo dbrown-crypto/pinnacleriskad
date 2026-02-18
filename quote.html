@@ -48,7 +48,7 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
-      scroll-padding-top: 90px; /* ✅ prevents anchor headings being hidden by fixed header */
+      scroll-padding-top: 90px;
     }
 
     body {
@@ -56,7 +56,7 @@
       background: var(--black);
       color: var(--gray-300);
       line-height: 1.7;
-      overflow-x: clip; /* ✅ avoids micro horizontal scroll */
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -82,13 +82,11 @@
     .gold-rule { width: 48px; height: 1px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); margin-bottom: 28px; }
     .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
 
-    /* ✅ accessibility polish: visible focus */
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
       outline: 2px solid var(--gold);
       outline-offset: 3px;
     }
 
-    /* HEADER */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 10, 0.88); backdrop-filter: blur(24px) saturate(1.2); -webkit-backdrop-filter: blur(24px) saturate(1.2); border-bottom: 1px solid rgba(201, 169, 78, 0.06); transition: var(--transition); }
     header.scrolled { background: rgba(10, 10, 10, 0.96); border-bottom-color: rgba(201, 169, 78, 0.1); box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
@@ -113,13 +111,11 @@
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
 
-    /* BUTTONS */
     .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 42px; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border: none; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; }
     .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s var(--ease-smooth); }
     .btn-primary:hover { background: var(--gold-light); color: var(--black); transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201, 169, 78, 0.25); }
     .btn-primary:hover::before { transform: translateX(100%); }
 
-    /* QUOTE PAGE HERO */
     .quote-page-hero { padding: 150px 0 64px; text-align: center; position: relative; overflow: hidden; }
     .quote-page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 78, 0.04) 0%, transparent 50%); }
     .quote-page-hero .container { position: relative; z-index: 2; }
@@ -127,7 +123,6 @@
     .quote-page-hero h1 em { font-style: italic; color: var(--gold); }
     .quote-page-hero .page-desc { font-family: var(--font-accent); font-size: 1.2rem; color: var(--gray-400); }
 
-    /* QUOTE FORM LAYOUT */
     .quote-page-body { padding: 0 0 var(--section-pad); }
     .quote-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start; padding-top: 64px; }
     .quote-info { padding-top: 12px; }
@@ -139,7 +134,6 @@
     .contact-fallback { margin-top: 32px; padding: 24px; background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); }
     .contact-fallback p { font-size: 0.84rem; color: var(--gray-400); margin-bottom: 12px; }
 
-    /* FORM */
     .quote-form-wrapper { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.08); padding: 48px; position: relative; }
     .quote-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); }
     .quote-form-wrapper h3 { font-size: 1.4rem; margin-bottom: 6px; }
@@ -167,7 +161,6 @@
     .form-footer-note { font-size: 0.72rem; color: var(--gray-700); text-align: center; margin-top: 16px; line-height: 1.6; }
     .form-footer-note a { font-size: 0.72rem; }
 
-    /* FOOTER */
     footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
     .footer-brand .logo { margin-bottom: 18px; }
@@ -186,31 +179,26 @@
     .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
     .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* RESPONSIVE */
     @media (max-width: 1024px) {
       .quote-grid { gap: 48px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
-    /* ✅ FIXED MOBILE MENU (iOS SAFE) */
     @media (max-width: 768px) {
       nav { display: none; }
       .menu-toggle { display: block; }
 
-      /* make header become the full-screen overlay */
       header.menu-open {
-        height: 100dvh; /* iOS-safe viewport */
+        height: 100dvh;
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
 
-      /* allow nav-inner to wrap so nav can sit below the top bar */
       header.menu-open .nav-inner {
         height: 100%;
         flex-wrap: wrap;
@@ -218,7 +206,6 @@
         padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
       }
 
-      /* nav takes full width below header row */
       #mainNav.open {
         display: flex;
         flex-direction: column;
@@ -241,7 +228,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header id="header">
     <div class="container nav-inner">
       <a href="index.html" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
@@ -264,7 +250,6 @@
     </div>
   </header>
 
-  <!-- PAGE HERO -->
   <section class="quote-page-hero">
     <div class="container">
       <div class="section-label">Free &amp; No Obligation</div>
@@ -275,12 +260,10 @@
 
   <div class="section-divider"></div>
 
-  <!-- QUOTE BODY -->
   <section class="quote-page-body">
     <div class="container">
       <div class="quote-grid">
 
-        <!-- LEFT INFO -->
         <div class="quote-info reveal">
           <h2 class="section-title" style="font-size: clamp(1.5rem, 3vw, 2rem);">Why Choose <em>Pinnacle</em></h2>
           <div class="gold-rule"></div>
@@ -298,7 +281,6 @@
             You may opt out at any time by replying STOP, or reply HELP for assistance.
           </div>
 
-          <!-- Coverage tags -->
           <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(201,169,78,0.08);">
             <p style="font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 16px;">Coverage Areas</p>
             <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -311,7 +293,6 @@
             </div>
           </div>
 
-          <!-- Contact fallback -->
           <div class="contact-fallback">
             <p>Prefer to talk? Reach us directly:</p>
             <p style="margin-bottom: 6px;">
@@ -323,7 +304,6 @@
           </div>
         </div>
 
-        <!-- RIGHT FORM -->
         <div class="quote-form-wrapper reveal">
           <h3>Tell Us About Your Business</h3>
           <p>All fields marked with <span style="color: var(--gold);">*</span> are required. Everything else is optional.</p>
@@ -396,39 +376,27 @@
               <div class="consent-group">
                 <input type="checkbox" id="smsService" name="smsService" value="yes">
                 <label for="smsService">
-                  I confirm I am <strong>18+</strong> and agree to receive <strong>automated</strong> text messages from Pinnacle Risk Advisors LLC related to insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and customer support.
-                  Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
-                  Consent is not a condition of purchase. View our
-                  <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
-                  <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                  I consent to receive non-marketing text messages from Pinnacle Risk Advisors LLC about insurance quote requests, policy service updates, renewal reminders, appointment scheduling, and client support. Message frequency varies. Message and data rates may apply. Text HELP for assistance, reply STOP to opt out.
                 </label>
               </div>
 
               <div class="consent-group">
                 <input type="checkbox" id="smsMarketing" name="smsMarketing" value="yes">
                 <label for="smsMarketing">
-                  I agree to receive <strong>automated marketing and educational</strong> text messages from Pinnacle Risk Advisors LLC, including coverage tips, risk management resources, and promotional updates.
-                  Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance.
-                  <strong>Consent is not a condition of purchase.</strong> View our
-                  <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and
-                  <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                  I consent to receive marketing text messages from Pinnacle Risk Advisors LLC at the number provided, including coverage tips, insurance advice, risk management resources, promotional offers (e.g., discounts, new products/services), and industry updates. Message frequency varies. Message and data rates may apply. Text HELP for assistance, reply STOP to opt out.
                 </label>
               </div>
 
-              <!-- A2P proof fields: always submit explicit yes/no + timestamp + source -->
               <input type="hidden" id="smsOptInTimestamp" name="smsOptInTimestamp" value="">
               <input type="hidden" id="smsOptInSource" name="smsOptInSource" value="Website quote form (quote.html)">
               <input type="hidden" id="smsOptInPageUrl" name="smsOptInPageUrl" value="">
 
-              <!-- Explicit boolean fields (because unchecked checkboxes are not posted) -->
               <input type="hidden" id="smsServiceConsent" name="smsServiceConsent" value="false">
               <input type="hidden" id="smsMarketingConsent" name="smsMarketingConsent" value="false">
 
-              <!-- Optional: disclosure versioning for audits -->
               <input type="hidden" id="smsDisclosureVersion" name="smsDisclosureVersion" value="v1">
             </div>
 
-            <!-- FormSubmit settings -->
             <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Quote Page">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
@@ -444,7 +412,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -509,7 +476,7 @@
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ✅ iOS-safe mobile menu overlay + scroll lock (matches index.html behavior)
+    // iOS-safe mobile menu overlay + scroll lock
     var menuToggle = document.getElementById('menuToggle'),
         mainNav = document.getElementById('mainNav');
 
@@ -591,7 +558,6 @@
       var smsMarketing = document.getElementById('smsMarketing');
       var ts = document.getElementById('smsOptInTimestamp');
 
-      // Proof fields
       var pageUrl = document.getElementById('smsOptInPageUrl');
       var svcBool = document.getElementById('smsServiceConsent');
       var mktBool = document.getElementById('smsMarketingConsent');
@@ -610,13 +576,8 @@
       }
 
       function setProofFields() {
-        // Timestamp only when opted in
         ts.value = wantsSms() ? new Date().toISOString() : '';
-
-        // Always capture the page URL
         if (pageUrl) pageUrl.value = window.location.href;
-
-        // Explicit booleans for audit trails
         if (svcBool) svcBool.value = smsService.checked ? 'true' : 'false';
         if (mktBool) mktBool.value = smsMarketing.checked ? 'true' : 'false';
       }
@@ -632,7 +593,6 @@
       });
 
       form.addEventListener('submit', function (e) {
-        // If they opted into SMS, ensure phone is present
         if (wantsSms() && !phone.value.trim()) {
           e.preventDefault();
           phone.focus();
