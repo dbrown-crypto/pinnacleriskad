@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landlord & SFR Insurance | Pinnacle Risk Advisors</title>
+  <meta name="description" content="Specialized landlord and single-family rental insurance for absentee property owners in Georgia and Florida. DP3, dwelling fire, and rental property coverage from Pinnacle Risk Advisors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0b;
+      --bg2: #111110;
+      --bg3: #181815;
+      --gold: #c9a96e;
+      --gold-light: #e2c99a;
+      --cream: #f5f0e8;
+      --text: #d8d3c8;
+      --muted: #7a7568;
+      --border: rgba(201,169,110,0.15);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(12,12,11,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--cream);
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .nav-logo-text { font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.02em; }
+    .nav-logo-text span { display: block; font-size: 0.6rem; font-family: var(--font-sans); font-weight: 300; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--cream);
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 4rem; }
+    .section-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-sub {
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    /* WHO WE SERVE */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .who-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+    .who-card:hover { background: var(--bg3); }
+    .who-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .who-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .who-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    /* COVERAGE TABLE */
+    .coverage-section { background: var(--bg2); }
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .coverage-list { list-style: none; }
+    .coverage-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .coverage-list li:last-child { border-bottom: none; }
+    .check {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+    .coverage-list li strong { color: var(--cream); display: block; margin-bottom: 0.2rem; }
+    .coverage-list li span { font-size: 0.85rem; color: var(--muted); }
+
+    .highlight-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem;
+    }
+    .highlight-box h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .highlight-box p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* WHY PINNACLE */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .why-card {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .why-num {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .why-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* FAQ */
+    .faq-section { background: var(--bg2); }
+    .faq-list { max-width: 760px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.8rem 0;
+    }
+    .faq-item h3 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+    }
+    .faq-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      text-align: center;
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw; height: 80vw;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-banner h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .cta-banner h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-banner p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-legal {
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, section, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">P</div>
+      <div class="nav-logo-text">
+        PinnacleRisk Advisors
+        <span>Est. Georgia &amp; Florida</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="quote.html" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-eyebrow">Landlord &amp; Rental Property Insurance</div>
+    <h1>Protect Your <em>Rental Portfolio</em> From Every Angle</h1>
+    <p class="hero-sub">Purpose-built DP3 and dwelling fire programs for absentee SFR landlords in Georgia and Florida. Coverage designed around how you actually own — not how you live.</p>
+    <div class="hero-actions">
+      <a href="quote.html" class="btn-primary">Get a Free Quote</a>
+      <a href="#coverage" class="btn-outline">View Coverage</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">DP3</div>
+        <div class="stat-label">Open Peril Coverage</div>
+      </div>
+      <div>
+        <div class="stat-val">GA &amp; FL</div>
+        <div class="stat-label">Licensed Markets</div>
+      </div>
+      <div>
+        <div class="stat-val">24hr</div>
+        <div class="stat-label">Quote Response</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section id="who">
+    <div class="section-eyebrow">Who We Serve</div>
+    <h2 class="section-title">Built for the <em>Absentee Owner</em></h2>
+    <p class="section-sub">If you don't live in the property you own, a standard homeowners policy won't protect you. We specialize in the coverage gap between HO3 and nothing.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🏠</div>
+        <h3>Single-Family Rentals</h3>
+        <p>DP3 dwelling fire policies for absentee landlords renting out single-family homes to long-term tenants.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">📦</div>
+        <h3>Vacant Properties</h3>
+        <p>Between tenants? We have vacancy endorsements and standalone vacant property programs so you're never exposed.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🔑</div>
+        <h3>Fix &amp; Hold Investors</h3>
+        <p>Bought a property to rent long-term after rehab? We bridge the gap from renovation to occupied landlord coverage.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">📍</div>
+        <h3>Out-of-State Owners</h3>
+        <p>Own Georgia or Florida property from another state? We handle everything remotely — no in-person required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section class="coverage-section" id="coverage">
+    <div class="section-eyebrow">Coverage Details</div>
+    <h2 class="section-title">What Your <em>Policy Covers</em></h2>
+    <p class="section-sub">We write DP3 open-peril dwelling fire policies — the gold standard for rental property owners. Here's what's typically included.</p>
+    <div class="coverage-grid">
+      <ul class="coverage-list">
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Dwelling Structure (Coverage A)</strong><span>Open-peril protection for the building itself against fire, wind, hail, lightning, vandalism, and all non-excluded perils.</span></div>
+        </li>
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Other Structures (Coverage B)</strong><span>Detached garages, fences, and outbuildings on the rental property.</span></div>
+        </li>
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Landlord's Personal Property (Coverage C)</strong><span>Appliances, fixtures, and items you own that remain in the rental unit.</span></div>
+        </li>
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Fair Rental Value / Loss of Rents</strong><span>If a covered loss makes the property uninhabitable, your lost rental income is covered during repairs.</span></div>
+        </li>
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Premises Liability</strong><span>Protection if a tenant or visitor is injured on your property and brings a claim against you.</span></div>
+        </li>
+        <li>
+          <span class="check">◆</span>
+          <div><strong>Medical Payments</strong><span>Covers minor injury claims without requiring litigation — keeps small incidents from becoming lawsuits.</span></div>
+        </li>
+      </ul>
+      <div>
+        <div class="highlight-box">
+          <h3>DP1 vs DP3 — Know the Difference</h3>
+          <p>Many landlords end up with a DP1 (named-peril) policy because it's cheaper. But DP1 only covers a short list of named perils — if the cause of damage isn't explicitly listed, you're not covered.</p>
+          <p>A <strong style="color:var(--gold-light)">DP3</strong> is open-peril: everything is covered unless specifically excluded. For rental properties, that's the coverage you actually need.</p>
+          <p>We write DP3 as the default, not the upgrade. Ask us about available enhancements including water backup, equipment breakdown, and extended replacement cost.</p>
+        </div>
+        <div style="margin-top: 2rem; padding: 2rem; border: 1px solid var(--border); background: var(--bg3);">
+          <h3 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--cream); margin-bottom: 1rem;">Add-On Options</h3>
+          <ul class="coverage-list" style="margin: 0;">
+            <li style="padding: 0.6rem 0;"><span class="check">+</span><div><strong>Water Backup &amp; Sewer</strong><span>Often excluded by default — we recommend this endorsement for all rentals.</span></div></li>
+            <li style="padding: 0.6rem 0;"><span class="check">+</span><div><strong>Umbrella / Excess Liability</strong><span>Extra liability limits above your base policy for added asset protection.</span></div></li>
+            <li style="padding: 0.6rem 0;"><span class="check">+</span><div><strong>Vacancy Extension</strong><span>Maintain coverage during between-tenant periods or extended vacancies.</span></div></li>
+            <li style="padding: 0.6rem 0; border-bottom: none;"><span class="check">+</span><div><strong>Portfolio Blanket Programs</strong><span>Own multiple properties? Ask about blanket limits and portfolio pricing.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PINNACLE -->
+  <section id="why">
+    <div class="section-eyebrow">Why Pinnacle</div>
+    <h2 class="section-title">The Agent Behind <em>Your Portfolio</em></h2>
+    <p class="section-sub">We don't just process policies — we advise. Here's what sets Pinnacle apart for landlords and investors.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>Market Access</h3>
+        <p>We're appointed with top landlord markets including REInsurePro/NREIG, Steadily, Obie, and others — so you get competitive quotes from carriers that actually know rental property.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>Absentee Specialist</h3>
+        <p>We understand the absentee ownership model. No site inspections required for placement. Remote-friendly quoting and binding for Georgia and Florida properties.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>Portfolio Thinking</h3>
+        <p>Whether you own 1 property or 30, we structure your coverage with growth in mind — from individual DP3s to blanket programs as your portfolio scales.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <h3>Rapid Turnaround</h3>
+        <p>Quote requests are typically responded to within 24 hours. Closings on the horizon don't wait — neither do we.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <h3>Direct Communication</h3>
+        <p>You speak directly with the principal agent — Derrick Brown. No account managers, no handoffs. The person you talk to is the person who binds your coverage.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <h3>Claims Advocacy</h3>
+        <p>When a claim happens, we're in your corner. We help you understand your policy, document properly, and navigate the carrier relationship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-eyebrow">Common Questions</div>
+    <h2 class="section-title">Landlord Insurance <em>FAQ</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Do I need landlord insurance if I already have a homeowners policy?</h3>
+        <p>Yes. Standard homeowners (HO3) policies exclude rental activity. If you're renting to a tenant — even a family member — you need a landlord/dwelling fire policy. Renting with an HO3 in place is a claim-denial waiting to happen.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What's the difference between a DP1, DP2, and DP3?</h3>
+        <p>DP1 is basic/named-peril (only the listed causes of loss are covered). DP2 is broad-form named-peril. DP3 is open-peril — everything is covered unless specifically excluded. We recommend DP3 for virtually all rental properties because of its comprehensive coverage scope.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I get coverage if the property is currently vacant?</h3>
+        <p>Yes, though vacancy adds complexity. Most standard landlord policies have vacancy clauses that reduce or eliminate coverage after 30–60 days of vacancy. We can write standalone vacant property policies or add vacancy endorsements to bridge the gap between tenants.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you insure properties in both Georgia and Florida?</h3>
+        <p>Yes. Pinnacle Risk Advisors is licensed in both Georgia and Florida. We have carrier access in both states including markets that specialize in coastal Florida property.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How fast can you quote and bind coverage?</h3>
+        <p>Typically within 24 hours for standard SFR rental properties. For more complex risks (large portfolios, distressed properties, coastal Florida), allow 48–72 hours. Closings with short timelines — reach out directly and we'll make it work.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Should my tenant carry renter's insurance?</h3>
+        <p>Yes — and we recommend requiring it in your lease. Your landlord policy covers the building structure and your liability. It does NOT cover your tenant's personal belongings. Requiring renter's insurance protects your tenant and reduces friction when losses occur.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <h2>Ready to Protect Your <em>Rental Property?</em></h2>
+    <p>Get a DP3 landlord insurance quote within 24 hours. No obligation, no pressure — just the right coverage at a competitive rate.</p>
+    <div class="cta-actions">
+      <a href="quote.html" class="btn-primary">Get Your Free Quote</a>
+      <a href="tel:+19432393439" class="btn-outline">Call (943) 239-3439</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-legal">
+        © 2026 Pinnacle Risk Advisors LLC. All rights reserved.<br />
+        Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="quote.html">Get a Quote</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
