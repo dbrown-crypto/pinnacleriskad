@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trucking Insurance | Pinnacle Risk Advisors</title>
+  <meta name="description" content="Commercial trucking insurance for general freight, hotshot, and long haul operators in Georgia and Florida. Primary liability, cargo, physical damage, and bobtail from Pinnacle Risk Advisors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0b;
+      --bg2: #111110;
+      --bg3: #181815;
+      --gold: #c9a96e;
+      --gold-light: #e2c99a;
+      --cream: #f5f0e8;
+      --text: #d8d3c8;
+      --muted: #7a7568;
+      --border: rgba(201,169,110,0.15);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(12,12,11,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--cream); }
+    .nav-logo-mark { width: 36px; height: 36px; background: var(--gold); color: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; }
+    .nav-logo-text { font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.02em; }
+    .nav-logo-text span { display: block; font-size: 0.6rem; font-family: var(--font-sans); font-weight: 300; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { background: var(--gold); color: var(--bg); text-decoration: none; padding: 0.6rem 1.5rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: var(--font-serif); font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.05; color: var(--cream); max-width: 700px; margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--bg); text-decoration: none; padding: 0.9rem 2.2rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline { border: 1px solid var(--border); color: var(--cream); text-decoration: none; padding: 0.9rem 2.2rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-tags { display: flex; gap: 0.75rem; margin-top: 3rem; flex-wrap: wrap; }
+    .tag { border: 1px solid var(--border); padding: 0.4rem 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .tag.active { border-color: var(--gold); color: var(--gold); }
+
+    section { padding: 6rem 4rem; }
+    .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-sub { color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 3.5rem; }
+
+    /* OPERATION TYPES */
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .ops-card {
+      background: var(--bg2);
+      padding: 3rem 2.5rem;
+      transition: background 0.2s;
+    }
+    .ops-card:hover { background: var(--bg3); }
+    .ops-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .ops-card h3 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--cream); margin-bottom: 1rem; }
+    .ops-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .ops-features { list-style: none; }
+    .ops-features li { font-size: 0.82rem; color: var(--text); padding: 0.35rem 0; border-bottom: 1px solid rgba(201,169,110,0.08); display: flex; align-items: center; gap: 0.6rem; }
+    .ops-features li::before { content: '◆'; color: var(--gold); font-size: 0.5rem; }
+
+    /* COVERAGE GRID */
+    .cov-bg { background: var(--bg2); }
+    .cov-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .cov-card {
+      background: var(--bg3);
+      padding: 2.5rem;
+    }
+    .cov-card h3 { font-family: var(--font-serif); font-size: 1.25rem; color: var(--cream); margin-bottom: 0.6rem; }
+    .cov-card .req-badge { display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: rgba(201,169,110,0.12); color: var(--gold); margin-bottom: 0.8rem; }
+    .cov-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+
+    /* MC / DOT */
+    .mc-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .mc-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem;
+    }
+    .mc-box h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--cream); margin-bottom: 1rem; }
+    .mc-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .mc-box p:last-child { margin-bottom: 0; }
+    .mc-reqs { list-style: none; }
+    .mc-reqs li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+    .mc-reqs li:last-child { border-bottom: none; }
+    .mc-reqs .req-val { color: var(--gold); font-family: var(--font-serif); font-size: 1rem; }
+
+    /* WHY */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .why-card { padding: 2rem 0; border-top: 1px solid var(--border); }
+    .why-num { font-family: var(--font-serif); font-size: 3rem; color: var(--border); line-height: 1; margin-bottom: 1rem; }
+    .why-card h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* CTA */
+    .cta-banner { text-align: center; padding: 7rem 4rem; position: relative; overflow: hidden; }
+    .cta-banner::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vw; background: radial-gradient(ellipse, rgba(201,169,110,0.07) 0%, transparent 60%); pointer-events: none; }
+    .cta-banner h2 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--cream); margin-bottom: 1rem; }
+    .cta-banner h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-banner p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 4rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+    .footer-legal { font-size: 0.75rem; color: var(--muted); max-width: 500px; line-height: 1.6; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, section, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .ops-grid { grid-template-columns: 1fr; }
+      .cov-grid { grid-template-columns: 1fr; }
+      .mc-section { grid-template-columns: 1fr; gap: 2rem; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">P</div>
+      <div class="nav-logo-text">
+        PinnacleRisk Advisors
+        <span>Est. Georgia &amp; Florida</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="quote.html" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-eyebrow">Commercial Trucking Insurance</div>
+    <h1>Coverage Built for <em>Life on the Road</em></h1>
+    <p class="hero-sub">Primary liability, cargo, physical damage, and bobtail programs for general freight, hotshot, and long haul operators in Georgia and Florida.</p>
+    <div class="hero-actions">
+      <a href="quote.html" class="btn-primary">Get a Trucking Quote</a>
+      <a href="#coverage" class="btn-outline">View Coverage</a>
+    </div>
+    <div class="hero-tags">
+      <div class="tag active">General Freight</div>
+      <div class="tag active">Hotshot</div>
+      <div class="tag active">Long Haul</div>
+      <div class="tag">Owner-Operators</div>
+      <div class="tag">New Ventures</div>
+    </div>
+  </section>
+
+  <!-- OPERATION TYPES -->
+  <section id="operations">
+    <div class="section-eyebrow">Operation Types</div>
+    <h2 class="section-title">We Write All <em>Trucking Operations</em></h2>
+    <p class="section-sub">From expedite freight in a pickup-and-gooseneck to 80,000-lb OTR rigs, we match your operation to the right program and the right carrier.</p>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <div class="ops-label">Operation 01</div>
+        <h3>General Freight</h3>
+        <p>Standard dry van, flatbed, step deck, and reefer operations hauling general commodities. The core of commercial trucking — we have the markets for it.</p>
+        <ul class="ops-features">
+          <li>Box trucks &amp; cargo vans</li>
+          <li>Flatbed &amp; step deck</li>
+          <li>Dry van / reefer</li>
+          <li>Single &amp; team drivers</li>
+          <li>Intrastate &amp; interstate</li>
+        </ul>
+      </div>
+      <div class="ops-card">
+        <div class="ops-label">Operation 02</div>
+        <h3>Hotshot</h3>
+        <p>Expedite freight, time-sensitive loads, and non-CDL pickup-and-gooseneck operations. A specialized market — we know the nuances.</p>
+        <ul class="ops-features">
+          <li>Pickup &amp; gooseneck/flatbed combos</li>
+          <li>Non-CDL Class III operations</li>
+          <li>Expedite &amp; time-critical loads</li>
+          <li>DOT medical card requirements</li>
+          <li>Load board operators</li>
+        </ul>
+      </div>
+      <div class="ops-card">
+        <div class="ops-label">Operation 03</div>
+        <h3>Long Haul</h3>
+        <p>Over-the-road operations running interstate lanes, including 48-state authorities. We write new ventures and established carriers alike.</p>
+        <ul class="ops-features">
+          <li>OTR 48-state operations</li>
+          <li>New authority programs</li>
+          <li>Established carriers</li>
+          <li>Owner-operators &amp; fleets</li>
+          <li>Lease-on arrangements</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE LINES -->
+  <section class="cov-bg" id="coverage">
+    <div class="section-eyebrow">Coverage Lines</div>
+    <h2 class="section-title">Everything You <em>Need to Roll</em></h2>
+    <p class="section-sub">A complete trucking insurance program covers multiple lines. Here's what we write — and what each one does for you.</p>
+    <div class="cov-grid">
+      <div class="cov-card">
+        <span class="req-badge">FMCSA Required</span>
+        <h3>Primary Auto Liability</h3>
+        <p>Covers bodily injury and property damage you cause to others while operating your CMV. Required by the FMCSA to obtain your operating authority — minimum $750K for general freight, $1M for hazmat. We file the MCS-90 endorsement on your behalf.</p>
+      </div>
+      <div class="cov-card">
+        <span class="req-badge">Shipper Required</span>
+        <h3>Motor Truck Cargo</h3>
+        <p>Covers the freight you're hauling in case of theft, accident, fire, or other covered loss. Most shippers and brokers require $100K minimum. We can write limits up to the value of the loads you pull — essential for high-value freight.</p>
+      </div>
+      <div class="cov-card">
+        <h3>Physical Damage</h3>
+        <p>Comprehensive and collision coverage for your truck and trailer. Covers your equipment when it's damaged in an accident, stolen, vandalized, or hit by weather. Lenders require it for financed equipment — but it's smart regardless.</p>
+      </div>
+      <div class="cov-card">
+        <h3>Bobtail / Non-Trucking Liability</h3>
+        <p>Covers you when you're operating your truck without a load — driving bobtail, deadheading, or using the truck for personal use outside of dispatch. Critical for owner-operators who are not under dispatch 100% of the time.</p>
+      </div>
+      <div class="cov-card">
+        <h3>General Liability (Trucking)</h3>
+        <p>Covers premises and operations liability — incidents that happen away from the truck, like loading dock accidents, office liability, or completed operations. Required by some contracts and shippers even when auto liability is in place.</p>
+      </div>
+      <div class="cov-card">
+        <h3>Occupational Accident</h3>
+        <p>For owner-operators and independent contractors not covered under workers' comp — occ/acc provides benefits for on-the-job injuries, disability, and accidental death. A cost-effective alternative to WC for 1099 operators.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MC / DOT -->
+  <section id="authority">
+    <div class="section-eyebrow">New Authority</div>
+    <h2 class="section-title">Starting Your <em>Operating Authority?</em></h2>
+    <p class="section-sub">We help new operators get the insurance filings needed to activate their FMCSA operating authority — fast.</p>
+    <div class="mc-section">
+      <div>
+        <div class="mc-box">
+          <h3>FMCSA Minimum Requirements</h3>
+          <p>The FMCSA sets minimum insurance requirements based on what you haul. Here are the standard thresholds for most general freight operations:</p>
+        </div>
+        <ul class="mc-reqs" style="margin-top: 1px; border: 1px solid var(--border); border-top: none; background: var(--bg3);">
+          <li style="padding: 1rem 1.5rem;"><span>General Freight — Primary Liability</span><span class="req-val">$750,000</span></li>
+          <li style="padding: 1rem 1.5rem;"><span>Hazardous Materials</span><span class="req-val">$1,000,000+</span></li>
+          <li style="padding: 1rem 1.5rem;"><span>Household Goods</span><span class="req-val">$300,000</span></li>
+          <li style="padding: 1rem 1.5rem;"><span>For-Hire Passenger (bus)</span><span class="req-val">$5,000,000</span></li>
+          <li style="padding: 1rem 1.5rem; border-bottom: none;"><span>MCS-90 Filing</span><span class="req-val">Included</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="section-title" style="margin-bottom: 1.5rem;">What We Do for <em>New Ventures</em></h3>
+        <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">Getting your operating authority activated requires insurance on file with the FMCSA. We handle that filing directly with the carrier — so your authority activates without delays.</p>
+        <ul style="list-style: none;">
+          <li style="padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text); display: flex; gap: 0.75rem;">
+            <span style="color:var(--gold)">◆</span>
+            <div><strong style="color:var(--cream); display:block; margin-bottom:0.2rem;">Quote &amp; Bind</strong>We quote your program, you approve, we bind coverage same-day in most cases.</div>
+          </li>
+          <li style="padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text); display: flex; gap: 0.75rem;">
+            <span style="color:var(--gold)">◆</span>
+            <div><strong style="color:var(--cream); display:block; margin-bottom:0.2rem;">FMCSA Filing</strong>Your carrier files the MCS-90 and BMC-91/91X directly with the FMCSA to activate your authority.</div>
+          </li>
+          <li style="padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text); display: flex; gap: 0.75rem;">
+            <span style="color:var(--gold)">◆</span>
+            <div><strong style="color:var(--cream); display:block; margin-bottom:0.2rem;">Certificate of Insurance</strong>We issue COIs for brokers and shippers so you can start pulling loads immediately.</div>
+          </li>
+          <li style="padding: 0.9rem 0; font-size: 0.88rem; color: var(--text); display: flex; gap: 0.75rem;">
+            <span style="color:var(--gold)">◆</span>
+            <div><strong style="color:var(--cream); display:block; margin-bottom:0.2rem;">Ongoing Support</strong>Adding drivers, vehicles, or endorsements — we handle changes as your operation grows.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PINNACLE -->
+  <section id="why" style="background: var(--bg2);">
+    <div class="section-eyebrow">Why Pinnacle</div>
+    <h2 class="section-title">A Trucking Specialist <em>In Your Corner</em></h2>
+    <p class="section-sub">Trucking insurance is a specialty market. We know the carriers, the language, and the underwriting nuances that generic agents miss.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>Progressive Commercial Direct</h3>
+        <p>We're directly appointed with Progressive Commercial — one of the largest commercial trucking carriers in the country. Direct access means faster quotes and better service.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>New Ventures Welcome</h3>
+        <p>Just got your authority? New ventures are our specialty, not a problem to work around. We have programs specifically designed for operators 0–2 years in business.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>Full Program Coverage</h3>
+        <p>We don't just write liability and call it done. We quote your complete program — liability, cargo, physical damage, bobtail — so there are no gaps when something goes wrong.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <h3>Fast FMCSA Filing</h3>
+        <p>We understand that inactive authority means no income. We prioritize binding and filing so your FMCSA authority activates as quickly as possible.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <h3>Direct Agent Access</h3>
+        <p>You deal directly with Derrick Brown — no account managers, no call centers. When you have a question about your policy, you get a real answer fast.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <h3>Georgia &amp; Florida Licensed</h3>
+        <p>Based in Atlanta, licensed in both Georgia and Florida. We understand the regional markets, carriers, and requirements for operators running the Southeast corridor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <h2>Let's Get Your <em>Operation Covered</em></h2>
+    <p>Whether you're activating new authority or reviewing your existing program, we'll get you a complete trucking insurance quote within 24 hours.</p>
+    <div class="cta-actions">
+      <a href="quote.html" class="btn-primary">Get a Trucking Quote</a>
+      <a href="tel:+19432393439" class="btn-outline">Call (943) 239-3439</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-legal">
+        © 2026 Pinnacle Risk Advisors LLC. All rights reserved.<br />
+        Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="quote.html">Get a Quote</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
