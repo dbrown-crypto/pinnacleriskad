@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pinnacle Risk Advisors LLC | Commercial, Property &amp; Casualty Insurance</title>
-  <meta name="description" content="Pinnacle Risk Advisors LLC provides commercial, property, and casualty insurance solutions for businesses across Georgia and Florida. Specializing in trucking insurance.">
+  <meta name="description" content="Pinnacle Risk Advisors LLC provides commercial, property, and casualty insurance solutions for businesses across Georgia and Florida. Specializing in trucking insurance, landlord coverage, and workers compensation.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +45,7 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
-      scroll-padding-top: 90px; /* prevents anchor headings being hidden by fixed header */
+      scroll-padding-top: 90px;
     }
 
     body {
@@ -53,7 +53,7 @@
       background: var(--black);
       color: var(--gray-300);
       line-height: 1.7;
-      overflow-x: clip; /* avoids micro horizontal scroll */
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -98,13 +98,9 @@
 
     .section-divider { height: 1px; background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 50%, transparent 95%); opacity: 0.2; }
 
-    /* Accessibility polish: visible focus */
-    a:focus-visible, button:focus-visible{
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       background: rgba(10, 10, 10, 0.88);
@@ -120,12 +116,12 @@
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
     .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); letter-spacing: 0.3px; }
-    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); transition: var(--transition); }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); transition: var(--transition); flex-shrink: 0; }
     .logo:hover .logo-icon { background: var(--gold); color: var(--black); }
     .logo span { color: var(--gold); font-weight: 400; }
 
-    nav { display: flex; align-items: center; gap: 32px; }
-    nav a { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-400); position: relative; padding: 4px 0; }
+    nav { display: flex; align-items: center; gap: 28px; }
+    nav a { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gray-400); position: relative; padding: 4px 0; white-space: nowrap; }
     nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.35s var(--ease-smooth); }
     nav a:hover { color: var(--gold-light); }
     nav a:hover::after { width: 100%; }
@@ -134,7 +130,7 @@
     .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
     .nav-cta::after { display: none !important; }
 
-    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 22px; position: relative; z-index: 1001; }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 22px; position: relative; z-index: 1001; flex-shrink: 0; }
     .menu-toggle span { display: block; width: 100%; height: 1.5px; background: var(--gold); position: absolute; left: 0; transition: var(--transition); }
     .menu-toggle span:nth-child(1) { top: 0; }
     .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
@@ -143,7 +139,7 @@
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
 
-    /* BUTTONS */
+    /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 16px 42px; background: var(--gold); color: var(--black);
@@ -169,54 +165,53 @@
     }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 100px 0 80px; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 45%, rgba(201, 169, 78, 0.05) 0%, transparent 55%), radial-gradient(ellipse at 85% 15%, rgba(201, 169, 78, 0.03) 0%, transparent 45%), radial-gradient(ellipse at 50% 100%, rgba(201, 169, 78, 0.02) 0%, transparent 40%); }
     .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201, 169, 78, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 78, 0.025) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%); }
-    .hero .container { position: relative; z-index: 2; }
-    .hero-content { max-width: 700px; }
-    .hero-label { font-family: var(--font-body); font-size: 0.62rem; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 18px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+    .hero .container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+    .hero-content { max-width: 700px; margin: 0 auto; text-align: center; }
+    .hero-label { font-family: var(--font-body); font-size: 0.62rem; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; justify-content: center; gap: 18px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
     .hero-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
     .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.2rem); font-weight: 400; line-height: 1.08; margin-bottom: 28px; letter-spacing: -0.5px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
     .hero h1 em { font-style: italic; color: var(--gold); }
     .hero-desc { font-family: var(--font-accent); font-size: 1.3rem; color: var(--gray-400); margin-bottom: 14px; letter-spacing: 0.3px; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
     .hero-serving { font-size: 0.75rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 44px; opacity: 0; animation: fadeUp 0.8s 0.75s forwards; }
-    .hero-buttons { display: flex; gap: 18px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.85s forwards; }
-    .hero-stats { display: flex; gap: 56px; margin-top: 72px; padding-top: 36px; border-top: 1px solid rgba(201, 169, 78, 0.08); opacity: 0; animation: fadeUp 0.8s 1.05s forwards; }
+    .hero-buttons { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.8s 0.85s forwards; }
+    .hero-stats { display: flex; gap: 56px; justify-content: center; margin-top: 72px; padding-top: 36px; border-top: 1px solid rgba(201, 169, 78, 0.08); opacity: 0; animation: fadeUp 0.8s 1.05s forwards; flex-wrap: wrap; }
+    .hero-stat { text-align: center; min-width: 120px; }
     .hero-stat strong { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--gold); letter-spacing: -0.5px; }
     .hero-stat span { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); }
 
-    /* HERO — lock true centering */
-    .hero .container{ display: flex; flex-direction: column; align-items: center; }
-    .hero-content{ margin: 0 auto; text-align: center; }
-    .hero-label{ justify-content: center; }
-    .hero-buttons{ justify-content: center; }
-    .hero-stats{ justify-content: center; text-align: center; }
-    .hero-stat{ text-align: center; min-width: 140px; }
-
-    /* SERVICES */
+    /* ── SERVICES ── */
     .services { padding: var(--section-pad) 0; background: var(--black-light); }
     .services-header { text-align: center; margin-bottom: 72px; }
     .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .service-card { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); padding: 44px 30px 40px; transition: var(--transition); position: relative; overflow: hidden; }
+    .service-card { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); padding: 44px 30px 40px; transition: var(--transition); position: relative; overflow: hidden; display: flex; flex-direction: column; }
     .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-smooth); }
-    .service-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 80px; height: 80px; background: radial-gradient(circle, rgba(201, 169, 78, 0.04) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s ease; }
     .service-card:hover { border-color: rgba(201, 169, 78, 0.15); transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.4), var(--shadow-gold); }
     .service-card:hover::before { transform: scaleX(1); }
-    .service-card:hover::after { opacity: 1; }
     .service-number { font-family: var(--font-display); font-size: 0.82rem; color: var(--gold-dark); margin-bottom: 22px; opacity: 0.5; }
     .service-card h3 { font-size: 1.25rem; margin-bottom: 14px; }
     .service-card p { font-size: 0.88rem; color: var(--gray-400); margin-bottom: 22px; line-height: 1.7; }
     .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
     .service-tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(201, 169, 78, 0.18); color: var(--gold); }
-    .service-link { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-fast); }
+    .service-link { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-fast); margin-top: auto; }
     .service-link:hover { gap: 14px; color: var(--gold-light); }
 
-    /* SERVICES — equal-height cards + aligned CTA */
-    .service-card{ display: flex; flex-direction: column; }
-    .service-link{ margin-top: auto; }
+    /* ── CARRIERS ── */
+    .carriers-section { padding: clamp(60px, 8vw, 100px) 0; background: var(--black); border-top: 1px solid rgba(201, 169, 78, 0.08); border-bottom: 1px solid rgba(201, 169, 78, 0.08); }
+    .carriers-header { text-align: center; margin-bottom: 56px; }
+    .carriers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201, 169, 78, 0.1); border: 1px solid rgba(201, 169, 78, 0.1); }
+    .carrier-card { background: var(--black-card); padding: 2rem 2.5rem; transition: background var(--transition-fast); }
+    .carrier-card:hover { background: var(--black-elevated); }
+    .carrier-line { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600; }
+    .carrier-name { font-family: var(--font-accent); font-size: 1.3rem; color: var(--white); margin-bottom: 0.4rem; }
+    .carrier-desc { font-size: 0.82rem; color: var(--gray-400); line-height: 1.6; }
+    .carriers-note { text-align: center; color: var(--gray-600); font-size: 0.82rem; margin-top: 2rem; letter-spacing: 0.04em; }
+    .carriers-note a { color: var(--gold); }
 
-    /* ABOUT */
+    /* ── ABOUT ── */
     .about { padding: var(--section-pad) 0; }
     .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
     .about-text { font-size: 0.92rem; color: var(--gray-400); margin-bottom: 28px; line-height: 1.85; }
@@ -232,7 +227,7 @@
     .about-image-box h4 { font-family: var(--font-accent); font-size: 1.5rem; font-weight: 400; font-style: italic; color: var(--gold-light); margin-bottom: 6px; position: relative; z-index: 1; }
     .about-tagline { font-size: 0.72rem; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gray-600); position: relative; z-index: 1; }
 
-    /* TEAM */
+    /* ── TEAM ── */
     .team { padding: var(--section-pad) 0; background: var(--black-light); }
     .team-inner { text-align: center; max-width: 580px; margin: 0 auto; }
     .team-avatar { width: 110px; height: 110px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--gold); background: var(--black-card); position: relative; }
@@ -241,7 +236,7 @@
     .team-role { font-family: var(--font-accent); font-size: 1.1rem; font-style: italic; color: var(--gold); margin-bottom: 20px; }
     .team-bio { font-size: 0.92rem; color: var(--gray-400); line-height: 1.85; }
 
-    /* TESTIMONIALS */
+    /* ── TESTIMONIALS ── */
     .testimonials { padding: var(--section-pad) 0; }
     .testimonials-header { text-align: center; margin-bottom: 72px; }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -254,7 +249,7 @@
     .testimonial-name { font-size: 0.88rem; font-weight: 600; color: var(--white); line-height: 1.3; }
     .testimonial-company { font-size: 0.76rem; color: var(--gray-600); }
 
-    /* CONTACT */
+    /* ── CONTACT ── */
     .contact-bar { padding: 80px 0 var(--section-pad); }
     .contact-header { text-align: center; margin-bottom: 56px; }
     .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 880px; margin: 0 auto; }
@@ -264,7 +259,7 @@
     .contact-item h4 { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-600); margin-bottom: 8px; }
     .contact-item a, .contact-item p { font-family: var(--font-accent); font-size: 1.1rem; color: var(--white); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer { padding: 72px 0 36px; background: var(--black-light); border-top: 1px solid rgba(201, 169, 78, 0.06); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
     .footer-brand .logo { margin-bottom: 18px; }
@@ -283,7 +278,7 @@
     .footer-socials a { width: 34px; height: 34px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gray-600); transition: var(--transition); }
     .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ANIMATIONS */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -292,42 +287,36 @@
     .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.12s; }
     .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.2s; }
 
-    /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1 !important; transform: none !important; }
     }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .carriers-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { gap: 48px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
-    /* ✅ FIXED MOBILE MENU (iOS SAFE) */
     @media (max-width: 768px) {
       nav { display: none; }
       .menu-toggle { display: block; }
 
-      /* make header become the full-screen overlay */
       header.menu-open {
-        height: 100dvh; /* iOS-safe viewport */
+        height: 100dvh;
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
-
-      /* allow nav-inner to wrap so nav can sit below the top bar */
       header.menu-open .nav-inner {
         height: 100%;
         flex-wrap: wrap;
         align-content: flex-start;
         padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
       }
-
-      /* nav takes full width below header row */
       #mainNav.open {
         display: flex;
         flex-direction: column;
@@ -336,17 +325,41 @@
         height: calc(100dvh - 76px);
         justify-content: center;
         align-items: center;
-        gap: 28px;
+        gap: 24px;
       }
       #mainNav.open a { font-size: 1rem; color: var(--gray-300); letter-spacing: 2px; }
 
-      .hero-stats { flex-wrap: wrap; gap: 28px; }
-      .services-grid, .about-grid, .testimonials-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+      .hero { padding: 90px 0 60px; min-height: auto; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+      .hero-desc { font-size: 1.1rem; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-buttons a { width: 100%; max-width: 320px; justify-content: center; }
+      .hero-stats { gap: 28px; }
 
-      /* make about bullets breathe on mobile */
+      .services-grid { grid-template-columns: 1fr; }
+      .carriers-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .about-features { grid-template-columns: 1fr; }
-
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-legal { flex-wrap: wrap; justify-content: center; }
+
+      .carriers-section { padding: 60px 0; }
+      .carrier-card { padding: 1.6rem 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+      .hero-label { font-size: 0.58rem; }
+      .hero-stats { gap: 20px; }
+      .hero-stat strong { font-size: 1.6rem; }
+      .btn-primary, .btn-secondary { padding: 14px 28px; font-size: 0.68rem; }
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+      .service-card { padding: 32px 24px; }
+      .about-image-box { padding: 40px 28px; }
+      .carrier-card { padding: 1.4rem 1.5rem; }
     }
   </style>
 </head>
@@ -378,6 +391,7 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-grid"></div>
     <div class="container">
@@ -391,7 +405,6 @@
           <a href="#services" class="btn-secondary">Discover Services</a>
         </div>
       </div>
-
       <div class="hero-stats">
         <div class="hero-stat"><strong>$1M+</strong><span>Assets Insured</span></div>
         <div class="hero-stat"><strong>98%</strong><span>Client Retention</span></div>
@@ -402,6 +415,7 @@
 
   <div class="section-divider"></div>
 
+  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="container">
       <div class="services-header reveal">
@@ -410,7 +424,6 @@
         <div class="ornament"><span></span></div>
         <p class="section-desc center">Tailored insurance programs designed to protect your small business.</p>
       </div>
-
       <div class="services-grid reveal-stagger">
         <div class="service-card reveal">
           <div class="service-number">01</div>
@@ -418,21 +431,23 @@
           <p>Business protection including general liability and professional liability options.</p>
           <a href="quote.html" class="service-link">Get Quote &rarr;</a>
         </div>
-
         <div class="service-card reveal">
           <div class="service-number">02</div>
           <h3>Property Insurance</h3>
           <p>Protect buildings, equipment, and inventory against fire, theft, and named perils.</p>
           <a href="quote.html" class="service-link">Get Quote &rarr;</a>
         </div>
-
         <div class="service-card reveal">
           <div class="service-number">03</div>
-          <h3>Casualty Insurance</h3>
-          <p>Liability protection for accidents&mdash;from injuries to property damage claims.</p>
-          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
+          <h3>Landlord &amp; Rental Property</h3>
+          <p>DP3 dwelling fire programs for absentee SFR landlords and rental property investors across Georgia and Florida.</p>
+          <div class="service-tags">
+            <span class="service-tag">SFR Rentals</span>
+            <span class="service-tag">DP3</span>
+            <span class="service-tag">Vacant Property</span>
+          </div>
+          <a href="landlord.html" class="service-link">Learn More &rarr;</a>
         </div>
-
         <div class="service-card reveal">
           <div class="service-number">04</div>
           <h3>Trucking Insurance</h3>
@@ -442,93 +457,89 @@
             <span class="service-tag">Hotshot</span>
             <span class="service-tag">Long Haul</span>
           </div>
+          <a href="trucking.html" class="service-link">Learn More &rarr;</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-number">05</div>
+          <h3>Workers Compensation</h3>
+          <p>Workers comp coverage for small and mid-size businesses across Georgia and Florida. Fast quotes, multiple markets.</p>
+          <a href="quote.html" class="service-link">Get Quote &rarr;</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-number">06</div>
+          <h3>Casualty Insurance</h3>
+          <p>Liability protection for accidents from injuries to property damage claims.</p>
           <a href="quote.html" class="service-link">Get Quote &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-
-<section id="carriers" style="padding: 5rem 4rem; background: #0c0c0b; border-top: 1px solid rgba(201,169,110,0.1);">
-  <div style="max-width: 1200px; margin: 0 auto;">
-
-    <div style="text-align: center; margin-bottom: 3.5rem;">
-      <div style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.75rem;">Our Markets</div>
-      <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 400; color: #f5f0e8; line-height: 1.1;">
-        Carriers We <em style="font-style: italic; color: #e2c99a;">Work With</em>
-      </h2>
-      <p style="color: #7a7568; max-width: 480px; margin: 1rem auto 0; font-size: 0.9rem; line-height: 1.7;">
-        Real market access means better options for you. We are appointed with and have access to A rated carriers across commercial, trucking, and property lines.
-      </p>
-    </div>
-
-    <!-- Carrier Grid -->
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,169,110,0.12); border: 1px solid rgba(201,169,110,0.12);">
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Commercial Trucking</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Progressive Commercial</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Direct appointment. General freight, hotshot, long haul, and fleet programs.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Workers' Compensation</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Employers Assurance</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Workers comp for small to mid size commercial accounts across Georgia and Florida.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">BOP / GL / Commercial</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Coterie Insurance</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Small business BOP and general liability. Fast digital binding for eligible classes.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Habitational / Commercial Property</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Spinnaker Insurance</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Multifamily and habitational commercial property programs in Georgia and Florida.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111810'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Landlord / Rental Property</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">REInsurePro / NREIG</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Investor focused DP3 and landlord programs. Portfolio pricing available for multiple properties.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Workers' Compensation</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">AmTrust Financial</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">WC for a broad range of commercial classes including healthcare, nonprofits, and services.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Landlord / SFR Rental</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Steadily Insurance</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Digital first landlord insurance platform. Fast quoting for SFR and small multifamily.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Landlord / Real Estate Investors</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">Obie Insurance</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Real estate investor focused landlord coverage. Competitive rates and streamlined underwriting.</div>
-      </div>
-
-      <div style="background: #111110; padding: 2rem 2.5rem; transition: background 0.2s;" onmouseover="this.style.background='#181815'" onmouseout="this.style.background='#111110'">
-        <div style="font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.5rem;">Habitational / Multifamily</div>
-        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: #f5f0e8; margin-bottom: 0.4rem;">CrossCover</div>
-        <div style="font-size: 0.82rem; color: #7a7568;">Habitational and multifamily property programs for apartments and investor portfolios.</div>
-      </div>
-
-    </div>
-
-    <p style="text-align: center; color: #7a7568; font-size: 0.82rem; margin-top: 2rem; letter-spacing: 0.04em;">
-      Plus additional markets through our aggregator network. Don't see your line? <a href="quote.html" style="color: #c9a96e; text-decoration: none;">Ask us</a> and we will find it.
-    </p>
-
-  </div>
-</section>
   <div class="section-divider"></div>
 
+  <!-- CARRIERS -->
+  <section class="carriers-section" id="carriers">
+    <div class="container">
+      <div class="carriers-header reveal">
+        <div class="section-label">Our Markets</div>
+        <h2 class="section-title">Carriers We <em>Work With</em></h2>
+        <div class="ornament"><span></span></div>
+        <p class="section-desc center">Real market access means better options for you. We are appointed with and have access to A rated carriers across commercial, trucking, and property lines.</p>
+      </div>
+      <div class="carriers-grid">
+        <div class="carrier-card">
+          <div class="carrier-line">Commercial Trucking</div>
+          <div class="carrier-name">Progressive Commercial</div>
+          <div class="carrier-desc">Direct appointment. General freight, hotshot, long haul, and fleet programs.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Workers Compensation</div>
+          <div class="carrier-name">Employers Assurance</div>
+          <div class="carrier-desc">Workers comp for small to mid size commercial accounts across Georgia and Florida.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">BOP / GL / Commercial</div>
+          <div class="carrier-name">Coterie Insurance</div>
+          <div class="carrier-desc">Small business BOP and general liability. Fast digital binding for eligible classes.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Habitational / Commercial Property</div>
+          <div class="carrier-name">Spinnaker Insurance</div>
+          <div class="carrier-desc">Multifamily and habitational commercial property programs in Georgia and Florida.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Landlord / Rental Property</div>
+          <div class="carrier-name">REInsurePro / NREIG</div>
+          <div class="carrier-desc">Investor focused DP3 and landlord programs. Portfolio pricing available for multiple properties.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Workers Compensation</div>
+          <div class="carrier-name">AmTrust Financial</div>
+          <div class="carrier-desc">WC for a broad range of commercial classes including healthcare, nonprofits, and services.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Landlord / SFR Rental</div>
+          <div class="carrier-name">Steadily Insurance</div>
+          <div class="carrier-desc">Digital first landlord insurance platform. Fast quoting for SFR and small multifamily.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Landlord / Real Estate Investors</div>
+          <div class="carrier-name">Obie Insurance</div>
+          <div class="carrier-desc">Real estate investor focused landlord coverage. Competitive rates and streamlined underwriting.</div>
+        </div>
+        <div class="carrier-card">
+          <div class="carrier-line">Habitational / Multifamily</div>
+          <div class="carrier-name">CrossCover</div>
+          <div class="carrier-desc">Habitational and multifamily property programs for apartments and investor portfolios.</div>
+        </div>
+      </div>
+      <p class="carriers-note">Plus additional markets through our aggregator network. Don't see your line? <a href="quote.html">Ask us</a> and we will find it.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
       <div class="about-grid">
@@ -546,7 +557,6 @@
           </ul>
           <a href="quote.html" class="btn-primary">Get Your Free Quote</a>
         </div>
-
         <div class="about-visual reveal">
           <div class="about-image-box">
             <div class="about-monogram"><span>P</span></div>
@@ -560,6 +570,7 @@
 
   <div class="section-divider"></div>
 
+  <!-- TEAM -->
   <section class="team" id="team">
     <div class="container">
       <div class="services-header reveal">
@@ -568,7 +579,6 @@
         <div class="ornament"><span></span></div>
         <p class="section-desc center">Dedicated to exceptional service and tailored protection.</p>
       </div>
-
       <div class="team-inner reveal">
         <div class="team-avatar">DB</div>
         <h3>Derrick Brown</h3>
@@ -580,6 +590,7 @@
 
   <div class="section-divider"></div>
 
+  <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="testimonials-header reveal">
@@ -587,7 +598,6 @@
         <h2 class="section-title">Words from Our <em>Clients</em></h2>
         <div class="ornament"><span></span></div>
       </div>
-
       <div class="testimonials-grid reveal-stagger">
         <div class="testimonial-card reveal">
           <div class="testimonial-quote">&ldquo;</div>
@@ -600,10 +610,9 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card reveal">
           <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache&mdash;until I found Pinnacle. Derrick understood our unique needs.</p>
+          <p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache until I found Pinnacle. Derrick understood our unique needs.</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">MT</div>
             <div>
@@ -612,7 +621,6 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card reveal">
           <div class="testimonial-quote">&ldquo;</div>
           <p class="testimonial-text">Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p>
@@ -630,6 +638,7 @@
 
   <div class="section-divider"></div>
 
+  <!-- CONTACT -->
   <section class="contact-bar" id="contact">
     <div class="container">
       <div class="contact-header reveal">
@@ -638,20 +647,17 @@
         <div class="ornament"><span></span></div>
         <p class="section-desc center">Ready to discuss your insurance needs? We&rsquo;re here to help protect your business.</p>
       </div>
-
       <div class="contact-grid">
         <div class="contact-item reveal">
           <div class="contact-icon">&#9742;</div>
           <h4>Direct Line</h4>
           <a href="tel:+19432393439">(943) 239-3439</a>
         </div>
-
         <div class="contact-item reveal">
           <div class="contact-icon">&#9993;</div>
           <h4>Email</h4>
           <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>
         </div>
-
         <div class="contact-item reveal">
           <div class="contact-icon">&#9906;</div>
           <h4>Service Areas</h4>
@@ -661,6 +667,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -668,17 +675,16 @@
           <a href="/" class="logo"><div class="logo-icon">P</div>Pinnacle<span>Risk Advisors</span></a>
           <p class="footer-desc">A modern approach to commercial insurance. Personalized protection for businesses across Georgia and Florida.</p>
         </div>
-
         <div>
           <h5 class="footer-heading">Services</h5>
           <ul class="footer-links">
             <li><a href="#services">Commercial Insurance</a></li>
             <li><a href="#services">Property Insurance</a></li>
-            <li><a href="#services">Casualty Insurance</a></li>
-            <li><a href="#services">Trucking Insurance</a></li>
+            <li><a href="landlord.html">Landlord Insurance</a></li>
+            <li><a href="trucking.html">Trucking Insurance</a></li>
+            <li><a href="#services">Workers Compensation</a></li>
           </ul>
         </div>
-
         <div>
           <h5 class="footer-heading">Company</h5>
           <ul class="footer-links">
@@ -688,7 +694,6 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-
         <div>
           <h5 class="footer-heading">Contact</h5>
           <ul class="footer-links">
@@ -697,13 +702,10 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p class="footer-copy">
           &copy; 2026 Pinnacle Risk Advisors LLC. All rights reserved.<br>
-          <span style="color:#666;font-size:.72rem;">
-            Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.
-          </span>
+          <span style="color:#666;font-size:.72rem;">Coverage is subject to underwriting approval. Not all coverages available in all states. License information available upon request.</span>
         </p>
         <div class="footer-legal">
           <a href="privacy-policy.html">Privacy Policy</a>
@@ -719,16 +721,13 @@
   </footer>
 
   <script>
-    // Header scroll state
     var header = document.getElementById('header');
     window.addEventListener('scroll', function () {
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ✅ iOS-safe mobile menu overlay + scroll lock
     var menuToggle = document.getElementById('menuToggle'),
-        mainNav = document.getElementById('mainNav');
-
+        mainNav    = document.getElementById('mainNav');
     var _scrollY = 0;
 
     function lockScroll() {
@@ -739,7 +738,6 @@
       document.body.style.right = '0';
       document.body.style.width = '100%';
     }
-
     function unlockScroll() {
       document.body.style.position = '';
       document.body.style.top = '';
@@ -748,7 +746,6 @@
       document.body.style.width = '';
       window.scrollTo(0, _scrollY);
     }
-
     function closeMenu() {
       menuToggle.classList.remove('active');
       mainNav.classList.remove('open');
@@ -756,7 +753,6 @@
       menuToggle.setAttribute('aria-expanded', 'false');
       unlockScroll();
     }
-
     function openMenu() {
       menuToggle.classList.add('active');
       mainNav.classList.add('open');
@@ -764,39 +760,21 @@
       menuToggle.setAttribute('aria-expanded', 'true');
       lockScroll();
     }
-
     menuToggle.addEventListener('click', function () {
-      var isOpen = mainNav.classList.contains('open');
-      if (isOpen) closeMenu();
-      else openMenu();
+      mainNav.classList.contains('open') ? closeMenu() : openMenu();
     });
-
-    mainNav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', closeMenu);
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mainNav.classList.contains('open')) closeMenu();
-    });
-
-    // Close if user taps outside the nav/toggle while open (kept, iOS-safe)
+    mainNav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
     document.addEventListener('click', function (e) {
       if (!mainNav.classList.contains('open')) return;
-      var clickedToggle = menuToggle.contains(e.target);
-      var clickedNav = mainNav.contains(e.target);
-      if (!clickedToggle && !clickedNav) closeMenu();
+      if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) closeMenu();
     });
 
-    // Reveal animations
     var ro = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          ro.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
     document.querySelectorAll('.reveal').forEach(function (el) { ro.observe(el); });
   </script>
 </body>
