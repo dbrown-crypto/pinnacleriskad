@@ -181,19 +181,54 @@
     .footer-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
 
+    /* HAMBURGER */
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; background: none; border: none; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { color: var(--cream); text-decoration: none; font-family: var(--font-serif); font-size: 2rem; font-weight: 400; }
+    .nav-mobile a:hover { color: var(--gold); }
+    .nav-mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--cream); font-size: 2rem; cursor: pointer; }
+
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .hero, section, .cta-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .hero { padding: 7rem 1.5rem 3rem; min-height: auto; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .hero-sub { font-size: 0.95rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { text-align: center; }
+      .hero-tags { gap: 0.5rem; }
+      section { padding: 4rem 1.5rem; }
       .ops-grid { grid-template-columns: 1fr; }
       .cov-grid { grid-template-columns: 1fr; }
       .mc-section { grid-template-columns: 1fr; gap: 2rem; }
       .why-grid { grid-template-columns: 1fr 1fr; }
+      .cta-banner { padding: 4rem 1.5rem; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .cta-actions a { text-align: center; width: 100%; max-width: 320px; }
       footer { padding: 2rem 1.5rem; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
     }
+
     @media (max-width: 600px) {
+      .hero { padding: 6rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+      .hero-eyebrow { font-size: 0.65rem; }
+      section { padding: 3rem 1.2rem; }
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+      .ops-card { padding: 2rem 1.5rem; }
+      .cov-card { padding: 1.8rem; }
       .why-grid { grid-template-columns: 1fr; }
+      .mc-box { padding: 1.8rem; }
+      .tag { font-size: 0.7rem; padding: 0.35rem 0.8rem; }
+      .btn-primary, .btn-outline { padding: 0.85rem 1.8rem; font-size: 0.78rem; }
+      .cta-banner h2 { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+      footer { padding: 1.8rem 1.2rem; }
+      .footer-legal { font-size: 0.72rem; }
     }
   </style>
 </head>
@@ -214,7 +249,20 @@
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <a href="quote.html" class="nav-cta">Get a Quote</a>
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="nav-mobile" id="mobileNav">
+    <button class="nav-mobile-close" onclick="document.getElementById('mobileNav').classList.remove('open')">&times;</button>
+    <a href="index.html" onclick="document.getElementById('mobileNav').classList.remove('open')">Home</a>
+    <a href="index.html#services" onclick="document.getElementById('mobileNav').classList.remove('open')">Services</a>
+    <a href="index.html#about" onclick="document.getElementById('mobileNav').classList.remove('open')">About</a>
+    <a href="index.html#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
+    <a href="quote.html" style="color: var(--gold);">Get a Quote</a>
+  </div>
 
   <section class="hero" id="home">
     <div class="hero-eyebrow">Commercial Trucking Insurance</div>
