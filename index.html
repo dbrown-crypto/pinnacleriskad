@@ -142,8 +142,31 @@
     a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
     /* ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ HEADER ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+        .sticky-phone-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1100;
+      background: #0d1b2a;
+      color: #fff;
+      text-align: center;
+      padding: 8px 20px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .sticky-phone-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+    .sticky-phone-bar a:hover { color: var(--gold-light); }
+
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 36px; left: 0; right: 0; z-index: 1000;
       background: rgba(10, 10, 10, 0.88);
       backdrop-filter: blur(24px) saturate(1.2);
       -webkit-backdrop-filter: blur(24px) saturate(1.2);
