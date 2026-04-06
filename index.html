@@ -509,7 +509,150 @@
       .hero-lead-form-row { grid-template-columns: 1fr; }
       .hero-lead-form { padding: 20px 16px; }
     }
-      </style>
+      
+    /* ============================================
+       MOBILE FIXES
+       ============================================ */
+
+    /* 1. Fix hero padding to clear sticky bar + fixed header */
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 130px;
+        padding-bottom: 60px;
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding-top: 120px;
+        padding-bottom: 48px;
+      }
+    }
+
+    /* 2. Fix hero stats wrapping on small phones */
+    @media (max-width: 480px) {
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding-top: 24px;
+        margin-top: 40px;
+      }
+      .hero-stat {
+        min-width: 0;
+      }
+      .hero-stat strong {
+        font-size: 1.4rem;
+      }
+      .hero-stat span {
+        font-size: 0.65rem;
+      }
+    }
+
+    /* 3. Improve tiny font sizes on mobile */
+    @media (max-width: 768px) {
+      .section-label,
+      .hero-label {
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+      }
+      .carrier-line {
+        font-size: 0.7rem;
+      }
+      .service-tag {
+        font-size: 0.7rem;
+      }
+      .hero-lead-form-group label {
+        font-size: 0.72rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-label {
+        font-size: 0.68rem;
+      }
+      .btn-primary,
+      .btn-secondary {
+        padding: 16px 24px;
+        font-size: 0.75rem;
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+      }
+    }
+
+    /* 4. Hero lead form — better small-phone padding */
+    @media (max-width: 480px) {
+      .hero-lead-form {
+        padding: 18px 14px;
+        margin-left: -4px;
+        margin-right: -4px;
+      }
+    }
+
+    /* 5. Contact grid — remove 400px cap on mobile */
+    @media (max-width: 480px) {
+      .contact-grid {
+        max-width: 100%;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 6. Footer — intermediate 2-column step */
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    /* 7. Touch-friendly active states */
+    @media (hover: none) and (pointer: coarse) {
+      .service-card:active::before { transform: scaleX(1); }
+      .carrier-card:active { background: var(--black-elevated); }
+      .testimonial-card:active { border-color: rgba(201, 169, 78, 0.2); transform: translateY(-4px); }
+      .contact-item:active { border-color: rgba(201, 169, 78, 0.2); transform: translateY(-2px); }
+      nav a:active { color: var(--gold); }
+    }
+
+    /* 8. Tighter vertical spacing on very small phones */
+    @media (max-width: 400px) {
+      .services, .about, .team, .testimonials {
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+      .carriers-section {
+        padding-top: 48px;
+        padding-bottom: 48px;
+      }
+    }
+
+    /* 9. General mobile UX improvements */
+    @media (max-width: 768px) {
+      .section-desc { max-width: 100%; }
+      .sticky-phone-bar a {
+        display: inline-block;
+        padding: 4px 8px;
+        min-height: 44px;
+        line-height: 36px;
+      }
+      .service-link {
+        display: inline-block;
+        padding: 8px 0;
+        min-height: 44px;
+        line-height: 28px;
+      }
+    }
+  
+    </style>
 </head>
 
 <body>
@@ -622,7 +765,7 @@
           <a href="quote.html" class="service-link">Get Quote &rarr;</a>
         </div>
         <div class="service-card reveal" style="padding-top:0;overflow:hidden;">
-          <div style="height:180px;margin:0 0 24px 0;overflow:hidden;"><img src="commercial-building.jpg" alt="Landlord Property" style="width:100%;height:180px;object-fit:cover;display:block;border-radius:4px 4px 0 0;"></div>
+          <div style="height:180px;margin:0 0 24px 0;overflow:hidden;"><img src="commercial-building.jpg" alt="Landlord Property" style="width:100%;height:180px;object-fit:cover;display:block;border-radius:4px 4px 0 0;" loading="lazy"></div>
           <div class="service-number" style="padding-left:30px;">03</div>
           <h3>Landlord &amp; Rental Property</h3>
           <p>DP3 dwelling fire programs for absentee SFR landlords and rental property investors across Georgia and Florida.</p>
@@ -634,7 +777,7 @@
           <a href="landlord.html" class="service-link">Learn More &rarr;</a>
         </div>
         <div class="service-card reveal" style="padding-top:0;overflow:hidden;">
-          <div style="height:180px;margin:0 0 24px 0;overflow:hidden;"><img src="trucks-highway.jpg" alt="Trucking Insurance" style="width:100%;height:180px;object-fit:cover;display:block;border-radius:4px 4px 0 0;"></div>
+          <div style="height:180px;margin:0 0 24px 0;overflow:hidden;"><img src="trucks-highway.jpg" alt="Trucking Insurance" style="width:100%;height:180px;object-fit:cover;display:block;border-radius:4px 4px 0 0;" loading="lazy"></div>
           <div class="service-number" style="padding-left:30px;">04</div>
           <h3>Trucking Insurance</h3>
           <p>Specialized coverage for trucking operations including liability, cargo, and physical damage.</p>
@@ -940,7 +1083,6 @@
       document.body.style.right = '';
       document.body.style.width = '';
       window.scrollTo(0, _scrollY);
-    }
     function closeMenu() {
       menuToggle.classList.remove('active');
       mainNav.classList.remove('open');
