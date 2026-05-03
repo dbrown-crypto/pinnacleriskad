@@ -1014,7 +1014,47 @@
       }
     }
 
-  </style>
+  
+    /* =============================
+       PHASE 3: PINNACLE PROCESS
+       ============================= */
+    .pinnacle-process { padding: var(--section-pad) 0; background: var(--black-light); }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .process-step { background: var(--black-card); border: 1px solid rgba(201, 169, 78, 0.06); padding: 44px 30px 40px; transition: var(--transition); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .process-step::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-smooth); }
+    .process-step:hover { border-color: rgba(201, 169, 78, 0.15); transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.4), var(--shadow-gold); }
+    .process-step:hover::before { transform: scaleX(1); }
+    .process-number { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--gold); opacity: 0.25; line-height: 1; margin-bottom: 20px; }
+    .process-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 14px; line-height: 1.35; }
+    .process-desc { font-size: 0.92rem; color: var(--gray-400); line-height: 1.75; flex: 1; }
+
+    /* =============================
+       PHASE 3: FOUNDER SECTION
+       ============================= */
+    .founder-section { padding: var(--section-pad) 0; background: var(--black); }
+    .founder-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .founder-bio { font-size: 1.05rem; color: var(--gray-300); line-height: 1.85; margin-bottom: 36px; }
+    .founder-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .founder-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+    .founder-monogram { width: 140px; height: 140px; background: linear-gradient(135deg, var(--black-elevated), var(--gray-900)); border: 2px solid rgba(201, 169, 78, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
+    .founder-tagline { font-family: var(--font-accent); font-size: 1rem; font-style: italic; color: var(--gray-400); text-align: center; letter-spacing: 1px; }
+
+    /* RESPONSIVE: PHASE 3 */
+    @media (max-width: 1024px) {
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .founder-inner { gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .founder-inner { grid-template-columns: 1fr; gap: 40px; }
+      .founder-visual { order: -1; }
+      .founder-ctas { flex-direction: column; }
+      .founder-ctas .btn-primary, .founder-ctas .btn-secondary { text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .process-step { padding: 32px 22px 28px; }
+    }
+</style>
 </head>
 
 <body>
@@ -1360,6 +1400,43 @@
 
   <div class="section-divider"></div>
 
+  <!-- THE PINNACLE PROCESS -->
+  <section class="pinnacle-process" id="pinnacle-process">
+    <div class="container">
+      <div class="services-header reveal">
+        <div class="section-label">How We Work</div>
+        <h2 class="section-title">The <em>Pinnacle Process</em></h2>
+        <div class="ornament"><span>&#8212;</span></div>
+        <p class="section-desc center">We collect what carriers need upfront, match your risk to the right markets, and walk you through every step from quote to bind.</p>
+      </div>
+      <div class="process-grid reveal-stagger">
+        <div class="process-step reveal">
+          <div class="process-number">01</div>
+          <h3 class="process-title">Tell Us About the Risk</h3>
+          <p class="process-desc">We collect the information carriers need upfront so your quote does not get delayed.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">02</div>
+          <h3 class="process-title">We Shop the Right Markets</h3>
+          <p class="process-desc">We match your business, property, or trucking operation with markets that actually write that type of risk.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">03</div>
+          <h3 class="process-title">Review Clear Options</h3>
+          <p class="process-desc">We explain coverage, pricing, deductibles, exclusions, and gaps in plain language.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-number">04</div>
+          <h3 class="process-title">Bind With Confidence</h3>
+          <p class="process-desc">We help with certificates, filings, policy documents, and next steps after binding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
@@ -1393,76 +1470,76 @@
   <div class="section-divider"></div>
 
   <!-- TEAM -->
-  <section class="team" id="team">
+    <!-- MEET DERRICK BROWN -->
+  <section class="founder-section" id="founder">
     <div class="container">
-      <div class="services-header reveal">
-        <div class="section-label">Leadership</div>
-        <h2 class="section-title">Meet Your <em>Advisor</em></h2>
-        <div class="ornament"><span></span></div>
-        <p class="section-desc center">Direct commercial insurance guidance for landlords, trucking operators, and business owners across Georgia and Florida.</p>
-      </div>
-      <div class="team-inner reveal">
-        <img
-          src="https://placehold.co/200x200/131313/C9A94E?text=DB"
-          alt="Derrick Brown - Principal Agent at Pinnacle Risk Advisors"
-          width="200"
-          height="200"
-          style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; border: 2px solid var(--gold); display: block; margin: 0 auto 28px;"
-        >
-        <h3>Derrick Brown</h3>
-        <p class="team-role">Principal Agent</p>
-        <p class="team-bio">Founder of Pinnacle Risk Advisors, dedicated to providing personalized commercial insurance solutions across Georgia and Florida.</p>
+      <div class="founder-inner">
+        <div class="founder-content reveal">
+          <div class="section-label">Leadership</div>
+          <h2 class="section-title">Meet <em>Derrick Brown</em></h2>
+          <div class="gold-rule"></div>
+          <p class="founder-bio">Pinnacle Risk Advisors was built to give business owners, landlords, and trucking operators direct access to commercial insurance guidance without the runaround. My focus is helping clients understand their options, avoid coverage gaps, and move quickly when it is time to quote or bind coverage.</p>
+          <div class="founder-ctas">
+            <a href="tel:+19432393439" class="btn-primary">Call Derrick</a>
+            <a href="quote.html" class="btn-secondary">Start a Quote</a>
+          </div>
+        </div>
+        <div class="founder-visual reveal">
+          <div class="founder-monogram">DB</div>
+          <div class="founder-tagline">Founder &amp; Principal Advisor</div>
+        </div>
       </div>
     </div>
   </section>
 
   <div class="section-divider"></div>
 
-  <!-- TESTIMONIALS -->
+  <!-- HOW WE HELP CLIENTS -->
+  <!-- HOW WE HELP CLIENTS -->
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="testimonials-header reveal">
-        <div class="section-label">Client Testimonials</div>
-        <h2 class="section-title">Words from Our <em>Clients</em></h2>
-        <div class="ornament"><span></span></div>
+        <div class="section-label">How We Help Clients</div>
+        <h2 class="section-title">Guidance for <em>Real Business Risks</em></h2>
+        <div class="ornament"><span>&#8212;</span></div>
       </div>
       <div class="testimonials-grid reveal-stagger">
         <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">Pinnacle has transformed how we approach risk management. Their responsiveness makes them indispensable partners.</p>
+          <p class="testimonial-text">Rental property owners often need help understanding the difference between basic landlord coverage and DP3 policies. We walk through coverage details, explain what is and is not included, and make sure the quote process is clear from the start.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">RH</div>
+            <div class="testimonial-avatar">RP</div>
             <div>
-              <div class="testimonial-name">Robert Hansen</div>
-              <div class="testimonial-company">Hansen&rsquo;s Auto Repair</div>
+              <div class="testimonial-name">Rental Property Owner</div>
+              <div class="testimonial-company">Landlord Coverage</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">As a trucking company owner, finding the right insurance was always a headache until I found Pinnacle. Derrick understood our unique needs.</p>
+          <p class="testimonial-text">Trucking operators frequently need guidance on how liability, cargo, and physical damage coverage work together. We help clients understand what documents carriers require and what underwriters are looking for before a quote is submitted.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">MT</div>
+            <div class="testimonial-avatar">TO</div>
             <div>
-              <div class="testimonial-name">Marcus Thompson</div>
-              <div class="testimonial-company">Thompson Freight LLC</div>
+              <div class="testimonial-name">Trucking Operator</div>
+              <div class="testimonial-company">Commercial Auto &amp; Cargo</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">Finally, an insurance agent who actually picks up the phone! Pinnacle saved us money and made the whole process simple.</p>
+          <p class="testimonial-text">Small business owners benefit most from clear communication upfront. We identify what is needed before the quoting process begins so there are no surprises, and we stay available to walk through options and answer questions throughout.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">SJ</div>
+            <div class="testimonial-avatar">SB</div>
             <div>
-              <div class="testimonial-name">Sandra Johnson</div>
-              <div class="testimonial-company">Peachtree Bakery</div>
+              <div class="testimonial-name">Small Business Owner</div>
+              <div class="testimonial-company">Commercial Coverage</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+
+
 
   <div class="section-divider"></div>
 
