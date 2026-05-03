@@ -4,52 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pinnacle Risk Advisors</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="hero">
-            <h1>Commercial Insurance for Landlords, Truckers, and Business Owners in Georgia &amp; Florida</h1>
-            <p>We help property owners, trucking operators, and small businesses compare coverage options from multiple markets so they can protect what they've built without the guesswork.</p>
-        </div>
-        <section class="who-we-help">
-            <h2>Who We Help Best</h2>
+        <h1>Commercial Insurance for Landlords, Truckers, and Business Owners in Georgia &amp; Florida</h1>
+        <p class="hero-desc">We help property owners, trucking operators, and small businesses compare coverage options from multiple markets so they can protect what they've built without the guesswork.</p>
+    </header>
+    
+    <section class="who-we-help best">
+        <h2>Who We Help Best</h2>
+        <div class="card-container">
             <div class="card">
                 <h3>Rental Property Owners</h3>
-                <p>Description of services.</p>
+                <p>We understand the unique needs of rental property owners and provide tailored insurance solutions.</p>
             </div>
             <div class="card">
                 <h3>Trucking Operators</h3>
-                <p>Description of services.</p>
+                <p>Our services help trucking operators navigate insurance options to ensure coverage on the road.</p>
             </div>
             <div class="card">
                 <h3>Commercial Property Owners</h3>
-                <p>Description of services.</p>
+                <p>Protect your commercial properties with our comprehensive insurance plans designed for business owners.</p>
             </div>
             <div class="card">
                 <h3>Small Business Owners</h3>
-                <p>Description of services.</p>
+                <p>We help small businesses safeguard their investments with customized insurance solutions.</p>
             </div>
-        </section>
-        <section class="quote-need">
-            <h2>What We Need to Quote You</h2>
+        </div>
+    </section>
+    
+    <section class="quote-checklist">
+        <h2>What We Need to Quote You</h2>
+        <div class="checklist-container">
             <div class="checklist-card">
                 <h3>Trucking Insurance Quote Checklist</h3>
-                <p>Description of requirements.</p>
+                <ul>
+                    <li>Driver licenses for all drivers and owners</li>
+                    <li>VINs for all vehicles</li>
+                    <li>Current policy or declarations page if available</li>
+                    <li>DOT and MC number if applicable</li>
+                    <li>Type of freight hauled</li>
+                    <li>Radius of travel</li>
+                    <li>Loss runs if available</li>
+                </ul>
             </div>
             <div class="checklist-card">
                 <h3>Landlord Insurance Quote Checklist</h3>
-                <p>Description of requirements.</p>
+                <ul>
+                    <li>Property address</li>
+                    <li>Year built</li>
+                    <li>Square footage</li>
+                    <li>Current policy or declarations page if available</li>
+                    <li>Occupancy status</li>
+                    <li>Rental income</li>
+                    <li>Any prior losses</li>
+                    <li>Desired effective date</li>
+                </ul>
             </div>
-        </section>
-    </header>
-    <footer>
-        <div class="mobile-cta">
-            <a href="tel:+19432393439">Call</a>
-            <a href="sms:+19432393439">Text</a>
-            <a href="quote.html">Start Quote</a>
         </div>
-    </footer>
-    <script src="script.js"></script>
+    </section>
+    
+    <div class="mobile-sticky-cta">
+        <a href="tel:9432393439">Call</a>
+        <a href="sms:9432393439">Text</a>
+        <a href="quote.html">Start Quote</a>
+    </div>
+        
+    <style>
+        :root {
+            --black: #000;
+            --gold: #FFD700;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--black);
+        }
+
+        .hero-desc {
+            font-size: 1.5em;
+            color: var(--gold);
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: var(--gold);
+            border: 1px solid var(--black);
+            margin: 10px;
+            padding: 20px;
+            width: calc(23% - 20px);
+        }
+
+        .checklist-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .checklist-card {
+            border: 1px solid var(--black);
+            margin: 10px;
+            padding: 20px;
+            width: calc(48% - 20px);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-sticky-cta {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                background: var(--black);
+                color: var(--gold);
+                padding: 10px 0;
+            }
+
+            .card {
+                width: calc(48% - 20px);
+            }
+            .checklist-card {
+                width: 100%;
+            }
+        }
+    </style>
 </body>
 </html>
