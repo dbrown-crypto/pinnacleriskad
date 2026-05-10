@@ -571,26 +571,50 @@ async function lookupDOT() {
   errorBox.textContent = '';
   resultBox.classList.remove('show');
   var fmcsaUrl = 'https://mobile.fmcsa.dot.gov/qc/services/carriers/' + dot + '?webKey=' + FMCSA_WEB_KEY;
-  async function fetchViaProxy(proxyUrl, parseResponse) {
+  async function tryProxy(proxyUrl, parseResponse) {
     var res = await fetch(proxyUrl, { headers: { 'Accept': 'application/json' } });
-    if (!res.ok) throw new Error('Proxy error ' + res.status);
-    return parseResponse(await res.json());
+    var text = await res.text();
+    if (text.trim().startsWith('<')) throw new Error('Proxy returned HTML');
+    var parsed = JSON.parse(text);
+    var result = parseResponse(parsed);
+    if (!result || typeof result !== 'object') throw new Error('Invalid response structure');
+    return result;
   }
   try {
     var json;
-    // Try primary proxy first
-    try {
-      json = await fetchViaProxy(
-        'https://api.allorigins.win/get?url=' + encodeURIComponent(fmcsaUrl),
-        function(data) { return JSON.parse(data.contents); }
-      );
-    } catch(e1) {
-      // Fallback to secondary proxy
-      json = await fetchViaProxy(
-        'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(fmcsaUrl),
-        function(data) { return data; }
-      );
+    var proxies = [
+      {
+        url: 'https://api.allorigins.win/get?url=' + encodeURIComponent(fmcsaUrl),
+        parse: function(data) {
+          var c = data.contents;
+          if (!c || c.trim().startsWith('<')) throw new Error('allorigins returned HTML');
+          return JSON.parse(c);
+        }
+      },
+      {
+        url: 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(fmcsaUrl),
+        parse: function(data) { return data; }
+      },
+      {
+        url: 'https://corsproxy.io/?' + encodeURIComponent(fmcsaUrl),
+        parse: function(data) { return data; }
+      }
+    ];
+    var lastErr = null;
+    for (var pi = 0; pi < proxies.length; pi++) {
+      try {
+        var res2 = await fetch(proxies[pi].url, { headers: { 'Accept': 'application/json' } });
+        var text2 = await res2.text();
+        if (text2.trim().startsWith('<')) { lastErr = new Error('Proxy ' + pi + ' returned HTML'); continue; }
+        var parsed2 = JSON.parse(text2);
+        json = proxies[pi].parse(parsed2);
+        break;
+      } catch(pe) {
+        lastErr = pe;
+        continue;
+      }
     }
+    if (!json) throw lastErr || new Error('All proxies failed');
     var c = json && json.content && json.content.carrier;
     if (!c) throw new Error('No carrier record found for DOT ' + dot);
     var fields = [];
