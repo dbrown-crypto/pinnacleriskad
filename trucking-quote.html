@@ -516,7 +516,7 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
     console.error('Form submission error:',err);
   }
 });
-const lastSubmissionData={};
+var lastSubmissionData={};
 function redownloadPDF(){if(Object.keys(lastSubmissionData).length>0){generateSubmissionPDF(lastSubmissionData);}}
 function generateSubmissionPDF(d){
   var today=new Date();
