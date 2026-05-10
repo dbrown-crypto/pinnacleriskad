@@ -284,7 +284,7 @@ footer a:hover{color:var(--gold);}
               <div class="field"><label>Model</label><input type="text" name="v1_model" placeholder="e.g. Cascadia"></div>
               <div class="field"><label>GVW (lbs)</label><input type="text" name="v1_gvw" placeholder="e.g. 80,000"></div>
               <div class="field span-2"><label>Vehicle Type</label><select name="v1_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>
-              <div class="field span-2"><label>VIN &#9670;</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character vehicle identification number" maxlength="17" oninput="onVinInput(this,'v1')"><button type="button" class="vin-decode-btn" id="v1_vin_btn" onclick="decodeVIN('v1')">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
+              <div class="field span-2"><label>VIN &#9670;</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character vehicle identification number" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="onVinPaste(this,'v1')" onchange="onVinInput(this,'v1')"><button type="button" class="vin-decode-btn" id="v1_vin_btn" onclick="decodeVIN('v1')">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
               <div class="field span-2"><label>Stated Value</label><input type="text" name="v1_value" placeholder="e.g. $85,000"><span class="hint">Approximate current market value of this unit</span></div>
               <div class="field"><label>Garaging ZIP</label><input type="text" name="v1_zip" placeholder="ZIP code" maxlength="5"></div>
               <div class="field"><label>Comp &amp; Collision?</label><div class="toggle-group" data-name="v1_comp_collision"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="v1_comp_collision" value=""></div>
@@ -416,7 +416,7 @@ document.getElementById('add-vehicle').addEventListener('click',function(){
     '<div class="field"><label>GVW (lbs)</label><input type="text" name="v'+n+'_gvw" placeholder="e.g. 80,000"></div>'+
     '<div class="field span-2"><label>Vehicle Type</label><select name="v'+n+'_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>'+
     '<div class="field span-2"><label>VIN</label><div class="vin-decode-wrap">'+
-    '<input type="text" name="v'+n+'_vin" id="v'+n+'_vin" placeholder="17-character vehicle identification number" maxlength="17" oninput="onVinInput(this,\'v'+n+'\')">'+
+    '<input type="text" name="v'+n+'_vin" id="v'+n+'_vin" placeholder="17-character vehicle identification number" maxlength="17" oninput="onVinInput(this,\'v'+n+'\') " onpaste="onVinPaste(this,\'v'+n+'\') " onchange="onVinInput(this,\'v'+n+'\')">'
     '<button type="button" class="vin-decode-btn" id="v'+n+'_vin_btn" onclick="decodeVIN(\'v'+n+'\')">Decode VIN</button>'+
     '<div class="vin-result" id="v'+n+'_vin_result"></div></div></div>'+
     '<div class="field span-2"><label>Stated Value</label><input type="text" name="v'+n+'_value" placeholder="e.g. $85,000"></div>'+
@@ -568,10 +568,13 @@ async function lookupDOT(){
   btn.textContent='Looking up\u2026';btn.disabled=true;
   errorBox.textContent='';resultBox.classList.remove('show');
   try{
-    var url='https://mobile.fmcsa.dot.gov/qc/services/carriers/'+dot+'?webKey='+FMCSA_WEB_KEY;
-    var res=await fetch(url);
-    if(!res.ok)throw new Error('Status '+res.status);
-    var json=await res.json();
+    var fmcsaUrl='https://mobile.fmcsa.dot.gov/qc/services/carriers/'+dot+'?webKey='+FMCSA_WEB_KEY;
+    var proxyUrl='https://api.allorigins.win/get?url='+encodeURIComponent(fmcsaUrl);
+    var res=await fetch(proxyUrl);
+    if(!res.ok)throw new Error('Proxy request failed with status '+res.status);
+    var wrapper=await res.json();
+    if(!wrapper||!wrapper.contents)throw new Error('No response from carrier lookup service');
+    var json=JSON.parse(wrapper.contents);
     var c=json&&json.content&&json.content.carrier;
     if(!c)throw new Error('No carrier record found for DOT '+dot);
     var fields=[];
@@ -608,9 +611,16 @@ document.getElementById('usdot-input').addEventListener('keydown',function(e){
 function onVinInput(input,prefix){
   var btn=document.getElementById(prefix+'_vin_btn');
   var result=document.getElementById(prefix+'_vin_result');
-  var val=input.value.trim();
-  if(btn)btn.classList.toggle('show',val.length===17);
-  if(result){result.classList.remove('show');result.textContent='';}
+  var val=input.value.trim().toUpperCase();
+  input.value=val;
+  if(btn){
+    btn.classList.toggle('show',val.length===17);
+    if(val.length===17){setTimeout(function(){decodeVIN(prefix);},300);}
+  }
+  if(result&&val.length<17){result.classList.remove('show');result.textContent='';}
+}
+function onVinPaste(input,prefix){
+  setTimeout(function(){onVinInput(input,prefix);},100);
 }
 async function decodeVIN(prefix){
   var vinInput=document.getElementById(prefix+'_vin');
