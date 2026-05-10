@@ -168,6 +168,10 @@ footer a:hover{color:var(--gold);}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function() { emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); })();
+</script>
 </head>
 <body>
 <nav>
@@ -284,7 +288,7 @@ footer a:hover{color:var(--gold);}
               <div class="field"><label>Model</label><input type="text" name="v1_model" placeholder="e.g. Cascadia"></div>
               <div class="field"><label>GVW (lbs)</label><input type="text" name="v1_gvw" placeholder="e.g. 80,000"></div>
               <div class="field span-2"><label>Vehicle Type</label><select name="v1_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>
-              <div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="setTimeout(function(){onVinInput(document.getElementById('v1_vin'),'v1')},50)"><button type="button" class="vin-decode-btn show" id="v1_vin_btn" onclick="decodeVIN('v1')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
+              <div class="field span-2"><label>VIN â</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="setTimeout(function(){onVinInput(document.getElementById('v1_vin'),'v1')},50)"><button type="button" class="vin-decode-btn show" id="v1_vin_btn" onclick="decodeVIN('v1')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
               <div class="field span-2"><label>Stated Value</label><input type="text" name="v1_value" placeholder="e.g. $85,000"><span class="hint">Approximate current market value of this unit</span></div>
               <div class="field"><label>Garaging ZIP</label><input type="text" name="v1_zip" placeholder="ZIP code" maxlength="5"></div>
               <div class="field"><label>Comp &amp; Collision?</label><div class="toggle-group" data-name="v1_comp_collision"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="v1_comp_collision" value=""></div>
@@ -415,7 +419,7 @@ document.getElementById('add-vehicle').addEventListener('click',function(){
     '<div class="field"><label>Model</label><input type="text" name="v'+n+'_model" placeholder="e.g. Cascadia"></div>'+
     '<div class="field"><label>GVW (lbs)</label><input type="text" name="v'+n+'_gvw" placeholder="e.g. 80,000"></div>'+
     '<div class="field span-2"><label>Vehicle Type</label><select name="v'+n+'_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>'+
-    '<div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap">' +
+    '<div class="field span-2"><label>VIN â</label><div class="vin-decode-wrap">' +
     '<input type="text" name="v'+n+'_vin" id="v'+n+'_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,\'v'+n+'\')" onpaste="setTimeout(function(){onVinInput(document.getElementById(\'v'+n+'_vin\'),\'v'+n+'\')},50)">' +
     '<button type="button" class="vin-decode-btn show" id="v'+n+'_vin_btn" onclick="decodeVIN(\'v'+n+'\')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button>' +
     '<div class="vin-result" id="v'+n+'_vin_result"></div>' +
@@ -478,7 +482,7 @@ const FORMSPREE_URL='https://formspree.io/f/xykobeqa';
 document.getElementById('truckingQuoteForm').addEventListener('submit',async function(e){
   e.preventDefault();
   var btn=document.getElementById('submit-btn');
-  btn.textContent='Submitting…';btn.disabled=true;
+  btn.textContent='Submittingâ¦';btn.disabled=true;
   var formData=new FormData(this);var data={};
   formData.forEach(function(val,key){
     if(val instanceof File)return;
@@ -553,8 +557,150 @@ function generateSubmissionPDF(d){
   '<div class="footer"><div class="footer-left"><b>Pinnacle Risk Advisors LLC</b><br>Georgia &middot; Florida &middot; South Carolina &middot; Texas<br>(943) 239-3439 &middot; dbrown@pinnacleriskad.com &middot; pinnacleriskad.com</div><div class="footer-right">This document is confidential and intended solely for the named underwriter. Submission does not bind coverage. All information is subject to verification and underwriting approval.</div></div>'+
   '</body></html>';
   var opt={margin:[0,0,0,0],filename:safeFileName,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,logging:false},jsPDF:{unit:'mm',format:'letter',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}};
-  html2pdf().set(opt).from(html).save();
+  var element = document.createElement('div');
+  element.innerHTML = html;
+  document.body.appendChild(element);
+  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+    // Download to browser
+    pdf.save(safeFileName);
+    // Convert to Blob and email to agent
+    var pdfBlob = new Blob([pdf.output('arraybuffer')], { type: 'application/pdf' });
+    sendPDFByEmail(lastSubmissionData, pdfBlob);
+  }).catch(function(err) {
+    console.error('PDF generation error:', err);
+  }).finally(function() {
+    if (document.body.contains(element)) {
+      document.body.removeChild(element);
+    }
+  });
 }
+
+/* ──────────────────────────────────────────────────
+   EMAILJS — SEND PDF TO AGENT INBOX
+
+   Service:  service_mefkv18
+
+   Template: template_fc0ufgx
+
+   Note: EmailJS free plan supports attachments up to
+
+   50KB. If PDF exceeds this the email body still
+
+   delivers and agent can use Download PDF Again button.
+
+────────────────────────────────────────────────── */
+
+var EMAILJS_SERVICE_ID  = 'service_mefkv18';
+
+var EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
+
+async function sendPDFByEmail(data, pdfBlob) {
+
+  try {
+
+    var base64PDF = await new Promise(function(resolve, reject) {
+
+      var reader = new FileReader();
+
+      reader.onload  = function() { resolve(reader.result.split(',')[1]); };
+
+      reader.onerror = reject;
+
+      reader.readAsDataURL(pdfBlob);
+
+    });
+
+    var covs = [];
+
+    if (data.cov_auto_liability     === 'Yes') covs.push('Auto Liability');
+
+    if (data.cov_physical_damage    === 'Yes') covs.push('Physical Damage');
+
+    if (data.cov_cargo              === 'Yes') covs.push('Motor Truck Cargo');
+
+    if (data.cov_general_liability  === 'Yes') covs.push('General Liability');
+
+    if (data.cov_bobtail            === 'Yes') covs.push('Bobtail / NTL');
+
+    if (data.cov_trailer_interchange=== 'Yes') covs.push('Trailer Interchange');
+
+    if (data.cov_workers_comp       === 'Yes') covs.push('Workers Comp');
+
+    if (data.cov_occ_accident       === 'Yes') covs.push('Occupational Accident');
+
+    if (data.cov_excess             === 'Yes') covs.push('Excess / Umbrella');
+
+    var templateParams = {
+
+      business_name:       data.business_name       || 'Not provided',
+
+      contact_name:        data.contact_name        || 'Not provided',
+
+      phone:               data.phone               || 'Not provided',
+
+      email:               data.email               || 'Not provided',
+
+      usdot:               data.usdot               || 'Not provided',
+
+      mc_number:           data.mc_number           || 'Not provided',
+
+      authority_status:    data.authority_status    || 'Not provided',
+
+      operation_type:      data.operation_type      || 'Not provided',
+
+      cargo_type:          data.cargo_type          || 'Not provided',
+
+      haul_radius:         data.haul_radius         || 'Not provided',
+
+      states_of_operation: data.states_of_operation || 'Not provided',
+
+      prior_coverage:      data.prior_coverage      || 'Not provided',
+
+      prior_carrier:       data.prior_carrier       || 'Not provided',
+
+      power_unit_count:    data.power_unit_count    || 'Not provided',
+
+      driver_count:        data.driver_count        || 'Not provided',
+
+      coverages_summary:   covs.length > 0 ? covs.join(', ') : 'None selected',
+
+      notes:               data.notes               || 'None',
+
+      files_noted:         data.files_noted         || 'No files uploaded',
+
+      lead_source:         data.lead_source         || 'Website Trucking Quote Page',
+
+      submitted_at:        data.submitted_at        || new Date().toISOString(),
+
+      pdf_attachment:      base64PDF,
+
+      pdf_name:            'Pinnacle-Trucking-Submission-' + (data.business_name || 'Unknown').replace(/[^a-z0-9]/gi,'_') + '.pdf'
+
+    };
+
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+
+    console.log('Carrier submission PDF emailed to dbrown@pinnacleriskad.com');
+
+  } catch (err) {
+
+    console.error('EmailJS error:', err);
+
+    // Silent fail — customer experience is not interrupted
+
+    // Agent can still use Download PDF Again button on success screen
+
+  }
+
+}
+
+/* ──────────────────────────────────────────────────
+
+   CONFIGURATION
+
+   FMCSA key is active. NHTSA VIN decoder needs no key.
+
+────────────────────────────────────────────────── */
 
 FMCSA_WEB_KEY='311d231f2053b66d7f2d499fec6efcce6920de93';
 async function lookupDOT() {
@@ -566,7 +712,7 @@ async function lookupDOT() {
   var errorBox  = document.getElementById('dot-error');
   var dot = dotInput.value.trim().replace(/\D/g, '');
   if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; return; }
-  btn.textContent = 'Looking up…';
+  btn.textContent = 'Looking upâ¦';
   btn.disabled = true;
   errorBox.textContent = '';
   resultBox.classList.remove('show');
@@ -667,7 +813,7 @@ async function decodeVIN(prefix) {
     result.classList.add('show');
     return;
   }
-  btn.textContent = 'Decoding…';
+  btn.textContent = 'Decodingâ¦';
   btn.disabled = true;
   result.classList.remove('show');
   try {
@@ -707,7 +853,7 @@ async function decodeVIN(prefix) {
     }
     result.style.color = '';
     result.textContent = filled.length > 0
-      ? 'Decoded: ' + filled.join(' · ') + '. Please confirm and complete remaining fields.'
+      ? 'Decoded: ' + filled.join(' Â· ') + '. Please confirm and complete remaining fields.'
       : 'VIN recognized. Please review and fill in vehicle details.';
     result.classList.add('show');
   } catch (err) {
