@@ -467,11 +467,11 @@ function showStatus(input,statusId){
     el.textContent=input.files.length===1?'\u2713 '+input.files[0].name:'\u2713 '+input.files.length+' files selected';
   }
 }
-const GHL_WEBHOOK_URL='https://services.leadconnectorhq.com/hooks/YOUR_HOOK_ID/webhook-trigger/YOUR_KEY';
+const FORMSPREE_URL='https://formspree.io/f/xykobeqa';
 document.getElementById('truckingQuoteForm').addEventListener('submit',async function(e){
   e.preventDefault();
   var btn=document.getElementById('submit-btn');
-  btn.textContent='Submitting\u2026';btn.disabled=true;
+  btn.textContent='Submitting…';btn.disabled=true;
   var formData=new FormData(this);var data={};
   formData.forEach(function(val,key){
     if(val instanceof File)return;
@@ -485,18 +485,22 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   });
   data['files_noted']=uploadedFileNames.length>0?uploadedFileNames.join(' | '):'No files uploaded at time of submission. Follow up required.';
   data['lead_source']='Website Trucking Quote Page';
-  data['internal_note']='New Trucking Quote Request from Pinnacle Risk Advisors Website';
+  data['_subject']='New Trucking Quote Request from Pinnacle Risk Advisors Website';
   data['submitted_at']=new Date().toISOString();
   data['form_page']='/trucking-quote';
   data['contact_email']=data['email']||'';
   data['contact_phone']=data['phone']||'';
   data['contact_name']=data['contact_name']||'';
   try{
-    const response=await fetch(GHL_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    if(!response.ok)throw new Error('Server returned '+response.status);
-    document.getElementById('truckingQuoteForm').style.display='none';
-    document.getElementById('success-screen').style.display='block';
-    document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+    const response=await fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+    const result=await response.json();
+    if(response.ok){
+      document.getElementById('truckingQuoteForm').style.display='none';
+      document.getElementById('success-screen').style.display='block';
+      document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+    }else{
+      throw new Error(result.error||'Submission failed');
+    }
   }catch(err){
     btn.textContent='Submit Trucking Quote Request';btn.disabled=false;
     alert('There was an issue submitting your request. Please try again or contact us directly at (943) 239-3439.');
