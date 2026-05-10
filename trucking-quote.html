@@ -166,6 +166,8 @@ footer a:hover{color:var(--gold);}
   .toggle-group{flex-wrap:nowrap;}
 }
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 <nav>
@@ -366,7 +368,11 @@ footer a:hover{color:var(--gold);}
     <div class="success-icon">&#x2713;</div>
     <h2>Quote Request Received</h2>
     <p>Thank you. Your trucking quote request has been received. Pinnacle Risk Advisors will review your information and contact you if anything else is needed.</p>
-    <a class="success-back" href="https://pinnacleriskad.com/">Return to Homepage</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:-10px;">Your carrier submission PDF is downloading now. Check your downloads folder.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+      <button onclick="redownloadPDF()" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--navy);border:none;border-radius:3px;padding:11px 24px;cursor:pointer;">Download PDF Again</button>
+      <a class="success-back" href="https://pinnacleriskad.com/">Return to Homepage</a>
+    </div>
   </div>
 </div>
 <footer>
@@ -495,9 +501,11 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
     const response=await fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
     const result=await response.json();
     if(response.ok){
+      lastSubmissionData=data;
       document.getElementById('truckingQuoteForm').style.display='none';
       document.getElementById('success-screen').style.display='block';
       document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+      setTimeout(function(){generateSubmissionPDF(data);},800);
     }else{
       throw new Error(result.error||'Submission failed');
     }
@@ -507,7 +515,47 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
     console.error('Form submission error:',err);
   }
 });
-const FMCSA_WEB_KEY='311d231f2053b66d7f2d499fec6efcce6920de93';
+const var lastSubmissionData={};
+function redownloadPDF(){if(Object.keys(lastSubmissionData).length>0){generateSubmissionPDF(lastSubmissionData);}}
+function generateSubmissionPDF(d){
+  var today=new Date();
+  var dateStr=(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+  var bizName=d.business_name||'Unknown';
+  var safeFileName='Pinnacle-Trucking-Submission-'+bizName.replace(/[^a-z0-9]/gi,'_')+'-'+today.getFullYear()+(today.getMonth()+1).toString().padStart(2,'0')+today.getDate().toString().padStart(2,'0')+'.pdf';
+  var vehicleRows='';
+  for(var vi=1;vi<=20;vi++){
+    if(!d['v'+vi+'_year']&&!d['v'+vi+'_make'])break;
+    vehicleRows+='<tr><td>'+vi+'</td><td>'+(d['v'+vi+'_year']||'')+'</td><td>'+(d['v'+vi+'_make']||'')+'</td><td>'+(d['v'+vi+'_model']||'')+'</td><td>'+(d['v'+vi+'_type']||'')+'</td><td style="font-size:9px;">'+(d['v'+vi+'_vin']||'')+'</td><td>'+(d['v'+vi+'_gvw']||'')+'</td><td>'+(d['v'+vi+'_value']||'')+'</td><td>'+(d['v'+vi+'_zip']||'')+'</td><td>'+(d['v'+vi+'_comp_collision']||'')+'</td></tr>';
+  }
+  if(!vehicleRows)vehicleRows='<tr><td colspan="10" style="color:#999;font-style:italic;text-align:center;">No vehicle details entered</td></tr>';
+  var driverRows='';
+  for(var di=1;di<=20;di++){
+    if(!d['d'+di+'_name'])break;
+    driverRows+='<tr><td>'+di+'</td><td>'+(d['d'+di+'_name']||'')+'</td><td>'+(d['d'+di+'_dob']||'')+'</td><td>'+(d['d'+di+'_lic_state']||'')+'</td><td>'+(d['d'+di+'_lic_num']||'')+'</td><td>'+(d['d'+di+'_cdl']||'')+'</td><td>'+(d['d'+di+'_exp']||'')+'</td><td>'+(d['d'+di+'_violations']||'')+'</td></tr>';
+  }
+  if(!driverRows)driverRows='<tr><td colspan="8" style="color:#999;font-style:italic;text-align:center;">No driver details entered</td></tr>';
+  function cov(field,label){var checked=d[field]==='Yes';return '<div style="display:flex;align-items:flex-start;gap:7px;padding:7px 10px;border:1px solid '+(checked?'#c9a84c':'#e8e4de')+';border-radius:2px;background:'+(checked?'rgba(201,168,76,0.07)':'#faf9f7')+'"><div style="width:13px;height:13px;border:1.5px solid '+(checked?'#c9a84c':'#d0ccc6')+';border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:'+(checked?'#c9a84c':'transparent')+';color:#0b1827;font-size:9px;font-weight:900;">'+(checked?'&#x2713;':'')+'</div><span style="font-size:10px;font-weight:600;color:#1a1a1a;line-height:1.35;">'+label+'</span></div>';}
+  function field(label,value,span){var v=value||'';return '<div style="grid-column:span '+(span||1)+'"><div style="font-size:8.5px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:#9a9490;margin-bottom:2px;">'+label+'</div><div style="font-size:11.5px;font-weight:500;color:'+(v?'#1a1a1a':'#c8c4be')+';border-bottom:1px solid #e8e4de;padding-bottom:4px;min-height:20px;font-style:'+(v?'normal':'italic')+'">'+(v||'Not provided')+'</div></div>';}
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;font-size:11px;color:#1a1a1a;background:#fff;}.doc-header{background:#0b1827;padding:22px 28px 18px;position:relative;}.gold-bar{height:3px;background:linear-gradient(90deg,#c9a84c,#e2c27a,#c9a84c);}.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}.brand{display:flex;align-items:center;gap:12px;}.logo-mark{width:40px;height:40px;border:1.5px solid #c9a84c;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#c9a84c;font-weight:700;font-family:Georgia,serif;flex-shrink:0;}.agency-name{font-size:14px;font-weight:700;color:#fff;letter-spacing:0.3px;}.agency-sub{font-size:9px;color:#c9a84c;letter-spacing:1.8px;text-transform:uppercase;margin-top:2px;}.meta{text-align:right;}.meta-row{font-size:9.5px;color:rgba(255,255,255,0.5);line-height:1.8;}.meta-row b{color:rgba(255,255,255,0.75);font-weight:600;}.doc-title{font-size:20px;font-weight:400;color:#fff;font-family:Georgia,serif;}.doc-title i{font-style:italic;color:#e2c27a;}.doc-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);border-radius:2px;padding:4px 10px;}.alert{background:#f7f5f1;border-left:4px solid #c9a84c;padding:8px 14px;margin:0 0 16px;font-size:10px;color:#7a7a7a;line-height:1.5;}.alert b{color:#1a1a1a;}.body{padding:0 28px 28px;}.section{margin-bottom:18px;border:1px solid #e8e4de;border-radius:3px;overflow:hidden;page-break-inside:avoid;}.section-head{background:#f7f5f1;border-bottom:1px solid #e8e4de;padding:8px 14px;display:flex;align-items:center;gap:8px;}.section-num{font-size:12px;color:#c9a84c;font-weight:700;font-family:Georgia,serif;}.section-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0b1827;}.section-body{padding:12px 14px;}.fg{display:grid;gap:8px 16px;}.fg3{grid-template-columns:repeat(3,1fr);}.fg2{grid-template-columns:repeat(2,1fr);}.fg4{grid-template-columns:repeat(4,1fr);}table{width:100%;border-collapse:collapse;font-size:9.5px;}th{background:#0b1827;color:rgba(255,255,255,0.7);font-size:8px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:6px 8px;text-align:left;}td{padding:6px 8px;border-bottom:1px solid #f0ede8;vertical-align:top;}tr:nth-child(even) td{background:#faf9f7;}.cov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}.limits{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid #e8e4de;}.limit-box{flex:1;background:#f7f5f1;border:1px solid #e8e4de;border-radius:2px;padding:7px 10px;}.limit-lbl{font-size:8px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:#9a9490;display:block;margin-bottom:2px;}.limit-val{font-size:11px;font-weight:700;color:#0b1827;}.notes-box{background:#f7f5f1;border:1px solid #e8e4de;border-radius:2px;padding:10px 12px;font-size:10.5px;color:#3a3a3a;line-height:1.7;min-height:50px;}.footer{background:#0b1827;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}.footer-left{font-size:9px;color:rgba(255,255,255,0.4);line-height:1.8;}.footer-left b{color:rgba(255,255,255,0.6);font-weight:600;}.footer-right{font-size:8.5px;color:rgba(255,255,255,0.25);max-width:300px;text-align:right;line-height:1.6;}</style></head><body>'+
+  '<div class="doc-header"><div class="header-top"><div class="brand"><div class="logo-mark">P</div><div><div class="agency-name">Pinnacle Risk Advisors</div><div class="agency-sub">Licensed Insurance Agency</div></div></div><div class="meta"><div class="meta-row"><b>Date:</b> '+dateStr+'</div><div class="meta-row"><b>Source:</b> Website Quote Form</div><div class="meta-row"><b>Agent:</b> Derrick Brown</div><div class="meta-row"><b>Phone:</b> (943) 239-3439</div><div class="meta-row"><b>Email:</b> dbrown@pinnacleriskad.com</div></div></div><div style="display:flex;align-items:center;justify-content:space-between;"><div class="doc-title">Commercial Trucking <i>Insurance Submission</i></div><div class="doc-badge">Confidential</div></div></div>'+
+  '<div class="gold-bar"></div>'+
+  '<div class="body">'+
+  '<div class="alert" style="margin-top:14px;"><b>For Underwriter Use.</b> This submission was prepared by Pinnacle Risk Advisors LLC from a customer quote request. All information is as provided by the applicant and subject to verification. Submission does not bind coverage.</div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">Business Information</span></div><div class="section-body"><div class="fg fg3">'+field('Legal Business Name',d.business_name,2)+field('Entity Type',d.entity_type)+field('Primary Contact',d.contact_name)+field('Phone',d.phone)+field('Email',d.email)+field('Mailing Address',d.address,2)+field('Years in Business',d.years_in_business)+field('Requested Effective Date',d.effective_date)+field('Annual Revenue',d.annual_revenue)+'</div></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">02</span><span class="section-title">DOT and Operation Details</span></div><div class="section-body"><div class="fg fg3">'+field('USDOT Number',d.usdot)+field('MC Number',d.mc_number)+field('Authority Status',d.authority_status)+field('Operation Type',d.operation_type)+field('New Venture',d.new_venture)+field('Prior Coverage',d.prior_coverage)+field('Prior Carrier',d.prior_carrier)+field('Haul Radius',d.haul_radius)+field('States of Operation',d.states_of_operation)+field('Primary Cargo Type',d.cargo_type,2)+field('Commodity Details',d.commodity_details,3)+'</div></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">03</span><span class="section-title">Vehicle Schedule</span></div><div class="section-body"><div class="fg fg2" style="margin-bottom:10px;">'+field('Number of Power Units',d.power_unit_count)+field('Number of Trailers',d.trailer_count)+'</div><table><thead><tr><th>#</th><th>Year</th><th>Make</th><th>Model</th><th>Type</th><th>VIN</th><th>GVW</th><th>Value</th><th>ZIP</th><th>Comp/Coll</th></tr></thead><tbody>'+vehicleRows+'</tbody></table></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">04</span><span class="section-title">Driver Schedule</span></div><div class="section-body"><table><thead><tr><th>#</th><th>Full Name</th><th>Date of Birth</th><th>Lic. State</th><th>License Number</th><th>CDL Class</th><th>Experience</th><th>Violations</th></tr></thead><tbody>'+driverRows+'</tbody></table></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">05</span><span class="section-title">Coverage Requested</span></div><div class="section-body"><div class="cov-grid">'+cov('cov_auto_liability','Auto Liability')+cov('cov_physical_damage','Physical Damage')+cov('cov_cargo','Motor Truck Cargo')+cov('cov_general_liability','General Liability')+cov('cov_bobtail','Bobtail / Non-Trucking Liability')+cov('cov_trailer_interchange','Trailer Interchange')+cov('cov_workers_comp','Workers Compensation')+cov('cov_occ_accident','Occupational Accident')+cov('cov_excess','Excess / Umbrella')+'</div><div class="limits"><div class="limit-box"><span class="limit-lbl">Auto Liability Limit</span><div class="limit-val">'+(d.al_limit||'Not specified')+'</div></div><div class="limit-box"><span class="limit-lbl">Cargo Limit</span><div class="limit-val">'+(d.cargo_limit||'Not specified')+'</div></div><div class="limit-box"><span class="limit-lbl">Deductible Preference</span><div class="limit-val">'+(d.deductible||'Not specified')+'</div></div></div></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">06</span><span class="section-title">Documents Noted</span></div><div class="section-body"><div style="font-size:11px;color:#3a3a3a;line-height:1.7;">'+(d.files_noted||'No files uploaded at time of submission. Follow up required.')+'</div></div></div>'+
+  '<div class="section"><div class="section-head"><span class="section-num">07</span><span class="section-title">Underwriting Notes</span></div><div class="section-body"><div class="notes-box">'+(d.notes||'No additional notes provided.')+'</div></div></div>'+
+  '</div>'+
+  '<div class="footer"><div class="footer-left"><b>Pinnacle Risk Advisors LLC</b><br>Georgia &middot; Florida &middot; South Carolina &middot; Texas<br>(943) 239-3439 &middot; dbrown@pinnacleriskad.com &middot; pinnacleriskad.com</div><div class="footer-right">This document is confidential and intended solely for the named underwriter. Submission does not bind coverage. All information is subject to verification and underwriting approval.</div></div>'+
+  '</body></html>';
+  var opt={margin:[0,0,0,0],filename:safeFileName,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,logging:false},jsPDF:{unit:'mm',format:'letter',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}};
+  html2pdf().set(opt).from(html).save();
+}
+
+FMCSA_WEB_KEY='311d231f2053b66d7f2d499fec6efcce6920de93';
 async function lookupDOT(){
   var dotInput=document.getElementById('usdot-input');
   var btn=document.getElementById('dot-lookup-btn');
