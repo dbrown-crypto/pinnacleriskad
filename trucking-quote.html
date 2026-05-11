@@ -288,7 +288,7 @@ footer a:hover{color:var(--gold);}
               <div class="field"><label>Model</label><input type="text" name="v1_model" placeholder="e.g. Cascadia"></div>
               <div class="field"><label>GVW (lbs)</label><input type="text" name="v1_gvw" placeholder="e.g. 80,000"></div>
               <div class="field span-2"><label>Vehicle Type</label><select name="v1_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>
-              <div class="field span-2"><label>VIN â</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="setTimeout(function(){onVinInput(document.getElementById('v1_vin'),'v1')},50)"><button type="button" class="vin-decode-btn show" id="v1_vin_btn" onclick="decodeVIN('v1')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
+              <div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="setTimeout(function(){onVinInput(document.getElementById('v1_vin'),'v1')},50)"><button type="button" class="vin-decode-btn show" id="v1_vin_btn" onclick="decodeVIN('v1')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
               <div class="field span-2"><label>Stated Value</label><input type="text" name="v1_value" placeholder="e.g. $85,000"><span class="hint">Approximate current market value of this unit</span></div>
               <div class="field"><label>Garaging ZIP</label><input type="text" name="v1_zip" placeholder="ZIP code" maxlength="5"></div>
               <div class="field"><label>Comp &amp; Collision?</label><div class="toggle-group" data-name="v1_comp_collision"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="v1_comp_collision" value=""></div>
@@ -419,7 +419,7 @@ document.getElementById('add-vehicle').addEventListener('click',function(){
     '<div class="field"><label>Model</label><input type="text" name="v'+n+'_model" placeholder="e.g. Cascadia"></div>'+
     '<div class="field"><label>GVW (lbs)</label><input type="text" name="v'+n+'_gvw" placeholder="e.g. 80,000"></div>'+
     '<div class="field span-2"><label>Vehicle Type</label><select name="v'+n+'_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>'+
-    '<div class="field span-2"><label>VIN â</label><div class="vin-decode-wrap">' +
+    '<div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap">' +
     '<input type="text" name="v'+n+'_vin" id="v'+n+'_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,\'v'+n+'\')" onpaste="setTimeout(function(){onVinInput(document.getElementById(\'v'+n+'_vin\'),\'v'+n+'\')},50)">' +
     '<button type="button" class="vin-decode-btn show" id="v'+n+'_vin_btn" onclick="decodeVIN(\'v'+n+'\')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button>' +
     '<div class="vin-result" id="v'+n+'_vin_result"></div>' +
@@ -482,7 +482,7 @@ const FORMSPREE_URL='https://formspree.io/f/xykobeqa';
 document.getElementById('truckingQuoteForm').addEventListener('submit',async function(e){
   e.preventDefault();
   var btn=document.getElementById('submit-btn');
-  btn.textContent='Submittingâ¦';btn.disabled=true;
+  btn.textContent='Submitting…';btn.disabled=true;
   var formData=new FormData(this);var data={};
   formData.forEach(function(val,key){
     if(val instanceof File)return;
@@ -712,7 +712,7 @@ async function lookupDOT() {
   var errorBox  = document.getElementById('dot-error');
   var dot = dotInput.value.trim().replace(/\D/g, '');
   if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; return; }
-  btn.textContent = 'Looking upâ¦';
+  btn.textContent = 'Looking up…';
   btn.disabled = true;
   errorBox.textContent = '';
   resultBox.classList.remove('show');
@@ -813,7 +813,7 @@ async function decodeVIN(prefix) {
     result.classList.add('show');
     return;
   }
-  btn.textContent = 'Decodingâ¦';
+  btn.textContent = 'Decoding…';
   btn.disabled = true;
   result.classList.remove('show');
   try {
@@ -853,7 +853,7 @@ async function decodeVIN(prefix) {
     }
     result.style.color = '';
     result.textContent = filled.length > 0
-      ? 'Decoded: ' + filled.join(' Â· ') + '. Please confirm and complete remaining fields.'
+      ? 'Decoded: ' + filled.join(' · ') + '. Please confirm and complete remaining fields.'
       : 'VIN recognized. Please review and fill in vehicle details.';
     result.classList.add('show');
   } catch (err) {
