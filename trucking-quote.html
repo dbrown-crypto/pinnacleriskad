@@ -661,6 +661,8 @@ async function sendPDFByEmail(data) {
 
       lead_source:         data.lead_source         || 'Website Trucking Quote Page',
 
+      submission_pdf_link: buildSubmissionLink(data),
+
       submitted_at:        data.submitted_at        || new Date().toISOString()
 
     };
