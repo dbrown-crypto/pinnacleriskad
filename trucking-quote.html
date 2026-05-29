@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -502,17 +502,12 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   data['contact_phone']=data['phone']||'';
   data['contact_name']=data['contact_name']||'';
   try{
-    const response=await fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
-    const result=await response.json();
-    if(response.ok){
-      lastSubmissionData=data;
-      document.getElementById('truckingQuoteForm').style.display='none';
-      document.getElementById('success-screen').style.display='block';
-      document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
-      setTimeout(function(){generateSubmissionPDF(data);},800);
-    }else{
-      throw new Error(result.error||'Submission failed');
-    }
+    await sendPDFByEmail(data);
+    lastSubmissionData=data;
+    document.getElementById('truckingQuoteForm').style.display='none';
+    document.getElementById('success-screen').style.display='block';
+    document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
+    setTimeout(function(){generateSubmissionPDF(data);},800);
   }catch(err){
     btn.textContent='Submit Trucking Quote Request';btn.disabled=false;
     alert('There was an issue submitting your request. Please try again or contact us directly at (943) 239-3439.');
