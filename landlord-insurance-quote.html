@@ -169,7 +169,7 @@ footer a:hover{color:var(--gold);}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  (function() { emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); })();
+  (function() { emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); };
 </script>
 </head>
 <body>
@@ -769,7 +769,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
 });
 </script>
   <script>
-    (async () => {
+    window.initPlaceAutocomplete = async function() {
         const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
         const input = document.getElementById('property_address');
         if (!input) return;
@@ -786,10 +786,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
               input.value = place.formattedAddress;
               input.dispatchEvent(new Event('input', { bubbles: true }));
         });
-    })();
+    };
   </script>
   <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&loading=async&libraries=places">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&loading=async&libraries=places&callback=initPlaceAutocomplete">
   </script>
 </body>
 </html>
