@@ -148,6 +148,23 @@ footer a:hover{color:var(--gold);}
 @media(max-width:480px){
   .fgrid-2{grid-template-columns:1fr;}
 }
+
+.opt-toggle-row{margin:20px 0 4px;}
+.opt-toggle-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--navy);background:var(--off);border:1px solid var(--border);border-radius:4px;padding:11px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.15s;width:100%;justify-content:space-between;}
+.opt-toggle-btn:hover{border-color:var(--gold);color:var(--gold);}
+.opt-toggle-btn .opt-arrow{font-size:10px;transition:transform 0.2s;display:inline-block;}
+.opt-toggle-btn.open .opt-arrow{transform:rotate(90deg);}
+.opt-intro{font-size:11.5px;color:var(--muted);font-style:italic;margin:6px 0 18px;line-height:1.6;}
+.opt-panel{display:none;}
+.opt-panel.open{display:block;}
+.opt-subhead{font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--border);padding-bottom:6px;margin:24px 0 14px;}
+.opt-subhead:first-child{margin-top:4px;}
+.cond-block{display:none;}
+.cond-block.show{display:contents;}
+.yes-no-group{display:flex;gap:8px;}
+.yn-btn{flex:1;border:1px solid var(--border);border-radius:4px;padding:9px 14px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);background:var(--white);cursor:pointer;text-align:center;transition:all 0.15s;}
+.yn-btn:hover{border-color:var(--gold);color:var(--navy);}
+.yn-btn.active{border-color:var(--gold);background:var(--gold3);color:var(--navy);font-weight:600;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -409,7 +426,128 @@ footer a:hover{color:var(--gold);}
       <button type="submit" class="btn-submit" id="submit-btn">Get My Landlord Quote</button>
       <p style="font-size:11px;color:var(--muted);">We typically respond within one business day.</p>
     </div>
-  </form>
+  
+    <div class="opt-toggle-row">
+      <button type="button" class="opt-toggle-btn" id="opt-toggle-btn" aria-expanded="false" aria-controls="opt-panel">
+        <span>+ Add property details for a faster, more accurate quote</span>
+        <span class="opt-arrow">&#9654;</span>
+      </button>
+    </div>
+    <div class="opt-panel" id="opt-panel" role="region">
+      <p class="opt-intro">Optional &mdash; but the more you share (or just upload your declarations page), the faster we can shop your account.</p>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Building &amp; <em>Construction</em></span><span class="fs-desc">All optional</span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field"><label for="year_built">Year Built</label><input type="number" id="year_built" name="year_built" placeholder="e.g. 1998" min="1800" max="2026"></div>
+            <div class="field"><label for="construction_type">Construction Type</label><select id="construction_type" name="construction_type"><option value="">Select...</option><option>Frame</option><option>Masonry</option><option>Masonry Veneer</option><option>Other</option></select></div>
+            <div class="field"><label for="sq_footage">Square Footage</label><input type="number" id="sq_footage" name="sq_footage" placeholder="e.g. 1400"></div>
+            <div class="field"><label for="num_stories">Number of Stories</label><select id="num_stories" name="num_stories"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+            <div class="field cond-block" id="cond-units" style="display:none;"><label for="num_units">Number of Units</label><input type="number" id="num_units" name="num_units" placeholder="e.g. 4" min="2" max="100"></div>
+            <div class="field"><label for="roof_material">Roof Material</label><select id="roof_material" name="roof_material"><option value="">Select...</option><option>Asphalt Shingle</option><option>Metal</option><option>Tile</option><option>Flat/Membrane</option><option>Other</option></select></div>
+            <div class="field"><label for="roof_age">Roof Age or Year Last Replaced</label><input type="text" id="roof_age" name="roof_age" placeholder="e.g. 2018 or 6 years old"></div>
+            <div class="field"><label for="roof_shape">Roof Shape</label><select id="roof_shape" name="roof_shape"><option value="">Select...</option><option>Hip</option><option>Gable</option><option>Flat</option><option>Other</option></select></div>
+            <div class="field span-2"><label for="electrical_panel">Electrical Panel Type</label><input type="text" id="electrical_panel" name="electrical_panel" placeholder="e.g. 200-amp Square D"><span class="hint">Flag Federal Pacific (FPE), Zinsco, knob-and-tube, or aluminum wiring &mdash; carriers scrutinize these.</span></div>
+            <div class="field span-2"><label for="plumbing_type">Plumbing Type</label><select id="plumbing_type" name="plumbing_type"><option value="">Select...</option><option>Copper</option><option>PEX</option><option>CPVC</option><option>Polybutylene</option><option>Galvanized</option><option>Other</option></select></div>
+          </div>
+          <div class="opt-subhead" id="updates-subhead" style="display:none;">Year Updated (Roof / Electrical / Plumbing / HVAC) &mdash; for homes 30+ years old</div>
+          <div class="fgrid fgrid-2" id="updates-grid" style="display:none;">
+            <div class="field"><label for="update_roof">Roof Last Updated</label><input type="text" id="update_roof" name="update_roof" placeholder="Year or N/A"></div>
+            <div class="field"><label for="update_electrical">Electrical Last Updated</label><input type="text" id="update_electrical" name="update_electrical" placeholder="Year or N/A"></div>
+            <div class="field"><label for="update_plumbing">Plumbing Last Updated</label><input type="text" id="update_plumbing" name="update_plumbing" placeholder="Year or N/A"></div>
+            <div class="field"><label for="update_hvac">HVAC Last Updated</label><input type="text" id="update_hvac" name="update_hvac" placeholder="Year or N/A"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Coverage <em>Requested</em></span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field"><label for="dwelling_limit">Dwelling Limit (Coverage A) Desired</label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="e.g. $275,000"></div>
+            <div class="field"><label for="valuation_pref">Valuation Preference</label><select id="valuation_pref" name="valuation_pref"><option value="">Select...</option><option>Replacement Cost</option><option>Actual Cash Value</option><option>Not sure</option></select></div>
+            <div class="field"><label for="liability_limit">Liability Limit</label><select id="liability_limit" name="liability_limit"><option value="">Select...</option><option>Not sure</option><option>$300,000</option><option>$500,000</option><option>$1,000,000</option></select></div>
+            <div class="field"><label for="monthly_rent">Monthly Rent Amount</label><input type="text" id="monthly_rent" name="monthly_rent" placeholder="e.g. $1,800/mo &mdash; loss of rents"></div>
+            <div class="field"><label for="deductible_pref">Deductible Preference</label><input type="text" id="deductible_pref" name="deductible_pref" placeholder="e.g. $1,000 or 1%"><span class="hint">FL policies carry a separate wind/hurricane deductible (often 2&ndash;5% of Coverage A).</span></div>
+            <div class="field"><label for="form_pref">Form Preference</label><select id="form_pref" name="form_pref"><option value="">Select...</option><option>DP1 (Basic Form)</option><option>DP3 (Special Form)</option><option>Not sure &mdash; let Pinnacle advise</option></select></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Occupancy <em>Detail</em></span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field span-2"><label for="rental_type">Rental Type</label><select id="rental_type" name="rental_type"><option value="">Select...</option><option>Long-term lease</option><option>Short-term rental / Airbnb</option><option>Section 8</option><option>Student</option><option>Other</option></select></div>
+            <div class="field span-2"><label>Any commercial/retail space in the building?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="commercial_space" data-val="No">No</button><button type="button" class="yn-btn" data-yn="commercial_space" data-val="Yes">Yes</button></div><input type="hidden" id="commercial_space" name="commercial_space" value=""></div>
+            <div class="field cond-block span-2" id="cond-commercial" style="display:none;"><label for="commercial_pct">Approximate % that is commercial</label><input type="text" id="commercial_pct" name="commercial_pct" placeholder="e.g. 20%"></div>
+          </div>
+          <div class="cond-block" id="cond-vacant" style="display:none;">
+            <div class="opt-subhead">Vacant Property Details</div>
+            <div class="fgrid fgrid-2">
+              <div class="field"><label for="vacant_how_long">How Long Vacant?</label><input type="text" id="vacant_how_long" name="vacant_how_long" placeholder="e.g. 3 months"></div>
+              <div class="field"><label for="vacant_reason">Reason for Vacancy</label><input type="text" id="vacant_reason" name="vacant_reason" placeholder="e.g. Between tenants, estate"></div>
+              <div class="field"><label>Property secured?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_secured" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_secured" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_secured" name="vacant_secured" value=""></div>
+              <div class="field"><label>Utilities on?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_utilities" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_utilities" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_utilities" name="vacant_utilities" value=""></div>
+              <div class="field span-2"><label>Under renovation?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_renovation" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_renovation" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_renovation" name="vacant_renovation" value=""></div>
+            </div>
+          </div>
+          <div class="cond-block" id="cond-renovation" style="display:none;">
+            <div class="opt-subhead">Renovation Details</div>
+            <div class="fgrid fgrid-2">
+              <div class="field span-2"><label for="reno_scope">Scope of Work</label><textarea id="reno_scope" name="reno_scope" placeholder="e.g. Full kitchen/bath gut renovation, new electrical, new roof"></textarea></div>
+              <div class="field"><label for="reno_pct_complete">Percent Complete</label><input type="text" id="reno_pct_complete" name="reno_pct_complete" placeholder="e.g. 40%"></div>
+              <div class="field"><label>Licensed General Contractor?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="reno_gc" data-val="No">No</button><button type="button" class="yn-btn" data-yn="reno_gc" data-val="Yes">Yes</button></div><input type="hidden" id="reno_gc" name="reno_gc" value=""></div>
+              <div class="field span-2"><label>Occupied during renovation?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="reno_occupied" data-val="No">No</button><button type="button" class="yn-btn" data-yn="reno_occupied" data-val="Yes">Yes</button></div><input type="hidden" id="reno_occupied" name="reno_occupied" value=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Liability <em>Hazards</em></span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field"><label>Pool on property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_pool" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_pool" data-val="Yes">Yes</button></div><input type="hidden" id="has_pool" name="has_pool" value=""></div>
+            <div class="field"><label>Trampoline on property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_trampoline" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_trampoline" data-val="Yes">Yes</button></div><input type="hidden" id="has_trampoline" name="has_trampoline" value=""></div>
+            <div class="cond-block span-2" id="cond-pool" style="display:none;"><div class="fgrid fgrid-2"><div class="field"><label>Pool fenced?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="pool_fenced" data-val="No">No</button><button type="button" class="yn-btn" data-yn="pool_fenced" data-val="Yes">Yes</button></div><input type="hidden" id="pool_fenced" name="pool_fenced" value=""></div><div class="field"><label>Diving board or slide?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="pool_diving" data-val="No">No</button><button type="button" class="yn-btn" data-yn="pool_diving" data-val="Yes">Yes</button></div><input type="hidden" id="pool_diving" name="pool_diving" value=""></div></div></div>
+            <div class="field span-2"><label>Dogs on the property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_dogs" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_dogs" data-val="Yes">Yes</button></div><input type="hidden" id="has_dogs" name="has_dogs" value=""></div>
+            <div class="field cond-block span-2" id="cond-dogs" style="display:none;"><label for="dog_breeds">Dog Breed(s)</label><input type="text" id="dog_breeds" name="dog_breeds" placeholder="e.g. Labrador, German Shepherd"></div>
+            <div class="field span-2"><label>Wood stove or supplemental heat?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_wood_stove" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_wood_stove" data-val="Yes">Yes</button></div><input type="hidden" id="has_wood_stove" name="has_wood_stove" value=""></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Loss History &amp; <em>Prior Coverage</em></span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field"><label for="prior_losses_count">Number of Prior Losses (last 5 years)</label><select id="prior_losses_count" name="prior_losses_count"><option value="">Select...</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+            <div class="field"><label>Currently insured?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="currently_insured" data-val="No">No</button><button type="button" class="yn-btn" data-yn="currently_insured" data-val="Yes">Yes</button></div><input type="hidden" id="currently_insured" name="currently_insured" value=""></div>
+            <div class="field span-2"><label for="loss_details">Loss Details (dates, cause, amounts, repaired?)</label><textarea id="loss_details" name="loss_details" placeholder="e.g. 2023 &mdash; water damage, $8,400 paid, repaired"></textarea></div>
+            <div class="field span-2"><label>Any lapse, cancellation, or non-renewal?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_lapse" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_lapse" data-val="Yes">Yes</button></div><input type="hidden" id="has_lapse" name="has_lapse" value=""></div>
+            <div class="field cond-block span-2" id="cond-lapse" style="display:none;"><label for="lapse_explain">Please explain the lapse/cancellation</label><textarea id="lapse_explain" name="lapse_explain" placeholder="Dates, reason, carrier..."></textarea></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Georgia &amp; Florida <em>Specifics</em></span></div>
+        <div class="form-section-body">
+          <div class="fgrid fgrid-2">
+            <div class="field"><label for="fl_coast_distance">FL: Distance to Coast / Windstorm Zone</label><input type="text" id="fl_coast_distance" name="fl_coast_distance" placeholder="e.g. 3 miles, wind zone 3"></div>
+            <div class="field"><label>FL: Wind mitigation inspection available?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="fl_wind_mit" data-val="No">No</button><button type="button" class="yn-btn" data-yn="fl_wind_mit" data-val="Yes">Yes</button></div><input type="hidden" id="fl_wind_mit" name="fl_wind_mit" value=""><span class="hint">OIR-B1-1802 wind mitigation report can drive major premium credits in FL.</span></div>
+            <div class="field span-2"><label>FL: Any sinkhole activity or prior ground movement?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="fl_sinkhole" data-val="No">No</button><button type="button" class="yn-btn" data-yn="fl_sinkhole" data-val="Yes">Yes</button></div><input type="hidden" id="fl_sinkhole" name="fl_sinkhole" value=""></div>
+            <div class="field span-2"><label for="mortgagee_info">Lender / Mortgagee Name, Address &amp; Loan Number</label><textarea id="mortgagee_info" name="mortgagee_info" placeholder="e.g. Wells Fargo Home Mortgage, PO Box 10335, Des Moines IA 50306, Loan #1234567890"></textarea></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Additional <em>Uploads</em></span><span class="fs-desc">All optional</span></div>
+        <div class="form-section-body">
+          <div class="upload-grid">
+            <div class="upload-zone"><input type="file" id="file_loss_runs" name="file_loss_runs" accept=".pdf,.xls,.xlsx,.csv" multiple><div class="upload-icon">&#128202;</div><div class="upload-label">Loss Runs (3&ndash;5 years)</div><div class="upload-hint">PDF, XLS, CSV &mdash; optional</div><div class="upload-status" id="loss-runs-status"></div></div>
+            <div class="upload-zone"><input type="file" id="file_photos" name="file_photos" accept=".jpg,.jpeg,.png,.pdf" multiple><div class="upload-icon">&#128247;</div><div class="upload-label">Property Photos</div><div class="upload-hint">Front, back, sides, roof &mdash; JPG/PNG/PDF</div><div class="upload-status" id="photos-status"></div></div>
+            <div class="upload-zone"><input type="file" id="file_inspection" name="file_inspection" accept=".pdf" multiple><div class="upload-icon">&#128203;</div><div class="upload-label">4-Point / Wind Mit Inspection</div><div class="upload-hint">PDF &mdash; optional</div><div class="upload-status" id="inspection-status"></div></div>
+          </div>
+        </div>
+      </div>
+    </div></form>
 </div>
 <section class="info-section alt">
   <div class="info-container">
@@ -498,113 +636,263 @@ footer a:hover{color:var(--gold);}
 const EMAILJS_SERVICE_ID  = 'service_mefkv18';
 const EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
 
-// Upload status display
-document.getElementById('policy_file').addEventListener('change', function() {
-  const status = document.getElementById('policy-upload-status');
-  if (this.files.length > 0) {
-    const names = Array.from(this.files).map(f => f.name).join(', ');
-    status.textContent = names;
-    status.style.display = 'block';
-  } else {
-    status.style.display = 'none';
-  }
+function wireUpload(inputId, statusId) {
+  const inp = document.getElementById(inputId);
+  const stat = document.getElementById(statusId);
+  if (!inp || !stat) return;
+  inp.addEventListener('change', function() {
+    if (this.files.length > 0) {
+      stat.textContent = Array.from(this.files).map(function(f){return f.name;}).join(', ');
+      stat.style.display = 'block';
+    } else { stat.style.display = 'none'; }
+  });
+}
+wireUpload('policy_file', 'policy-upload-status');
+wireUpload('file_loss_runs', 'loss-runs-status');
+wireUpload('file_photos', 'photos-status');
+wireUpload('file_inspection', 'inspection-status');
+
+document.getElementById('opt-toggle-btn').addEventListener('click', function() {
+  const panel = document.getElementById('opt-panel');
+  const isOpen = panel.classList.toggle('open');
+  this.classList.toggle('open', isOpen);
+  this.setAttribute('aria-expanded', String(isOpen));
+  this.querySelector('span:first-child').textContent = isOpen
+    ? '\u2013 Hide property details'
+    : '+ Add property details for a faster, more accurate quote';
 });
 
+document.querySelectorAll('.yn-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var yn = this.dataset.yn;
+    var val = this.dataset.val;
+    document.querySelectorAll('.yn-btn[data-yn="' + yn + '"]').forEach(function(b){b.classList.remove('active');});
+    this.classList.add('active');
+    var hidden = document.getElementById(yn);
+    if (hidden) hidden.value = val;
+    handleYNCond(yn, val);
+  });
+});
+
+function showCond(id, show) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  if (show) { el.style.display = ''; el.classList.add('show'); }
+  else { el.style.display = 'none'; el.classList.remove('show'); }
+}
+function handleYNCond(yn, val) {
+  var yes = val === 'Yes';
+  if (yn === 'has_pool')         showCond('cond-pool', yes);
+  if (yn === 'has_dogs')         showCond('cond-dogs', yes);
+  if (yn === 'has_lapse')        showCond('cond-lapse', yes);
+  if (yn === 'commercial_space') showCond('cond-commercial', yes);
+}
+function updateOccupancyConds() {
+  var occ = (document.getElementById('occupancy_status').value || '').toLowerCase();
+  showCond('cond-vacant',     occ.indexOf('vacant') >= 0);
+  showCond('cond-renovation', occ.indexOf('renovation') >= 0);
+}
+document.getElementById('occupancy_status').addEventListener('change', updateOccupancyConds);
+
+function updatePropertyTypeConds() {
+  var pt = (document.getElementById('property_type').value || '').toLowerCase();
+  showCond('cond-units', pt.indexOf('duplex') >= 0 || pt.indexOf('multifamily') >= 0 || pt.indexOf('apartment') >= 0);
+}
+document.getElementById('property_type').addEventListener('change', updatePropertyTypeConds);
+
+function updateAgeFields() {
+  var yr = parseInt(document.getElementById('year_built').value, 10);
+  var show = !isNaN(yr) && (new Date().getFullYear() - yr) >= 30;
+  var sh = document.getElementById('updates-subhead');
+  var gr = document.getElementById('updates-grid');
+  if (sh) sh.style.display = show ? '' : 'none';
+  if (gr) gr.style.display = show ? '' : 'none';
+}
+document.getElementById('year_built').addEventListener('input', updateAgeFields);
+
 function buildSubmissionLink(data) {
-  try {
-    const copy = Object.assign({}, data);
-    return window.location.origin + '/landlord-insurance-quote.html?view_submission=' +
-           btoa(unescape(encodeURIComponent(JSON.stringify(copy))));
-  } catch(e) { return ''; }
+  try { return window.location.origin + '/landlord-insurance-quote.html?view_submission=' + btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
+  catch(e) { return ''; }
 }
 
-/* If opened via agent copy link, render submission packet */
+function opt(id) {
+  var el = document.getElementById(id);
+  return el ? (el.value || '').trim() : '';
+}
+
+function allFileNames() {
+  var names = [];
+  ['policy_file','file_loss_runs','file_photos','file_inspection'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.files.length > 0) Array.from(el.files).forEach(function(f){names.push(f.name);});
+  });
+  return names.length > 0 ? names.join(', ') : 'None uploaded';
+}
+
+function buildNotes(data) {
+  var lines = [];
+  function add(label, val) { if (val && val.trim()) lines.push(label + ': ' + val.trim()); }
+  lines.push('=== CORE FIELDS ===');
+  add('First Name', data.first_name);
+  add('Phone', data.phone);
+  add('Email', data.email);
+  add('Property Address', data.property_address);
+  add('Property Type', data.property_type);
+  add('Occupancy Status', data.occupancy_status);
+  add('Desired Effective Date', data.effective_date);
+  lines.push('--- Building & Construction ---');
+  add('Year Built', opt('year_built'));
+  add('Construction Type', opt('construction_type'));
+  add('Square Footage', opt('sq_footage'));
+  add('Number of Stories', opt('num_stories'));
+  add('Number of Units', opt('num_units'));
+  add('Roof Material', opt('roof_material'));
+  add('Roof Age / Last Replaced', opt('roof_age'));
+  add('Roof Shape', opt('roof_shape'));
+  add('Electrical Panel', opt('electrical_panel'));
+  add('Plumbing Type', opt('plumbing_type'));
+  add('Roof Last Updated', opt('update_roof'));
+  add('Electrical Last Updated', opt('update_electrical'));
+  add('Plumbing Last Updated', opt('update_plumbing'));
+  add('HVAC Last Updated', opt('update_hvac'));
+  lines.push('--- Coverage Requested ---');
+  add('Dwelling Limit (Cov A)', opt('dwelling_limit'));
+  add('Valuation Preference', opt('valuation_pref'));
+  add('Liability Limit', opt('liability_limit'));
+  add('Monthly Rent Amount', opt('monthly_rent'));
+  add('Deductible Preference', opt('deductible_pref'));
+  add('Form Preference (DP1/DP3)', opt('form_pref'));
+  lines.push('--- Occupancy Detail ---');
+  add('Rental Type', opt('rental_type'));
+  add('Commercial Space in Building', opt('commercial_space'));
+  add('Commercial Space %', opt('commercial_pct'));
+  add('Vacant How Long', opt('vacant_how_long'));
+  add('Vacant Reason', opt('vacant_reason'));
+  add('Vacant Secured', opt('vacant_secured'));
+  add('Vacant Utilities On', opt('vacant_utilities'));
+  add('Vacant Under Renovation', opt('vacant_renovation'));
+  add('Renovation Scope of Work', opt('reno_scope'));
+  add('Renovation % Complete', opt('reno_pct_complete'));
+  add('Renovation Licensed GC', opt('reno_gc'));
+  add('Renovation Occupied During', opt('reno_occupied'));
+  lines.push('--- Liability Hazards ---');
+  add('Pool', opt('has_pool'));
+  add('Pool Fenced', opt('pool_fenced'));
+  add('Pool Diving Board / Slide', opt('pool_diving'));
+  add('Trampoline', opt('has_trampoline'));
+  add('Dogs on Property', opt('has_dogs'));
+  add('Dog Breed(s)', opt('dog_breeds'));
+  add('Wood Stove / Supplemental Heat', opt('has_wood_stove'));
+  lines.push('--- Loss History & Prior Coverage ---');
+  add('Prior Losses (last 5 yrs)', opt('prior_losses_count'));
+  add('Loss Details', opt('loss_details'));
+  add('Currently Insured', opt('currently_insured'));
+  add('Lapse / Cancellation / Non-Renewal', opt('has_lapse'));
+  add('Lapse Explanation', opt('lapse_explain'));
+  lines.push('--- GA & FL Specifics ---');
+  add('FL Distance to Coast / Wind Zone', opt('fl_coast_distance'));
+  add('FL Wind Mitigation Report', opt('fl_wind_mit'));
+  add('FL Sinkhole / Ground Movement', opt('fl_sinkhole'));
+  add('Mortgagee / Lender Info', opt('mortgagee_info'));
+  lines.push('--- Files Uploaded ---');
+  lines.push(allFileNames());
+  return lines.join('\n');
+}
+
+function buildCoveragesSummary(data) {
+  var parts = ['Landlord Insurance'];
+  if (data.property_type) parts.push('Type: ' + data.property_type);
+  if (data.occupancy_status) parts.push('Occ: ' + data.occupancy_status);
+  var dwl = opt('dwelling_limit'); var lib = opt('liability_limit'); var frm = opt('form_pref');
+  if (dwl) parts.push('Cov A: ' + dwl);
+  if (lib) parts.push('Liability: ' + lib);
+  if (frm) parts.push('Form: ' + frm);
+  return parts.join(' | ');
+}
+
 window.addEventListener('DOMContentLoaded', function() {
   try {
-    const params = new URLSearchParams(window.location.search);
-    const enc = params.get('view_submission');
+    var params = new URLSearchParams(window.location.search);
+    var enc = params.get('view_submission');
     if (!enc) return;
-    const data = JSON.parse(decodeURIComponent(escape(atob(enc))));
+    var data = JSON.parse(decodeURIComponent(escape(atob(enc))));
     document.getElementById('landlord-quote-form').style.display = 'none';
-    const ss = document.getElementById('success-screen');
+    var ss = document.getElementById('success-screen');
     ss.style.display = 'block';
-    ss.querySelector('h2').textContent = 'Landlord Quote Submission Copy';
-    let table = '<table style="width:100%;border-collapse:collapse;text-align:left;font-size:13px;margin-top:16px;">';
-    for (const [k, v] of Object.entries(data)) {
-      table += '<tr><td style="padding:6px 12px;border:1px solid #ddd;font-weight:600;color:#0b1827;width:40%">' +
-        k.replace(/_/g,' ') + '</td><td style="padding:6px 12px;border:1px solid #ddd;">' + (v||'&mdash;') + '</td></tr>';
-    }
-    table += '</table>';
-    ss.querySelector('p').innerHTML = table;
+    ss.querySelector('h2').textContent = 'Landlord Insurance Quote \u2014 Submission Copy';
+    var groups = [
+      {label:'Core Fields', keys:['first_name','phone','email','property_address','property_type','occupancy_status','effective_date','coverage_type','lead_source','form_page','submitted_at']},
+      {label:'Building & Construction', keys:['year_built','construction_type','sq_footage','num_stories','num_units','roof_material','roof_age','roof_shape','electrical_panel','plumbing_type','update_roof','update_electrical','update_plumbing','update_hvac']},
+      {label:'Coverage Requested', keys:['dwelling_limit','valuation_pref','liability_limit','monthly_rent','deductible_pref','form_pref']},
+      {label:'Occupancy Detail', keys:['rental_type','commercial_space','commercial_pct','vacant_how_long','vacant_reason','vacant_secured','vacant_utilities','vacant_renovation','reno_scope','reno_pct_complete','reno_gc','reno_occupied']},
+      {label:'Liability Hazards', keys:['has_pool','pool_fenced','pool_diving','has_trampoline','has_dogs','dog_breeds','has_wood_stove']},
+      {label:'Loss History & Prior Coverage', keys:['prior_losses_count','loss_details','currently_insured','has_lapse','lapse_explain']},
+      {label:'GA & FL Specifics', keys:['fl_coast_distance','fl_wind_mit','fl_sinkhole','mortgagee_info']},
+      {label:'Files', keys:['files_noted']}
+    ];
+    var tbl = '<style>.sub-copy table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:16px;} .sub-copy th{background:#0b1827;color:#c9a84c;padding:7px 10px;text-align:left;letter-spacing:0.5px;} .sub-copy td{padding:5px 10px;border:1px solid #ddd;vertical-align:top;} .sub-copy td:first-child{font-weight:600;color:#0b1827;width:38%;white-space:nowrap;}</style><div class="sub-copy">';
+    groups.forEach(function(g) {
+      var rows = g.keys.filter(function(k){return data[k] && String(data[k]).trim();});
+      if (!rows.length) return;
+      tbl += '<table><thead><tr><th colspan="2">' + g.label + '</th></tr></thead><tbody>';
+      rows.forEach(function(k) {
+        var label = k.replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+        tbl += '<tr><td>' + label + '</td><td>' + String(data[k]).replace(/\n/g,'<br>') + '</td></tr>';
+      });
+      tbl += '</tbody></table>';
+    });
+    tbl += '</div>';
+    ss.querySelector('p').innerHTML = tbl;
   } catch(e) {}
 });
 
 document.getElementById('landlord-quote-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = document.getElementById('submit-btn');
+  var btn = document.getElementById('submit-btn');
   btn.textContent = 'Sending...';
   btn.disabled = true;
-
-  const fd = new FormData(this);
-  const data = {};
-  for (const [k, v] of fd.entries()) { data[k] = v; }
-
-  // Collect uploaded file names
-  const policyFiles = document.getElementById('policy_file').files;
-  const fileNames = policyFiles.length > 0
-    ? Array.from(policyFiles).map(f => f.name).join(', ')
-    : 'None uploaded';
-
-  // Build property summary for notes field
-  const propertySummary = [
-    'Property Address: ' + (data.property_address || 'Not provided'),
-    'Property Type: ' + (data.property_type || 'Not provided'),
-    'Occupancy Status: ' + (data.occupancy_status || 'Not provided'),
-    'Desired Effective Date: ' + (data.effective_date || 'Not provided'),
-    'Coverage Type: Landlord Insurance',
-    'Uploaded Files: ' + fileNames,
-    'Lead Source: Website Landlord Quote Page',
-    'Form Page: /landlord-insurance-quote'
-  ].join(' | ');
-
-  const templateParams = {
-    business_name:       data.first_name              || 'Not provided',
-    contact_name:        data.first_name              || 'Not provided',
-    phone:               data.phone                   || 'Not provided',
-    email:               data.email                   || 'Not provided',
-    usdot:               'N/A - Landlord Insurance',
-    mc_number:           'N/A',
-    authority_status:    'N/A',
-    operation_type:      data.property_type           || 'Not provided',
-    cargo_type:          data.occupancy_status        || 'Not provided',
-    haul_radius:         data.effective_date          || 'Not provided',
-    states_of_operation: 'Georgia / Florida',
-    prior_coverage:      fileNames,
-    prior_carrier:       'Not provided',
-    power_unit_count:    'N/A',
-    driver_count:        'N/A',
-    coverages_summary:   'Landlord Insurance | Property: ' + (data.property_address || 'Not provided') + ' | Type: ' + (data.property_type || 'Not provided') + ' | Occupancy: ' + (data.occupancy_status || 'Not provided'),
-    notes:               propertySummary,
-    files_noted:         fileNames,
-    coverage_type:       'Landlord Insurance',
-    lead_source:         'Website Landlord Quote Page',
-    form_page:           '/landlord-insurance-quote',
-    submission_pdf_link: buildSubmissionLink(Object.assign({}, data, {
-      coverage_type: 'Landlord Insurance',
-      lead_source: 'Website Landlord Quote Page',
-      form_page: '/landlord-insurance-quote',
-      files_noted: fileNames,
-      submitted_at: new Date().toISOString()
-    })),
-    submitted_at:        new Date().toISOString()
+  var fd = new FormData(this);
+  var data = {};
+  for (var pair of fd.entries()) { data[pair[0]] = pair[1]; }
+  var fileNames = allFileNames();
+  var notesBlock = buildNotes(data);
+  var covSummary = buildCoveragesSummary(data);
+  var submissionData = Object.assign({}, data, {
+    coverage_type:'Landlord Insurance', lead_source:'Website Landlord Quote Page',
+    form_page:'/landlord-insurance-quote', files_noted:fileNames,
+    submitted_at:new Date().toISOString()
+  });
+  // Mirror optional fields into submissionData for ?view_submission
+  ['year_built','construction_type','sq_footage','num_stories','num_units','roof_material','roof_age','roof_shape','electrical_panel','plumbing_type','update_roof','update_electrical','update_plumbing','update_hvac','dwelling_limit','valuation_pref','liability_limit','monthly_rent','deductible_pref','form_pref','rental_type','commercial_space','commercial_pct','vacant_how_long','vacant_reason','vacant_secured','vacant_utilities','vacant_renovation','reno_scope','reno_pct_complete','reno_gc','reno_occupied','has_pool','pool_fenced','pool_diving','has_trampoline','has_dogs','dog_breeds','has_wood_stove','prior_losses_count','loss_details','currently_insured','has_lapse','lapse_explain','fl_coast_distance','fl_wind_mit','fl_sinkhole','mortgagee_info'].forEach(function(id){
+    var v = opt(id); if (v) submissionData[id] = v;
+  });
+  var templateParams = {
+    business_name:data.first_name||'Not provided', contact_name:data.first_name||'Not provided',
+    phone:data.phone||'Not provided', email:data.email||'Not provided',
+    usdot:'N/A - Landlord Insurance', mc_number:'N/A', authority_status:'N/A',
+    operation_type:data.property_type||'Not provided',
+    cargo_type:data.occupancy_status||'Not provided',
+    haul_radius:data.effective_date||'Not provided',
+    states_of_operation:'Georgia / Florida',
+    prior_coverage:opt('currently_insured')||fileNames,
+    prior_carrier:opt('mortgagee_info')||'Not provided',
+    power_unit_count:opt('dwelling_limit')||'N/A',
+    driver_count:opt('liability_limit')||'N/A',
+    coverages_summary:covSummary,
+    notes:notesBlock,
+    files_noted:fileNames,
+    coverage_type:'Landlord Insurance',
+    lead_source:'Website Landlord Quote Page',
+    form_page:'/landlord-insurance-quote',
+    submission_pdf_link:buildSubmissionLink(submissionData),
+    submitted_at:submissionData.submitted_at
   };
-
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
     console.log('Landlord quote notification emailed via EmailJS.');
     document.getElementById('landlord-quote-form').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top:0,behavior:'smooth'});
   } catch(err) {
     console.error('EmailJS error:', err);
     btn.textContent = 'Get My Landlord Quote';
@@ -614,4 +902,4 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
 });
 </script>
 </body>
-</html>
+  </html>
