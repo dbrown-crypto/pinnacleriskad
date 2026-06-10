@@ -769,27 +769,25 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
 });
 </script>
   <script>
-    window.initPlaceAutocomplete = async function() {
-        const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
-        const input = document.getElementById('property_address');
-        if (!input) return;
-        const placeAutoComplete = new PlaceAutocompleteElement({
-              componentRestrictions: { country: 'us' },
-              types: ['address']
-        });
-        placeAutoComplete.id = 'property_address_autocomplete';
-        placeAutoComplete.style.cssText = 'width:100%;display:block;';
-        input.parentNode.insertBefore(placeAutoComplete, input);
-        input.style.display = 'none';
-        placeAutoComplete.addEventListener('gmp-placeselect', async ({ place }) => {
-              await place.fetchFields({ fields: ['formattedAddress'] });
-              input.value = place.formattedAddress;
-              input.dispatchEvent(new Event('input', { bubbles: true }));
-        });
-    };
+      window.initAddressAutocomplete = function() {
+            var input = document.getElementById('property_address');
+            if (!input) return;
+            var autocomplete = new google.maps.places.Autocomplete(input, {
+                    types: ['address'],
+                    componentRestrictions: { country: 'us' }
+            });
+            autocomplete.setFields(['formatted_address']);
+            autocomplete.addListener('place_changed', function() {
+                    var place = autocomplete.getPlace();
+                    if (place && place.formatted_address) {
+                              input.value = place.formatted_address;
+                    }
+            });
+      };
   </script>
   <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&loading=async&libraries=places&callback=initPlaceAutocomplete">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&libraries=places&callback=initAddressAutocomplete">
+  </script>
   </script>
 </body>
 </html>
