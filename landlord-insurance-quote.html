@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {h
+:root {hh
 --navy:#0b1827;--navy2:#112236;--navy3:#1a3050;--gold:#c9a84c;--gold2:#e2c27a;
 --gold3:rgba(201,168,76,0.12);--white:#ffffff;--off:#f7f5f1;--light:#f2efe9;
 --border:#ddd8ce;--text:#1a1a1a;--muted:#7a7a7a;--green:#1e6641;--radius:6px;h
@@ -769,23 +769,27 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
 });
 </script>
   <script>
-      window.initAddressAutocomplete = function() {
-            var input = document.getElementById('property_address');
-            if (!input) return;
-            var autocomplete = new google.maps.places.Autocomplete(input, {
-                    types: ['address'],
-                    componentRestrictions: { country: 'us' }
-            });
-            autocomplete.setFields(['formatted_address']);
-            autocomplete.addListener('place_changed', function() {
-                    var place = autocomplete.getPlace();
-                    if (place && place.formatted_address) {
-                              input.value = place.formatted_address;
-                    }
-            });
-      };
+    (async () => {
+        const { PlaceAutocompleteElement } = await google.maps.importLibrary('places');
+        const input = document.getElementById('property_address');
+        if (!input) return;
+        const placeAutoComplete = new PlaceAutocompleteElement({
+              componentRestrictions: { country: 'us' },
+              types: ['address']
+        });
+        placeAutoComplete.id = 'property_address_autocomplete';
+        placeAutoComplete.style.cssText = 'width:100%;display:block;';
+        input.parentNode.insertBefore(placeAutoComplete, input);
+        input.style.display = 'none';
+        placeAutoComplete.addEventListener('gmp-placeselect', async ({ place }) => {
+              await place.fetchFields({ fields: ['formattedAddress'] });
+              input.value = place.formattedAddress;
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    })();
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&libraries=places&callback=initAddressAutocomplete" async defer></script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&loading=async&libraries=places">
   </script>
 </body>
 </html>
