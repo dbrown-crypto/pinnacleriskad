@@ -14,7 +14,7 @@
 :root {
 --navy:#0b1827;--navy2:#112236;--navy3:#1a3050;--gold:#c9a84c;--gold2:#e2c27a;
 --gold3:rgba(201,168,76,0.12);--white:#ffffff;--off:#f7f5f1;--light:#f2efe9;
---border:#ddd8ce;--text:#1a1a1a;--muted:#7a7a7a;--green:#1e6641;--radius:6px;
+--border:#ddd8ce;--text:#1a1a1a;--muted:#7a7a7a;--green:#1e6641;--radius:6px;h
 }
 *,::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -256,7 +256,7 @@ footer a:hover{color:var(--gold);}
       <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Your <em>Contact</em> Information</span><span class="fs-desc">Required to follow up on your quote</span></div>
       <div class="form-section-body">
         <div class="fgrid fgrid-2">
-          <div class="field"><label for="first_name">First Name <span class="req">*</span></label><input type="text" id="first_name" name="first_name" placeholder="First name" required></div>
+          <div class="field"><label for="full_name">Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" placeholder="Full name" required></div>
           <div class="field"><label for="phone">Phone Number <span class="req">*</span></label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required></div>
           <div class="field span-2"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
         </div>
@@ -587,7 +587,7 @@ function buildNotes(data) {
   add('Insured / Lapse Explanation', data.insured_lapse_explain);
   lines.push('');
   lines.push('=== CORE FIELDS ===');
-  add('First Name', data.first_name);
+  add('First Name', data.full_name);
   add('Phone', data.phone);
   add('Email', data.email);
   add('Property Address', data.property_address);
@@ -671,7 +671,7 @@ window.addEventListener('DOMContentLoaded', function() {
     ss.querySelector('h2').textContent = 'Landlord Insurance Quote \u2014 Submission Copy';
     var groups = [
       {label:'Price Indication Summary', keys:['year_built','roof_age','occupancy_status','dwelling_limit','liability_limit','prior_losses','prior_losses_describe','currently_insured','insured_lapse_explain']},
-      {label:'Core Fields', keys:['first_name','phone','email','property_address','property_type','effective_date','coverage_type','lead_source','form_page','submitted_at']},
+      {label:'Core Fields', keys:['full_name','phone','email','property_address','property_type','effective_date','coverage_type','lead_source','form_page','submitted_at']},
       {label:'Building & Construction', keys:['construction_type','sq_footage','num_stories','num_units','roof_material','roof_shape','electrical_panel','plumbing_type','update_roof','update_electrical','update_plumbing','update_hvac']},
       {label:'Coverage Preferences', keys:['valuation_pref','monthly_rent','deductible_pref','form_pref']},
       {label:'Occupancy Detail', keys:['rental_type','commercial_space','commercial_pct','vacant_how_long','vacant_reason','vacant_secured','vacant_utilities','vacant_renovation','reno_scope','reno_pct_complete','reno_gc','reno_occupied']},
@@ -730,8 +730,8 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     var v = opt(id); if (v) submissionData[id] = v;
   });
   var templateParams = {
-    business_name: data.first_name||'Not provided',
-    contact_name:  data.first_name||'Not provided',
+    business_name: data.full_name||'Not provided',
+    contact_name:  data.full_name||'Not provided',
     phone:         data.phone||'Not provided',
     email:         data.email||'Not provided',
     usdot:         'N/A - Landlord Insurance',
@@ -768,5 +768,24 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   }
 });
 </script>
+  <script>
+      window.initAddressAutocomplete = function() {
+            var input = document.getElementById('property_address');
+            if (!input) return;
+            var autocomplete = new google.maps.places.Autocomplete(input, {
+                    types: ['address'],
+                    componentRestrictions: { country: 'us' }
+            });
+            autocomplete.setFields(['formatted_address']);
+            autocomplete.addListener('place_changed', function() {
+                    var place = autocomplete.getPlace();
+                    if (place && place.formatted_address) {
+                              input.value = place.formatted_address;
+                    }
+            });
+      };
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAddressAutocomplete" async defer></script>
+  </script>
 </body>
 </html>
