@@ -797,6 +797,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     if (!addr) return;
 
     var lastQueried = "";
+    var lastSeen = (addr.value || "").trim();
     var statusEl = null;
 
     function ensureStatus() {
@@ -863,17 +864,27 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       var q = (addr.value || "").trim();
       if (q.length < 8 || q === lastQueried) return;
       lastQueried = q;
-      setStatus("Looking up property details…", "#555");
+      setStatus("Looking up property details… (first lookup after idle can take up to a minute)", "#555");
       fetch(ENDPOINT + "?address=" + encodeURIComponent(q), { method: "GET" })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (d) { if (d) { fill(d); } else { setStatus("", "#555"); } })
-        .catch(function () { setStatus("", "#555"); });
+        .then(function (d) { if (d) { fill(d); } else { setStatus("Lookup unavailable right now — please fill the details manually.", "#a1502b"); } })
+        .catch(function () { setStatus("Lookup unavailable right now — please fill the details manually.", "#a1502b"); });
     }
 
+    // Explicit triggers
     addr.addEventListener("blur", lookup);
-    addr.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") { e.preventDefault(); lookup(); }
-    });
+    addr.addEventListener("change", lookup);
+    addr.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); lookup(); } });
+
+    // Robust catch-all: detect when the address value settles, covering Google Places
+    // autocomplete filling the field programmatically (which fires no blur on mobile).
+    setInterval(function () {
+      var v = (addr.value || "").trim();
+      if (v !== lastSeen) { lastSeen = v; return; }          // still changing — wait
+      if (v.length >= 8 && v !== lastQueried && /\d/.test(v) && v.indexOf(",") > -1) {
+        lookup();                                            // settled + looks like a full address
+      }
+    }, 900);
   })();
   </script>
 </body>
