@@ -821,6 +821,21 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       }
     }
 
+    function mapPropertyType(raw, units) {
+      if (!raw) return "";
+      var t = String(raw).toLowerCase();
+      var u = parseInt(units, 10);
+      if (t.indexOf("single") > -1 || t.indexOf("town") > -1 || t.indexOf("condo") > -1) return "Single-Family Rental";
+      if (t.indexOf("apartment") > -1) return "Apartment Building";
+      if (t.indexOf("multi") > -1 || t.indexOf("duplex") > -1 || t.indexOf("triplex") > -1 || t.indexOf("fourplex") > -1) {
+        return (!isNaN(u) && u >= 5) ? "Small Multifamily" : "Duplex/Triplex/Fourplex";
+      }
+      return "";
+    }
+    function money(n) {
+      if (n === null || n === undefined || isNaN(parseFloat(n))) return null;
+      return "$" + Math.round(parseFloat(n)).toLocaleString("en-US");
+    }
     function fill(data) {
       console.log("[autofill] response:", data);
       if (!data || data.found === false) {
@@ -840,7 +855,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       }
       setSelect("roof_material", data.roof_material);
       setSelect("construction_type", data.construction_type);
-      setStatus("Autofilled from property records — please review and correct anything that looks off.", "#178a3c");
+      setSelect("property_type", mapPropertyType(data.property_type, data.units));
+      var dwelling = money(data.estimated_value);
+      if (dwelling) setInput("dwelling_limit", dwelling);
+      setStatus("Autofilled from property records — review and confirm (dwelling limit is an estimate; adjust to replacement cost).", "#178a3c");
     }
 
     function lookup() {
