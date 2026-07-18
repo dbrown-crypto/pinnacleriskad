@@ -789,5 +789,92 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&libraries=places&callback=initAddressAutocomplete">
   </script>
   </script>
+  <!-- RentCast property autofill via Pinnacle lookup service -->
+  <script>
+  (function () {
+    var ENDPOINT = "https://pinnacleriskad.onrender.com/property-lookup";
+    var addr = document.getElementById("property_address");
+    if (!addr) return;
+
+    var lastQueried = "";
+    var statusEl = null;
+
+    function ensureStatus() {
+      if (statusEl) return statusEl;
+      statusEl = document.createElement("div");
+      statusEl.id = "autofill-status";
+      statusEl.style.cssText = "font-size:13px;margin-top:6px;min-height:16px;color:#555;";
+      addr.parentNode.appendChild(statusEl);
+      return statusEl;
+    }
+    function setStatus(msg, color) {
+      var el = ensureStatus();
+      el.textContent = msg || "";
+      el.style.color = color || "#555";
+    }
+
+    function setInput(id, val) {
+      if (val === null || val === undefined || val === "") return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el.value && String(el.value).trim() !== "") return;
+      el.value = val;
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    function setSelect(id, val) {
+      if (!val) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el.value && String(el.value).trim() !== "") return;
+      var want = String(val).toLowerCase();
+      for (var i = 0; i < el.options.length; i++) {
+        if (el.options[i].value.toLowerCase() === want || el.options[i].text.toLowerCase() === want) {
+          el.selectedIndex = i;
+          el.dispatchEvent(new Event("change", { bubbles: true }));
+          return;
+        }
+      }
+    }
+
+    function fill(data) {
+      if (!data || data.found === false) {
+        setStatus("No property record found for that address — please fill the details in manually.", "#a1502b");
+        return;
+      }
+      setInput("year_built", data.year_built);
+      setInput("sq_footage", data.square_footage);
+      if (data.stories) {
+        var n = parseInt(data.stories, 10);
+        setSelect("num_stories", isNaN(n) ? data.stories : (n >= 4 ? "4+" : String(n)));
+      }
+      if (data.units && parseInt(data.units, 10) > 1) {
+        var cond = document.getElementById("cond-units");
+        if (cond) cond.style.display = "";
+        setInput("num_units", data.units);
+      }
+      setSelect("roof_material", data.roof_material);
+      setSelect("construction_type", data.construction_type);
+      setStatus("Autofilled from property records — please review and correct anything that looks off.", "#178a3c");
+    }
+
+    function lookup() {
+      var q = (addr.value || "").trim();
+      if (q.length < 8 || q === lastQueried) return;
+      lastQueried = q;
+      setStatus("Looking up property details…", "#555");
+      fetch(ENDPOINT + "?address=" + encodeURIComponent(q), { method: "GET" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) { fill(d); } else { setStatus("", "#555"); } })
+        .catch(function () { setStatus("", "#555"); });
+    }
+
+    addr.addEventListener("blur", lookup);
+    addr.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); lookup(); }
+    });
+  })();
+  </script>
 </body>
 </html>
