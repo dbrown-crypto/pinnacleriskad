@@ -794,7 +794,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   (function () {
     var ENDPOINT = "https://pinnacleriskad.onrender.com/property-lookup";
     var addr = document.getElementById("property_address");
-    if (!addr) return;
+    if (!addr) { console.log("[autofill] property_address field not found"); return; }
 
     var lastQueried = "";
     var lastSeen = (addr.value || "").trim();
@@ -804,7 +804,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       if (statusEl) return statusEl;
       statusEl = document.createElement("div");
       statusEl.id = "autofill-status";
-      statusEl.style.cssText = "font-size:13px;margin-top:6px;min-height:16px;color:#555;";
+      statusEl.style.cssText = "font-size:13px;margin-top:6px;min-height:16px;font-weight:600;color:#555;";
       addr.parentNode.appendChild(statusEl);
       return statusEl;
     }
@@ -823,7 +823,6 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       el.dispatchEvent(new Event("input", { bubbles: true }));
       el.dispatchEvent(new Event("change", { bubbles: true }));
     }
-
     function setSelect(id, val) {
       if (!val) return;
       var el = document.getElementById(id);
@@ -840,6 +839,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     }
 
     function fill(data) {
+      console.log("[autofill] response:", data);
       if (!data || data.found === false) {
         setStatus("No property record found for that address — please fill the details in manually.", "#a1502b");
         return;
@@ -864,27 +864,34 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       var q = (addr.value || "").trim();
       if (q.length < 8 || q === lastQueried) return;
       lastQueried = q;
+      console.log("[autofill] looking up:", q);
       setStatus("Looking up property details… (first lookup after idle can take up to a minute)", "#555");
-      fetch(ENDPOINT + "?address=" + encodeURIComponent(q), { method: "GET" })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (d) { if (d) { fill(d); } else { setStatus("Lookup unavailable right now — please fill the details manually.", "#a1502b"); } })
-        .catch(function () { setStatus("Lookup unavailable right now — please fill the details manually.", "#a1502b"); });
+      fetch(ENDPOINT + "?address=" + encodeURIComponent(q), { method: "GET", mode: "cors" })
+        .then(function (r) {
+          if (!r.ok) { throw new Error("HTTP " + r.status); }
+          return r.json();
+        })
+        .then(function (d) { fill(d); })
+        .catch(function (e) {
+          console.log("[autofill] error:", e);
+          setStatus("Lookup error: " + (e && e.message ? e.message : e) + " — please fill details manually.", "#c0261c");
+        });
     }
 
-    // Explicit triggers
     addr.addEventListener("blur", lookup);
     addr.addEventListener("change", lookup);
     addr.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); lookup(); } });
 
-    // Robust catch-all: detect when the address value settles, covering Google Places
-    // autocomplete filling the field programmatically (which fires no blur on mobile).
+    // Catch-all: fire once the address value has settled (covers Google Places programmatic fill).
     setInterval(function () {
       var v = (addr.value || "").trim();
-      if (v !== lastSeen) { lastSeen = v; return; }          // still changing — wait
-      if (v.length >= 8 && v !== lastQueried && /\d/.test(v) && v.indexOf(",") > -1) {
-        lookup();                                            // settled + looks like a full address
+      if (v !== lastSeen) { lastSeen = v; return; }
+      if (v.length >= 8 && v !== lastQueried && /\d/.test(v) && v.indexOf(" ") > -1) {
+        lookup();
       }
-    }, 900);
+    }, 600);
+
+    console.log("[autofill] RentCast autofill armed on #property_address");
   })();
   </script>
 </body>

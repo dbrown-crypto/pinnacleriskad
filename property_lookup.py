@@ -19,10 +19,7 @@ app = FastAPI(title="Pinnacle Property Lookup")
 # Only your own site may call this from the browser.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://pinnacleriskad.com",
-        "https://www.pinnacleriskad.com",
-    ],
+    allow_origins=["*"],
     allow_methods=["GET"],
     allow_headers=["*"],
 )
