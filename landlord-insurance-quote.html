@@ -266,7 +266,7 @@ footer a:hover{color:var(--gold);}
       <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Property <em>Details</em></span><span class="fs-desc">Tell us about the rental property</span></div>
       <div class="form-section-body">
         <div class="fgrid fgrid-2">
-          <div class="field span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" placeholder="123 Main St, Atlanta, GA 30301" required></div>
+          <div class="field span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" placeholder="123 Main St, Atlanta, GA 30301" required><span class="hint" id="autofill-hint">Type the full address — street, city, state, and ZIP — and property details fill in automatically.</span></div>
           <div class="field"><label for="property_type">Property Type <span class="req">*</span></label><select id="property_type" name="property_type" required><option value="">Select property type...</option><option value="Single-Family Rental">Single-Family Rental</option><option value="Duplex/Triplex/Fourplex">Duplex/Triplex/Fourplex</option><option value="Small Multifamily">Small Multifamily</option><option value="Apartment Building">Apartment Building</option><option value="Vacant Property">Vacant Property</option><option value="Renovation Property">Renovation Property</option></select></div>
           <div class="field"><label for="occupancy_status">Occupancy Status <span class="req">*</span></label><select id="occupancy_status" name="occupancy_status" required><option value="">Select occupancy...</option><option value="Tenant Occupied">Tenant Occupied</option><option value="Vacant">Vacant</option><option value="Owner Occupied">Owner Occupied</option><option value="Renovation">Renovation</option><option value="Mixed Occupancy">Mixed Occupancy</option></select></div>
           <div class="field"><label for="effective_date">Desired Effective Date</label><input type="date" id="effective_date" name="effective_date"></div>
@@ -768,27 +768,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   }
 });
 </script>
-  <script>
-      window.initAddressAutocomplete = function() {
-            var input = document.getElementById('property_address');
-            if (!input) return;
-            var autocomplete = new google.maps.places.Autocomplete(input, {
-                    types: ['address'],
-                    componentRestrictions: { country: 'us' }
-            });
-            autocomplete.setFields(['formatted_address']);
-            autocomplete.addListener('place_changed', function() {
-                    var place = autocomplete.getPlace();
-                    if (place && place.formatted_address) {
-                              input.value = place.formatted_address;
-                    }
-            });
-      };
-  </script>
-  <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhPTQ_nT3KwY7AYkqGwloWnjqcMcvuPGU&libraries=places&callback=initAddressAutocomplete">
-  </script>
-  </script>
+  <!-- Google Places autocomplete removed: the Google Maps API key was throwing a
+       "can't load Google Maps correctly" error. Address is now typed manually and the
+       RentCast autofill runs on the typed value. Re-add Places later once the Google
+       Cloud key has billing + Maps JavaScript/Places APIs enabled for pinnacleriskad.com. -->
   <!-- RentCast property autofill via Pinnacle lookup service -->
   <script>
   (function () {
