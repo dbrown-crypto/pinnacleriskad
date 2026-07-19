@@ -298,6 +298,8 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
+    <video class="pra-herovid" autoplay muted loop playsinline poster="property-hero-poster.jpg"><source src="property-hero.mp4" type="video/mp4"></video>
+    <div class="pra-herovid-veil"></div>
   <div class="hero-content">
     <div class="hero-text reveal">
       <p class="eyebrow">Landlord Insurance in Georgia</p>
@@ -648,6 +650,27 @@
     });
     q.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();} });
   });
+</script>
+<style>
+  .hero{position:relative;overflow:hidden}
+  .pra-herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(1.05) contrast(1.02)}
+  .pra-herovid-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,17,32,.92) 0%,rgba(6,17,32,.62) 46%,rgba(6,17,32,.34) 100%),linear-gradient(180deg,rgba(6,17,32,.5),rgba(6,17,32,0) 30%,rgba(6,17,32,.62))}
+  .hero>*:not(.pra-herovid):not(.pra-herovid-veil){position:relative;z-index:2}
+  .pra-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .pra-reveal.in{opacity:1;transform:none}
+  @media(max-width:700px){.pra-herovid{display:none}.hero{background:#0A1A30 url('property-hero-poster.jpg') center/cover}}
+  @media(prefers-reduced-motion:reduce){.pra-reveal{opacity:1;transform:none;transition:none}.pra-herovid{display:none}}
+</style>
+<script>
+(function(){
+  var v=document.querySelector('.pra-herovid');
+  if(v){var pl=function(){var p=v.play();if(p&&p.catch)p.catch(function(){})};v.addEventListener('canplay',pl);v.addEventListener('loadeddata',pl);pl();}
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var els=[].slice.call(document.querySelectorAll(".section-title,.section-subtitle,.who-card,.coverage-item,.coverage-badge,.factor-item,.mistake-item,.faq-item"));
+  els.forEach(function(el){el.classList.add('pra-reveal')});
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){var el=e.target;var i=el.parentNode?[].slice.call(el.parentNode.children).indexOf(el):0;el.style.transitionDelay=Math.min(Math.max(i,0)*70,350)+'ms';el.classList.add('in');io.unobserve(el);}})},{threshold:0.12});
+  els.forEach(function(el){io.observe(el)});
+})();
 </script>
 </body>
 </html>
