@@ -25,13 +25,13 @@
       --gold-light: #E2CA7B;
       --gold-dark: #A68B3A;
       --gold-glow: rgba(201, 169, 78, 0.15);
-      --black: #0A0A0A;
-      --black-light: #0E0E0E;
-      --black-card: #131313;
-      --black-elevated: #1A1A1A;
-      --gray-900: #1C1C1C;
-      --gray-800: #282828;
-      --gray-700: #383838;
+      --black: #0A1A30;
+      --black-light: #0B2038;
+      --black-card: #122A44;
+      --black-elevated: #143050;
+      --gray-900: #16324F;
+      --gray-800: #1f4062;
+      --gray-700: #22405C;
       --gray-600: #555;
       --gray-400: #8A8A8A;
       --gray-300: #AAA;
@@ -115,16 +115,16 @@
     /* HEADER (match homepage/quote) */
     header{
       position: fixed; top:0; left:0; right:0; z-index: 1000;
-      background: rgba(10, 10, 10, 0.88);
+      background: rgba(9,23,42, 0.88);
       backdrop-filter: blur(24px) saturate(1.2);
       -webkit-backdrop-filter: blur(24px) saturate(1.2);
       border-bottom: 1px solid rgba(201, 169, 78, 0.06);
       transition: var(--transition);
     }
     header.scrolled{
-      background: rgba(10,10,10,0.96);
+      background: rgba(9,23,42,0.96);
       border-bottom-color: rgba(201,169,78,0.1);
-      box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 40px rgba(3,10,20,0.5);
     }
     .nav-inner { display:flex; align-items:center; justify-content:space-between; height: 76px; }
     .logo {
@@ -232,7 +232,7 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       padding: clamp(34px, 5vw, 56px);
-      box-shadow: 0 16px 60px rgba(0,0,0,0.45), var(--shadow-gold);
+      box-shadow: 0 16px 60px rgba(3,10,20,0.45), var(--shadow-gold);
     }
     .card::before{
       content:'';
@@ -255,7 +255,7 @@
     }
     .box{
       border: 1px solid rgba(201, 169, 78, 0.08);
-      background: rgba(10,10,10,0.35);
+      background: rgba(9,23,42,0.35);
       padding: 18px 18px;
     }
     .label{
@@ -318,7 +318,7 @@
     .sms-disclosure{
       margin-top: 26px;
       border: 1px solid rgba(201, 169, 78, 0.10);
-      background: rgba(10,10,10,0.28);
+      background: rgba(9,23,42,0.28);
       padding: 18px 18px;
     }
     .sms-disclosure-title{
@@ -367,7 +367,7 @@
         flex-direction: column;
         position: fixed;
         inset: 0;
-        background: rgba(10, 10, 10, 0.98);
+        background: rgba(9,23,42, 0.98);
         backdrop-filter: blur(20px);
         justify-content: center;
         align-items: center;
