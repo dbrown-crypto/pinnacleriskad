@@ -271,6 +271,9 @@ footer a:hover{color:var(--gold);}
           <div class="field"><label for="occupancy_status">Occupancy Status <span class="req">*</span></label><select id="occupancy_status" name="occupancy_status" required><option value="">Select occupancy...</option><option value="Tenant Occupied">Tenant Occupied</option><option value="Vacant">Vacant</option><option value="Owner Occupied">Owner Occupied</option><option value="Renovation">Renovation</option><option value="Mixed Occupancy">Mixed Occupancy</option></select></div>
           <div class="field"><label for="effective_date">Desired Effective Date</label><input type="date" id="effective_date" name="effective_date"></div>
           <div class="field"><label for="year_built">Year Built</label><input type="number" id="year_built" name="year_built" placeholder="e.g. 1998" min="1800" max="2026"></div>
+          <div class="field"><label for="bedrooms">Bedrooms</label><input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 3" min="0" max="50"></div>
+          <div class="field"><label for="bathrooms">Bathrooms</label><input type="number" id="bathrooms" name="bathrooms" placeholder="e.g. 2" min="0" max="50" step="0.5"></div>
+          <div class="field"><label for="sq_footage">Square Footage</label><input type="number" id="sq_footage" name="sq_footage" placeholder="e.g. 1400"></div>
           <div class="field" style="display:none;"><label for="roof_age">Roof Age or Year Last Replaced</label><input type="text" id="roof_age" name="roof_age" placeholder="e.g. 2018 or 6 years old"></div>
           <div class="field"><label for="dwelling_limit">Dwelling Limit / Coverage A Desired <span class="hint-inline">(estimated — adjust if needed)</span></label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="$250,000"></div>
           <div class="field"><label for="liability_limit">Liability Limit <span class="req">*</span></label><select id="liability_limit" name="liability_limit" required><option value="">Select liability limit...</option><option value="$300,000">$300,000</option><option value="$500,000">$500,000</option><option value="$1,000,000">$1,000,000</option><option value="Not sure">Not sure</option></select></div>
@@ -322,7 +325,7 @@ footer a:hover{color:var(--gold);}
         <div class="form-section-body">
           <div class="fgrid fgrid-2">
             <div class="field"><label for="construction_type">Construction Type</label><select id="construction_type" name="construction_type"><option value="">Select...</option><option>Frame</option><option>Masonry</option><option>Masonry Veneer</option><option>Other</option></select></div>
-            <div class="field"><label for="sq_footage">Square Footage</label><input type="number" id="sq_footage" name="sq_footage" placeholder="e.g. 1400"></div>
+            
             <div class="field"><label for="num_stories">Number of Stories</label><select id="num_stories" name="num_stories"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
             <div class="field cond-block" id="cond-units" style="display:none;"><label for="num_units">Number of Units</label><input type="number" id="num_units" name="num_units" placeholder="e.g. 4" min="2" max="100"></div>
             <div class="field"><label for="roof_material">Roof Material</label><select id="roof_material" name="roof_material"><option value="">Select...</option><option>Asphalt Shingle</option><option>Metal</option><option>Tile</option><option>Flat/Membrane</option><option>Other</option></select></div>
@@ -834,6 +837,8 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       }
       setInput("year_built", data.year_built);
       setInput("sq_footage", data.square_footage);
+      setInput("bedrooms", data.bedrooms);
+      setInput("bathrooms", data.bathrooms);
       if (data.stories) {
         var n = parseInt(data.stories, 10);
         setSelect("num_stories", isNaN(n) ? data.stories : (n >= 4 ? "4+" : String(n)));
