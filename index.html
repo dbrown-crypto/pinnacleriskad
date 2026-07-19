@@ -175,8 +175,8 @@
   .lic .facts{list-style:none;margin-top:18px}
   .lic .facts li{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;font-size:.95rem}
   .lic .facts .k{color:var(--gold);min-width:130px;font-weight:600;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
-  .map{aspect-ratio:4/3;border:1px solid var(--line);background:radial-gradient(circle at 40% 45%,rgba(201,169,78,.12),transparent 60%),#0C2340;
-    display:flex;align-items:center;justify-content:center;color:var(--gray2);font-size:.8rem;text-align:center}
+  .map{aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;position:relative;background:#0C2340;border-radius:2px}
+  .map iframe{width:100%;height:100%;border:0;display:block}
 
   /* FINAL CTA */
   .final{background:linear-gradient(120deg,#123255,#0A1A30);text-align:center;border-top:1px solid var(--line)}
@@ -393,44 +393,7 @@
           <li><span class="k">Direct</span> <span><a href="tel:+19432393439" style="color:#fff;font-weight:600">(943) 239-3439</a> &nbsp;·&nbsp; dbrown@pinnacleriskad.com</span></li>
         </ul>
       </div>
-      <div class="map"><svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
-  <defs>
-    <linearGradient id="ggold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#EBD79A"/><stop offset="0.55" stop-color="#C9A94E"/><stop offset="1" stop-color="#9E7C2E"/>
-    </linearGradient>
-    <radialGradient id="gglow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="rgba(201,169,78,0.35)"/><stop offset="1" stop-color="rgba(201,169,78,0)"/>
-    </radialGradient>
-    <filter id="soft"><feGaussianBlur stdDeviation="0.6"/></filter>
-  </defs>
-  <!-- faint lat/long grid -->
-  <g stroke="rgba(201,169,78,0.10)" stroke-width="1">
-    <line x1="0" y1="70" x2="420" y2="70"/><line x1="0" y1="140" x2="420" y2="140"/>
-    <line x1="0" y1="210" x2="420" y2="210"/><line x1="0" y1="280" x2="420" y2="280"/>
-    <line x1="90" y1="0" x2="90" y2="360"/><line x1="180" y1="0" x2="180" y2="360"/>
-    <line x1="270" y1="0" x2="270" y2="360"/><line x1="360" y1="0" x2="360" y2="360"/>
-  </g>
-  <ellipse cx="210" cy="180" rx="150" ry="140" fill="url(#gglow)"/>
-  <!-- Georgia -->
-  <path d="M138,70 L245,60 L250,86 L258,120 L268,150 L250,182 L150,186 L140,150 L131,110 Z"
-        fill="url(#ggold)" stroke="#E2CA7B" stroke-width="1.5" opacity="0.95"/>
-  <text x="188" y="132" font-family="Georgia,serif" font-size="16" fill="#0A1A30" font-weight="bold" text-anchor="middle">GA</text>
-  <!-- Florida (panhandle + peninsula) -->
-  <path d="M70,190 L150,187 L205,187 L214,205 L226,214 L246,214 L258,232 L266,270 L262,306 L250,322 L237,320 L233,286 L224,252 L206,226 L182,214 L150,210 L70,206 Z"
-        fill="url(#ggold)" stroke="#E2CA7B" stroke-width="1.5" opacity="0.95"/>
-  <text x="120" y="204" font-family="Georgia,serif" font-size="14" fill="#0A1A30" font-weight="bold" text-anchor="middle">FL</text>
-  <!-- Atlanta HQ pin (north-central GA) -->
-  <g>
-    <circle cx="180" cy="105" r="16" fill="none" stroke="#E2CA7B" stroke-width="1.2" opacity="0.5">
-      <animate attributeName="r" values="10;20;10" dur="3s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.55;0;0.55" dur="3s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="180" cy="105" r="5.5" fill="#0A1A30" stroke="#E2CA7B" stroke-width="2"/>
-    <text x="180" y="90" font-family="Raleway,Arial,sans-serif" font-size="9" fill="#E2CA7B" text-anchor="middle" letter-spacing="1">ATLANTA</text>
-  </g>
-  <!-- caption -->
-  <text x="210" y="348" font-family="Raleway,Arial,sans-serif" font-size="11" fill="#8A9099" text-anchor="middle" letter-spacing="1.5">CORE MARKETS: GEORGIA &amp; FLORIDA</text>
-</svg></div>
+      <div class="map"><iframe title="Pinnacle Risk Advisors office location" src="https://maps.google.com/maps?q=2700+Cumberland+Pkwy+SE,+Atlanta,+GA+30339&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
     </div>
   </div>
 </section>
