@@ -816,7 +816,7 @@ async function lookupDOT() {
     if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
     if (c.dbaName)            fields.push({ label: 'DBA Name',           value: c.dbaName });
     if (c.mcNumber)           fields.push({ label: 'MC Number',          value: 'MC-' + c.mcNumber });
-    if (c.phyCity||c.phyState)fields.push({ label: 'Location',           value: [c.phyCity, c.phyState].filter(Boolean).join(', ') });
+    if (c.phyStreet||c.phyCity)fields.push({ label: 'Address',           value: [c.phyStreet, c.phyCity, c.phyState, c.phyZipcode].filter(Boolean).join(', ') });
     if (c.totalPowerUnits)    fields.push({ label: 'Power Units',         value: c.totalPowerUnits });
     if (c.totalDrivers)       fields.push({ label: 'Total Drivers',       value: c.totalDrivers });
     if (c.operationClassDesc) fields.push({ label: 'Operation Class',     value: c.operationClassDesc });
@@ -833,6 +833,8 @@ async function lookupDOT() {
     if (authSel && c.allowedToOperate) { authSel.value = c.allowedToOperate === 'Y' ? 'Active' : 'Inactive / Not Applied'; filled.push('authority status'); }
     var statesInput = document.getElementById('states-input');
     if (statesInput && !statesInput.value && c.phyState) { statesInput.value = c.phyState; filled.push('state'); }
+    var addrInput = document.querySelector('input[name="address"]');
+    if (addrInput && !addrInput.value && (c.phyStreet || c.phyCity)) { addrInput.value = [c.phyStreet, c.phyCity, c.phyState, c.phyZipcode].filter(Boolean).join(', '); filled.push('company address'); }
     filledNote.textContent = filled.length > 0
       ? 'Auto-filled: ' + filled.join(', ') + '. Please review and complete remaining fields.'
       : 'Carrier found. Please review and complete remaining fields.';

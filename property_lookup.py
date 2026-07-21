@@ -116,13 +116,42 @@ async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
         except Exception:
             return {"found": False, "error": "Upstream request failed"}
 
-    if resp.status_code != 200:
-        return {"found": False, "status": resp.status_code}
+        if resp.status_code != 200:
+            return {"found": False, "status": resp.status_code}
 
-    try:
-        return resp.json()
-    except Exception:
-        return {"found": False, "error": "Bad upstream response"}
+        try:
+            data = resp.json()
+        except Exception:
+            return {"found": False, "error": "Bad upstream response"}
+
+        # FMCSA's main carrier record does not include the MC number —
+        # it lives in the docket-numbers feed. Merge it in server-side so
+        # the site gets everything in one call.
+        try:
+            content = data.get("content") if isinstance(data, dict) else None
+            carrier = content.get("carrier") if isinstance(content, dict) else None
+            if carrier is not None and not carrier.get("mcNumber"):
+                d2 = await client.get(
+                    f"{FMCSA_BASE}/carriers/{dot_clean}/docket-numbers",
+                    params={"webKey": FMCSA_WEB_KEY},
+                    headers={"Accept": "application/json"},
+                )
+                if d2.status_code == 200:
+                    dockets = (d2.json() or {}).get("content") or []
+                    if isinstance(dockets, dict):
+                        dockets = [dockets]
+                    for item in dockets:
+                        if not isinstance(item, dict):
+                            continue
+                        rec = item.get("carrier") if isinstance(item.get("carrier"), dict) else item
+                        num = rec.get("docketNumber")
+                        if num:
+                            carrier["mcNumber"] = num
+                            break
+        except Exception:
+            pass  # MC merge is best-effort; never break the main lookup
+
+    return data
 
 
 @app.get("/")
