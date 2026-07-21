@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Commercial Trucking Insurance Quote | Pinnacle Risk Advisors</title>
+<!-- Google tag (gtag.js) - Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18335963415"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18335963415');
+</script>
 <meta name="description" content="Request a commercial trucking insurance quote from Pinnacle Risk Advisors. Coverage options may include auto liability, physical damage, motor truck cargo.">
 <link rel="canonical" href="https://pinnacleriskad.com/trucking-quote.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -567,6 +575,37 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   data['contact_name']=data['contact_name']||'';
   try{
     await sendPDFByEmail(data);
+    // Google Ads conversion. Fires only on successful form submission.
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {'send_to': 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE'});
+    }
+    // GoHighLevel CRM intake. Fires only on successful form submission.
+    try {
+      var qp = new URLSearchParams(window.location.search);
+      var nameParts = (data['contact_name']||'').trim().split(/\s+/);
+      await fetch('https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/b5d38073-e334-4959-a857-41a534c883fa', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          first_name: nameParts[0]||'',
+          last_name: nameParts.slice(1).join(' '),
+          phone: data['phone']||'',
+          email: data['email']||'',
+          company: data['business_name']||'',
+          dot_number: data['usdot']||'',
+          mc_number: data['mc_number']||'',
+          cargo: data['cargo_type']||'',
+          states: data['states_of_operation']||'',
+          current_carrier: data['prior_carrier']||'',
+          source: qp.get('gclid') ? 'google-ads' : 'website',
+          gclid: qp.get('gclid')||'',
+          ad_group: qp.get('adgroup')||qp.get('utm_content')||'',
+          campaign: qp.get('utm_campaign')||'',
+          form: 'trucking-quote',
+          page_url: window.location.href
+        })
+      });
+    } catch (crmErr) { /* CRM notify must never block the visitor */ }
     lastSubmissionData=data;
     document.getElementById('truckingQuoteForm').style.display='none';
     document.getElementById('success-screen').style.display='block';
