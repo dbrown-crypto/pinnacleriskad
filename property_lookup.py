@@ -92,6 +92,39 @@ async def property_lookup(address: str = Query(..., min_length=6)):
     }
 
 
+FMCSA_WEB_KEY = os.environ.get(
+    "FMCSA_WEB_KEY", "311d231f2053b66d7f2d499fec6efcce6920de93")
+FMCSA_BASE = "https://mobile.fmcsa.dot.gov/qc/services"
+
+
+@app.get("/dot-lookup")
+async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
+    """Server-side FMCSA carrier lookup so the site never depends on
+    flaky public CORS proxies. Returns FMCSA's raw JSON shape
+    ({content: {carrier: {...}}}) that the front end already parses."""
+    dot_clean = "".join(ch for ch in dot if ch.isdigit())
+    if not dot_clean:
+        return {"found": False, "error": "Invalid DOT number"}
+
+    async with httpx.AsyncClient(timeout=15) as client:
+        try:
+            resp = await client.get(
+                f"{FMCSA_BASE}/carriers/{dot_clean}",
+                params={"webKey": FMCSA_WEB_KEY},
+                headers={"Accept": "application/json"},
+            )
+        except Exception:
+            return {"found": False, "error": "Upstream request failed"}
+
+    if resp.status_code != 200:
+        return {"found": False, "status": resp.status_code}
+
+    try:
+        return resp.json()
+    except Exception:
+        return {"found": False, "error": "Bad upstream response"}
+
+
 @app.get("/")
 def health():
     return {"ok": True, "configured": bool(RENTCAST_API_KEY)}

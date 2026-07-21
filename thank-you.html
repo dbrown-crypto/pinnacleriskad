@@ -628,5 +628,7 @@ var burger=document.getElementById('praBurger'),mob=document.getElementById('pra
 if(burger&&mob){burger.addEventListener('click',function(){mob.classList.add('open')});}
 if(close&&mob){close.addEventListener('click',function(){mob.classList.remove('open')});}
 if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open')})});}
-})();</script></body>
+})();</script><!--reveal-failsafe--><script>/* Reveal failsafe: guarantees animated content is never left invisible if IntersectionObserver misses an element during fast scrolling, anchor jumps, or on slow devices. Coexists with the normal scroll animation. */
+(function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
+</body>
 </html>

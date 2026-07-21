@@ -4,14 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Commercial Trucking Insurance Quote | Pinnacle Risk Advisors</title>
-<!-- Google tag (gtag.js) - Google Ads -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18335963415"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18335963415');
-</script>
 <meta name="description" content="Request a commercial trucking insurance quote from Pinnacle Risk Advisors. Coverage options may include auto liability, physical damage, motor truck cargo.">
 <link rel="canonical" href="https://pinnacleriskad.com/trucking-quote.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -575,10 +567,6 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   data['contact_name']=data['contact_name']||'';
   try{
     await sendPDFByEmail(data);
-    // Google Ads conversion - fires only on successful form submission
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion', {'send_to': 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE'});
-    }
     lastSubmissionData=data;
     document.getElementById('truckingQuoteForm').style.display='none';
     document.getElementById('success-screen').style.display='block';
@@ -772,12 +760,23 @@ async function lookupDOT() {
   btn.disabled = true;
   errorBox.textContent = '';
   resultBox.classList.remove('show');
+  var backendUrl = 'https://pinnacleriskad.onrender.com/dot-lookup?dot=' + dot;
   var fmcsaUrl = 'https://mobile.fmcsa.dot.gov/qc/services/carriers/' + dot + '?webKey=' + FMCSA_WEB_KEY;
   var proxies = [
     'https://api.allorigins.win/raw?url=' + encodeURIComponent(fmcsaUrl),
     'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(fmcsaUrl),
     'https://api.allorigins.win/get?url=' + encodeURIComponent(fmcsaUrl)
   ];
+  function validCarrier(data) {
+    return data && data.content && data.content.carrier ? data : null;
+  }
+  async function fetchBackend() {
+    var res = await fetch(backendUrl, { headers: { 'Accept': 'application/json' } });
+    var data = await res.json();
+    var ok = validCarrier(data);
+    if (!ok) throw new Error((data && data.error) || 'Backend: no carrier record');
+    return ok;
+  }
   async function fetchProxy(url, isWrapped) {
     var res = await fetch(url, { headers: { 'Accept': 'application/json' } });
     var text = await res.text();
@@ -785,19 +784,34 @@ async function lookupDOT() {
     var data = JSON.parse(text);
     if (isWrapped) {
       if (!data.contents || data.contents.trim().startsWith('<')) throw new Error('Wrapped proxy error');
-      return JSON.parse(data.contents);
+      data = JSON.parse(data.contents);
     }
-    return data;
+    var ok = validCarrier(data);
+    if (!ok) throw new Error('Proxy: no carrier record');
+    return ok;
+  }
+  async function fetchProxyChain() {
+    var lastErr = null;
+    for (var p = 0; p < proxies.length; p++) {
+      try { return await fetchProxy(proxies[p], p === 2); } catch (e) { lastErr = e; }
+    }
+    throw lastErr || new Error('All proxies failed');
+  }
+  /* first source to succeed wins; reject only if every source fails */
+  function firstSuccess(promises) {
+    return new Promise(function (resolve, reject) {
+      var pending = promises.length, firstErr = null;
+      promises.forEach(function (p) {
+        Promise.resolve(p).then(resolve, function (e) {
+          if (!firstErr) firstErr = e;
+          if (--pending === 0) reject(firstErr);
+        });
+      });
+    });
   }
   try {
-    var json = null;
-    var lastErr = null;
-    try { json = await fetchProxy(proxies[0], false); } catch(e1) { lastErr = e1; }
-    if (!json) try { json = await fetchProxy(proxies[1], false); } catch(e2) { lastErr = e2; }
-    if (!json) try { json = await fetchProxy(proxies[2], true); } catch(e3) { lastErr = e3; }
-    if (!json) throw lastErr || new Error('All proxies failed');
-    var c = json && json.content && json.content.carrier;
-    if (!c) throw new Error('No carrier record found for DOT ' + dot);
+    var json = await firstSuccess([fetchBackend(), fetchProxyChain()]);
+    var c = json.content.carrier;
     var fields = [];
     if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
     if (c.dbaName)            fields.push({ label: 'DBA Name',           value: c.dbaName });
@@ -824,13 +838,16 @@ async function lookupDOT() {
       : 'Carrier found. Please review and complete remaining fields.';
     resultBox.classList.add('show');
   } catch (err) {
-    errorBox.textContent = 'Could not retrieve carrier record. Please verify the DOT number and try again.';
+    errorBox.textContent = 'Could not retrieve carrier record. Please double-check the DOT number and try again in a moment.';
     console.error('DOT lookup error:', err);
   } finally {
     btn.textContent = 'Look Up DOT';
     btn.disabled = false;
   }
 }
+/* Warm up the lookup server (free tier sleeps when idle) so the first
+   Look Up DOT click responds fast instead of waiting on a cold start. */
+try { fetch('https://pinnacleriskad.onrender.com/', { mode: 'cors' }).catch(function(){}); } catch (e) {}
 document.getElementById('usdot-input').addEventListener('keydown',function(e){
   if(e.key==='Enter'){e.preventDefault();lookupDOT();}
 });
@@ -946,5 +963,7 @@ var burger=document.getElementById('praBurger'),mob=document.getElementById('pra
 if(burger&&mob){burger.addEventListener('click',function(){mob.classList.add('open')});}
 if(close&&mob){close.addEventListener('click',function(){mob.classList.remove('open')});}
 if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open')})});}
-})();</script></body>
+})();</script><!--reveal-failsafe--><script>/* Reveal failsafe: guarantees animated content is never left invisible if IntersectionObserver misses an element during fast scrolling, anchor jumps, or on slow devices. Coexists with the normal scroll animation. */
+(function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
+</body>
 </html>
