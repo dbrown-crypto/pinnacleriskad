@@ -153,12 +153,67 @@ body{overflow-x:hidden}
 .praft-bot{border-top:1px solid rgba(201,169,78,.12);margin-top:36px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:#8A9099}
 @media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.praft-grid{grid-template-columns:1fr}}
-</style><div class="prahd" id="prahd"><div class="prahd-in">
+
+/* ===== category dropdown nav (added) ===== */
+.pradd{position:relative;display:flex;align-items:center}
+.pradd-t{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:0;margin:0;cursor:pointer;font-family:'Raleway','Segoe UI',sans-serif;color:#B7BCC4;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;line-height:1;transition:color .2s}
+.pradd-t:hover,.pradd-t[aria-expanded="true"]{color:#E2CA7B}
+.pradd-t:focus-visible,.prahd-nav a:focus-visible,.pramob a:focus-visible,.pramob-close:focus-visible,.prahd-burger:focus-visible{outline:2px solid #C9A94E;outline-offset:4px}
+.pradd-ar{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s;flex:0 0 auto}
+.pradd-t[aria-expanded="true"] .pradd-ar{transform:translateY(1px) rotate(-135deg)}
+.pradd-m{display:flex;flex-direction:column}
+.prahd-nav .pradd-m{position:absolute;top:100%;left:-16px;min-width:250px;margin-top:10px;padding:8px 0;background:rgba(9,23,42,.97);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid rgba(201,169,78,.16);border-top:2px solid #C9A94E;border-radius:0 0 2px 2px;box-shadow:0 18px 44px rgba(0,0,0,.45)}
+.prahd-nav .pradd-m a{display:block;padding:11px 18px;font-size:.7rem;letter-spacing:1.2px;color:#C6CBD3;white-space:nowrap}
+.prahd-nav .pradd-m a:hover{background:rgba(201,169,78,.1);color:#E2CA7B}
+.prahd-nav .pradd-m .pradd-q{margin-top:6px;padding-top:13px;border-top:1px solid rgba(201,169,78,.16);color:#C9A94E;font-weight:700}
+.prahd-nav .pradd-m .pradd-q:hover{color:#E2CA7B}
+/* collapse only when JS is available - without JS every link stays visible and reachable */
+.pra-js .pradd-m{display:none}
+.pra-js .pradd-m.pradd-open{display:flex}
+/* mobile drawer accordion */
+.pramob{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pramob-scroll{margin:auto;display:flex;flex-direction:column;align-items:stretch;gap:18px;width:100%;max-width:400px;padding:70px 0 28px;text-align:center}
+.pramob .pradd{display:block;position:static}
+.pramob .pradd-t{width:100%;min-height:44px;justify-content:center;padding:6px 0;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;letter-spacing:.5px;text-transform:none;color:#F5F2EB}
+.pramob .pradd-ar{width:9px;height:9px;border-width:2px}
+.pramob .pradd-m{gap:2px;padding:4px 0 10px}
+.pramob .pradd-m a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 8px;font-family:'Raleway','Segoe UI',sans-serif;font-size:1rem;line-height:1.35;color:#B7BCC4}
+.pramob .pradd-m .pradd-q{color:#C9A94E;font-weight:700}
+/* fixed 70px header offset for in-page anchors */
+/* no-JS fallback: mobile drawer becomes a static in-flow list so every link stays reachable */
+html:not(.pra-js) .pramob{position:static;transform:none;opacity:1;pointer-events:auto;overflow:visible;padding-top:86px}
+html:not(.pra-js) .pramob-close{display:none}
+@media(prefers-reduced-motion:reduce){.pradd-ar{transition:none}}
+</style>
+<script>document.documentElement.className+=' pra-js';</script>
+<div class="prahd" id="prahd"><div class="prahd-in">
 <a class="prahd-logo" href="/"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
 <nav class="prahd-nav">
-<a href="/landlord.html">Property &amp; Landlord</a>
-<a href="/trucking.html">Trucking</a>
-<a href="/quote.html">Business &amp; Commercial</a>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-prop" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-prop">Property &amp; Landlord<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-prop" aria-labelledby="ddt-prop">
+<a href="/landlord.html">Landlord Insurance</a>
+<a href="/commercial-property-insurance-georgia.html">Commercial Property &ndash; Georgia</a>
+<a href="/commercial-property-insurance-florida.html">Commercial Property &ndash; Florida</a>
+<a class="pradd-q" href="/landlord-insurance-quote.html">Get a Landlord Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-truck" aria-labelledby="ddt-truck">
+<a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
+<a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
+<a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-biz" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-biz">Business &amp; Commercial<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-biz" aria-labelledby="ddt-biz">
+<a href="/quote.html?coverage=workers-comp">Workers' Comp</a>
+<a class="pradd-q" href="/quote.html">Get a Business Quote</a>
+</div>
+</div>
 <a href="/#founder">About</a>
 <a class="prahd-ph" href="tel:+17707583197">(770) 758-3197</a>
 <a class="prahd-cta" href="/quote.html">Get a Quote</a>
@@ -167,12 +222,36 @@ body{overflow-x:hidden}
 </div></div>
 <div class="pramob" id="praMob">
 <button class="pramob-close" id="praClose" aria-label="Close menu">&times;</button>
-<a href="/landlord.html">Property &amp; Landlord</a>
-<a href="/trucking.html">Trucking</a>
-<a href="/quote.html">Business &amp; Commercial</a>
+<div class="pramob-scroll">
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-prop" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-prop">Property &amp; Landlord<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-prop" aria-labelledby="mdt-prop">
+<a href="/landlord.html">Landlord Insurance</a>
+<a href="/commercial-property-insurance-georgia.html">Commercial Property &ndash; Georgia</a>
+<a href="/commercial-property-insurance-florida.html">Commercial Property &ndash; Florida</a>
+<a class="pradd-q" href="/landlord-insurance-quote.html">Get a Landlord Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-truck" aria-labelledby="mdt-truck">
+<a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
+<a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
+<a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-biz" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-biz">Business &amp; Commercial<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-biz" aria-labelledby="mdt-biz">
+<a href="/quote.html?coverage=workers-comp">Workers' Comp</a>
+<a class="pradd-q" href="/quote.html">Get a Business Quote</a>
+</div>
+</div>
 <a href="/#founder">About</a>
 <a href="tel:+17707583197">Call (770) 758-3197</a>
 <a class="pramob-cta" href="/quote.html">Get a Quote</a>
+</div>
 </div>
 
   <header id="header">
@@ -378,6 +457,44 @@ var burger=document.getElementById('praBurger'),mob=document.getElementById('pra
 if(burger&&mob){burger.addEventListener('click',function(){mob.classList.add('open')});}
 if(close&&mob){close.addEventListener('click',function(){mob.classList.remove('open')});}
 if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open')})});}
+
+/* ----- category dropdown nav ----- */
+var DD=[].slice.call(document.querySelectorAll('.pradd'));
+function ddT(d){return d.querySelector('.pradd-t');}
+function ddI(d){return [].slice.call(d.querySelectorAll('.pradd-m a'));}
+function ddOpen(d){var t=ddT(d);return !!t&&t.getAttribute('aria-expanded')==='true';}
+function ddSet(d,v){var t=ddT(d),m=d.querySelector('.pradd-m');if(!t||!m)return;t.setAttribute('aria-expanded',v?'true':'false');if(m.classList){m.classList.toggle('pradd-open',!!v);}}
+function ddCloseAll(except){DD.forEach(function(d){if(d!==except)ddSet(d,false);});}
+DD.forEach(function(d){
+var t=ddT(d);if(!t)return;
+ddSet(d,false);
+t.addEventListener('click',function(e){e.preventDefault();var was=ddOpen(d);ddCloseAll(d);ddSet(d,!was);});
+t.addEventListener('keydown',function(e){var k=e.key,it;
+if(k==='ArrowDown'||k==='Down'){e.preventDefault();ddCloseAll(d);ddSet(d,true);it=ddI(d);if(it[0])it[0].focus();}
+else if(k==='ArrowUp'||k==='Up'){e.preventDefault();ddCloseAll(d);ddSet(d,true);it=ddI(d);if(it.length)it[it.length-1].focus();}
+else if(k==='Escape'||k==='Esc'){ddSet(d,false);}
+else if(k==='ArrowRight'||k==='Right'||k==='ArrowLeft'||k==='Left'){
+var scope=(t.closest&&t.closest('.prahd-nav,.pramob'))||document,ts=[].slice.call(scope.querySelectorAll('.pradd-t')),i=ts.indexOf(t);
+if(i>-1&&ts.length>1){e.preventDefault();var n=(k==='ArrowRight'||k==='Right')?(i+1)%ts.length:(i-1+ts.length)%ts.length;ddCloseAll();ts[n].focus();}}
+});
+d.addEventListener('keydown',function(e){
+var it=ddI(d),i=it.indexOf(e.target),k=e.key;
+if(i<0)return;
+if(k==='ArrowDown'||k==='Down'){e.preventDefault();it[(i+1)%it.length].focus();}
+else if(k==='ArrowUp'||k==='Up'){e.preventDefault();it[(i-1+it.length)%it.length].focus();}
+else if(k==='Home'){e.preventDefault();it[0].focus();}
+else if(k==='End'){e.preventDefault();it[it.length-1].focus();}
+else if(k==='Escape'||k==='Esc'){e.preventDefault();ddSet(d,false);t.focus();}
+else if(k==='Tab'&&((e.shiftKey&&i===0)||(!e.shiftKey&&i===it.length-1))){ddSet(d,false);}
+});
+});
+document.addEventListener('click',function(e){var n=e.target;while(n&&n!==document){if(n.className&&(''+n.className).indexOf('pradd')>-1)return;n=n.parentNode;}ddCloseAll();});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;DD.forEach(function(d){if(!ddOpen(d))return;var inside=d.contains(document.activeElement);ddSet(d,false);if(inside){var t=ddT(d);if(t)t.focus();}});});
+if(burger){burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-controls','praMob');
+burger.addEventListener('click',function(){burger.setAttribute('aria-expanded','true');});}
+if(close&&mob){close.addEventListener('click',function(){ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}});}
+if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){ddCloseAll();if(burger)burger.setAttribute('aria-expanded','false');});});}
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;if(!mob||!mob.classList.contains('open'))return;var od=[].slice.call(mob.querySelectorAll('.pradd')).filter(ddOpen)[0];if(od){e.preventDefault();e.stopPropagation();ddSet(od,false);var ot=ddT(od);if(ot)ot.focus();return;}mob.classList.remove('open');ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}},true);
 })();</script><!--reveal-failsafe--><script>/* Reveal failsafe: guarantees animated content is never left invisible if IntersectionObserver misses an element during fast scrolling, anchor jumps, or on slow devices. Coexists with the normal scroll animation. */
 (function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
 </body>
