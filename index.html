@@ -638,11 +638,11 @@ if(k==='ArrowDown'||k==='Down'){e.preventDefault();ddCloseAll(d);ddSet(d,true);i
 else if(k==='ArrowUp'||k==='Up'){e.preventDefault();ddCloseAll(d);ddSet(d,true);it=ddI(d);if(it.length)it[it.length-1].focus();}
 else if(k==='Escape'||k==='Esc'){ddSet(d,false);}
 else if(k==='ArrowRight'||k==='Right'||k==='ArrowLeft'||k==='Left'){
-var ts=DD.filter(function(x){return x.offsetParent!==null||d.offsetParent===null;}).map(ddT),i=ts.indexOf(t);
+var scope=(t.closest&&t.closest('.prahd-nav,.pramob'))||document,ts=[].slice.call(scope.querySelectorAll('.pradd-t')),i=ts.indexOf(t);
 if(i>-1&&ts.length>1){e.preventDefault();var n=(k==='ArrowRight'||k==='Right')?(i+1)%ts.length:(i-1+ts.length)%ts.length;ddCloseAll();ts[n].focus();}}
 });
 d.addEventListener('keydown',function(e){
-var it=ddI(d),i=it.indexOf(document.activeElement),k=e.key;
+var it=ddI(d),i=it.indexOf(e.target),k=e.key;
 if(i<0)return;
 if(k==='ArrowDown'||k==='Down'){e.preventDefault();it[(i+1)%it.length].focus();}
 else if(k==='ArrowUp'||k==='Up'){e.preventDefault();it[(i-1+it.length)%it.length].focus();}
@@ -653,7 +653,7 @@ else if(k==='Tab'&&((e.shiftKey&&i===0)||(!e.shiftKey&&i===it.length-1))){ddSet(
 });
 });
 document.addEventListener('click',function(e){var n=e.target;while(n&&n!==document){if(n.className&&(''+n.className).indexOf('pradd')>-1)return;n=n.parentNode;}ddCloseAll();});
-document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;DD.forEach(function(d){if(ddOpen(d)){ddSet(d,false);var t=ddT(d);if(t&&d.offsetParent!==null)t.focus();}});});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;DD.forEach(function(d){if(!ddOpen(d))return;var inside=d.contains(document.activeElement);ddSet(d,false);if(inside){var t=ddT(d);if(t)t.focus();}});});
 if(burger){burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-controls','praMob');
 burger.addEventListener('click',function(){burger.setAttribute('aria-expanded','true');});}
 if(close&&mob){close.addEventListener('click',function(){ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}});}
