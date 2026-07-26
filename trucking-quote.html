@@ -151,6 +151,69 @@ footer a:hover{color:var(--gold);}
 .vin-decode-btn:hover{background:var(--navy3);}
 .vin-result{display:none;font-size:11px;color:var(--green);margin-top:5px;font-weight:500;line-height:1.6;}
 .vin-result.show{display:block;}
+/* ── Hero DOT capture ─────────────────────────────────────── */
+.hero-dot{max-width:540px;margin:0 auto;width:100%;}
+.hero-dot-lbl{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.hero-dot-row{display:flex;gap:10px;}
+.hero-dot-row input{flex:1;min-width:0;border:1px solid rgba(201,169,78,0.4);background:rgba(255,255,255,0.07);color:#fff;border-radius:4px;padding:15px 18px;font-family:'Inter',sans-serif;font-size:16px;letter-spacing:0.5px;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
+.hero-dot-row input::placeholder{color:rgba(255,255,255,0.32);letter-spacing:0.3px;}
+.hero-dot-row input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,78,0.15);background:rgba(255,255,255,0.1);}
+.hero-dot-note{font-size:12px;color:rgba(255,255,255,0.38);margin-top:13px;line-height:1.6;}
+.hero-dot-note a{color:rgba(255,255,255,0.62);text-decoration:underline;cursor:pointer;}
+.hero-dot-note a:hover{color:var(--gold);}
+/* ── Collapsible prep list ────────────────────────────────── */
+.prep-details{max-width:900px;margin:0 auto;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.prep-details>summary{list-style:none;cursor:pointer;padding:15px 22px;display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:var(--navy);transition:background 0.15s;}
+.prep-details>summary::-webkit-details-marker{display:none;}
+.prep-details>summary:hover{background:var(--off);}
+.prep-details>summary .chev{margin-left:auto;color:var(--gold);font-size:11px;transition:transform 0.2s;}
+.prep-details[open]>summary .chev{transform:rotate(180deg);}
+.prep-details>summary .sm-note{font-weight:400;color:var(--muted);font-size:11.5px;}
+.prep-inner{padding:4px 22px 22px;border-top:1px solid var(--border);}
+/* ── Wizard ───────────────────────────────────────────────── */
+.wiz-progress{position:sticky;top:68px;z-index:200;background:var(--off);padding:14px 0 12px;margin-bottom:20px;}
+.wiz-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.wiz-bar-fill{height:100%;width:14%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width 0.35s ease;}
+.wiz-meta{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-top:9px;}
+.wiz-step-label{font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--navy);}
+.wiz-step-count{font-size:11px;color:var(--muted);letter-spacing:0.5px;white-space:nowrap;}
+.wiz-step{display:none;}
+.wiz-step.active{display:block;animation:wizIn 0.25s ease;}
+@keyframes wizIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:none;}}
+.wiz-nav{display:flex;gap:12px;align-items:center;margin-top:20px;}
+.btn-next{flex:1;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:16px 32px;cursor:pointer;transition:background 0.15s,transform 0.12s;}
+.btn-next:hover{background:var(--gold2);transform:translateY(-1px);}
+.btn-next:active{transform:translateY(0);}
+.btn-back{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--white);color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:16px 22px;cursor:pointer;transition:all 0.15s;flex-shrink:0;}
+.btn-back:hover{border-color:var(--gold);color:var(--navy);}
+.wiz-skip{text-align:center;margin-top:14px;}
+.btn-skip{background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 4px;}
+.btn-skip:hover{color:var(--navy);}
+.field.err input,.field.err select,.field.err textarea{border-color:#c0392b;background:#fdf7f6;}
+.field-err{display:none;font-size:11px;color:#c0392b;font-weight:500;}
+.field.err .field-err{display:block;}
+/* ── DOT step ─────────────────────────────────────────────── */
+.dot-hero-field input{font-size:17px;padding:15px 17px;letter-spacing:1px;}
+.dot-why{background:var(--light);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--radius);padding:14px 18px;margin-top:18px;}
+.dot-why strong{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+.dot-why p{font-size:12px;color:var(--muted);line-height:1.65;}
+.dot-confirm{display:none;margin-top:16px;}
+.dot-confirm.show{display:block;}
+.dot-confirm-q{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:12px;}
+.dot-confirm-row{display:flex;gap:10px;flex-wrap:wrap;}
+.dot-confirm-row .btn-next{flex:1 1 260px;}
+.fmcsa-badge{display:inline-block;font-size:8.5px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--green);background:rgba(30,102,65,0.08);border:1px solid rgba(30,102,65,0.22);border-radius:2px;padding:2px 6px;margin-left:7px;vertical-align:2px;}
+.fleet-note{display:none;background:var(--gold3);border:1px solid rgba(201,169,78,0.35);border-radius:var(--radius);padding:12px 16px;font-size:12px;color:var(--navy);line-height:1.6;margin-bottom:16px;}
+.fleet-note.show{display:block;}
+.step-intro{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;}
+@media(max-width:768px){
+  .wiz-progress{top:62px;}
+  .wiz-nav{flex-direction:column-reverse;}
+  .wiz-nav .btn-next,.wiz-nav .btn-back{width:100%;}
+  .dot-confirm-row .btn-next,.dot-confirm-row .btn-back{flex:1 1 100%;width:100%;}
+  .hero-dot-row{flex-direction:column;}
+  .hero-dot-row .btn-hero{width:100%;padding:16px 24px;}
+}
 @media(max-width:768px){
   nav{padding:0 20px;height:62px;}
   .nav-right .nav-phone{display:none;}
@@ -261,9 +324,16 @@ body{overflow-x:hidden}
 <section class="hero">
   <div class="hero-eyebrow">Commercial Trucking Insurance</div>
   <h1>Get a <em>Commercial Trucking</em> Insurance Quote Built Around Your Operation</h1>
-  <p class="hero-sub">Tell us what you haul, where you run, who drives, and what units need coverage. Pinnacle Risk Advisors will review the account and help shop available trucking markets for the best fit.</p>
-  <div class="hero-cta-row">
-    <a class="btn-hero" href="#quote-form">Start Trucking Quote</a>
+  <p class="hero-sub">Start with your USDOT number and we'll pull your carrier record from FMCSA and fill in most of the quote for you. Pinnacle Risk Advisors will review the account and shop available trucking markets for the best fit.</p>
+  <div class="hero-dot">
+    <div class="hero-dot-lbl">Start with your USDOT number</div>
+    <div class="hero-dot-row">
+      <input type="text" id="hero-dot" inputmode="numeric" autocomplete="off" placeholder="e.g. 1234567" aria-label="USDOT number">
+      <button type="button" class="btn-hero" id="dot-lookup-btn" onclick="heroLookup()">Look Up My DOT</button>
+    </div>
+    <p class="hero-dot-note">Takes about 3 seconds. <a onclick="skipDOT()">I don't have a DOT number yet</a></p>
+  </div>
+  <div class="hero-cta-row" style="margin-top:26px;">
     <p class="hero-trust">Serving trucking accounts in <strong>Georgia, Florida, South Carolina, and Texas.</strong></p>
   </div>
   <div class="trust-badges">
@@ -273,11 +343,11 @@ body{overflow-x:hidden}
     <div class="trust-badge"><span class="dot"></span> Licensed Insurance Support</div>
   </div>
 </section>
-<section class="prep">
-  <div style="max-width:900px;margin:0 auto;">
-    <div class="section-eyebrow">Before You Begin</div>
-    <h2>What You'll <em>Need</em> Handy</h2>
-    <p class="prep-intro">Gathering these items ahead of time will make completing your quote request quick and simple. You won't need everything. Share what you have and we'll follow up if anything else is needed.</p>
+<section class="prep" style="padding:26px 40px;">
+  <details class="prep-details">
+    <summary>What you'll need handy <span class="sm-note">&mdash; optional, you can start without it</span><span class="chev">&#9660;</span></summary>
+    <div class="prep-inner">
+    <p class="prep-intro" style="margin:16px 0 20px;">You won't need everything. Your DOT number pulls most of this automatically. Share what you have and we'll follow up if anything else is needed.</p>
     <div class="prep-grid">
       <div class="prep-item"><div class="prep-icon">&#x1F522;</div><div><strong>USDOT Number</strong><p>Your assigned USDOT carrier number</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#x1F4CB;</div><div><strong>MC Number</strong><p>If you hold interstate operating authority</p></div></div>
@@ -289,47 +359,101 @@ body{overflow-x:hidden}
       <div class="prep-item"><div class="prep-icon">&#x1F4C4;</div><div><strong>Current Declarations Page</strong><p>If you have existing coverage (optional)</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#x1F4CA;</div><div><strong>Loss Runs</strong><p>3 to 5 year loss history if available (optional)</p></div></div>
     </div>
-  </div>
+    </div>
+  </details>
 </section>
 <div class="form-body" id="quote-form">
   <div class="section-eyebrow">Your Quote Request</div>
   <h2>Commercial Trucking Insurance Quote</h2>
-  <p class="sub">Complete the sections below. Fields marked <span style="color:var(--gold);">&#9670;</span> are helpful but not required. Share what you have.</p>
+  <p class="sub">Seven quick steps. Fields marked <span style="color:var(--gold);">&#9670;</span> are helpful but not required. Share what you have and we'll follow up on the rest.</p>
+  <div class="wiz-progress" id="wiz-progress">
+    <div class="wiz-bar"><div class="wiz-bar-fill" id="wiz-bar-fill"></div></div>
+    <div class="wiz-meta">
+      <span class="wiz-step-label" id="wiz-step-label">Your Carrier Record</span>
+      <span class="wiz-step-count" id="wiz-step-count">Step 1 of 7</span>
+    </div>
+  </div>
   <form id="truckingQuoteForm" novalidate>
+
+    <!-- ══ STEP 1 · DOT LOOKUP ══ -->
+    <div class="wiz-step active" data-step="1">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Business <em>Information</em></span><span class="fs-desc">Tell us about your company</span></div>
+      <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Your <em>Carrier Record</em></span><span class="fs-desc">Pulled from FMCSA by DOT number</span></div>
       <div class="form-section-body">
+        <!-- the only USDOT input on the page lives in the hero; this mirrors it into the payload -->
+        <input type="hidden" name="usdot" id="usdot-input" value="">
+
+        <!-- state A: no lookup run yet -->
+        <div id="dot-empty">
+          <div class="dot-why">
+            <strong>Start with your USDOT number</strong>
+            <p>Your USDOT record already contains your legal business name, address, authority status, MC number, unit count, and driver count. Enter it at the top of this page and we'll fill most of this form in for you.</p>
+          </div>
+          <div class="wiz-nav">
+            <button type="button" class="btn-next" onclick="focusHeroDot()">Look Up My DOT Number</button>
+          </div>
+          <div class="wiz-skip">
+            <button type="button" class="btn-skip" onclick="wizNext()">I don't have a DOT number yet &mdash; continue without it</button>
+          </div>
+        </div>
+
+        <!-- state B: lookup in flight -->
+        <div id="dot-loading" style="display:none;">
+          <p class="step-intro" style="margin:0;">Pulling your carrier record from FMCSA&hellip;</p>
+        </div>
+
+        <!-- state C: carrier found -->
+        <div id="dot-found" style="display:none;">
+          <div class="lookup-result" id="dot-result">
+            <div class="lookup-result-title">Carrier Information from FMCSA</div>
+            <div class="lookup-result-grid" id="dot-result-grid"></div>
+            <div class="lookup-filled" id="dot-filled-note"></div>
+          </div>
+          <div class="dot-confirm" id="dot-confirm">
+            <p class="dot-confirm-q">Is this your company?</p>
+            <div class="dot-confirm-row">
+              <button type="button" class="btn-next" onclick="dotConfirmYes()">Yes, that's us &mdash; Continue</button>
+              <button type="button" class="btn-back" onclick="dotConfirmNo()">Not us / change number</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lookup-error" id="dot-error"></div>
+      </div>
+    </div>
+    </div>
+
+    <!-- ══ STEP 2 · CONTACT & BUSINESS ══ -->
+    <div class="wiz-step" data-step="2">
+    <div class="form-section">
+      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Contact &amp; <em>Business</em></span><span class="fs-desc">So we can send your quote</span></div>
+      <div class="form-section-body">
+        <p class="step-intro">Just the basics so we can reach you with your quote. Anything we pulled from FMCSA is already filled in &mdash; edit it if it's out of date.</p>
         <div class="fgrid fgrid-2">
-          <div class="field span-2"><label>Legal Business Name <span class="req">*</span></label><input type="text" name="business_name" placeholder="As shown on your operating authority or filings" required></div>
+          <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Please enter your name.</span></div>
+          <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" required><span class="hint">Mobile preferred so we can text your quote</span><span class="field-err">Please enter a valid 10-digit phone number.</span></div>
+          <div class="field span-2"><label>Email Address <span class="req">*</span></label><input type="email" name="email" placeholder="you@example.com" autocomplete="email" required><span class="field-err">Please enter a valid email address.</span></div>
+          <div class="field span-2"><label>Legal Business Name <span class="req">*</span></label><input type="text" name="business_name" placeholder="As shown on your operating authority or filings" autocomplete="organization" required><span class="field-err">Please enter your business name.</span></div>
           <div class="field"><label>Entity Type</label><select name="entity_type"><option value="">Select one</option><option>Sole Proprietor</option><option>LLC</option><option>Corporation</option><option>Partnership</option><option>Other</option></select></div>
           <div class="field"><label>Years in Business</label><select name="years_in_business"><option value="">Select one</option><option>New Venture (less than 1 year)</option><option>1 year</option><option>2 years</option><option>3 to 5 years</option><option>6 to 10 years</option><option>More than 10 years</option></select></div>
-          <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" required></div>
-          <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="Your phone number" required></div>
-          <div class="field span-2"><label>Email Address <span class="req">*</span></label><input type="email" name="email" placeholder="you@example.com" required></div>
-          <div class="field span-2"><label>Mailing Address</label><input type="text" name="address" placeholder="Street address, city, state, ZIP"></div>
+          <div class="field span-2"><label>Mailing Address</label><input type="text" name="address" placeholder="Street address, city, state, ZIP" autocomplete="street-address"></div>
           <div class="field"><label>Requested Effective Date</label><input type="date" name="effective_date"><span class="hint">When do you need coverage to begin?</span></div>
           <div class="field"><label>Estimated Annual Revenue &#9670;</label><select name="annual_revenue"><option value="">Select one</option><option>Under $100,000</option><option>$100,000 to $250,000</option><option>$250,000 to $500,000</option><option>$500,000 to $1,000,000</option><option>Over $1,000,000</option></select></div>
         </div>
+        <div class="wiz-nav">
+          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
+        </div>
       </div>
     </div>
+    </div>
+
+    <!-- ══ STEP 3 · OPERATION DETAILS ══ -->
+    <div class="wiz-step" data-step="3">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">DOT &amp; <em>Operation Details</em></span><span class="fs-desc">Authority, freight, and haul info</span></div>
+      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Operation <em>Details</em></span><span class="fs-desc">Authority, freight, and haul info</span></div>
       <div class="form-section-body">
         <div class="fgrid fgrid-2">
-          <div class="field span-2">
-            <label>USDOT Number</label>
-            <div class="lookup-row">
-              <input type="text" name="usdot" id="usdot-input" placeholder="e.g. 1234567" inputmode="numeric">
-              <button type="button" class="btn-lookup" id="dot-lookup-btn" onclick="lookupDOT()">Look Up DOT</button>
-            </div>
-            <span class="hint">Enter your USDOT number and click Look Up DOT to auto-fill your carrier information.</span>
-            <div class="lookup-result" id="dot-result">
-              <div class="lookup-result-title">Carrier Information from FMCSA</div>
-              <div class="lookup-result-grid" id="dot-result-grid"></div>
-              <div class="lookup-filled" id="dot-filled-note"></div>
-            </div>
-            <div class="lookup-error" id="dot-error"></div>
-          </div>
           <div class="field"><label>MC Number &#9670;</label><input type="text" name="mc_number" id="mc-number-input" placeholder="e.g. MC-987654"><span class="hint">Motor carrier authority number, if applicable</span></div>
           <div class="field"><label>Authority Status</label><select name="authority_status" id="authority-status-select"><option value="">Select one</option><option>Active</option><option>Pending</option><option>Inactive / Not Applied</option></select></div>
           <div class="field"><label>Operation Type <span class="req">*</span></label><select name="operation_type" required><option value="">Select one</option><option>Owner Operator</option><option>Fleet</option><option>Box Truck</option><option>Hotshot</option><option>Long Haul</option><option>Local Delivery</option><option>General Freight</option><option>Other</option></select></div>
@@ -341,15 +465,25 @@ body{overflow-x:hidden}
           <div class="field span-2"><label>Primary Cargo Type <span class="req">*</span></label><select name="cargo_type" required><option value="">Select one</option><option>General Freight</option><option>Building Materials</option><option>Auto Parts</option><option>Consumer Goods</option><option>Paper or Packaging</option><option>Produce</option><option>Refrigerated Food</option><option>Beverages</option><option>Furniture</option><option>Appliances</option><option>Electronics</option><option>Metal or Steel</option><option>Machinery or Equipment</option><option>Intermodal Containers</option><option>Last Mile or Parcel</option><option>Hazmat</option><option>Oversized or Heavy Haul</option><option>Other</option></select><span class="hint">Choose the type that represents most of your loads</span></div>
           <div class="field span-2"><label>Commodity Details &#9670;</label><textarea name="commodity_details" placeholder="Describe what you usually haul, average load value, and any special handling requirements."></textarea></div>
         </div>
+        <div class="wiz-nav">
+          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
+        </div>
       </div>
     </div>
+    </div>
+
+    <!-- ══ STEP 4 · VEHICLES ══ -->
+    <div class="wiz-step" data-step="4">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Vehicle <em>Information</em></span><span class="fs-desc">Power units and trailers</span></div>
+      <div class="form-section-head"><span class="fs-num">04</span><span class="fs-title">Vehicle <em>Information</em></span><span class="fs-desc">Power units and trailers</span></div>
       <div class="form-section-body">
+        <p class="step-intro">Pick your number of power units and we'll open a block for each one. Paste a VIN and we'll decode the year, make, and model for you.</p>
         <div class="fgrid fgrid-2" style="margin-bottom:20px;">
           <div class="field"><label>Number of Power Units <span class="req">*</span></label><select name="power_unit_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>11 to 20</option><option>More than 20</option></select></div>
           <div class="field"><label>Number of Trailers &#9670;</label><select name="trailer_count"><option value="">Select one</option><option>None</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select></div>
         </div>
+        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. Upload your vehicle schedule at the last step (or skip it) and we'll pick up the rest from there &mdash; no need to type every unit.</div>
         <div class="repeat-wrap" id="vehicle-list">
           <div class="repeat-item" id="vehicle-1">
             <div class="repeat-header"><span class="repeat-label">Vehicle 1</span></div>
@@ -367,12 +501,21 @@ body{overflow-x:hidden}
           </div>
         </div>
         <button type="button" class="btn-add" id="add-vehicle">+ Add Another Vehicle</button>
+        <div class="wiz-nav">
+          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
+        </div>
       </div>
     </div>
+    </div>
+
+    <!-- ══ STEP 5 · DRIVERS ══ -->
+    <div class="wiz-step" data-step="5">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">04</span><span class="fs-title">Driver <em>Information</em></span><span class="fs-desc">All scheduled drivers</span></div>
+      <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Driver <em>Information</em></span><span class="fs-desc">All scheduled drivers</span></div>
       <div class="form-section-body">
-        <div class="field" style="max-width:280px;margin-bottom:20px;"><label>Total Number of Drivers <span class="req">*</span></label><select name="driver_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select></div>
+        <div class="field" style="max-width:280px;margin-bottom:20px;"><label>Total Number of Drivers <span class="req">*</span></label><select name="driver_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select><span class="field-err">Please select how many drivers you have.</span></div>
+        <div class="fleet-note" id="fleet-note-drivers"><strong>More than 5 drivers?</strong> Enter your first 5 here. Upload a driver list at the last step (or skip it) and we'll follow up for the remainder.</div>
         <div class="repeat-wrap" id="driver-list">
           <div class="repeat-item" id="driver-1">
             <div class="repeat-header"><span class="repeat-label">Driver 1</span></div>
@@ -388,16 +531,24 @@ body{overflow-x:hidden}
           </div>
         </div>
         <button type="button" class="btn-add" id="add-driver">+ Add Another Driver</button>
+        <div class="wiz-nav">
+          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
+        </div>
       </div>
     </div>
+    </div>
+
+    <!-- ══ STEP 6 · COVERAGE ══ -->
+    <div class="wiz-step" data-step="6">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Coverage <em>Requested</em></span><span class="fs-desc">Select all that apply</span></div>
+      <div class="form-section-head"><span class="fs-num">06</span><span class="fs-title">Coverage <em>Requested</em></span><span class="fs-desc">Select all that apply</span></div>
       <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;">Select every coverage line you'd like quoted. Not sure what you need? Select your best guess and we'll help you refine it.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;">We've pre-selected the three lines most trucking operations carry. Add or remove anything &mdash; not sure? Leave your best guess and we'll help you refine it.</p>
         <div class="cov-grid">
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_auto_liability" value="Yes"><div class="cov-card-text"><strong>Auto Liability</strong><p>Required for most trucking operations</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_physical_damage" value="Yes"><div class="cov-card-text"><strong>Physical Damage</strong><p>Comprehensive and collision for your trucks</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_cargo" value="Yes"><div class="cov-card-text"><strong>Motor Truck Cargo</strong><p>Protects freight you haul for customers</p></div></label>
+          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_auto_liability" value="Yes" checked><div class="cov-card-text"><strong>Auto Liability</strong><p>Required for most trucking operations</p></div></label>
+          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_physical_damage" value="Yes" checked><div class="cov-card-text"><strong>Physical Damage</strong><p>Comprehensive and collision for your trucks</p></div></label>
+          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_cargo" value="Yes" checked><div class="cov-card-text"><strong>Motor Truck Cargo</strong><p>Protects freight you haul for customers</p></div></label>
           <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_general_liability" value="Yes"><div class="cov-card-text"><strong>General Liability</strong><p>Premises and operations coverage</p></div></label>
           <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_bobtail" value="Yes"><div class="cov-card-text"><strong>Bobtail / Non-Trucking Liability</strong><p>Personal use of truck without a load</p></div></label>
           <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_trailer_interchange" value="Yes"><div class="cov-card-text"><strong>Trailer Interchange</strong><p>Physical damage for non-owned trailers</p></div></label>
@@ -411,13 +562,21 @@ body{overflow-x:hidden}
           <div class="field"><label>Cargo Limit &#9670;</label><select name="cargo_limit"><option value="">Select if known</option><option>$25,000</option><option>$50,000</option><option>$100,000</option><option>$150,000</option><option>$250,000</option><option>Other, I will describe in notes</option></select></div>
           <div class="field"><label>Deductible Preference &#9670;</label><select name="deductible"><option value="">Select if known</option><option>$1,000</option><option>$2,500</option><option>$5,000</option><option>$10,000</option><option>No preference, please advise</option></select></div>
         </div>
+        <div class="wiz-nav">
+          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
+        </div>
       </div>
     </div>
+    </div>
+
+    <!-- ══ STEP 7 · DOCUMENTS & NOTES ══ -->
+    <div class="wiz-step" data-step="7">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">06</span><span class="fs-title">Upload <em>Documents</em></span><span class="fs-desc">Optional, share what you have</span></div>
+      <div class="form-section-head"><span class="fs-num">07</span><span class="fs-title">Documents &amp; <em>Notes</em></span><span class="fs-desc">Everything here is optional</span></div>
       <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Uploading supporting documents helps us start your quote faster. Nothing is required. We can follow up for anything additional after reviewing your submission.</p>
-        <p style="font-size:11.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-style:italic;">You can upload documents here if available. If uploads are not completed, we will request them after reviewing your quote request.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Uploading supporting documents helps us start your quote faster, but <strong>nothing on this step is required.</strong> You can submit right now and we'll request anything else we need.</p>
+        <p style="font-size:11.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-style:italic;">If uploads are not completed, we will request them after reviewing your quote request.</p>
         <div class="upload-grid">
           <div class="upload-zone"><div class="upload-icon">&#x1FAFB;</div><div class="upload-label">Driver Licenses</div><div class="upload-hint">PDF, JPG, or PNG</div><div class="upload-status" id="status_upload_dl">&#x2713; File selected</div><input type="file" id="upload_dl" name="upload_dl" accept=".pdf,.jpg,.jpeg,.png" multiple onchange="showStatus(this,'status_upload_dl')"></div>
           <div class="upload-zone"><div class="upload-icon">&#x1F4C4;</div><div class="upload-label">Current Declarations Page</div><div class="upload-hint">PDF preferred</div><div class="upload-status" id="status_upload_dec">&#x2713; File selected</div><input type="file" id="upload_dec" name="upload_dec" accept=".pdf,.jpg,.jpeg,.png" onchange="showStatus(this,'status_upload_dec')"></div>
@@ -425,19 +584,18 @@ body{overflow-x:hidden}
           <div class="upload-zone"><div class="upload-icon">&#x1F4CB;</div><div class="upload-label">Vehicle Schedule</div><div class="upload-hint">List of all units</div><div class="upload-status" id="status_upload_sched">&#x2713; File selected</div><input type="file" id="upload_sched" name="upload_sched" accept=".pdf,.xls,.xlsx,.csv" onchange="showStatus(this,'status_upload_sched')"></div>
           <div class="upload-zone"><div class="upload-icon">&#x1F4CE;</div><div class="upload-label">Other Supporting Documents</div><div class="upload-hint">Contracts, safety plans, etc.</div><div class="upload-status" id="status_upload_other">&#x2713; File selected</div><input type="file" id="upload_other" name="upload_other" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple onchange="showStatus(this,'status_upload_other')"></div>
         </div>
-      </div>
-    </div>
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">07</span><span class="fs-title">Additional <em>Notes</em></span><span class="fs-desc">Anything else we should know</span></div>
-      <div class="form-section-body">
-        <div class="field"><label>Notes for Your Agent &#9670;</label><textarea name="notes" rows="5" placeholder="Tell us about your operation, any contracts you're on, safety practices, prior coverage history, losses, or anything else that might be important for underwriting. The more context you provide, the better we can shop your account."></textarea></div>
+        <div class="fdivider"></div>
+        <div class="field"><label>Notes for Your Agent &#9670;</label><textarea name="notes" rows="4" placeholder="Contracts you're on, safety practices, prior coverage history, losses, or anything else that matters for underwriting. The more context you provide, the better we can shop your account."></textarea></div>
       </div>
     </div>
     <div class="disclaimer"><div class="disclaimer-icon">&#x2139;&#xFE0F;</div><p><strong>No coverage is bound by submitting this form.</strong> Coverage is subject to underwriting review, carrier approval, complete documentation, and final eligibility. Pinnacle Risk Advisors will contact you to review your options before any policy is issued.</p></div>
-    <div class="submit-row">
-      <button type="submit" class="btn-submit" id="submit-btn">Submit Trucking Quote Request</button>
-      <p class="submit-note">We'll review your request and reach out if anything additional is needed.</p>
+    <div class="wiz-nav">
+      <button type="button" class="btn-back" onclick="wizBack()">Back</button>
+      <button type="submit" class="btn-next" id="submit-btn" style="padding:17px 32px;font-size:13px;">Submit Trucking Quote Request</button>
     </div>
+    <p class="submit-note" style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:12px;">We'll review your request and reach out if anything additional is needed.</p>
+    </div>
+
   </form>
   <div id="success-screen">
     <div class="success-icon">&#x2713;</div>
@@ -794,7 +952,8 @@ async function lookupDOT() {
   var filledNote= document.getElementById('dot-filled-note');
   var errorBox  = document.getElementById('dot-error');
   var dot = dotInput.value.trim().replace(/\D/g, '');
-  if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; return; }
+  if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; dotState('dot-empty'); focusHeroDot(); return; }
+  var btnText = btn.textContent;
   btn.textContent = 'Looking up…';
   btn.disabled = true;
   errorBox.textContent = '';
@@ -864,34 +1023,61 @@ async function lookupDOT() {
       return '<div class="lookup-field"><span>' + f.label + '</span><strong>' + f.value + '</strong></div>';
     }).join('');
     var filled = [];
-    var bizName = document.querySelector('input[name="business_name"]');
-    if (bizName && !bizName.value && c.legalName) { bizName.value = c.legalName; filled.push('business name'); }
-    var mcInput = document.getElementById('mc-number-input');
-    if (mcInput && !mcInput.value && c.mcNumber) { mcInput.value = 'MC-' + c.mcNumber; filled.push('MC number'); }
+    function put(el, val, label){
+      if(!el || !val) return;
+      if(el.value) return;                 /* never overwrite what the visitor typed */
+      el.value = val;
+      el.dataset.fmcsa = '1';
+      if(label) filled.push(label);
+    }
+    /* map an FMCSA unit/driver count onto the closest dropdown bucket */
+    function bucketUnits(n){ n = parseInt(n,10); if(!n) return ''; if(n <= 5) return String(n); if(n <= 10) return '6 to 10'; if(n <= 20) return '11 to 20'; return 'More than 20'; }
+    function bucketDrivers(n){ n = parseInt(n,10); if(!n) return ''; if(n <= 5) return String(n); if(n <= 10) return '6 to 10'; return 'More than 10'; }
+    function guessEntity(name){
+      var s = (name || '').toUpperCase();
+      if (/\bL\.?L\.?C\.?\b/.test(s))                    return 'LLC';
+      if (/\bINC\.?\b|\bCORP\.?\b|INCORPORATED/.test(s)) return 'Corporation';
+      if (/\bL\.?P\.?\b|PARTNERSHIP/.test(s))            return 'Partnership';
+      return '';
+    }
+    put(document.querySelector('input[name="business_name"]'), c.legalName, 'business name');
+    put(document.getElementById('mc-number-input'), c.mcNumber ? 'MC-' + c.mcNumber : '', 'MC number');
+    put(document.getElementById('states-input'), c.phyState, 'state');
+    put(document.querySelector('input[name="address"]'),
+        (c.phyStreet || c.phyCity) ? [c.phyStreet, c.phyCity, c.phyState, c.phyZipcode].filter(Boolean).join(', ') : '',
+        'company address');
+    put(document.querySelector('input[name="phone"]'), c.phone || c.telephone || '', 'phone number');
+    put(document.querySelector('select[name="entity_type"]'), guessEntity(c.legalName), 'entity type');
     var authSel = document.getElementById('authority-status-select');
-    if (authSel && c.allowedToOperate) { authSel.value = c.allowedToOperate === 'Y' ? 'Active' : 'Inactive / Not Applied'; filled.push('authority status'); }
-    var statesInput = document.getElementById('states-input');
-    if (statesInput && !statesInput.value && c.phyState) { statesInput.value = c.phyState; filled.push('state'); }
-    var addrInput = document.querySelector('input[name="address"]');
-    if (addrInput && !addrInput.value && (c.phyStreet || c.phyCity)) { addrInput.value = [c.phyStreet, c.phyCity, c.phyState, c.phyZipcode].filter(Boolean).join(', '); filled.push('company address'); }
+    if (authSel && !authSel.value && c.allowedToOperate) { authSel.value = c.allowedToOperate === 'Y' ? 'Active' : 'Inactive / Not Applied'; authSel.dataset.fmcsa = '1'; filled.push('authority status'); }
+    var puSelect = document.querySelector('select[name="power_unit_count"]');
+    if (puSelect && !puSelect.value) {
+      var pub = bucketUnits(c.totalPowerUnits);
+      if (pub) { puSelect.value = pub; puSelect.dataset.fmcsa = '1'; filled.push('power units (' + c.totalPowerUnits + ')'); if (typeof syncVehicles === 'function') syncVehicles(); }
+    }
+    var drSelect = document.querySelector('select[name="driver_count"]');
+    if (drSelect && !drSelect.value) {
+      var drb = bucketDrivers(c.totalDrivers);
+      if (drb) { drSelect.value = drb; drSelect.dataset.fmcsa = '1'; filled.push('driver count (' + c.totalDrivers + ')'); if (typeof syncDrivers === 'function') syncDrivers(); }
+    }
     filledNote.textContent = filled.length > 0
-      ? 'Auto-filled: ' + filled.join(', ') + '. Please review and complete remaining fields.'
-      : 'Carrier found. Please review and complete remaining fields.';
+      ? 'Auto-filled for you: ' + filled.join(', ') + '. You can edit any of it on the next steps.'
+      : 'Carrier found.';
     resultBox.classList.add('show');
+    document.getElementById('dot-confirm').classList.add('show');
+    dotState('dot-found');
   } catch (err) {
-    errorBox.textContent = 'Could not retrieve carrier record. Please double-check the DOT number and try again in a moment.';
+    dotState('dot-empty');
+    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again &mdash; or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
     console.error('DOT lookup error:', err);
   } finally {
-    btn.textContent = 'Look Up DOT';
+    btn.textContent = btnText;
     btn.disabled = false;
   }
 }
 /* Warm up the lookup server (free tier sleeps when idle) so the first
    Look Up DOT click responds fast instead of waiting on a cold start. */
 try { fetch('https://pinnacleriskad.onrender.com/', { mode: 'cors' }).catch(function(){}); } catch (e) {}
-document.getElementById('usdot-input').addEventListener('keydown',function(e){
-  if(e.key==='Enter'){e.preventDefault();lookupDOT();}
-});
 function onVinInput(input, prefix) {
   var btn    = document.getElementById(prefix + '_vin_btn');
   var result = document.getElementById(prefix + '_vin_result');
@@ -988,6 +1174,241 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
     if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
+
+/* ══════════════════════════════════════════════════════════════
+   STEP WIZARD
+   Controls step visibility, progress bar, per-step validation,
+   and scroll position. Every field keeps its original name
+   attribute, so Formspree / EmailJS / the PDF builder / the GHL
+   webhook all continue to receive the exact same payload.
+══════════════════════════════════════════════════════════════ */
+var WIZ_LABELS = ['Your Carrier Record','Contact & Business','Operation Details','Vehicles','Drivers','Coverage','Documents & Notes'];
+var wizSteps = [], wizIdx = 0;
+
+function wizGo(i, noScroll){
+  if(i < 0 || i >= wizSteps.length) return;
+  for(var n = 0; n < wizSteps.length; n++){
+    if(n === i) wizSteps[n].classList.add('active');
+    else wizSteps[n].classList.remove('active');
+  }
+  wizIdx = i;
+  document.getElementById('wiz-bar-fill').style.width = (((i+1)/wizSteps.length)*100) + '%';
+  document.getElementById('wiz-step-label').textContent = WIZ_LABELS[i] || '';
+  document.getElementById('wiz-step-count').textContent = 'Step ' + (i+1) + ' of ' + wizSteps.length;
+  if(!noScroll){
+    var anchor = document.getElementById('quote-form');
+    var top = anchor.getBoundingClientRect().top + window.pageYOffset - 84;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+}
+function wizNext(){
+  if(!wizValidate(wizSteps[wizIdx])) return;
+  if(wizIdx === 1) captureLead();      /* contact step complete → partial lead */
+  wizGo(wizIdx + 1);
+}
+function wizBack(){ wizGo(wizIdx - 1); }
+
+function wizValidate(step){
+  var first = null;
+  step.querySelectorAll('.field.err').forEach(function(f){ f.classList.remove('err'); });
+  step.querySelectorAll('[required]').forEach(function(c){
+    var val = (c.value || '').trim();
+    var ok  = val !== '';
+    if(ok && c.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
+    if(ok && c.type === 'tel')   ok = val.replace(/\D/g,'').length >= 10;
+    if(!ok){
+      var wrap = c.closest('.field');
+      if(wrap){ wrap.classList.add('err'); if(!first) first = wrap; }
+    }
+  });
+  if(first){
+    first.scrollIntoView({ behavior:'smooth', block:'center' });
+    var inp = first.querySelector('input,select,textarea');
+    if(inp){ try { inp.focus({ preventScroll:true }); } catch(e){ inp.focus(); } }
+    return false;
+  }
+  return true;
+}
+/* clear the error state as soon as the visitor starts fixing it */
+document.getElementById('truckingQuoteForm').addEventListener('input', function(e){
+  var w = e.target.closest ? e.target.closest('.field.err') : null;
+  if(w) w.classList.remove('err');
+}, true);
+document.getElementById('truckingQuoteForm').addEventListener('change', function(e){
+  var w = e.target.closest ? e.target.closest('.field.err') : null;
+  if(w) w.classList.remove('err');
+}, true);
+
+/* ── DOT step: one input (in the hero), three display states ── */
+function dotState(which){
+  ['dot-empty','dot-loading','dot-found'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.style.display = (id === which) ? 'block' : 'none';
+  });
+}
+function focusHeroDot(){
+  var h = document.getElementById('hero-dot');
+  if(!h) return;
+  h.scrollIntoView({ behavior:'smooth', block:'center' });
+  setTimeout(function(){ try { h.focus({ preventScroll:true }); h.select(); } catch(e){ h.focus(); } }, 450);
+}
+function heroLookup(){
+  var h = document.getElementById('hero-dot');
+  var v = (h.value || '').replace(/\D/g,'');
+  if(!v){ h.focus(); return; }
+  h.value = v;
+  document.getElementById('usdot-input').value = v;   /* mirror into the form payload */
+  document.getElementById('dot-error').textContent = '';
+  wizGo(0, true);
+  dotState('dot-loading');
+  document.getElementById('quote-form').scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(lookupDOT, 400);
+}
+function skipDOT(){
+  wizGo(1, true);
+  document.getElementById('quote-form').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+var heroDotEl = document.getElementById('hero-dot');
+if(heroDotEl){
+  heroDotEl.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); heroLookup(); }
+  });
+}
+
+/* ── DOT confirmation ───────────────────────────────────────── */
+function dotConfirmYes(){ wizGo(1); }
+function dotConfirmNo(){
+  dotState('dot-empty');
+  document.getElementById('dot-result').classList.remove('show');
+  document.getElementById('dot-confirm').classList.remove('show');
+  document.getElementById('dot-error').textContent = '';
+  /* roll back everything FMCSA filled, leave anything the visitor typed */
+  ['business_name','address','phone','mc_number','states_of_operation','entity_type','power_unit_count','driver_count','authority_status'].forEach(function(n){
+    var el = document.querySelector('[name="'+n+'"]');
+    if(el && el.dataset.fmcsa === '1'){ el.value = ''; delete el.dataset.fmcsa; }
+  });
+  document.getElementById('usdot-input').value = '';
+  var h = document.getElementById('hero-dot');
+  if(h) h.value = '';
+  focusHeroDot();
+}
+
+/* ── Auto-size the vehicle / driver repeaters ───────────────── */
+var REPEAT_CAP = 5;
+function countFromLabel(v){
+  if(!v) return 0;
+  if(/^\d+$/.test(v)) return parseInt(v,10);
+  if(/none/i.test(v)) return 0;
+  var range = v.match(/(\d+)\s*to\s*(\d+)/i);
+  if(range) return parseInt(range[1],10);
+  var more = v.match(/(\d+)/);
+  if(/more than/i.test(v) && more) return parseInt(more[1],10) + 1;
+  return 0;
+}
+function itemIsEmpty(el){
+  var empty = true;
+  el.querySelectorAll('input,select,textarea').forEach(function(c){
+    if(c.type === 'hidden'){ if(c.value) empty = false; }
+    else if((c.value || '').trim() !== '') empty = false;
+  });
+  return empty;
+}
+function syncRepeat(selectName, listId, addBtnId, prefix, noteId, getCount, setCount){
+  var sel = document.querySelector('select[name="'+selectName+'"]');
+  if(!sel) return;
+  var raw  = countFromLabel(sel.value);
+  var want = Math.min(Math.max(raw, 1), REPEAT_CAP);
+  var addBtn = document.getElementById(addBtnId);
+  var guard = 0;
+  while(getCount() < want && guard++ < 20){ addBtn.click(); }
+  /* trim trailing blocks the visitor never touched */
+  guard = 0;
+  while(getCount() > want && guard++ < 20){
+    var last = document.getElementById(prefix + '-' + getCount());
+    if(!last || !itemIsEmpty(last)) break;
+    last.remove();
+    setCount(getCount() - 1);
+  }
+  var note = document.getElementById(noteId);
+  if(note){ if(raw > REPEAT_CAP) note.classList.add('show'); else note.classList.remove('show'); }
+}
+function syncVehicles(){
+  syncRepeat('power_unit_count','vehicle-list','add-vehicle','vehicle','fleet-note-vehicles',
+    function(){ return vehicleCount; }, function(v){ vehicleCount = v; });
+}
+function syncDrivers(){
+  syncRepeat('driver_count','driver-list','add-driver','driver','fleet-note-drivers',
+    function(){ return driverCount; }, function(v){ driverCount = v; });
+}
+var puSel = document.querySelector('select[name="power_unit_count"]');
+if(puSel) puSel.addEventListener('change', syncVehicles);
+var drSel = document.querySelector('select[name="driver_count"]');
+if(drSel) drSel.addEventListener('change', syncDrivers);
+
+/* ── Partial lead capture ───────────────────────────────────────
+   Fires once the visitor has given us a name/phone/email, even if
+   they never reach Submit. Sends the same GHL webhook the full
+   submission uses, tagged lead_status = partial-incomplete so the
+   CRM workflow can treat it as an unfinished quote.
+──────────────────────────────────────────────────────────────── */
+var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/b5d38073-e334-4959-a857-41a534c883fa';
+var partialLeadSent = false;
+function fieldVal(n){ var el = document.querySelector('[name="'+n+'"]'); return el ? (el.value||'').trim() : ''; }
+function captureLead(){
+  if(partialLeadSent) return;
+  var email = fieldVal('email'), phone = fieldVal('phone');
+  if(!email && !phone) return;
+  partialLeadSent = true;
+  try{
+    var qp = new URLSearchParams(window.location.search);
+    var parts = fieldVal('contact_name').split(/\s+/);
+    fetch(GHL_HOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+      body: JSON.stringify({
+        first_name: parts[0] || '',
+        last_name: parts.slice(1).join(' '),
+        phone: phone,
+        email: email,
+        company: fieldVal('business_name'),
+        dot_number: fieldVal('usdot'),
+        mc_number: fieldVal('mc_number'),
+        source: qp.get('gclid') ? 'google-ads' : 'website',
+        gclid: qp.get('gclid') || '',
+        campaign: qp.get('utm_campaign') || '',
+        form: 'trucking-quote',
+        lead_status: 'partial-incomplete',
+        note: 'Started the trucking quote form and provided contact info but has not submitted yet.',
+        page_url: window.location.href
+      })
+    }).catch(function(){});
+  } catch(e){ /* never block the visitor */ }
+}
+/* backstop: fire if they leave mid-form after giving us contact info */
+window.addEventListener('pagehide', function(){ if(wizIdx >= 1) captureLead(); });
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'hidden' && wizIdx >= 2) captureLead();
+});
+
+/* ── Boot ───────────────────────────────────────────────────── */
+(function(){
+  wizSteps = Array.prototype.slice.call(document.querySelectorAll('.wiz-step'));
+  wizGo(0, true);
+  /* deep link: /trucking-quote.html?dot=1234567 runs the lookup on load */
+  try{
+    var dq = new URLSearchParams(window.location.search).get('dot');
+    if(dq){
+      var clean = dq.replace(/\D/g,'');
+      if(clean){
+        var h = document.getElementById('hero-dot'); if(h) h.value = clean;
+        document.getElementById('usdot-input').value = clean;
+        dotState('dot-loading');
+        setTimeout(lookupDOT, 600);
+      }
+    }
+  } catch(e){}
+})();
 </script>
 <div class="praft"><div class="praft-in"><div class="praft-grid">
 <div class="praft-brand"><a class="prahd-logo" href="/" style="margin-bottom:14px"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
