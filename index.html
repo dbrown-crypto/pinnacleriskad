@@ -267,6 +267,9 @@ body{overflow-x:hidden}
 .pramob .pradd-m a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 8px;font-family:'Raleway','Segoe UI',sans-serif;font-size:1rem;line-height:1.35;color:#B7BCC4}
 .pramob .pradd-m .pradd-q{color:#C9A94E;font-weight:700}
 /* fixed 70px header offset for in-page anchors */
+/* no-JS fallback: mobile drawer becomes a static in-flow list so every link stays reachable */
+html:not(.pra-js) .pramob{position:static;transform:none;opacity:1;pointer-events:auto;overflow:visible;padding-top:86px}
+html:not(.pra-js) .pramob-close{display:none}
 #founder{scroll-margin-top:86px}
 @media(prefers-reduced-motion:reduce){.pradd-ar{transition:none}}
 </style>
