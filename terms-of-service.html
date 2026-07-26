@@ -497,5 +497,11 @@ if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventL
 document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;if(!mob||!mob.classList.contains('open'))return;var od=[].slice.call(mob.querySelectorAll('.pradd')).filter(ddOpen)[0];if(od){e.preventDefault();e.stopPropagation();ddSet(od,false);var ot=ddT(od);if(ot)ot.focus();return;}mob.classList.remove('open');ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}},true);
 })();</script><!--reveal-failsafe--><script>/* Reveal failsafe: guarantees animated content is never left invisible if IntersectionObserver misses an element during fast scrolling, anchor jumps, or on slow devices. Coexists with the normal scroll animation. */
 (function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
+<style id="pra-a11y-css">
+/* ===== accessibility / contrast overrides (added) ===== */
+:root{--gray-400:#C6CBD3;--gray-600:#A6B3C2;--gray-700:#8FA3B8;--gray-800:#5A7A9C}
+::placeholder{color:#8FA3B8;opacity:1}
+@media(max-width:600px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+</style>
 </body>
 </html>
