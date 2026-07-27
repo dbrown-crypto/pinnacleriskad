@@ -649,4 +649,22 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Es
 /* ===== typography unified with brand: Raleway + Playfair Display ===== */
 :root{--font-sans:'Raleway','Segoe UI',sans-serif;--font-serif:'Playfair Display',Georgia,serif}
 </style>
+
+<style id="pra-flow-css">
+/* pra-flow: align the state landing pages with the sitewide layout language */
+:root{--mid:rgba(201,169,78,.15)}
+body>aside{display:none!important}
+body{padding-bottom:0!important}
+.container,.hero-content{max-width:none;padding-left:64px;padding-right:64px}
+.section{padding:96px 0}
+.hero{padding:128px 0 96px}
+.cta-section{background:none;background-color:transparent;padding:112px 64px}
+.section-alt{background:#0E2340}
+.section-title{font-size:clamp(2rem,4vw,3.2rem)}
+.who-card,.coverage-item,.factor-item,.mistake-item,.faq-item,.checklist li,.hero-card,.hero-card input,.hero-card select,.btn{border-radius:0}
+.internal-links{margin-top:24px;gap:22px}
+.internal-links a{border:0;padding:0;border-radius:0;color:#E2CA7B;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:900px){.container,.hero-content{padding-left:24px;padding-right:24px}.section{padding:64px 0}.hero{padding:112px 0 64px}.cta-section{padding:64px 24px}}
+@media(max-width:600px){.section{padding:48px 0}}
+</style>
 </body></html>
