@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Umbrella Insurance in Georgia &amp; Florida | Pinnacle Risk Advisors LLC</title>
+  <meta name="description" content="Personal umbrella insurance for Georgia and Florida households. Extra liability protection over your auto and home limits for landlords, business owners, and families with teen drivers.">
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A1A30;
+      --bg2: #0E2340;
+      --bg3: #143050;
+      --gold: #C9A94E;
+      --gold-light: #E2CA7B;
+      --cream: #F5F2EB;
+      --text: #d8d3c8;
+      --muted: #7a7568;
+      --border: rgba(201,169,78,0.15);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(10,26,48,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--cream);
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .nav-logo-text { font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.02em; }
+    .nav-logo-text span { display: block; font-size: 0.6rem; font-family: var(--font-sans); font-weight: 300; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(ellipse, rgba(201,169,78,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--cream);
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 4rem; }
+    .section-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-sub {
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    /* WHO WE SERVE */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .who-card {
+      background: var(--bg2);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+    .who-card:hover { background: var(--bg3); }
+    .who-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .who-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .who-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    /* COVERAGE TABLE */
+    .coverage-section { background: var(--bg2); }
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .coverage-list { list-style: none; }
+    .coverage-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .coverage-list li:last-child { border-bottom: none; }
+    .check {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+    .coverage-list li strong { color: var(--cream); display: block; margin-bottom: 0.2rem; }
+    .coverage-list li span { font-size: 0.85rem; color: var(--muted); }
+
+    .highlight-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem;
+    }
+    .highlight-box h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .highlight-box p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* WHY PINNACLE */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .why-card {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .why-num {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .why-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* FAQ */
+    .faq-section { background: var(--bg2); }
+    .faq-list { max-width: 760px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.8rem 0;
+    }
+    .faq-item h3 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+    }
+    .faq-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      text-align: center;
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw; height: 80vw;
+      background: radial-gradient(ellipse, rgba(201,169,78,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-banner h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .cta-banner h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-banner p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-legal {
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* HAMBURGER */
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; background: none; border: none; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { color: var(--cream); text-decoration: none; font-family: var(--font-serif); font-size: 2rem; font-weight: 400; }
+    .nav-mobile a:hover { color: var(--gold); }
+    .nav-mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--cream); font-size: 2rem; cursor: pointer; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .hero { padding: 7rem 1.5rem 3rem; min-height: auto; }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .hero-sub { font-size: 0.95rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { text-align: center; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 2rem; }
+      .stat-val { font-size: 1.8rem; }
+      section { padding: 4rem 1.5rem; }
+      .who-grid { grid-template-columns: 1fr 1fr; }
+      .coverage-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .cta-banner { padding: 4rem 1.5rem; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .cta-actions a { text-align: center; width: 100%; max-width: 320px; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 6rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+      .hero-eyebrow { font-size: 0.65rem; }
+      .hero-stats { gap: 1.2rem; }
+      .stat-val { font-size: 1.6rem; }
+      section { padding: 3rem 1.2rem; }
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+      .who-grid { grid-template-columns: 1fr; }
+      .who-card { padding: 1.8rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .coverage-list li { font-size: 0.88rem; }
+      .highlight-box { padding: 1.8rem; }
+      .faq-item { padding: 1.4rem 0; }
+      .faq-item h3 { font-size: 1.05rem; }
+      .btn-primary, .btn-outline { padding: 0.85rem 1.8rem; font-size: 0.78rem; }
+      .cta-banner h2 { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+      footer { padding: 1.8rem 1.2rem; }
+      .footer-legal { font-size: 0.72rem; }
+    }
+  </style>
+
+<style id="pra-hero-bg">
+  /* Matches the hero treatment on landlord.html / trucking.html, using a still
+     image instead of a video so these pages stay light. Swap the URL below if
+     you add residential photography. */
+  .hero{position:relative;overflow:hidden}
+  .pra-heroimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(1.05) contrast(1.02)}
+  .pra-herovid-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,17,32,.92) 0%,rgba(6,17,32,.62) 46%,rgba(6,17,32,.34) 100%),linear-gradient(180deg,rgba(6,17,32,.5),rgba(6,17,32,0) 30%,rgba(6,17,32,.62))}
+  .hero>*:not(.pra-heroimg):not(.pra-herovid-veil){position:relative;z-index:2}
+  @media(max-width:700px){.pra-heroimg{display:none}.hero{background:#0A1A30 url('atlanta-hero-poster.jpg') center/cover}}
+</style>
+
+<link rel="canonical" href="https://pinnacleriskad.com/personal-umbrella-insurance.html">
+<meta property="og:title" content="Personal Umbrella Insurance in Georgia &amp; Florida | Pinnacle Risk Advisors LLC"><meta property="og:description" content="Personal umbrella insurance for Georgia and Florida households. Extra liability protection over your auto and home limits for landlords, business owners, and families with teen drivers."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/personal-umbrella-insurance.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Personal Umbrella Insurance in Georgia &amp; Florida | Pinnacle Risk Advisors LLC"><meta name="twitter:description" content="Personal umbrella insurance for Georgia and Florida households. Extra liability protection over your auto and home limits for landlords, business owners, and families with teen drivers.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"InsuranceAgency","@id":"https://pinnacleriskad.com/#agency","name":"Pinnacle Risk Advisors LLC","url":"https://pinnacleriskad.com/","telephone":"+1-770-758-3197","email":"dbrown@pinnacleriskad.com","image":"https://pinnacleriskad.com/atlanta-hero-poster.jpg","logo":"https://pinnacleriskad.com/pra-logo.png","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"2700 Cumberland Pkwy SE","addressLocality":"Atlanta","addressRegion":"GA","postalCode":"30339","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.8797,"longitude":-84.4682},"areaServed":["Georgia","Florida","Texas","Indiana","Utah","North Carolina","South Carolina"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:30"},"founder":{"@type":"Person","name":"Derrick Brown"},"sameAs":["https://g.page/r/CYpx_oi8HBDZEBM"]}
+</script>
+</head>
+<body><style id="pra-chrome-css">
+/* hide old chrome */
+body>header,body>nav,body>footer,header#header,header#hd,.nav-mobile{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+/* shared header */
+.prahd{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(9,23,42,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,169,78,.1);font-family:'Raleway','Segoe UI',sans-serif}
+.prahd.solid{background:rgba(9,23,42,.97)}
+.prahd-in{max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,40px);height:70px;display:flex;align-items:center;justify-content:space-between}
+.prahd-logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:600;color:#F5F2EB;text-decoration:none;white-space:nowrap}
+.prahd-logo b{color:#C9A94E;font-weight:400}.pra-logo-img{height:42px;width:auto;display:block}@media(max-width:430px){.pra-logo-img{height:34px}}.pra-mono{height:34px;width:auto;flex:0 0 auto;display:block}.prawm{display:flex;flex-direction:column;line-height:1}.prawm .pw{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:1.1rem;letter-spacing:3px;color:#F5F2EB}.prawm .rw{font-family:'Raleway',sans-serif;font-weight:700;font-size:.54rem;letter-spacing:3px;color:#C9A94E;margin-top:3px}@media(max-width:430px){.prawm{display:none}}
+.prahd-mk{width:32px;height:32px;border:1.5px solid #C9A94E;color:#C9A94E;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:.95rem;flex:0 0 auto}
+.prahd-nav{display:flex;align-items:center;gap:22px}
+.prahd-nav a{color:#B7BCC4;text-decoration:none;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;transition:color .2s}
+.prahd-nav a:hover{color:#E2CA7B}
+.prahd-nav .prahd-ph{color:#fff;font-weight:600;letter-spacing:.5px}
+.prahd-nav .prahd-cta{background:#C9A94E;color:#0A1A30;padding:10px 18px;border-radius:2px;font-weight:700}
+.prahd-nav .prahd-cta:hover{background:#E2CA7B}
+.prahd-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.prahd-burger span{width:24px;height:2px;background:#E2CA7B;display:block}
+.pramob{position:fixed;inset:0;z-index:1001;background:rgba(8,20,38,.98);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transform:translateY(-100%);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .3s;font-family:'Raleway',sans-serif;padding:20px}
+.pramob.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.pramob a{color:#F5F2EB;text-decoration:none;font-family:'Playfair Display',Georgia,serif;font-size:1.6rem;text-align:center}
+.pramob a:hover{color:#E2CA7B}
+.pramob .pramob-cta{background:#C9A94E;color:#0A1A30;font-family:'Raleway',sans-serif;font-size:1rem;font-weight:700;padding:13px 30px;border-radius:2px;margin-top:8px}
+.pramob-close{position:absolute;top:20px;right:24px;background:none;border:0;color:#E2CA7B;font-size:2.4rem;cursor:pointer;line-height:1}
+@media(max-width:900px){.prahd-nav{display:none}.prahd-burger{display:flex}}
+/* shared footer */
+.praft{background:#061428;border-top:1px solid rgba(201,169,78,.12);padding:58px 0 26px;font-family:'Raleway',sans-serif;color:#B7BCC4}
+.praft-in{max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.praft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:28px}
+.praft-grid h5{color:#C9A94E;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px;font-weight:600}
+.praft-grid a{display:block;color:#B7BCC4;font-size:.85rem;margin-bottom:9px;text-decoration:none}
+.praft-grid a:hover{color:#E2CA7B}
+.praft-brand p{font-size:.84rem;max-width:280px;line-height:1.6}
+.praft-addr{margin-top:12px;color:#8A9099;font-size:.82rem}
+.praft-bot{border-top:1px solid rgba(201,169,78,.12);margin-top:36px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:#8A9099}
+@media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.praft-grid{grid-template-columns:1fr}}
+
+/* ===== category dropdown nav (added) ===== */
+.pradd{position:relative;display:flex;align-items:center}
+.pradd-t{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:0;margin:0;cursor:pointer;font-family:'Raleway','Segoe UI',sans-serif;color:#B7BCC4;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;line-height:1;transition:color .2s}
+.pradd-t:hover,.pradd-t[aria-expanded="true"]{color:#E2CA7B}
+.pradd-t:focus-visible,.prahd-nav a:focus-visible,.pramob a:focus-visible,.pramob-close:focus-visible,.prahd-burger:focus-visible{outline:2px solid #C9A94E;outline-offset:4px}
+.pradd-ar{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s;flex:0 0 auto}
+.pradd-t[aria-expanded="true"] .pradd-ar{transform:translateY(1px) rotate(-135deg)}
+.pradd-m{display:flex;flex-direction:column}
+.prahd-nav .pradd-m{position:absolute;top:100%;left:-16px;min-width:250px;margin-top:10px;padding:8px 0;background:rgba(9,23,42,.97);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid rgba(201,169,78,.16);border-top:2px solid #C9A94E;border-radius:0 0 2px 2px;box-shadow:0 18px 44px rgba(0,0,0,.45)}
+.prahd-nav .pradd-m a{display:block;padding:11px 18px;font-size:.7rem;letter-spacing:1.2px;color:#C6CBD3;white-space:nowrap}
+.prahd-nav .pradd-m a:hover{background:rgba(201,169,78,.1);color:#E2CA7B}
+.prahd-nav .pradd-m .pradd-q{margin-top:6px;padding-top:13px;border-top:1px solid rgba(201,169,78,.16);color:#C9A94E;font-weight:700}
+.prahd-nav .pradd-m .pradd-q:hover{color:#E2CA7B}
+/* collapse only when JS is available - without JS every link stays visible and reachable */
+.pra-js .pradd-m{display:none}
+.pra-js .pradd-m.pradd-open{display:flex}
+/* mobile drawer accordion */
+.pramob{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pramob-scroll{margin:auto;display:flex;flex-direction:column;align-items:stretch;gap:18px;width:100%;max-width:400px;padding:70px 0 28px;text-align:center}
+.pramob .pradd{display:block;position:static}
+.pramob .pradd-t{width:100%;min-height:44px;justify-content:center;padding:6px 0;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;letter-spacing:.5px;text-transform:none;color:#F5F2EB}
+.pramob .pradd-ar{width:9px;height:9px;border-width:2px}
+.pramob .pradd-m{gap:2px;padding:4px 0 10px}
+.pramob .pradd-m a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 8px;font-family:'Raleway','Segoe UI',sans-serif;font-size:1rem;line-height:1.35;color:#B7BCC4}
+.pramob .pradd-m .pradd-q{color:#C9A94E;font-weight:700}
+/* fixed 70px header offset for in-page anchors */
+/* no-JS fallback: mobile drawer becomes a static in-flow list so every link stays reachable */
+html:not(.pra-js) .pramob{position:static;transform:none;opacity:1;pointer-events:auto;overflow:visible;padding-top:86px}
+html:not(.pra-js) .pramob-close{display:none}
+@media(prefers-reduced-motion:reduce){.pradd-ar{transition:none}}
+</style>
+<script>document.documentElement.className+=' pra-js';</script>
+<div class="prahd" id="prahd"><div class="prahd-in">
+<a class="prahd-logo" href="/"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
+<nav class="prahd-nav">
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-prop" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-prop">Property &amp; Landlord<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-prop" aria-labelledby="ddt-prop">
+<a href="/landlord.html">Landlord Insurance</a>
+<a href="/commercial-property-insurance-georgia.html">Commercial Property &ndash; Georgia</a>
+<a href="/commercial-property-insurance-florida.html">Commercial Property &ndash; Florida</a>
+<a class="pradd-q" href="/landlord-insurance-quote.html">Get a Landlord Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-truck" aria-labelledby="ddt-truck">
+<a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
+<a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
+<a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-biz" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-biz">Business &amp; Commercial<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-biz" aria-labelledby="ddt-biz">
+<a href="/quote.html?coverage=workers-comp">Workers' Comp</a>
+<a class="pradd-q" href="/quote.html">Get a Business Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="ddt-pers" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-pers">Auto, Home &amp; Umbrella<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="ddm-pers" aria-labelledby="ddt-pers">
+<a href="/personal-insurance.html">Overview</a>
+<a href="/personal-auto-insurance.html">Auto Insurance</a>
+<a href="/homeowners-insurance.html">Homeowners Insurance</a>
+<a href="/personal-umbrella-insurance.html">Umbrella Insurance</a>
+<a class="pradd-q" href="/personal-insurance.html#review">Existing Client Review</a>
+</div>
+</div>
+<a href="/#founder">About</a>
+<a class="prahd-ph" href="tel:+17707583197">(770) 758-3197</a>
+<a class="prahd-cta" href="/quote.html">Get a Quote</a>
+</nav>
+<button class="prahd-burger" id="praBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</div></div>
+<div class="pramob" id="praMob">
+<button class="pramob-close" id="praClose" aria-label="Close menu">&times;</button>
+<div class="pramob-scroll">
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-prop" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-prop">Property &amp; Landlord<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-prop" aria-labelledby="mdt-prop">
+<a href="/landlord.html">Landlord Insurance</a>
+<a href="/commercial-property-insurance-georgia.html">Commercial Property &ndash; Georgia</a>
+<a href="/commercial-property-insurance-florida.html">Commercial Property &ndash; Florida</a>
+<a class="pradd-q" href="/landlord-insurance-quote.html">Get a Landlord Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-truck" aria-labelledby="mdt-truck">
+<a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
+<a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
+<a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-biz" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-biz">Business &amp; Commercial<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-biz" aria-labelledby="mdt-biz">
+<a href="/quote.html?coverage=workers-comp">Workers' Comp</a>
+<a class="pradd-q" href="/quote.html">Get a Business Quote</a>
+</div>
+</div>
+<div class="pradd">
+<button type="button" class="pradd-t" id="mdt-pers" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-pers">Auto, Home &amp; Umbrella<span class="pradd-ar" aria-hidden="true"></span></button>
+<div class="pradd-m" id="mdm-pers" aria-labelledby="mdt-pers">
+<a href="/personal-insurance.html">Overview</a>
+<a href="/personal-auto-insurance.html">Auto Insurance</a>
+<a href="/homeowners-insurance.html">Homeowners Insurance</a>
+<a href="/personal-umbrella-insurance.html">Umbrella Insurance</a>
+<a class="pradd-q" href="/personal-insurance.html#review">Existing Client Review</a>
+</div>
+</div>
+<a href="/#founder">About</a>
+<a href="tel:+17707583197">Call (770) 758-3197</a>
+<a class="pramob-cta" href="/quote.html">Get a Quote</a>
+</div>
+</div>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <img class="pra-heroimg" src="atlanta-hero.jpg" alt="" aria-hidden="true" fetchpriority="high">
+    <div class="pra-herovid-veil"></div>
+    <div class="hero-eyebrow">Umbrella Insurance &middot; Georgia &amp; Florida</div>
+    <h1>Your auto policy stops. <em>The claim doesn&rsquo;t.</em></h1>
+    <p class="hero-sub">A serious injury claim can clear a 250/500 auto limit in an afternoon. Everything past that limit comes out of your house, your savings, and your future income. A personal umbrella is the cheapest large coverage most people never buy.</p>
+    <div class="hero-actions">
+      <a href="/umbrella-quote.html" class="btn-primary">Get an Umbrella Quote</a>
+      <a href="tel:+17707583197" class="btn-outline">Call Derrick &middot; (770) 758-3197</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">$1M+</div><div class="stat-label">Typical starting limit</div></div>
+      <div><div class="stat-val">20+</div><div class="stat-label">Carrier markets shopped</div></div>
+      <div><div class="stat-val">24hr</div><div class="stat-label">Quote response</div></div>
+    </div>
+  </section>
+
+  <!-- THE GAP -->
+  <section>
+    <div class="section-eyebrow">The Math Nobody Shows You</div>
+    <h2 class="section-title">Where your current limits <em>run out</em></h2>
+    <p class="section-sub">This is the whole argument for umbrella coverage, and it takes about thirty seconds to understand.</p>
+    <div class="coverage-grid">
+      <ul class="coverage-list">
+        <li><span class="check">&#9670;</span><div><strong>Your auto liability limit is a ceiling, not a promise</strong><span>If you carry 250/500 and cause an accident with serious injuries, the carrier pays up to the limit and then stops. The rest of the judgment does not disappear. It follows you.</span></div></li>
+        <li><span class="check">&#9670;</span><div><strong>A judgment can reach past your insurance</strong><span>Depending on the state and the circumstances, that can mean savings, investment accounts, equity, and in many cases future wages through garnishment. This is the part people do not picture.</span></div></li>
+        <li><span class="check">&#9670;</span><div><strong>Your homeowners liability has the same ceiling</strong><span>A guest injured at your house, a dog bite, a teenager&rsquo;s party. All of it runs through a limit that was probably set once and never revisited.</span></div></li>
+        <li><span class="check">&#9670;</span><div><strong>Umbrella sits on top of both</strong><span>One policy, extending over your auto and home liability, that picks up where those limits end.</span></div></li>
+        <li><span class="check">&#9670;</span><div><strong>It is priced per million, and the first million is the cheapest</strong><span>Umbrella is one of the few places in insurance where the coverage is large and the premium is small, because catastrophic claims are rare.</span></div></li>
+      </ul>
+      <div class="highlight-box">
+        <h3>What an umbrella typically requires</h3>
+        <p>Umbrella carriers will not sit on top of limits they consider too thin. Most require underlying auto liability and homeowners liability at specified minimums before they will write over them.</p>
+        <p>That is why umbrella is easiest when your auto and home are handled by the same agency. If your underlying limits need to come up, that adjustment is usually far cheaper than people expect, and sometimes the umbrella plus the higher underlying limits costs less than what a separate agency was already charging.</p>
+        <p><strong style="color:var(--cream)">We will tell you what your current policies would need to look like before we quote you anything.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO NEEDS ONE -->
+  <section class="coverage-section">
+    <div class="section-eyebrow">Who Needs One Most</div>
+    <h2 class="section-title">If any of these describe you, <em>you are exposed</em></h2>
+    <p class="section-sub">Umbrella is not about how much money you have. It is about how much a claim could take.</p>
+    <div class="who-grid">
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You own rental property</h3><p>Rentals multiply your liability surface: tenants, their guests, stairs, pools, dogs, parking lots. Investors are among the most underinsured umbrella prospects we see. Coverage over rental exposure varies by carrier, so this is worth an actual conversation.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You run a business</h3><p>Business owners are perceived as having assets, and plaintiff attorneys act accordingly. Your commercial policy protects the business. Your personal umbrella protects you.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You have a teen driver</h3><p>The single largest jump in household liability risk, and it arrives overnight. Umbrella is the cheapest way to respond to it.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You have a pool, trampoline, or dog</h3><p>All three are standard liability triggers. Homeowners liability responds up to a limit that was probably chosen by default years ago.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You have real equity or future earnings</h3><p>Umbrella protects what you have built and what you are going to earn. Younger high earners often have more to lose in future wages than in current savings.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3>You have never had it reviewed</h3><p>Most people set their liability limits once, at the original purchase, and never look again. Meanwhile the assets grew and the limits did not.</p></div>
+    </div>
+  </section>
+
+  <!-- WHY PINNACLE -->
+  <section>
+    <div class="section-eyebrow">Why Pinnacle</div>
+    <h2 class="section-title">Why work with an <em>independent agency</em> on this</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><h3>We coordinate the underlying limits</h3><p>The most common umbrella mistake is buying one that sits on top of auto and home limits that do not qualify. When we handle all three, that cannot happen quietly.</p></div>
+      <div class="why-card"><div class="why-num">02</div><h3>We already price liability all day</h3><p>Our commercial book is trucking, landlord, and business liability. Reading exposure and sizing limits is the core of what this agency does.</p></div>
+      <div class="why-card"><div class="why-num">03</div><h3>We shop it across 20+ markets</h3><p>Umbrella pricing and appetite vary widely between carriers, especially with rental property, teen drivers, or prior claims in the mix. A captive can only offer one answer.</p></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-eyebrow">Common Questions</div>
+    <h2 class="section-title">Umbrella insurance <em>FAQ</em></h2>
+    <div class="faq-list">
+      <div class="faq-item"><h3>How much does a personal umbrella cost?</h3><p>Less than most people assume. Umbrella is generally one of the lowest-cost-per-dollar-of-coverage policies available, because catastrophic claims are rare. Actual pricing depends on your drivers, vehicles, properties, claim history, and the limit you choose, so we quote it rather than publishing a number that would be wrong for half the people reading it. Call and we will give you a real figure for your household.</p></div>
+      <div class="faq-item"><h3>Do I have to move my auto and home to you to buy an umbrella?</h3><p>Not always, but often it is simpler and cheaper. Many umbrella carriers prefer or require writing the underlying policies. We will tell you upfront which of your options need the auto and home to move and which do not.</p></div>
+      <div class="faq-item"><h3>Does my personal umbrella cover my rental properties?</h3><p>Sometimes, and it depends entirely on the carrier and how the properties are owned and titled. Some personal umbrellas will extend over a limited number of rental dwellings if they are scheduled; others exclude them and the right answer is a commercial umbrella instead. This is exactly the kind of detail worth getting right in advance rather than at claim time. Tell us what you own and we will confirm it in writing.</p></div>
+      <div class="faq-item"><h3>What does an umbrella not cover?</h3><p>An umbrella is liability coverage. It does not pay to repair your own car or your own house. It also generally excludes intentional acts, business activities not tied to a covered policy, and certain vehicles or watercraft unless they are specifically scheduled. We will walk the exclusions with you before you bind.</p></div>
+      <div class="faq-item"><h3>How much umbrella coverage should I carry?</h3><p>The common rule of thumb is at least enough to cover your net worth, and many advisors add expected future earnings on top of that. We will walk through what you actually own and what a judgment could realistically reach, then size it from there.</p></div>
+      <div class="faq-item"><h3>I already have an umbrella. Is it worth reviewing?</h3><p>Yes, particularly if it has been in place for several years. The two things that go stale are the limit, which rarely keeps pace with what you have accumulated, and the underlying policies, which may have changed carriers or limits since the umbrella was written.</p></div>
+    </div>
+  </section>
+
+  <!-- CROSS-LINKS -->
+  <section>
+    <div class="section-eyebrow">Related Coverage</div>
+    <h2 class="section-title">An umbrella works with <em>what sits under it</em></h2>
+    <div class="who-grid">
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3><a href="/personal-auto-insurance.html" style="color:var(--cream);text-decoration:none">Auto Insurance &rarr;</a></h3><p>Your auto liability is the limit an umbrella most often sits on top of. If it is at the state minimum, that is the first thing to fix.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3><a href="/homeowners-insurance.html" style="color:var(--cream);text-decoration:none">Homeowners Insurance &rarr;</a></h3><p>The other required underlying policy, and the one most likely to have a liability limit nobody has looked at in years.</p></div>
+      <div class="who-card"><div class="who-icon">&#9679;</div><h3><a href="/landlord.html" style="color:var(--cream);text-decoration:none">Landlord Insurance &rarr;</a></h3><p>If you own rentals, the landlord policy carries its own liability. How an umbrella coordinates with it depends on the carrier. Worth a conversation.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <h2>Tell us what you own. <em>We&rsquo;ll tell you what you&rsquo;d lose.</em></h2>
+    <p>Six questions, about two minutes. We will come back with a real limit recommendation and a real number.</p>
+    <div class="cta-actions">
+      <a href="/umbrella-quote.html" class="btn-primary">Get an Umbrella Quote</a>
+      <a href="tel:+17707583197" class="btn-outline">Call (770) 758-3197</a>
+    </div>
+  </section>
+<div class="praft"><div class="praft-in"><style>.praft-grid{grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr}@media(max-width:1040px){.praft-grid{grid-template-columns:1fr 1fr 1fr}}@media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.praft-grid{grid-template-columns:1fr}}</style><div class="praft-grid">
+<div class="praft-brand"><a class="prahd-logo" href="/" style="margin-bottom:14px"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
+<p>Independent commercial insurance for landlords, truckers, and business owners across Georgia and Florida.</p>
+<p class="praft-addr">2700 Cumberland Pkwy SE, Atlanta, GA 30339</p></div>
+<div><h5>Property &amp; Landlord</h5><a href="/landlord.html">Landlord Overview</a><a href="/landlord-insurance-georgia.html">Georgia Landlord</a><a href="/landlord-insurance-florida.html">Florida Landlord</a><a href="/landlord-insurance-quote.html">Get a Property Quote</a></div>
+<div><h5>Trucking</h5><a href="/trucking.html">Trucking Overview</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT &amp; Ambulette</a><a href="/trucking-quote.html">Get a Trucking Quote</a></div>
+<div><h5>Business &amp; Commercial</h5><a href="/quote.html">Commercial Insurance</a><a href="/commercial-property-insurance-georgia.html">Georgia Commercial Property</a><a href="/commercial-property-insurance-florida.html">Florida Commercial Property</a><a href="/quote.html?coverage=workers-comp">Workers' Compensation</a><a href="/quote.html?coverage=commercial">Get a Business Quote</a></div>
+<div><h5>Auto, Home &amp; Umbrella</h5><a href="/personal-insurance.html">Overview</a><a href="/personal-auto-insurance.html">Auto Insurance</a><a href="/homeowners-insurance.html">Homeowners Insurance</a><a href="/personal-umbrella-insurance.html">Umbrella Insurance</a></div>
+<div><h5>Company</h5><a href="/#founder">About</a><a href="/#founder">Meet Derrick</a><a href="/quote.html">Contact</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/terms-of-service.html">Terms of Service</a></div>
+</div><div class="praft-bot"><span>&copy; 2026 Pinnacle Risk Advisors LLC &middot; Licensed in GA, FL, TX, IN, UT, NC &amp; SC</span><span>(770) 758-3197 &middot; dbrown@pinnacleriskad.com</span></div></div></div><script id="pra-chrome-js">(function(){
+var hd=document.getElementById('prahd');
+if(hd){window.addEventListener('scroll',function(){hd.classList.toggle('solid',window.scrollY>40)});}
+var burger=document.getElementById('praBurger'),mob=document.getElementById('praMob'),close=document.getElementById('praClose');
+if(burger&&mob){burger.addEventListener('click',function(){mob.classList.add('open')});}
+if(close&&mob){close.addEventListener('click',function(){mob.classList.remove('open')});}
+if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open')})});}
+
+/* ----- category dropdown nav ----- */
+var DD=[].slice.call(document.querySelectorAll('.pradd'));
+function ddT(d){return d.querySelector('.pradd-t');}
+function ddI(d){return [].slice.call(d.querySelectorAll('.pradd-m a'));}
+function ddOpen(d){var t=ddT(d);return !!t&&t.getAttribute('aria-expanded')==='true';}
+function ddSet(d,v){var t=ddT(d),m=d.querySelector('.pradd-m');if(!t||!m)return;t.setAttribute('aria-expanded',v?'true':'false');if(m.classList){m.classList.toggle('pradd-open',!!v);}}
+function ddCloseAll(except){DD.forEach(function(d){if(d!==except)ddSet(d,false);});}
+DD.forEach(function(d){
+var t=ddT(d);if(!t)return;
+ddSet(d,false);
+t.addEventListener('click',function(e){e.preventDefault();var was=ddOpen(d);ddCloseAll(d);ddSet(d,!was);});
+t.addEventListener('keydown',function(e){var k=e.key,it;
+if(k==='ArrowDown'||k==='Down'){e.preventDefault();ddCloseAll(d);ddSet(d,true);it=ddI(d);if(it[0])it[0].focus();}
+else if(k==='ArrowUp'||k==='Up'){e.preventDefault();ddCloseAll(d);ddSet(d,true);it=ddI(d);if(it.length)it[it.length-1].focus();}
+else if(k==='Escape'||k==='Esc'){ddSet(d,false);}
+else if(k==='ArrowRight'||k==='Right'||k==='ArrowLeft'||k==='Left'){
+var scope=(t.closest&&t.closest('.prahd-nav,.pramob'))||document,ts=[].slice.call(scope.querySelectorAll('.pradd-t')),i=ts.indexOf(t);
+if(i>-1&&ts.length>1){e.preventDefault();var n=(k==='ArrowRight'||k==='Right')?(i+1)%ts.length:(i-1+ts.length)%ts.length;ddCloseAll();ts[n].focus();}}
+});
+d.addEventListener('keydown',function(e){
+var it=ddI(d),i=it.indexOf(e.target),k=e.key;
+if(i<0)return;
+if(k==='ArrowDown'||k==='Down'){e.preventDefault();it[(i+1)%it.length].focus();}
+else if(k==='ArrowUp'||k==='Up'){e.preventDefault();it[(i-1+it.length)%it.length].focus();}
+else if(k==='Home'){e.preventDefault();it[0].focus();}
+else if(k==='End'){e.preventDefault();it[it.length-1].focus();}
+else if(k==='Escape'||k==='Esc'){e.preventDefault();ddSet(d,false);t.focus();}
+else if(k==='Tab'&&((e.shiftKey&&i===0)||(!e.shiftKey&&i===it.length-1))){ddSet(d,false);}
+});
+});
+document.addEventListener('click',function(e){var n=e.target;while(n&&n!==document){if(n.className&&(''+n.className).indexOf('pradd')>-1)return;n=n.parentNode;}ddCloseAll();});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;DD.forEach(function(d){if(!ddOpen(d))return;var inside=d.contains(document.activeElement);ddSet(d,false);if(inside){var t=ddT(d);if(t)t.focus();}});});
+if(burger){burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-controls','praMob');
+burger.addEventListener('click',function(){burger.setAttribute('aria-expanded','true');});}
+if(close&&mob){close.addEventListener('click',function(){ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}});}
+if(mob){[].slice.call(mob.querySelectorAll('a')).forEach(function(a){a.addEventListener('click',function(){ddCloseAll();if(burger)burger.setAttribute('aria-expanded','false');});});}
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;if(!mob||!mob.classList.contains('open'))return;var od=[].slice.call(mob.querySelectorAll('.pradd')).filter(ddOpen)[0];if(od){e.preventDefault();e.stopPropagation();ddSet(od,false);var ot=ddT(od);if(ot)ot.focus();return;}mob.classList.remove('open');ddCloseAll();if(burger){burger.setAttribute('aria-expanded','false');burger.focus();}},true);
+})();</script><!--reveal-failsafe--><script>/* Reveal failsafe: guarantees animated content is never left invisible if IntersectionObserver misses an element during fast scrolling, anchor jumps, or on slow devices. Coexists with the normal scroll animation. */
+(function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
+<style id="pra-a11y-css">
+/* ===== accessibility / contrast overrides (added) ===== */
+:root{--muted:#B7BCC4}
+.why-num{color:rgba(201,169,78,.6)}
+</style>
+<style id="pra-type-css">
+/* ===== typography unified with brand: Raleway + Playfair Display ===== */
+:root{--font-sans:'Raleway','Segoe UI',sans-serif;--font-serif:'Playfair Display',Georgia,serif}
+</style>
+</body>
+</html>
