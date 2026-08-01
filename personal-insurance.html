@@ -429,10 +429,11 @@
      image instead of a video so these pages stay light. Swap the URL below if
      you add residential photography. */
   .hero{position:relative;overflow:hidden}
-  .pra-heroimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(1.05) contrast(1.02)}
+  .pra-herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(1.05) contrast(1.02)}
   .pra-herovid-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,17,32,.92) 0%,rgba(6,17,32,.62) 46%,rgba(6,17,32,.34) 100%),linear-gradient(180deg,rgba(6,17,32,.5),rgba(6,17,32,0) 30%,rgba(6,17,32,.62))}
-  .hero>*:not(.pra-heroimg):not(.pra-herovid-veil){position:relative;z-index:2}
-  @media(max-width:700px){.pra-heroimg{display:none}.hero{background:#0A1A30 url('atlanta-hero-poster.jpg') center/cover}}
+  .hero>*:not(.pra-herovid):not(.pra-herovid-veil){position:relative;z-index:2}
+  @media(max-width:700px){.pra-herovid{display:none}.hero{background:#0A1A30 url('atlanta-hero-poster.jpg') center/cover}}
+  @media(prefers-reduced-motion:reduce){.pra-herovid{display:none}.hero{background:#0A1A30 url('atlanta-hero-poster.jpg') center/cover}}
 </style>
 
 <link rel="canonical" href="https://pinnacleriskad.com/personal-insurance.html">
@@ -604,7 +605,7 @@ html:not(.pra-js) .pramob-close{display:none}
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <img class="pra-heroimg" src="atlanta-hero.jpg" alt="" aria-hidden="true" fetchpriority="high">
+    <video class="pra-herovid" autoplay muted loop playsinline poster="atlanta-hero-poster.jpg"><source src="atlanta-hero-web.mp4" type="video/mp4"></video>
     <div class="pra-herovid-veil"></div>
     <div class="hero-eyebrow">Auto &middot; Home &middot; Umbrella &middot; Georgia &amp; Florida</div>
     <h1>Auto, home, and umbrella for the people <em>behind the business</em>.</h1>
@@ -711,6 +712,12 @@ html:not(.pra-js) .pramob-close{display:none}
       <a href="tel:+17707583197" class="btn-outline">Call (770) 758-3197</a>
     </div>
   </section>
+<script id="pra-herovid-js">
+(function(){
+  var v=document.querySelector('.pra-herovid');
+  if(v){var pl=function(){var p=v.play();if(p&&p.catch)p.catch(function(){})};v.addEventListener('canplay',pl);v.addEventListener('loadeddata',pl);pl();}
+})();
+</script>
 <style id="pra-reveal-css">
   .pra-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .pra-reveal.in{opacity:1;transform:none}
