@@ -784,12 +784,19 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Es
 (function(){function rp(){var vh=window.innerHeight||800;var els=document.querySelectorAll('.reveal:not(.visible),.pra-reveal:not(.in)');for(var i=0;i<els.length;i++){var el=els[i];var r=el.getBoundingClientRect();if(r.top<vh*0.97){el.classList.add('visible');el.classList.add('in');el.style.opacity='1';el.style.transform='none';}}}var tk=false;function os(){if(tk)return;tk=true;setTimeout(function(){tk=false;rp();},100);}window.addEventListener('scroll',os,{passive:true});window.addEventListener('resize',os,{passive:true});window.addEventListener('load',function(){setTimeout(rp,400);});if(document.readyState!=='loading'){setTimeout(rp,400);}setTimeout(rp,3000);})();</script>
 <style id="pra-a11y-css">
 /* ===== accessibility / contrast overrides (added) ===== */
-:root{--muted:#B7BCC4}
-.why-num{color:rgba(201,169,78,.6)}
+:root{--muted:#5F5F5F}
+.nav-phone,.hero-sub,.hero-trust,.hero-trust strong,.fs-desc,footer,footer a,footer strong{color:rgba(255,255,255,.82)}
+.section-eyebrow,.field label .req{color:#7A6224}
+.cta-section .section-eyebrow{color:#C9A94E}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:#7A6224}
+.prahd a:focus-visible,.prahd button:focus-visible,.pramob a:focus-visible,.pramob button:focus-visible,.pradd-t:focus-visible{outline-color:#C9A94E}
 </style>
 <style id="pra-type-css">
 /* ===== typography unified with brand: Raleway + Playfair Display ===== */
-:root{--font-sans:'Raleway','Segoe UI',sans-serif;--font-serif:'Playfair Display',Georgia,serif}
+body,button,.nav-cta,.btn-hero,.field input,.field select,.field textarea,.btn-submit,.btn-print,.yn-btn,.btn-next,.btn-back,.own-opt span,.consent-row label{font-family:'Raleway','Segoe UI',sans-serif}
+.logo-p,.hero h1,.prep h2,.form-body h2,.section-h2,.fs-num,.fs-title,#success-screen h2,.cta-section h2,.gap-step .gs-n{font-family:'Playfair Display',Georgia,serif}
+body{font-size:15px}
+.field input,.field select,.field textarea,.field label{font-size:15px}
 </style>
 </body>
 </html>
