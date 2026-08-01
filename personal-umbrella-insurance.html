@@ -702,6 +702,20 @@ html:not(.pra-js) .pramob-close{display:none}
       <a href="tel:+17707583197" class="btn-outline">Call (770) 758-3197</a>
     </div>
   </section>
+<style id="pra-reveal-css">
+  .pra-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .pra-reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.pra-reveal{opacity:1;transform:none;transition:none}}
+</style>
+<script id="pra-reveal-js">
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var els=[].slice.call(document.querySelectorAll(".section-title,.section-eyebrow,.section-sub,.who-card,.why-card,.faq-item,.coverage-list li,.highlight-box,.step,.reason,.founder"));
+  els.forEach(function(el){el.classList.add('pra-reveal')});
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){var el=e.target;var i=el.parentNode?[].slice.call(el.parentNode.children).indexOf(el):0;el.style.transitionDelay=Math.min(Math.max(i,0)*70,350)+'ms';el.classList.add('in');io.unobserve(el);}})},{threshold:0.12});
+  els.forEach(function(el){io.observe(el)});
+})();
+</script>
 <div class="praft"><div class="praft-in"><style>.praft-grid{grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr}@media(max-width:1040px){.praft-grid{grid-template-columns:1fr 1fr 1fr}}@media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.praft-grid{grid-template-columns:1fr}}</style><div class="praft-grid">
 <div class="praft-brand"><a class="prahd-logo" href="/" style="margin-bottom:14px"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
 <p>Independent commercial insurance for landlords, truckers, and business owners across Georgia and Florida.</p>
