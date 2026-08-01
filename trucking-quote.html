@@ -452,7 +452,7 @@ html:not(.pra-js) .pramob-close{display:none}
 </section>
 <section class="prep" style="padding:26px 40px;">
   <details class="prep-details">
-    <summary>What you'll need handy <span class="sm-note">&mdash; optional, you can start without it</span><span class="chev">&#9660;</span></summary>
+    <summary>What you'll need handy <span class="sm-note">,  optional, you can start without it</span><span class="chev">&#9660;</span></summary>
     <div class="prep-inner">
     <p class="prep-intro" style="margin:16px 0 20px;">You won't need everything. Your DOT number pulls most of this automatically. Share what you have and we'll follow up if anything else is needed.</p>
     <div class="prep-grid">
@@ -500,7 +500,7 @@ html:not(.pra-js) .pramob-close{display:none}
             <button type="button" class="btn-next" onclick="focusHeroDot()">Look Up My DOT Number</button>
           </div>
           <div class="wiz-skip">
-            <button type="button" class="btn-skip" onclick="wizNext()">I don't have a DOT number yet &mdash; continue without it</button>
+            <button type="button" class="btn-skip" onclick="wizNext()">I don't have a DOT number yet. Continue without it</button>
           </div>
         </div>
 
@@ -519,7 +519,7 @@ html:not(.pra-js) .pramob-close{display:none}
           <div class="dot-confirm" id="dot-confirm">
             <p class="dot-confirm-q">Is this your company?</p>
             <div class="dot-confirm-row">
-              <button type="button" class="btn-next" onclick="dotConfirmYes()">Yes, that's us &mdash; Continue</button>
+              <button type="button" class="btn-next" onclick="dotConfirmYes()">Yes, that's us. Continue</button>
               <button type="button" class="btn-back" onclick="dotConfirmNo()">Not us / change number</button>
             </div>
           </div>
@@ -535,7 +535,7 @@ html:not(.pra-js) .pramob-close{display:none}
     <div class="form-section">
       <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Contact &amp; <em>Business</em></span><span class="fs-desc">So we can send your quote</span></div>
       <div class="form-section-body">
-        <p class="step-intro">Just the basics so we can reach you with your quote. Anything we pulled from FMCSA is already filled in &mdash; edit it if it's out of date.</p>
+        <p class="step-intro">Just the basics so we can reach you with your quote. Anything we pulled from FMCSA is already filled in. Edit it if it's out of date.</p>
         <div class="fgrid fgrid-2">
           <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Please enter your name.</span></div>
           <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" required><span class="hint">Mobile preferred so we can text your quote</span><span class="field-err">Please enter a valid 10-digit phone number.</span></div>
@@ -590,7 +590,7 @@ html:not(.pra-js) .pramob-close{display:none}
           <div class="field"><label>Number of Power Units <span class="req">*</span></label><select name="power_unit_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>11 to 20</option><option>More than 20</option></select></div>
           <div class="field"><label>Number of Trailers &#9670;</label><select name="trailer_count"><option value="">Select one</option><option>None</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select></div>
         </div>
-        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. Upload your vehicle schedule at the last step (or skip it) and we'll pick up the rest from there &mdash; no need to type every unit.</div>
+        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. Upload your vehicle schedule at the last step (or skip it) and we'll pick up the rest from there. no need to type every unit.</div>
         <div class="repeat-wrap" id="vehicle-list">
           <div class="repeat-item" id="vehicle-1">
             <div class="repeat-header"><span class="repeat-label">Vehicle 1</span></div>
@@ -651,7 +651,7 @@ html:not(.pra-js) .pramob-close{display:none}
     <div class="form-section">
       <div class="form-section-head"><span class="fs-num">06</span><span class="fs-title">Coverage <em>Requested</em></span><span class="fs-desc">Select all that apply</span></div>
       <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;">We've pre-selected the three lines most trucking operations carry. Add or remove anything &mdash; not sure? Leave your best guess and we'll help you refine it.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;">We've pre-selected the three lines most trucking operations carry. Add or remove anything, not sure? Leave your best guess and we'll help you refine it.</p>
         <div class="cov-grid">
           <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_auto_liability" value="Yes" checked><div class="cov-card-text"><strong>Auto Liability</strong><p>Required for most trucking operations</p></div></label>
           <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_physical_damage" value="Yes" checked><div class="cov-card-text"><strong>Physical Damage</strong><p>Comprehensive and collision for your trucks</p></div></label>
@@ -951,7 +951,7 @@ window.addEventListener('DOMContentLoaded', function(){
     var enc = new URLSearchParams(window.location.search).get('view_submission');
     if(!enc) return;
     var d = JSON.parse(decodeURIComponent(escape(atob(enc))));
-    var bar = '<div style="position:fixed;top:0;left:0;right:0;background:#0A1A30;color:#fff;padding:11px 20px;font-family:Arial,sans-serif;font-size:13px;z-index:99999;display:flex;justify-content:space-between;align-items:center;"><span><b>Pinnacle Risk Advisors</b> &mdash; Submission Copy</span><button onclick="window.print()" style="background:#C9A94E;color:#0A1A30;border:none;padding:8px 18px;font-weight:700;border-radius:3px;cursor:pointer;font-family:Arial,sans-serif;">Save as PDF / Print</button></div><div style="height:46px;"></div>';
+    var bar = '<div style="position:fixed;top:0;left:0;right:0;background:#0A1A30;color:#fff;padding:11px 20px;font-family:Arial,sans-serif;font-size:13px;z-index:99999;display:flex;justify-content:space-between;align-items:center;"><span><b>Pinnacle Risk Advisors</b>. Submission Copy</span><button onclick="window.print()" style="background:#C9A94E;color:#0A1A30;border:none;padding:8px 18px;font-weight:700;border-radius:3px;cursor:pointer;font-family:Arial,sans-serif;">Save as PDF / Print</button></div><div style="height:46px;"></div>';
     var doc = buildSubmissionDoc(d).replace('<body>', '<body>'+bar);
     document.open(); document.write(doc); document.close();
   }catch(e){ console.error('Could not render submission link:', e); }
@@ -1176,7 +1176,7 @@ async function lookupDOT() {
     dotState('dot-found');
   } catch (err) {
     dotState('dot-empty');
-    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again &mdash; or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
+    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again, or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
     console.error('DOT lookup error:', err);
   } finally {
     btn.textContent = btnText;

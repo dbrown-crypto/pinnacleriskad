@@ -407,7 +407,7 @@ html:not(.pra-js) .pramob-close{display:none}
   <div style="max-width:900px;margin:0 auto;">
     <div class="section-eyebrow">Before You Begin</div>
     <h2>What We Need to <em>Quote</em> Your Rental Property</h2>
-    <p class="prep-intro">Gathering these items ahead of time will help us provide the most accurate quote. You don't need everything&mdash;share what you have and we'll follow up if anything else is needed.</p>
+    <p class="prep-intro">Gathering these items ahead of time will help us provide the most accurate quote. You don't need everything. Share what you have and we'll follow up if anything else is needed.</p>
     <div class="prep-grid">
       <div class="prep-item"><div class="prep-icon">&#127968;</div><div><strong>Property Address</strong><p>Full address of the rental property, including city and state.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128203;</div><div><strong>Property Type &amp; Occupancy</strong><p>Whether the property is a single-family rental, duplex, vacant, or under renovation.</p></div></div>
@@ -435,23 +435,23 @@ html:not(.pra-js) .pramob-close{display:none}
       </div>
     </div>
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Property <em>Details</em></span><span class="fs-desc">Just the basics — we auto-fill the rest from the address</span></div>
+      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Property <em>Details</em></span><span class="fs-desc">Just the basics. we auto-fill the rest from the address</span></div>
       <div class="form-section-body">
         <div class="fgrid fgrid-2">
-          <div class="field span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" placeholder="123 Main St, Atlanta, GA 30301" required><span class="hint" id="autofill-hint">Type the full address — street, city, state, and ZIP — and property details fill in automatically.</span></div>
+          <div class="field span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" placeholder="123 Main St, Atlanta, GA 30301" required><span class="hint" id="autofill-hint">Type the full address, including street, city, state, and ZIP, and property details fill in automatically.</span></div>
           <div class="field"><label for="property_type">Property Type</label><select id="property_type" name="property_type"><option value="">Select property type...</option><option value="Single-Family Rental">Single-Family Rental</option><option value="Duplex/Triplex/Fourplex">Duplex/Triplex/Fourplex</option><option value="Small Multifamily">Small Multifamily</option><option value="Apartment Building">Apartment Building</option><option value="Vacant Property">Vacant Property</option><option value="Renovation Property">Renovation Property</option></select></div>
           <div class="field"><label for="occupancy_status">Occupancy Status <span class="req">*</span></label><select id="occupancy_status" name="occupancy_status" required><option value="">Select occupancy...</option><option value="Tenant Occupied">Tenant Occupied</option><option value="Vacant">Vacant</option><option value="Owner Occupied">Owner Occupied</option><option value="Renovation">Renovation</option><option value="Mixed Occupancy">Mixed Occupancy</option></select></div>
           <div class="field"><label for="effective_date">Desired Effective Date</label><input type="date" id="effective_date" name="effective_date"></div>
           <div class="field"><label for="year_built">Year Built</label><input type="number" id="year_built" name="year_built" placeholder="e.g. 1998" min="1800" max="2026"></div>
           <div class="field" style="display:none;"><label for="roof_age">Roof Age or Year Last Replaced</label><input type="text" id="roof_age" name="roof_age" placeholder="e.g. 2018 or 6 years old"></div>
-          <div class="field"><label for="dwelling_limit">Dwelling Limit / Coverage A Desired <span class="hint-inline">(estimated — adjust if needed)</span></label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="$250,000"></div>
+          <div class="field"><label for="dwelling_limit">Dwelling Limit / Coverage A Desired <span class="hint-inline">(estimated; adjust if needed)</span></label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="$250,000"></div>
           <div class="field"><label for="liability_limit">Liability Limit <span class="req">*</span></label><select id="liability_limit" name="liability_limit" required><option value="">Select liability limit...</option><option value="$300,000">$300,000</option><option value="$500,000">$500,000</option><option value="$1,000,000">$1,000,000</option><option value="Not sure">Not sure</option></select></div>
           <div class="field span-2" style="display:none;">
             <label>Prior losses in last 3&ndash;5 years? <span class="req">*</span></label>
             <div class="yes-no-group"><button type="button" class="yn-btn" data-yn="prior_losses" data-val="No">No</button><button type="button" class="yn-btn" data-yn="prior_losses" data-val="Yes">Yes</button></div>
             <input type="hidden" id="prior_losses" name="prior_losses" value="">
           </div>
-          <div class="field cond-block span-2" id="cond-prior-losses" style="display:none;"><label for="prior_losses_describe">Briefly describe (date, cause, amount) <span class="req">*</span></label><textarea id="prior_losses_describe" name="prior_losses_describe" placeholder="e.g. 2022 &mdash; wind damage, $6,500 paid, repaired" rows="2"></textarea></div>
+          <div class="field cond-block span-2" id="cond-prior-losses" style="display:none;"><label for="prior_losses_describe">Briefly describe (date, cause, amount) <span class="req">*</span></label><textarea id="prior_losses_describe" name="prior_losses_describe" placeholder="e.g. 2022, wind damage, $6,500 paid, repaired" rows="2"></textarea></div>
           <div class="field span-2" style="display:none;">
             <label>Currently insured / any lapse or cancellation? <span class="req">*</span></label>
             <div class="yes-no-group"><button type="button" class="yn-btn" data-yn="currently_insured" data-val="No">No</button><button type="button" class="yn-btn" data-yn="currently_insured" data-val="Yes">Yes</button></div>
@@ -462,7 +462,7 @@ html:not(.pra-js) .pramob-close{display:none}
       </div>
     </div>
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Upload <em>Declarations Page</em></span><span class="fs-desc">Optional &mdash; fastest way to share your details</span></div>
+      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Upload <em>Declarations Page</em></span><span class="fs-desc">Optional: fastest way to share your details</span></div>
       <div class="form-section-body">
         <p class="dec-page-nudge"><strong>Prefer not to type it all?</strong> Upload your declarations page and we'll pull the rest.</p>
         <div class="upload-grid">
@@ -470,7 +470,7 @@ html:not(.pra-js) .pramob-close{display:none}
             <input type="file" id="policy_file" name="policy_file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple>
             <div class="upload-icon">&#128196;</div>
             <div class="upload-label">Current Policy / Declarations Page</div>
-            <div class="upload-hint">PDF, JPG, PNG &mdash; optional</div>
+            <div class="upload-hint">PDF, JPG, PNG. optional</div>
             <div class="upload-status" id="policy-upload-status"></div>
           </div>
         </div>
@@ -488,7 +488,7 @@ html:not(.pra-js) .pramob-close{display:none}
       </button>
     </div>
     <div class="opt-panel" id="opt-panel" role="region">
-      <p class="opt-intro">Optional &mdash; already covered the essentials above. Add more here (or upload your dec page) for a faster, more complete quote.</p>
+      <p class="opt-intro">Optional: already covered the essentials above. Add more here (or upload your dec page) for a faster, more complete quote.</p>
       <div class="form-section">
         <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Building &amp; <em>Construction</em></span><span class="fs-desc">All optional</span></div>
         <div class="form-section-body">
@@ -502,10 +502,10 @@ html:not(.pra-js) .pramob-close{display:none}
             <div class="field cond-block" id="cond-units" style="display:none;"><label for="num_units">Number of Units</label><input type="number" id="num_units" name="num_units" placeholder="e.g. 4" min="2" max="100"></div>
             <div class="field"><label for="roof_material">Roof Material</label><select id="roof_material" name="roof_material"><option value="">Select...</option><option>Asphalt Shingle</option><option>Metal</option><option>Tile</option><option>Flat/Membrane</option><option>Other</option></select></div>
             <div class="field"><label for="roof_shape">Roof Shape</label><select id="roof_shape" name="roof_shape"><option value="">Select...</option><option>Hip</option><option>Gable</option><option>Flat</option><option>Other</option></select></div>
-            <div class="field span-2"><label for="electrical_panel">Electrical Panel Type</label><input type="text" id="electrical_panel" name="electrical_panel" placeholder="e.g. 200-amp Square D"><span class="hint">Flag Federal Pacific (FPE), Zinsco, knob-and-tube, or aluminum wiring &mdash; carriers scrutinize these.</span></div>
+            <div class="field span-2"><label for="electrical_panel">Electrical Panel Type</label><input type="text" id="electrical_panel" name="electrical_panel" placeholder="e.g. 200-amp Square D"><span class="hint">Flag Federal Pacific (FPE), Zinsco, knob-and-tube, or aluminum wiring. Carriers scrutinize these.</span></div>
             <div class="field span-2"><label for="plumbing_type">Plumbing Type</label><select id="plumbing_type" name="plumbing_type"><option value="">Select...</option><option>Copper</option><option>PEX</option><option>CPVC</option><option>Polybutylene</option><option>Galvanized</option><option>Other</option></select></div>
           </div>
-          <div class="opt-subhead" id="updates-subhead" style="display:none;">Year Updated (Roof / Electrical / Plumbing / HVAC) &mdash; for homes 30+ years old</div>
+          <div class="opt-subhead" id="updates-subhead" style="display:none;">Year Updated (Roof / Electrical / Plumbing / HVAC), for homes 30+ years old</div>
           <div class="fgrid fgrid-2" id="updates-grid" style="display:none;">
             <div class="field"><label for="update_roof">Roof Last Updated</label><input type="text" id="update_roof" name="update_roof" placeholder="Year or N/A"></div>
             <div class="field"><label for="update_electrical">Electrical Last Updated</label><input type="text" id="update_electrical" name="update_electrical" placeholder="Year or N/A"></div>
@@ -519,9 +519,9 @@ html:not(.pra-js) .pramob-close{display:none}
         <div class="form-section-body">
           <div class="fgrid fgrid-2">
             <div class="field"><label for="valuation_pref">Valuation Preference</label><select id="valuation_pref" name="valuation_pref"><option value="">Select...</option><option>Replacement Cost</option><option>Actual Cash Value</option><option>Not sure</option></select></div>
-            <div class="field"><label for="monthly_rent">Monthly Rent Amount</label><input type="text" id="monthly_rent" name="monthly_rent" placeholder="e.g. $1,800/mo &mdash; loss of rents"></div>
+            <div class="field"><label for="monthly_rent">Monthly Rent Amount</label><input type="text" id="monthly_rent" name="monthly_rent" placeholder="e.g. $1,800/mo, loss of rents"></div>
             <div class="field"><label for="deductible_pref">Deductible Preference</label><input type="text" id="deductible_pref" name="deductible_pref" placeholder="e.g. $1,000 or 1%"><span class="hint">FL policies carry a separate wind/hurricane deductible (often 2&ndash;5% of Coverage A).</span></div>
-            <div class="field"><label for="form_pref">Form Preference</label><select id="form_pref" name="form_pref"><option value="">Select...</option><option>DP1 (Basic Form)</option><option>DP3 (Special Form)</option><option>Not sure &mdash; let Pinnacle advise</option></select></div>
+            <div class="field"><label for="form_pref">Form Preference</label><select id="form_pref" name="form_pref"><option value="">Select...</option><option>DP1 (Basic Form)</option><option>DP3 (Special Form)</option><option>Not sure? Let Pinnacle advise</option></select></div>
           </div>
         </div>
       </div>
@@ -571,7 +571,7 @@ html:not(.pra-js) .pramob-close{display:none}
         <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Additional Loss &amp; <em>Coverage Detail</em></span></div>
         <div class="form-section-body">
           <div class="fgrid fgrid-2">
-            <div class="field span-2"><label for="loss_details">Loss Details (dates, cause, amounts, repaired?)</label><textarea id="loss_details" name="loss_details" placeholder="e.g. 2023 &mdash; water damage, $8,400 paid, repaired"></textarea></div>
+            <div class="field span-2"><label for="loss_details">Loss Details (dates, cause, amounts, repaired?)</label><textarea id="loss_details" name="loss_details" placeholder="e.g. 2023, water damage, $8,400 paid, repaired"></textarea></div>
             <div class="field span-2"><label>Any lapse, cancellation, or non-renewal?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_lapse" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_lapse" data-val="Yes">Yes</button></div><input type="hidden" id="has_lapse" name="has_lapse" value=""></div>
             <div class="field cond-block span-2" id="cond-lapse" style="display:none;"><label for="lapse_explain">Please explain the lapse/cancellation</label><textarea id="lapse_explain" name="lapse_explain" placeholder="Dates, reason, carrier..."></textarea></div>
           </div>
@@ -592,9 +592,9 @@ html:not(.pra-js) .pramob-close{display:none}
         <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Additional <em>Uploads</em></span><span class="fs-desc">All optional</span></div>
         <div class="form-section-body">
           <div class="upload-grid">
-            <div class="upload-zone"><input type="file" id="file_loss_runs" name="file_loss_runs" accept=".pdf,.xls,.xlsx,.csv" multiple><div class="upload-icon">&#128202;</div><div class="upload-label">Loss Runs (3&ndash;5 years)</div><div class="upload-hint">PDF, XLS, CSV &mdash; optional</div><div class="upload-status" id="loss-runs-status"></div></div>
-            <div class="upload-zone"><input type="file" id="file_photos" name="file_photos" accept=".jpg,.jpeg,.png,.pdf" multiple><div class="upload-icon">&#128247;</div><div class="upload-label">Property Photos</div><div class="upload-hint">Front, back, sides, roof &mdash; JPG/PNG/PDF</div><div class="upload-status" id="photos-status"></div></div>
-            <div class="upload-zone"><input type="file" id="file_inspection" name="file_inspection" accept=".pdf" multiple><div class="upload-icon">&#128203;</div><div class="upload-label">4-Point / Wind Mit Inspection</div><div class="upload-hint">PDF &mdash; optional</div><div class="upload-status" id="inspection-status"></div></div>
+            <div class="upload-zone"><input type="file" id="file_loss_runs" name="file_loss_runs" accept=".pdf,.xls,.xlsx,.csv" multiple><div class="upload-icon">&#128202;</div><div class="upload-label">Loss Runs (3&ndash;5 years)</div><div class="upload-hint">PDF, XLS, CSV. optional</div><div class="upload-status" id="loss-runs-status"></div></div>
+            <div class="upload-zone"><input type="file" id="file_photos" name="file_photos" accept=".jpg,.jpeg,.png,.pdf" multiple><div class="upload-icon">&#128247;</div><div class="upload-label">Property Photos</div><div class="upload-hint">Front, back, sides, roof. JPG/PNG/PDF</div><div class="upload-status" id="photos-status"></div></div>
+            <div class="upload-zone"><input type="file" id="file_inspection" name="file_inspection" accept=".pdf" multiple><div class="upload-icon">&#128203;</div><div class="upload-label">4-Point / Wind Mit Inspection</div><div class="upload-hint">PDF. optional</div><div class="upload-status" id="inspection-status"></div></div>
           </div>
         </div>
       </div>
@@ -919,6 +919,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     submission_pdf_link: buildSubmissionLink(submissionData),
     submitted_at:     submissionData.submitted_at
   };
+  if (typeof emailjs === 'undefined') { alert('We could not reach our form service. This is usually an ad blocker or a network issue.\n\nPlease call us at (770) 758-3197 or email dbrown@pinnacleriskad.com and we will take your details directly.'); btn.textContent = 'Get My Landlord Quote'; btn.disabled = false; return; }
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
     console.log('Landlord quote notification emailed via EmailJS.');
@@ -1004,7 +1005,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     function fill(data) {
       console.log("[autofill] response:", data);
       if (!data || data.found === false) {
-        setStatus("No property record found for that address — please fill the details in manually.", "var(--navy)");
+        setStatus("No property record found for that address. Please fill the details in manually.", "var(--navy)");
         return;
       }
       setInput("year_built", data.year_built);
@@ -1025,7 +1026,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       setSelect("property_type", mapPropertyType(data.property_type, data.units));
       var dwelling = money(data.estimated_value);
       if (dwelling) setInput("dwelling_limit", dwelling);
-      setStatus("Autofilled from property records — review and confirm (dwelling limit is an estimate; adjust to replacement cost).", "var(--green)");
+      setStatus("Autofilled from property records. Review and confirm (dwelling limit is an estimate; adjust to replacement cost).", "var(--green)");
     }
 
     function lookup() {
@@ -1042,7 +1043,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
         .then(function (d) { fill(d); })
         .catch(function (e) {
           console.log("[autofill] error:", e);
-          setStatus("Lookup error: " + (e && e.message ? e.message : e) + " — please fill details manually.", "#9a3324");
+          setStatus("Lookup error: " + (e && e.message ? e.message : e) + ". please fill details manually.", "#9a3324");
         });
     }
 
