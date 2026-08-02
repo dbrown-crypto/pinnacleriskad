@@ -692,6 +692,22 @@ document.getElementById('home-quote-form').addEventListener('submit', async func
     submitted_at:        new Date().toISOString()
   };
 
+  try{
+    var GHL_HOOK='https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/53018edb-c755-437e-a1fc-b78ee4174ac3';
+    var np = (data.full_name||'').split(/\s+/);
+    fetch(GHL_HOOK, { method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+      body: JSON.stringify({
+        first_name: np[0]||'', last_name: np.slice(1).join(' '),
+        phone: data.phone||'', email: data.email||'',
+        line_of_business: 'Homeowners',
+        client_type: data.client_type||'new',
+        property_address: data.property_address||'',
+        partial: 'no',
+        source: 'website', form_page: '/home-quote'
+      })
+    }).catch(function(){});
+  }catch(e){}
+
   if (typeof emailjs === 'undefined') {
     btn.textContent = 'Get My Homeowners Quote';
     btn.disabled = false;

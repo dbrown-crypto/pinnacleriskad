@@ -663,8 +663,8 @@ document.getElementById('auto-quote-form').addEventListener('change', function(e
   if(w) w.classList.remove('err');
 }, true);
 
-/* ── partial lead capture: same GHL webhook the trucking form uses ── */
-var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/b5d38073-e334-4959-a857-41a534c883fa';
+/* ── partial lead capture: posts to the Personal Lines intake webhook in GoHighLevel ── */
+var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/53018edb-c755-437e-a1fc-b78ee4174ac3';
 var partialLeadSent = false;
 function fieldVal(n){ var el = document.querySelector('[name="'+n+'"]'); return el ? (el.value||'').trim() : ''; }
 function captureLead(){
@@ -685,7 +685,7 @@ function captureLead(){
         phone: phone,
         email: email,
         coverage_type: 'Personal Auto',
-        line_of_business: 'auto',
+        line_of_business: 'Personal Auto',
         client_type: fieldVal('client_type') || 'new',
         garaging_zip: fieldVal('garaging_zip'),
         partial: 'yes - contact step only',
@@ -832,6 +832,23 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
     submission_pdf_link: '',
     submitted_at:        new Date().toISOString()
   };
+
+  try{
+    var np = (data.full_name||'').split(/\s+/);
+    fetch(GHL_HOOK, { method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+      body: JSON.stringify({
+        first_name: np[0]||'', last_name: np.slice(1).join(' '),
+        phone: data.phone||'', email: data.email||'',
+        line_of_business: 'Personal Auto',
+        client_type: data.client_type||'new',
+        zip: data.garaging_zip||'',
+        num_vehicles: data.num_vehicles||'', num_drivers: data.num_drivers||'',
+        current_carrier: data.current_carrier||'',
+        partial: 'no',
+        source: 'website', form_page: '/auto-quote'
+      })
+    }).catch(function(){});
+  }catch(e){}
 
   if (typeof emailjs === 'undefined') {
     btn.textContent = 'Get My Auto Quote';
