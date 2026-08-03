@@ -39,8 +39,10 @@ function sessionFor(fetchFn, options = {}) {
 }
 
 test('successful CRM response is authoritative and normalized', async () => {
+  let requestUrl;
   let requestBody;
-  const session = sessionFor(async (_url, options) => {
+  const session = sessionFor(async (url, options) => {
+    requestUrl = url;
     requestBody = JSON.parse(options.body);
     return response(200, {
       ok: true,
@@ -50,6 +52,7 @@ test('successful CRM response is authoritative and normalized', async () => {
   });
   const result = await session.submitComplete(validFields(), '');
   assert.equal(result.ok, true);
+  assert.equal(requestUrl, 'https://pinnacleriskadvisors.net/api/quote-submit');
   assert.equal(requestBody.fields.email, 'dbrown@example.com');
   assert.equal(requestBody.fields.phone, '+17707583197');
   assert.equal(requestBody.fields.full_name, 'Derrick Brown');

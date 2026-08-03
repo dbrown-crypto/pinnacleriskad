@@ -129,6 +129,32 @@ test('Origin or Referer must match the two production origins', async () => {
   assert.equal(calls, 1);
 });
 
+test('allowed origins receive CORS headers and preflight never reaches CRM', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls += 1;
+    return new Response('{}', { status: 200 });
+  };
+
+  const preflight = await quoteSubmit(new Request('https://pinnacleriskadvisors.net/api/quote-submit', {
+    method: 'OPTIONS',
+    headers: {
+      Origin: 'https://pinnacleriskad.com',
+      'Access-Control-Request-Method': 'POST',
+      'Access-Control-Request-Headers': 'content-type'
+    }
+  }));
+  assert.equal(preflight.status, 204);
+  assert.equal(preflight.headers.get('access-control-allow-origin'), 'https://pinnacleriskad.com');
+  assert.equal(preflight.headers.get('access-control-allow-methods'), 'POST, OPTIONS');
+  assert.equal(preflight.headers.get('access-control-allow-headers'), 'Content-Type');
+
+  const response = await quoteSubmit(request());
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://pinnacleriskad.com');
+  assert.equal(response.headers.get('vary'), 'Origin');
+  assert.equal(calls, 1);
+});
+
 test('honeypot and minimum completion time stop requests before CRM', async () => {
   let calls = 0;
   globalThis.fetch = async () => { calls += 1; return new Response('{}', { status: 200 }); };
@@ -154,6 +180,7 @@ test('field allowlist and complete-state required fields are enforced', async ()
 });
 
 test('Netlify native per-IP and domain rate limiting is configured', () => {
+  assert.deepEqual(config.method, ['POST', 'OPTIONS']);
   assert.deepEqual(config.rateLimit, {
     action: 'rate_limit',
     aggregateBy: ['domain', 'ip'],
