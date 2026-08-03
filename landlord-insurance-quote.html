@@ -170,8 +170,10 @@ footer a:hover{color:var(--gold);}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  (function() { emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); })();
+  try { if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); }
+  catch (error) { console.warn('EmailJS initialization failed.'); }
 </script>
+<script src="/quote-submission.js"></script>
 
 <meta property="og:title" content="Landlord Insurance Quote | Georgia &amp; Florida Rental Property Coverage"><meta property="og:description" content="Get landlord insurance quotes for rental properties, vacant homes, small multifamily buildings, and investor portfolios in Georgia and Florida. Pinnacle Risk."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/landlord-insurance-quote.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Landlord Insurance Quote | Georgia &amp; Florida Rental Property Coverage"><meta name="twitter:description" content="Get landlord insurance quotes for rental properties, vacant homes, small multifamily buildings, and investor portfolios in Georgia and Florida. Pinnacle Risk.">
 <script type="application/ld+json">
@@ -424,6 +426,7 @@ html:not(.pra-js) .pramob-close{display:none}
   <p class="sub">Complete the form below and a Pinnacle Risk Advisors agent will review your property details and reach out with coverage options.</p>
   <form id="landlord-quote-form" novalidate>
     <input type="hidden" name="coverage_type" id="coverage_type" value="Landlord Insurance">
+    <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label for="landlord-website">Leave this field empty</label><input type="text" id="landlord-website" name="website" tabindex="-1" autocomplete="off"></div>
     <div class="form-section">
       <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Your <em>Contact</em> Information</span><span class="fs-desc">Required to follow up on your quote</span></div>
       <div class="form-section-body">
@@ -655,6 +658,7 @@ html:not(.pra-js) .pramob-close{display:none}
 <script>
 const EMAILJS_SERVICE_ID  = 'service_mefkv18';
 const EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
+var quoteSession = PinnacleQuote.createSession({ formKey: 'landlord-quote', lineOfBusiness: 'landlord' });
 
 function wireUpload(inputId, statusId) {
   var inp = document.getElementById(inputId);
@@ -732,7 +736,7 @@ document.getElementById('year_built').addEventListener('input', updateAgeFields)
 
 function buildSubmissionLink(data) {
   try { return window.location.origin + '/landlord-insurance-quote.html?view_submission=' + btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
-  catch(e) { return ''; }
+  catch(error) { PinnacleQuote.logDiagnostic('landlord_submission_link_failed', error); return ''; }
 }
 function opt(id) {
   var el = document.getElementById(id);
@@ -868,7 +872,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
     tbl += '</div>';
     ss.querySelector('p').innerHTML = tbl;
-  } catch(e) {}
+  } catch(error) { PinnacleQuote.logDiagnostic('landlord_submission_copy_failed', error); }
 });
 
 document.getElementById('landlord-quote-form').addEventListener('submit', async function(e) {
@@ -880,9 +884,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   var btn = document.getElementById('submit-btn');
   btn.textContent = 'Sending...';
   btn.disabled = true;
-  var fd = new FormData(this);
-  var data = {};
-  for (var pair of fd.entries()) { data[pair[0]] = pair[1]; }
+  PinnacleQuote.clearFailure(this);
+  var data = PinnacleQuote.formToObject(this);
+  var honeypot = data.website || '';
+  delete data.website;
   var fileNames = allFileNames();
   var notesBlock = buildNotes(data);
   var covSummary = buildCoveragesSummary(data);
@@ -919,18 +924,22 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     submission_pdf_link: buildSubmissionLink(submissionData),
     submitted_at:     submissionData.submitted_at
   };
-  if (typeof emailjs === 'undefined') { alert('We could not reach our form service. This is usually an ad blocker or a network issue.\n\nPlease call us at (770) 758-3197 or email dbrown@pinnacleriskad.com and we will take your details directly.'); btn.textContent = 'Get My Landlord Quote'; btn.disabled = false; return; }
   try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-    console.log('Landlord quote notification emailed via EmailJS.');
+    var primary = await quoteSession.submitComplete(submissionData, honeypot);
+    if (!primary.duplicate) {
+      await PinnacleQuote.notifySecondary(function(){
+        if (typeof emailjs === 'undefined') throw new Error('EmailJS unavailable');
+        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      });
+    }
     document.getElementById('landlord-quote-form').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
     window.scrollTo({top:0,behavior:'smooth'});
   } catch(err) {
-    console.error('EmailJS error:', err);
+    PinnacleQuote.logDiagnostic('landlord_complete_submit_failed', err);
     btn.textContent = 'Get My Landlord Quote';
     btn.disabled = false;
-    alert('There was a problem submitting your request. Please call us at (770) 758-3197 or email dbrown@pinnacleriskad.com.');
+    PinnacleQuote.showFailure(this, err);
   }
 });
 </script>

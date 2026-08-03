@@ -1,5 +1,6 @@
 # Pinnacle property lookup endpoint — RentCast underwriting autofill
 import os
+
 import httpx
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,9 +9,12 @@ app = FastAPI(title="Pinnacle Property Lookup")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://pinnacleriskad.com",
+        "https://www.pinnacleriskad.com",
+    ],
     allow_methods=["GET"],
-    allow_headers=["*"],
+    allow_headers=["Accept"],
 )
 
 RENTCAST_API_KEY = os.environ.get("RENTCAST_API_KEY", "")
@@ -92,19 +96,18 @@ async def property_lookup(address: str = Query(..., min_length=6)):
     }
 
 
-FMCSA_WEB_KEY = os.environ.get(
-    "FMCSA_WEB_KEY", "311d231f2053b66d7f2d499fec6efcce6920de93")
+FMCSA_WEB_KEY = os.environ.get("FMCSA_WEB_KEY", "")
 FMCSA_BASE = "https://mobile.fmcsa.dot.gov/qc/services"
 
 
 @app.get("/dot-lookup")
 async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
-    """Server-side FMCSA carrier lookup so the site never depends on
-    flaky public CORS proxies. Returns FMCSA's raw JSON shape
-    ({content: {carrier: {...}}}) that the front end already parses."""
+    """Server-side FMCSA carrier lookup so the site never exposes the API key."""
     dot_clean = "".join(ch for ch in dot if ch.isdigit())
     if not dot_clean:
         return {"found": False, "error": "Invalid DOT number"}
+    if not FMCSA_WEB_KEY:
+        return {"found": False, "error": "Server not configured"}
 
     async with httpx.AsyncClient(timeout=15) as client:
         try:
@@ -124,9 +127,7 @@ async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
         except Exception:
             return {"found": False, "error": "Bad upstream response"}
 
-        # FMCSA's main carrier record does not include the MC number —
-        # it lives in the docket-numbers feed. Merge it in server-side so
-        # the site gets everything in one call.
+        # FMCSA's main carrier record does not include the MC number.
         try:
             content = data.get("content") if isinstance(data, dict) else None
             carrier = content.get("carrier") if isinstance(content, dict) else None
@@ -156,4 +157,9 @@ async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
 
 @app.get("/")
 def health():
-    return {"ok": True, "configured": bool(RENTCAST_API_KEY)}
+    return {
+        "ok": True,
+        "configured": bool(RENTCAST_API_KEY),
+        "rentcast_configured": bool(RENTCAST_API_KEY),
+        "fmcsa_configured": bool(FMCSA_WEB_KEY),
+    }

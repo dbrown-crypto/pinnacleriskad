@@ -517,7 +517,8 @@ html:not(.pra-js) .pramob-close{display:none}
             <a href="trucking-quote.html" style="color:var(--gold); white-space:nowrap;">Trucking Quote &rarr;</a>
           </div>
 
-          <form id="quoteForm" action="https://formsubmit.co/dbrown@pinnacleriskad.com" method="POST">
+          <form id="quoteForm" novalidate>
+            <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label for="commercial-website">Leave this field empty</label><input type="text" id="commercial-website" name="website" tabindex="-1" autocomplete="off"></div>
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name <span class="req">*</span></label>
@@ -602,10 +603,6 @@ html:not(.pra-js) .pramob-close{display:none}
               <input type="hidden" id="smsDisclosureVersion" name="smsDisclosureVersion" value="v1">
             </div>
 
-            <input type="hidden" name="_subject" value="New Quote Request - Pinnacle Quote Page">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://pinnacleriskad.com/thank-you.html">
-
             <button type="submit" class="form-submit">Submit Quote Request</button>
             <p class="form-footer-note">
               By submitting this form, you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
@@ -670,6 +667,7 @@ html:not(.pra-js) .pramob-close{display:none}
     </div>
   </footer>
 
+  <script src="/quote-submission.js"></script>
   <script>
     // Header scroll state
     var header = document.getElementById('header');
@@ -797,9 +795,11 @@ html:not(.pra-js) .pramob-close{display:none}
         if (wantsSms() && !phone.value.trim()) {
           e.preventDefault();
           phone.focus();
-          alert('Please enter a phone number if you opt into SMS messages.');
+          phone.setCustomValidity('Please enter a phone number if you opt into SMS messages.');
+          phone.reportValidity();
           return;
         }
+        phone.setCustomValidity('');
         setProofFields();
       });
 
@@ -817,7 +817,42 @@ html:not(.pra-js) .pramob-close{display:none}
         if (sel && sel.querySelector('option[value="' + cov.replace(/"/g, '') + '"]')) {
           sel.value = cov;
         }
-      } catch (e) {}
+      } catch (error) { PinnacleQuote.logDiagnostic('coverage_prefill_failed', error); }
+    })();
+  </script>
+  <script>
+    (function () {
+      var form = document.getElementById('quoteForm');
+      var button = form.querySelector('[type="submit"]');
+      var originalLabel = button.textContent;
+      var quoteSession = PinnacleQuote.createSession({ formKey: 'commercial-quote', lineOfBusiness: 'commercial' });
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (button.disabled) return;
+        button.disabled = true;
+        button.textContent = 'Sending...';
+        PinnacleQuote.clearFailure(form);
+
+        var fields = PinnacleQuote.formToObject(form);
+        var honeypot = fields.website || '';
+        delete fields.website;
+        fields.line_of_business = 'Commercial Insurance';
+        fields.form_page = '/quote';
+        fields.source = 'website';
+        fields.submitted_at = new Date().toISOString();
+
+        try {
+          await quoteSession.submitComplete(fields, honeypot);
+          window.location.assign('/thank-you.html');
+        } catch (error) {
+          PinnacleQuote.logDiagnostic('commercial_complete_submit_failed', error);
+          button.disabled = false;
+          button.textContent = originalLabel;
+          PinnacleQuote.showFailure(form, error);
+        }
+      });
     })();
   </script>
 <div class="praft"><div class="praft-in"><style>.praft-grid{grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr}@media(max-width:1040px){.praft-grid{grid-template-columns:1fr 1fr 1fr}}@media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.praft-grid{grid-template-columns:1fr}}</style><div class="praft-grid">

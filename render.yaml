@@ -8,3 +8,5 @@ services:
     envVars:
       - key: RENTCAST_API_KEY
         sync: false
+      - key: FMCSA_WEB_KEY
+        sync: false
