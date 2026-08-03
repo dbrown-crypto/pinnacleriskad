@@ -5,8 +5,8 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
 
-  var DEFAULT_ENDPOINT = 'https://pinnacleriskad.onrender.com/quote-submit';
-  var DEFAULT_TIMEOUT_MS = 20000;
+  var DEFAULT_ENDPOINT = '/api/quote-submit';
+  var DEFAULT_TIMEOUT_MS = 12000;
   var MIN_COMPLETION_MS = 3000;
   var memoryStorage = {};
 
@@ -152,12 +152,6 @@
     }
     var partialInFlight = null;
     var completeInFlight = null;
-    if (root.document && typeof root.fetch === 'function' && options.warmEndpoint !== false) {
-      var healthUrl = (options.endpoint || DEFAULT_ENDPOINT).replace(/\/quote-submit$/, '/');
-      root.fetch(healthUrl, { method: 'GET', mode: 'cors', credentials: 'omit' }).catch(function (error) {
-        logDiagnostic('quote_service_warmup_failed', error);
-      });
-    }
 
     function submit(state, fields, honeypot) {
       if (state !== 'partial' && state !== 'complete') return Promise.reject(submissionError('validation', 'Invalid submission state.'));
