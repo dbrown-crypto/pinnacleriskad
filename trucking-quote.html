@@ -240,8 +240,10 @@ footer a:hover{color:var(--gold);}
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  (function() { emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); })();
+  try { if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); }
+  catch (error) { console.warn('EmailJS initialization failed.'); }
 </script>
+<script src="/quote-submission.js"></script>
 
 <meta property="og:title" content="Commercial Trucking Insurance Quote | Pinnacle Risk Advisors"><meta property="og:description" content="Request a commercial trucking insurance quote from Pinnacle Risk Advisors. Coverage options may include auto liability, physical damage, motor truck cargo."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/trucking-quote.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Commercial Trucking Insurance Quote | Pinnacle Risk Advisors"><meta name="twitter:description" content="Request a commercial trucking insurance quote from Pinnacle Risk Advisors. Coverage options may include auto liability, physical damage, motor truck cargo.">
 <script type="application/ld+json">
@@ -481,6 +483,7 @@ html:not(.pra-js) .pramob-close{display:none}
     </div>
   </div>
   <form id="truckingQuoteForm" novalidate>
+    <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label for="trucking-website">Leave this field empty</label><input type="text" id="trucking-website" name="website" tabindex="-1" autocomplete="off"></div>
 
     <!-- ══ STEP 1 · DOT LOOKUP ══ -->
     <div class="wiz-step active" data-step="1">
@@ -814,17 +817,16 @@ function showStatus(input,statusId){
     el.textContent=input.files.length===1?'\u2713 '+input.files[0].name:'\u2713 '+input.files.length+' files selected';
   }
 }
-const FORMSPREE_URL='https://formspree.io/f/xykobeqa';
+var quoteSession = PinnacleQuote.createSession({ formKey: 'trucking-quote', lineOfBusiness: 'trucking' });
 document.getElementById('truckingQuoteForm').addEventListener('submit',async function(e){
   e.preventDefault();
+  if (!this.checkValidity()) { this.reportValidity(); return; }
   var btn=document.getElementById('submit-btn');
   btn.textContent='Submitting…';btn.disabled=true;
-  var formData=new FormData(this);var data={};
-  formData.forEach(function(val,key){
-    if(val instanceof File)return;
-    if(data[key]){if(!Array.isArray(data[key]))data[key]=[data[key]];data[key].push(val);}
-    else{data[key]=val;}
-  });
+  PinnacleQuote.clearFailure(this);
+  var data=PinnacleQuote.formToObject(this);
+  var honeypot=data.website||'';
+  delete data.website;
   var uploadedFileNames=[];
   ['upload_dl','upload_dec','upload_loss','upload_sched','upload_other'].forEach(function(id){
     var input=document.getElementById(id);
@@ -832,46 +834,31 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   });
   data['files_noted']=uploadedFileNames.length>0?uploadedFileNames.join(' | '):'No files uploaded at time of submission. Follow up required.';
   data['lead_source']='Website Trucking Quote Page';
-  data['_subject']='New Trucking Quote Request from Pinnacle Risk Advisors Website';
   data['submitted_at']=new Date().toISOString();
   data['form_page']='/trucking-quote';
   data['contact_email']=data['email']||'';
   data['contact_phone']=data['phone']||'';
   data['contact_name']=data['contact_name']||'';
   try{
-    // Google Ads conversion. Fires independently of the Formspree call so a
-    // downstream error cannot suppress the beacon.
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion', {'send_to': 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE'});
+    var qp = new URLSearchParams(window.location.search);
+    data['source']=qp.get('gclid')?'google-ads':'website';
+    data['gclid']=qp.get('gclid')||'';
+    data['ad_group']=qp.get('adgroup')||qp.get('utm_content')||'';
+    data['campaign']=qp.get('utm_campaign')||'';
+    data['form']='trucking-quote';
+    data['page_url']=window.location.href;
+    data['company']=data['business_name']||'';
+    data['dot_number']=data['usdot']||'';
+    data['cargo']=data['cargo_type']||'';
+    data['states']=data['states_of_operation']||'';
+    data['current_carrier']=data['prior_carrier']||'';
+    var primary=await quoteSession.submitComplete(data,honeypot);
+    if(!primary.duplicate){
+      await PinnacleQuote.notifySecondary(function(){return sendPDFByEmail(data);});
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {'send_to': 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE'});
+      }
     }
-    await sendPDFByEmail(data);
-    // GoHighLevel CRM intake. Fires only on successful form submission.
-    try {
-      var qp = new URLSearchParams(window.location.search);
-      var nameParts = (data['contact_name']||'').trim().split(/\s+/);
-      await fetch('https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/b5d38073-e334-4959-a857-41a534c883fa', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          first_name: nameParts[0]||'',
-          last_name: nameParts.slice(1).join(' '),
-          phone: data['phone']||'',
-          email: data['email']||'',
-          company: data['business_name']||'',
-          dot_number: data['usdot']||'',
-          mc_number: data['mc_number']||'',
-          cargo: data['cargo_type']||'',
-          states: data['states_of_operation']||'',
-          current_carrier: data['prior_carrier']||'',
-          source: qp.get('gclid') ? 'google-ads' : 'website',
-          gclid: qp.get('gclid')||'',
-          ad_group: qp.get('adgroup')||qp.get('utm_content')||'',
-          campaign: qp.get('utm_campaign')||'',
-          form: 'trucking-quote',
-          page_url: window.location.href
-        })
-      });
-    } catch (crmErr) { /* CRM notify must never block the visitor */ }
     lastSubmissionData=data;
     document.getElementById('truckingQuoteForm').style.display='none';
     document.getElementById('success-screen').style.display='block';
@@ -879,8 +866,8 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
     setTimeout(function(){generateSubmissionPDF(data);},800);
   }catch(err){
     btn.textContent='Submit Trucking Quote Request';btn.disabled=false;
-    alert('There was an issue submitting your request. Please try again or contact us directly at (770) 758-3197.');
-    console.error('Form submission error:',err);
+    PinnacleQuote.logDiagnostic('trucking_complete_submit_failed',err);
+    PinnacleQuote.showFailure(this,err);
   }
 });
 var lastSubmissionData={};
@@ -931,7 +918,10 @@ function openPrintWindow(fullDoc){
     return;
   }
   win.document.open(); win.document.write(fullDoc); win.document.close(); win.focus();
-  setTimeout(function(){ try{ win.print(); }catch(e){} }, 600);
+  setTimeout(function(){
+    try { win.print(); }
+    catch(error) { PinnacleQuote.logDiagnostic('submission_print_failed', error); }
+  }, 600);
 }
 function generateSubmissionPDF(d){
   if(!d || Object.keys(d).length===0) return;
@@ -943,7 +933,7 @@ function buildSubmissionLink(d){
     var copy={}; for(var k in d){ if(k!=='your_copy_link') copy[k]=d[k]; }
     return window.location.origin + '/trucking-quote.html?view_submission=' +
            btoa(unescape(encodeURIComponent(JSON.stringify(copy))));
-  }catch(e){ return ''; }
+  }catch(error){ PinnacleQuote.logDiagnostic('submission_link_failed', error); return ''; }
 }
 /* If opened via an agent copy link, render the packet ready to Save-as-PDF */
 window.addEventListener('DOMContentLoaded', function(){
@@ -1031,14 +1021,11 @@ async function sendPDFByEmail(data) {
 
     };
 
+    if (typeof emailjs === 'undefined') throw new Error('EmailJS unavailable');
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
 
-    console.log('Quote notification emailed to dbrown@pinnacleriskad.com');
-
   } catch (err) {
-
-    console.error('EmailJS error:', err);
-
+    throw err;
   }
 
 }
@@ -1047,11 +1034,11 @@ async function sendPDFByEmail(data) {
 
    CONFIGURATION
 
-   FMCSA key is active. NHTSA VIN decoder needs no key.
+   FMCSA requests use the server-side lookup endpoint. NHTSA VIN
+   decoder needs no key.
 
 ────────────────────────────────────────────────── */
 
-FMCSA_WEB_KEY='311d231f2053b66d7f2d499fec6efcce6920de93';
 async function lookupDOT() {
   var dotInput  = document.getElementById('usdot-input');
   var btn       = document.getElementById('dot-lookup-btn');
@@ -1067,56 +1054,20 @@ async function lookupDOT() {
   errorBox.textContent = '';
   resultBox.classList.remove('show');
   var backendUrl = 'https://pinnacleriskad.onrender.com/dot-lookup?dot=' + dot;
-  var fmcsaUrl = 'https://mobile.fmcsa.dot.gov/qc/services/carriers/' + dot + '?webKey=' + FMCSA_WEB_KEY;
-  var proxies = [
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent(fmcsaUrl),
-    'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(fmcsaUrl),
-    'https://api.allorigins.win/get?url=' + encodeURIComponent(fmcsaUrl)
-  ];
   function validCarrier(data) {
     return data && data.content && data.content.carrier ? data : null;
   }
   async function fetchBackend() {
     var res = await fetch(backendUrl, { headers: { 'Accept': 'application/json' } });
-    var data = await res.json();
+    var text = await res.text();
+    if (!res.ok) throw new Error('DOT lookup service rejected the request');
+    var data = JSON.parse(text);
     var ok = validCarrier(data);
     if (!ok) throw new Error((data && data.error) || 'Backend: no carrier record');
     return ok;
   }
-  async function fetchProxy(url, isWrapped) {
-    var res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-    var text = await res.text();
-    if (text.trim().startsWith('<') || text.includes('Oops')) throw new Error('Proxy error: got HTML');
-    var data = JSON.parse(text);
-    if (isWrapped) {
-      if (!data.contents || data.contents.trim().startsWith('<')) throw new Error('Wrapped proxy error');
-      data = JSON.parse(data.contents);
-    }
-    var ok = validCarrier(data);
-    if (!ok) throw new Error('Proxy: no carrier record');
-    return ok;
-  }
-  async function fetchProxyChain() {
-    var lastErr = null;
-    for (var p = 0; p < proxies.length; p++) {
-      try { return await fetchProxy(proxies[p], p === 2); } catch (e) { lastErr = e; }
-    }
-    throw lastErr || new Error('All proxies failed');
-  }
-  /* first source to succeed wins; reject only if every source fails */
-  function firstSuccess(promises) {
-    return new Promise(function (resolve, reject) {
-      var pending = promises.length, firstErr = null;
-      promises.forEach(function (p) {
-        Promise.resolve(p).then(resolve, function (e) {
-          if (!firstErr) firstErr = e;
-          if (--pending === 0) reject(firstErr);
-        });
-      });
-    });
-  }
   try {
-    var json = await firstSuccess([fetchBackend(), fetchProxyChain()]);
+    var json = await fetchBackend();
     var c = json.content.carrier;
     var fields = [];
     if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
@@ -1183,9 +1134,6 @@ async function lookupDOT() {
     btn.disabled = false;
   }
 }
-/* Warm up the lookup server (free tier sleeps when idle) so the first
-   Look Up DOT click responds fast instead of waiting on a cold start. */
-try { fetch('https://pinnacleriskad.onrender.com/', { mode: 'cors' }).catch(function(){}); } catch (e) {}
 function onVinInput(input, prefix) {
   var btn    = document.getElementById(prefix + '_vin_btn');
   var result = document.getElementById(prefix + '_vin_result');
@@ -1309,10 +1257,11 @@ function wizGo(i, noScroll){
     window.scrollTo({ top: top, behavior: 'smooth' });
   }
 }
-function wizNext(){
+async function wizNext(){
   if(!wizValidate(wizSteps[wizIdx])) return;
-  if(wizIdx === 1) captureLead();      /* contact step complete → partial lead */
+  var captureContact = wizIdx === 1;
   wizGo(wizIdx + 1);
+  if(captureContact) await captureLead();      /* contact step complete → partial lead */
 }
 function wizBack(){ wizGo(wizIdx - 1); }
 
@@ -1453,51 +1402,26 @@ if(puSel) puSel.addEventListener('change', syncVehicles);
 var drSel = document.querySelector('select[name="driver_count"]');
 if(drSel) drSel.addEventListener('change', syncDrivers);
 
-/* ── Partial lead capture ───────────────────────────────────────
-   Fires once the visitor has given us a name/phone/email, even if
-   they never reach Submit. Sends the same GHL webhook the full
-   submission uses, tagged lead_status = partial-incomplete so the
-   CRM workflow can treat it as an unfinished quote.
-──────────────────────────────────────────────────────────────── */
-var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/SLFDg9HSybMWjZB0g2y5/webhook-trigger/b5d38073-e334-4959-a857-41a534c883fa';
-var partialLeadSent = false;
+/* Partial capture shares the completed request's stable submission_id. */
 function fieldVal(n){ var el = document.querySelector('[name="'+n+'"]'); return el ? (el.value||'').trim() : ''; }
-function captureLead(){
-  if(partialLeadSent) return;
+async function captureLead(){
   var email = fieldVal('email'), phone = fieldVal('phone');
   if(!email && !phone) return;
-  partialLeadSent = true;
+  var qp = new URLSearchParams(window.location.search);
   try{
-    var qp = new URLSearchParams(window.location.search);
-    var parts = fieldVal('contact_name').split(/\s+/);
-    fetch(GHL_HOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-      body: JSON.stringify({
-        first_name: parts[0] || '',
-        last_name: parts.slice(1).join(' '),
-        phone: phone,
-        email: email,
-        company: fieldVal('business_name'),
-        dot_number: fieldVal('usdot'),
-        mc_number: fieldVal('mc_number'),
-        source: qp.get('gclid') ? 'google-ads' : 'website',
-        gclid: qp.get('gclid') || '',
-        campaign: qp.get('utm_campaign') || '',
-        form: 'trucking-quote',
-        lead_status: 'partial-incomplete',
-        note: 'Started the trucking quote form and provided contact info but has not submitted yet.',
-        page_url: window.location.href
-      })
-    }).catch(function(){});
-  } catch(e){ /* never block the visitor */ }
+    await quoteSession.submitPartial({
+      contact_name: fieldVal('contact_name'), phone: phone, email: email,
+      business_name: fieldVal('business_name'), company: fieldVal('business_name'),
+      usdot: fieldVal('usdot'), dot_number: fieldVal('usdot'),
+      mc_number: fieldVal('mc_number'),
+      source: qp.get('gclid') ? 'google-ads' : 'website',
+      gclid: qp.get('gclid') || '', campaign: qp.get('utm_campaign') || '',
+      form: 'trucking-quote', lead_status: 'partial-incomplete',
+      note: 'Started the trucking quote form and provided contact info but has not submitted yet.',
+      page_url: window.location.href
+    }, fieldVal('website'));
+  } catch(error){ PinnacleQuote.logDiagnostic('trucking_partial_submit_failed', error); }
 }
-/* backstop: fire if they leave mid-form after giving us contact info */
-window.addEventListener('pagehide', function(){ if(wizIdx >= 1) captureLead(); });
-document.addEventListener('visibilitychange', function(){
-  if(document.visibilityState === 'hidden' && wizIdx >= 2) captureLead();
-});
 
 /* ── Boot ───────────────────────────────────────────────────── */
 (function(){
@@ -1515,7 +1439,7 @@ document.addEventListener('visibilitychange', function(){
         setTimeout(lookupDOT, 600);
       }
     }
-  } catch(e){}
+  } catch(error){ PinnacleQuote.logDiagnostic('dot_prefill_failed', error); }
 })();
 </script>
 <div class="praft"><div class="praft-in"><style>.praft-grid{grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr}@media(max-width:1040px){.praft-grid{grid-template-columns:1fr 1fr 1fr}}@media(max-width:820px){.praft-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.praft-grid{grid-template-columns:1fr}}</style><div class="praft-grid">

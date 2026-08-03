@@ -8,3 +8,11 @@ services:
     envVars:
       - key: RENTCAST_API_KEY
         sync: false
+      - key: FMCSA_WEB_KEY
+        sync: false
+      - key: GHL_PERSONAL_LINES_WEBHOOK_URL
+        sync: false
+      - key: GHL_TRUCKING_WEBHOOK_URL
+        sync: false
+      - key: GHL_COMMERCIAL_WEBHOOK_URL
+        sync: false
