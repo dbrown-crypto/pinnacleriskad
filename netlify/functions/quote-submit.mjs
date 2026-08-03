@@ -118,6 +118,21 @@ function fail(status, code, message) {
   return json(status, { ok: false, code, message });
 }
 
+function corsHeaders(origin) {
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin'
+  };
+}
+
+function withCors(response, origin) {
+  for (const [name, value] of Object.entries(corsHeaders(origin))) response.headers.set(name, value);
+  return response;
+}
+
 function requestOrigin(request) {
   const origin = (request.headers.get('origin') || '').replace(/\/$/, '');
   if (origin) return origin;
@@ -211,11 +226,7 @@ async function forwardToCrm(webhookUrl, upstreamPayload, timeoutMs = UPSTREAM_TI
   }
 }
 
-export default async function quoteSubmit(request) {
-  if (!ALLOWED_ORIGINS.has(requestOrigin(request))) {
-    return fail(403, 'origin_not_allowed', 'This submission origin is not allowed.');
-  }
-
+async function handleSubmission(request) {
   const contentLength = Number(request.headers.get('content-length') || 0);
   if (contentLength > BODY_LIMIT) return fail(413, 'request_too_large', 'The submission is too large.');
   const raw = await request.text();
@@ -281,9 +292,23 @@ export default async function quoteSubmit(request) {
   return json(200, { ok: true, submission_id: submissionId, submission_state: state });
 }
 
+export default async function quoteSubmit(request) {
+  const origin = requestOrigin(request);
+  if (!ALLOWED_ORIGINS.has(origin)) {
+    return fail(403, 'origin_not_allowed', 'This submission origin is not allowed.');
+  }
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: corsHeaders(origin) });
+  }
+  if (request.method !== 'POST') {
+    return withCors(fail(405, 'method_not_allowed', 'This request method is not allowed.'), origin);
+  }
+  return withCors(await handleSubmission(request), origin);
+}
+
 export const config = {
   path: '/api/quote-submit',
-  method: 'POST',
+  method: ['POST', 'OPTIONS'],
   rateLimit: {
     action: 'rate_limit',
     aggregateBy: ['domain', 'ip'],
