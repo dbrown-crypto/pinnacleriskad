@@ -5,7 +5,10 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
 
-  var DEFAULT_ENDPOINT = '/api/quote-submit';
+  /* The public .com site is hosted on GitHub Pages. Quote delivery runs on
+     the agency's Netlify project, which provides the required server-side
+     function runtime. */
+  var DEFAULT_ENDPOINT = 'https://pinnacleriskadvisors.net/api/quote-submit';
   var DEFAULT_TIMEOUT_MS = 12000;
   var MIN_COMPLETION_MS = 3000;
   var memoryStorage = {};

@@ -2,9 +2,9 @@
 
 ## Hosting architecture
 
-The public site is deployed by Netlify. The repository's deploy-preview integration confirms Netlify is the active static host, and Netlify supports first-party serverless functions. The authoritative quote endpoint is therefore implemented at `netlify/functions/quote-submit.mjs` and routed directly to `/api/quote-submit` with the function's path configuration.
+The canonical public site at `pinnacleriskad.com` is deployed by GitHub Pages, which cannot run a server-side submission function. The repository is also connected to the agency's Netlify project at `pinnacleriskadvisors.net`, which provides the required serverless runtime. The authoritative quote endpoint is implemented at `netlify/functions/quote-submit.mjs` and exposed at `https://pinnacleriskadvisors.net/api/quote-submit`.
 
-All six public quote forms post to that same-origin endpoint. It validates the production site origin, request shape, line-specific fields, required values, completion time, and honeypot before forwarding an allowlisted payload to GoHighLevel. The browser only shows success after the function confirms a successful, well-formed CRM response. EmailJS remains a best-effort secondary notification and cannot create a success state by itself.
+All six public quote forms post cross-origin from the GitHub Pages site to that Netlify endpoint. Netlify handles an allowlisted CORS preflight for `https://pinnacleriskad.com` and `https://www.pinnacleriskad.com`, then validates the request shape, line-specific fields, required values, completion time, and honeypot before forwarding an allowlisted payload to GoHighLevel. The browser only shows success after the function confirms a successful, well-formed CRM response. EmailJS remains a best-effort secondary notification and cannot create a success state by itself.
 
 The repository-wide form audit found partial-lead workflows on `auto-quote.html` and `trucking-quote.html`; both now send `partial` and later `complete` with one session-stable ID. `home-quote.html`, `umbrella-quote.html`, `landlord-insurance-quote.html`, and `quote.html` have completed-lead workflows only. The small GET forms on the Georgia/Florida property landing pages only prefill or navigate to `quote.html`; they do not deliver leads.
 
@@ -34,6 +34,7 @@ The previously public GHL webhook URLs and FMCSA key should be rotated before pr
 ## Implemented protections
 
 - Production `Origin` or `Referer` allowlist for both canonical hostnames.
+- Restricted cross-origin preflight and response headers so the GitHub Pages frontend can call the Netlify function without exposing webhook values.
 - Strict per-line field allowlists, required-field checks, contact normalization, a 64 KB request limit, and an 8-second GHL upstream timeout.
 - Honeypot and three-second minimum completion checks in both the client and function.
 - Stable `submission_id` in `sessionStorage`, shared by partial and complete states.
@@ -57,6 +58,7 @@ The test suites cover CRM success, CRM 400 and 500 responses, malformed response
 ## Known limitations
 
 - GHL deduplication across browser/network retries depends on the external upsert workflow being configured as documented; the stable ID is supplied consistently, but this repository cannot configure GHL itself.
+- The static site and submission function deploy independently. A GitHub Pages update changes the forms; a Netlify deploy changes the backend and its environment variables. Both deployments must be healthy for quote delivery to work.
 - Netlify deploy previews are intentionally rejected by the production origin allowlist. Use the automated tests for preview validation, then run controlled end-to-end submissions on the two approved production origins.
 - EmailJS is intentionally best-effort and does not affect the authoritative CRM result.
 - Existing upload behavior remains unchanged: file names are noted for follow-up; files are not proxied through this JSON endpoint.
