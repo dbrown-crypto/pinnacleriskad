@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Auto Insurance Quote | Georgia &amp; Florida | Pinnacle Risk Advisors</title>
-  <meta name="description" content="Request an auto insurance quote from Pinnacle Risk Advisors. CDL holders, SR-22s, teen drivers, and multi-vehicle households shopped across 20+ carrier markets in Georgia and Florida.">
+  <title>Auto Insurance Quote | Pinnacle Risk Advisors</title>
+  <meta name="description" content="Compare personal auto insurance options for your household with an independent advisor. Securely provide driver and vehicle details for an accurate quote.">
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -223,8 +223,57 @@ footer a:hover{color:var(--gold);}
 }
 </style>
 
+<style id="pra-auto-upgrade-css">
+.form-body{max-width:980px;padding-top:42px;}
+.secure-intro{display:flex;align-items:flex-start;gap:12px;background:#eef6f1;border:1px solid #c8dfd0;border-radius:var(--radius);padding:14px 16px;margin:-18px 0 28px;color:#234b34;font-size:12px;line-height:1.6;}
+.secure-intro strong{display:block;color:#173c27;font-size:12.5px;margin-bottom:2px;}
+.dynamic-list{display:grid;gap:18px;margin-top:18px;}
+.dynamic-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.dynamic-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--light);border-bottom:1px solid var(--border);padding:12px 16px;}
+.dynamic-card-head strong{font-family:'Playfair Display',Georgia,serif;color:var(--navy);font-size:17px;font-weight:500;}
+.dynamic-card-head span{font-size:10.5px;color:var(--muted);}
+.dynamic-card-body{padding:18px 16px 20px;}
+.vin-input-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;}
+.btn-decode{min-height:42px;border:1px solid var(--gold);border-radius:4px;background:var(--gold3);color:var(--navy);font-family:'Raleway','Segoe UI',sans-serif;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:0 18px;cursor:pointer;white-space:nowrap;}
+.btn-decode:hover{background:var(--gold);}
+.btn-decode:disabled{cursor:wait;opacity:.6;}
+.vin-status{display:none;margin-top:9px;border-radius:4px;padding:10px 12px;font-size:12px;line-height:1.5;}
+.vin-status.show{display:block;}
+.vin-status.loading{display:block;background:#f6f3e8;color:#67571e;}
+.vin-status.success{display:block;background:#edf7f0;border:1px solid #c6e0ce;color:#205b35;}
+.vin-status.error{display:block;background:#fff2f0;border:1px solid #f2c7c1;color:#8a2d22;}
+.decoded-vehicle{display:none;margin-top:12px;border:1px solid #c6e0ce;background:#f7fbf8;border-radius:var(--radius);padding:14px 16px;}
+.decoded-vehicle.show{display:block;}
+.decoded-vehicle strong{display:block;color:var(--navy);font-size:15px;margin-bottom:4px;}
+.decoded-vehicle span{font-size:11.5px;color:var(--muted);}
+.manual-vehicle{display:none;margin-top:14px;}
+.manual-vehicle.show{display:block;}
+.classic-toggle{margin-top:12px;}
+.classic-toggle label{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--muted);cursor:pointer;}
+.classic-toggle input{width:16px;height:16px;margin-top:2px;accent-color:var(--gold);flex-shrink:0;}
+.privacy-note{display:flex;gap:12px;align-items:flex-start;background:var(--navy2);color:rgba(255,255,255,.82);border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:12px;line-height:1.65;}
+.privacy-note strong{color:var(--gold2);}
+.sms-note a{font-weight:600;}
+.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}
+.cta-actions .btn-hero.secondary{background:transparent;border:1px solid rgba(201,169,78,.55);color:var(--gold2);}
+.cta-actions .btn-hero.secondary:hover{background:rgba(201,169,78,.1);}
+.mobile-quote-bar{display:none;}
+@media(max-width:768px){
+  .hero{padding-top:46px;padding-bottom:46px;}
+  .form-body{padding-top:30px;}
+  .secure-intro{margin-top:-10px;}
+  .vin-input-row{grid-template-columns:1fr;}
+  .btn-decode{width:100%;min-height:44px;}
+  .dynamic-card-body{padding:16px 14px 18px;}
+  .mobile-quote-bar{display:grid;grid-template-columns:1fr 1fr 1.15fr;position:fixed;left:0;right:0;bottom:0;z-index:500;background:var(--navy);border-top:1px solid rgba(201,169,78,.4);box-shadow:0 -8px 20px rgba(0,0,0,.16);}
+  .mobile-quote-bar a{display:flex;align-items:center;justify-content:center;min-height:52px;color:var(--white);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.12);}
+  .mobile-quote-bar a:last-child{background:var(--gold);color:var(--navy);border:0;}
+  body{padding-bottom:52px;}
+}
+</style>
+
 <link rel="canonical" href="https://pinnacleriskad.com/auto-quote.html">
-<meta property="og:title" content="Auto Insurance Quote | Georgia &amp; Florida | Pinnacle Risk Advisors"><meta property="og:description" content="Request an auto insurance quote from Pinnacle Risk Advisors. CDL holders, SR-22s, teen drivers, and multi-vehicle households shopped across 20+ carrier markets in Georgia and Florida."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/auto-quote.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Auto Insurance Quote | Georgia &amp; Florida | Pinnacle Risk Advisors"><meta name="twitter:description" content="Request an auto insurance quote from Pinnacle Risk Advisors. CDL holders, SR-22s, teen drivers, and multi-vehicle households shopped across 20+ carrier markets in Georgia and Florida.">
+<meta property="og:title" content="Auto Insurance Quote | Pinnacle Risk Advisors"><meta property="og:description" content="Compare personal auto insurance options for your household with an independent advisor. Securely provide driver and vehicle details for an accurate quote."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/auto-quote.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Auto Insurance Quote | Pinnacle Risk Advisors"><meta name="twitter:description" content="Compare personal auto insurance options for your household with an independent advisor.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"InsuranceAgency","@id":"https://pinnacleriskad.com/#agency","name":"Pinnacle Risk Advisors LLC","url":"https://pinnacleriskad.com/","telephone":"+1-770-758-3197","email":"dbrown@pinnacleriskad.com","image":"https://pinnacleriskad.com/atlanta-hero-poster.jpg","logo":"https://pinnacleriskad.com/pra-logo.png","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"2700 Cumberland Pkwy SE","addressLocality":"Atlanta","addressRegion":"GA","postalCode":"30339","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.8797,"longitude":-84.4682},"areaServed":["Georgia","Florida","Texas","Indiana","Utah","North Carolina","South Carolina"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:30"},"founder":{"@type":"Person","name":"Derrick Brown"},"sameAs":["https://g.page/r/CYpx_oi8HBDZEBM"]}
 </script>
@@ -348,7 +397,7 @@ html:not(.pra-js) .pramob-close{display:none}
 </div>
 <a href="/#founder">About</a>
 <a class="prahd-ph" href="tel:+17707583197">(770) 758-3197</a>
-<a class="prahd-cta" href="/quote.html">Get a Quote</a>
+<a class="prahd-cta" href="#quote-form">Start Auto Quote</a>
 </nav>
 <button class="prahd-burger" id="praBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </div></div>
@@ -393,38 +442,39 @@ html:not(.pra-js) .pramob-close{display:none}
 </div>
 <a href="/#founder">About</a>
 <a href="tel:+17707583197">Call (770) 758-3197</a>
-<a class="pramob-cta" href="/quote.html">Get a Quote</a>
+<a class="pramob-cta" href="#quote-form">Start Auto Quote</a>
 </div>
 </div>
 
 
 <section class="hero">
   <div class="hero-eyebrow">Auto Insurance</div>
-  <h1>Get an Auto Insurance Quote for <em>Georgia &amp; Florida</em> Drivers</h1>
-  <p class="hero-sub">Four quick steps, about two minutes. We shop your household across 20+ carrier markets. Including the ones that price tickets, SR-22s, CDLs, and teen drivers fairly, and come back with a real number.</p>
+  <h1>Compare Auto Insurance Options for <em>Your Household</em></h1>
+  <p class="hero-sub">One secure quote request lets an independent advisor review multiple carrier options for families, multi-vehicle households, homeowners, commercial drivers, and customers who need a fresh look at their coverage.</p>
   <div class="hero-cta-row">
     <a class="btn-hero" href="#quote-form">Start My Auto Quote</a>
     <p class="hero-trust">Licensed in <strong>Georgia, Florida, Texas, Indiana, Utah, North Carolina &amp; South Carolina.</strong></p>
   </div>
   <div class="trust-badges">
-    <div class="trust-badge"><span class="dot"></span> 20+ Carrier Markets</div>
-    <div class="trust-badge"><span class="dot"></span> CDL &amp; Commercial Drivers Welcome</div>
-    <div class="trust-badge"><span class="dot"></span> SR-22 Filings Handled</div>
-    <div class="trust-badge"><span class="dot"></span> Re-Shopped Every Renewal</div>
+    <div class="trust-badge"><span class="dot"></span> Multiple Carrier Markets</div>
+    <div class="trust-badge"><span class="dot"></span> Auto &amp; Home Bundling</div>
+    <div class="trust-badge"><span class="dot"></span> One Advisor, Start to Finish</div>
+    <div class="trust-badge"><span class="dot"></span> Secure Driver &amp; VIN Intake</div>
   </div>
 </section>
 
 <section class="info-section">
   <div class="info-container">
-    <div class="section-eyebrow">Who This Is For</div>
-    <h2 class="section-h2">Drivers We <em>Quote Every Day</em></h2>
-    <p class="prep-intro">Anyone can quote a clean record. Our edge is the households whose quotes come back high everywhere else.</p>
+    <div class="section-eyebrow">Built Around Your Household</div>
+    <h2 class="section-h2">Personal Auto Options for <em>Real Life</em></h2>
+    <p class="prep-intro">We start with the coverage your household needs, then compare the carrier options available for your drivers, vehicles, and budget.</p>
     <div class="info-grid">
-      <div class="info-card"><div class="card-icon">&#128666;</div><strong>CDL &amp; Commercial Drivers</strong><p>We insure fleets and owner-operators daily. We know which personal carriers treat commercial experience as an asset.</p></div>
-      <div class="info-card"><div class="card-icon">&#128203;</div><strong>Tickets, Accidents &amp; SR-22s</strong><p>A violation means most carriers stopped competing for you, and a few still do. We find the few.</p></div>
       <div class="info-card"><div class="card-icon">&#128663;</div><strong>Multi-Vehicle Households</strong><p>Rated correctly, with the right driver on the right vehicle, the savings are real.</p></div>
+      <div class="info-card"><div class="card-icon">&#127968;</div><strong>Auto &amp; Home Bundles</strong><p>We review both policies together so discounts do not come at the cost of missing protection.</p></div>
+      <div class="info-card"><div class="card-icon">&#128737;</div><strong>Safe &amp; Experienced Drivers</strong><p>Clean records, prior coverage, and thoughtful limits deserve a market that recognizes them.</p></div>
       <div class="info-card"><div class="card-icon">&#127891;</div><strong>Families With Teen Drivers</strong><p>Which carrier, and which vehicle the teen is rated on, matters more than any discount.</p></div>
-      <div class="info-card"><div class="card-icon">&#128274;</div><strong>Declined or Non-Renewed</strong><p>Often about the carrier&rsquo;s book, not your driving. Tell us what happened and we will tell you what we can place.</p></div>
+      <div class="info-card"><div class="card-icon">&#128666;</div><strong>CDL &amp; Commercial Drivers</strong><p>We understand households that include professional drivers and commercial driving experience.</p></div>
+      <div class="info-card"><div class="card-icon">&#128203;</div><strong>Complicated Driving History</strong><p>Tickets, accidents, SR-22 needs, or a non-renewal do not end the conversation. We will explain the available options.</p></div>
       <div class="info-card"><div class="card-icon">&#127970;</div><strong>Pinnacle Commercial Clients</strong><p>Already insure your business with us? Your personal auto belongs in the same file.</p></div>
     </div>
   </div>
@@ -437,11 +487,11 @@ html:not(.pra-js) .pramob-close{display:none}
     <p class="prep-intro">None of this is required to start. Share what you have and we will follow up for anything else.</p>
     <div class="prep-grid">
       <div class="prep-item"><div class="prep-icon">&#128203;</div><div><strong>Your Current Dec Page</strong><p>The single most useful thing you can send. It answers most questions in one shot and lets us compare coverage honestly.</p></div></div>
-      <div class="prep-item"><div class="prep-icon">&#128100;</div><div><strong>Drivers in the Household</strong><p>Names and dates of birth for everyone who drives, including occasional drivers.</p></div></div>
-      <div class="prep-item"><div class="prep-icon">&#128663;</div><div><strong>Vehicles &amp; VINs</strong><p>Year, make, and model gets us started; VINs make the final number exact.</p></div></div>
+      <div class="prep-item"><div class="prep-icon">&#128100;</div><div><strong>Driver Information</strong><p>Names, dates of birth, license numbers, and license states for everyone who drives.</p></div></div>
+      <div class="prep-item"><div class="prep-icon">&#128663;</div><div><strong>Vehicle VINs</strong><p>Enter each VIN and the form will verify and identify the vehicle through NHTSA.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128205;</div><div><strong>Garaging ZIP Code</strong><p>Where the vehicles sleep at night. It drives rating more than most people expect.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128196;</div><div><strong>Any Violations or Claims</strong><p>Last three to five years. Being upfront lets us pick the right market the first time.</p></div></div>
-      <div class="prep-item"><div class="prep-icon">&#128176;</div><div><strong>Your Renewal Date</strong><p>The best time to switch is at renewal. Knowing it lets us time the quote so nothing lapses.</p></div></div>
+      <div class="prep-item"><div class="prep-icon">&#128176;</div><div><strong>Your Renewal Date</strong><p>You can review coverage at any time. The renewal date helps us avoid a lapse and compare the right policy term.</p></div></div>
     </div>
   </div>
 </section>
@@ -449,16 +499,17 @@ html:not(.pra-js) .pramob-close{display:none}
 <div class="form-body" id="quote-form">
   <div class="section-eyebrow">Get Your Quote</div>
   <h2>Start Your Auto Insurance Quote</h2>
-  <p class="sub">Four quick steps. A Pinnacle Risk Advisors agent will shop your household and reach out with options, usually within one business day.</p>
+  <p class="sub">Five secure steps, usually five to seven minutes. Your VINs are verified automatically so the vehicles reach us correctly.</p>
+  <div class="secure-intro"><span aria-hidden="true">&#128274;</span><div><strong>Secure intake for accurate quoting</strong>Date of birth, driver&rsquo;s-license, and VIN information is sent directly to our protected quote intake and excluded from backup email notifications.</div></div>
   <div class="wiz-progress" id="wiz-progress">
-    <div class="wiz-bar"><div class="wiz-bar-fill" id="wiz-bar-fill"></div></div>
-    <div class="wiz-meta"><span class="wiz-step-label" id="wiz-step-label">Contact</span><span class="wiz-step-count" id="wiz-step-count">Step 1 of 4</span></div>
+    <div class="wiz-bar"><div class="wiz-bar-fill" id="wiz-bar-fill" style="width:20%"></div></div>
+    <div class="wiz-meta"><span class="wiz-step-label" id="wiz-step-label">Contact</span><span class="wiz-step-count" id="wiz-step-count">Step 1 of 5</span></div>
   </div>
 
-  <form id="auto-quote-form" novalidate>
+  <form id="auto-quote-form" method="post" action="https://pinnacleriskadvisors.net/api/quote-submit" novalidate>
     <input type="hidden" name="coverage_type"    id="coverage_type"    value="Personal Auto">
     <input type="hidden" name="line_of_business" id="line_of_business" value="auto">
-    <input type="hidden" name="form_depth"       id="form_depth"       value="short">
+    <input type="hidden" name="form_depth"       id="form_depth"       value="full">
     <input type="hidden" name="client_type"      id="client_type"      value="new">
     <input type="hidden" name="source_page"      id="source_page"      value="">
     <input type="hidden" name="referrer"         id="referrer"         value="">
@@ -468,21 +519,21 @@ html:not(.pra-js) .pramob-close{display:none}
     <div class="client-toggle">
       <div class="ct-head">Are you already a Pinnacle Risk Advisors client?</div>
       <div class="yes-no-group">
-        <button type="button" class="yn-btn" data-yn="is_client" data-val="No">No, I'm new</button>
+        <button type="button" class="yn-btn active" data-yn="is_client" data-val="No" aria-pressed="true">No, I'm new</button>
         <button type="button" class="yn-btn" data-yn="is_client" data-val="Yes">Yes, I'm a client</button>
       </div>
-      <input type="hidden" id="is_client" name="is_client" value="">
-      <div class="ct-hint" id="client-hint">If you already have a policy with us, say so. We will pull what we already have on file instead of asking you to retype it.</div>
+      <input type="hidden" id="is_client" name="is_client" value="No">
+      <div class="ct-hint" id="client-hint">Existing clients can identify themselves so we can connect this request to the right account.</div>
     </div>
 
     <div class="form-section">
       <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Your <em>Contact</em> Information</span><span class="fs-desc">Required to follow up on your quote</span></div>
       <div class="form-section-body">
         <div class="fgrid fgrid-2">
-          <div class="field"><label for="full_name">Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" placeholder="Full name" required></div>
-          <div class="field"><label for="phone">Phone Number <span class="req">*</span></label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required></div>
-          <div class="field"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
-          <div class="field"><label for="garaging_zip">Garaging ZIP Code <span class="req">*</span></label><input type="text" id="garaging_zip" name="garaging_zip" inputmode="numeric" placeholder="e.g. 30339" pattern="[0-9]{5}" maxlength="5" required><span class="hint">Where the vehicles are kept overnight.</span></div>
+          <div class="field"><label for="full_name">Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Enter your full name.</span></div>
+          <div class="field"><label for="phone">Phone Number <span class="req">*</span></label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required><span class="field-err">Enter a valid phone number.</span></div>
+          <div class="field"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required><span class="field-err">Enter a valid email address.</span></div>
+          <div class="field"><label for="garaging_zip">Garaging ZIP Code <span class="req">*</span></label><input type="text" id="garaging_zip" name="garaging_zip" inputmode="numeric" autocomplete="postal-code" placeholder="e.g. 30339" pattern="[0-9]{5}" maxlength="5" required><span class="hint">Where the vehicles are kept overnight.</span><span class="field-err">Enter a five-digit ZIP code.</span></div>
         </div>
       </div>
     </div>
@@ -492,15 +543,10 @@ html:not(.pra-js) .pramob-close{display:none}
 
     <div class="wiz-step" data-step="2">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Your <em>Household</em></span><span class="fs-desc">Vehicles, drivers, and what you have today</span></div>
+      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Household <em>Drivers</em></span><span class="fs-desc">Add every licensed or permitted household driver</span></div>
       <div class="form-section-body">
-        <div class="fgrid fgrid-2">
-          <div class="field"><label for="num_vehicles">Vehicles to insure <span class="req">*</span></label><input type="number" id="num_vehicles" name="num_vehicles" placeholder="e.g. 2" min="1" max="20" required></div>
-          <div class="field"><label for="num_drivers">Drivers in household <span class="req">*</span></label><input type="number" id="num_drivers" name="num_drivers" placeholder="e.g. 2" min="1" max="12" required></div>
-          <div class="field"><label for="current_carrier">Current carrier</label><input type="text" id="current_carrier" name="current_carrier" placeholder="e.g. Progressive, GEICO, none right now"></div>
-          <div class="field"><label for="renewal_date">Renewal date (if known)</label><input type="text" id="renewal_date" name="renewal_date" placeholder="e.g. October 15, or not sure"></div>
-          <div class="field span-2"><label for="current_limit">Current liability limit</label><select id="current_limit" name="current_limit"><option value="">Select if you know it...</option><option value="State minimum">State minimum</option><option value="50/100">50/100</option><option value="100/300">100/300</option><option value="250/500">250/500</option><option value="500/500 or higher">500/500 or higher</option><option value="Not sure">Not sure / please check for me</option><option value="No coverage currently">No coverage currently</option></select><span class="hint">Not sure is a perfectly good answer. We will read it off your dec page.</span></div>
-        </div>
+        <div class="field" style="max-width:280px"><label for="num_drivers">Number of household drivers <span class="req">*</span></label><input type="number" id="num_drivers" name="num_drivers" value="1" min="1" max="12" inputmode="numeric" required><span class="hint">The form will add one secure driver card for each person.</span><span class="field-err">Enter between 1 and 12 drivers.</span></div>
+        <div class="dynamic-list" id="driver-list" aria-live="polite"></div>
       </div>
     </div>
 
@@ -509,19 +555,10 @@ html:not(.pra-js) .pramob-close{display:none}
 
     <div class="wiz-step" data-step="3">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Anything We Should <em>Know Upfront</em></span><span class="fs-desc">Being upfront lets us pick the right market the first time. Check all that apply</span></div>
+      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">Vehicles to <em>Insure</em></span><span class="fs-desc">Every modern VIN is verified through NHTSA</span></div>
       <div class="form-section-body">
-        <div class="own-grid">
-          <label class="own-opt"><input type="checkbox" name="drv_cdl" value="Yes"><span>CDL holder in household</span></label>
-          <label class="own-opt"><input type="checkbox" name="drv_violation" value="Yes"><span>Ticket or accident, last 3 to 5 yrs</span></label>
-          <label class="own-opt"><input type="checkbox" name="drv_sr22" value="Yes"><span>SR-22 filing needed</span></label>
-          <label class="own-opt"><input type="checkbox" name="drv_teen" value="Yes"><span>Teen or under-25 driver</span></label>
-          <label class="own-opt"><input type="checkbox" name="drv_declined" value="Yes"><span>Recently declined or non-renewed</span></label>
-          <label class="own-opt"><input type="checkbox" name="drv_rideshare" value="Yes"><span>Rideshare or delivery driving</span></label>
-        </div>
-        <div class="fgrid" style="margin-top:16px;">
-          <div class="field"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" rows="3" placeholder="Vehicle years/makes/models, details on a violation, a quote you want us to beat, or anything you want us to look at."></textarea></div>
-        </div>
+        <div class="field" style="max-width:280px"><label for="num_vehicles">Number of vehicles <span class="req">*</span></label><input type="number" id="num_vehicles" name="num_vehicles" value="1" min="1" max="10" inputmode="numeric" required><span class="hint">The form will add one VIN decoder for each vehicle.</span><span class="field-err">Enter between 1 and 10 vehicles.</span></div>
+        <div class="dynamic-list" id="vehicle-list" aria-live="polite"></div>
       </div>
     </div>
 
@@ -530,7 +567,31 @@ html:not(.pra-js) .pramob-close{display:none}
 
     <div class="wiz-step" data-step="4">
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">04</span><span class="fs-title">While We're <em>At It</em></span><span class="fs-desc">Optional. Bundling is usually the single largest discount on both policies</span></div>
+      <div class="form-section-head"><span class="fs-num">04</span><span class="fs-title">Current Coverage &amp; <em>History</em></span><span class="fs-desc">This helps us approach the right carrier first</span></div>
+      <div class="form-section-body">
+        <div class="fgrid fgrid-2">
+          <div class="field"><label for="current_carrier">Current carrier</label><input type="text" id="current_carrier" name="current_carrier" autocomplete="organization" placeholder="e.g. Progressive, GEICO, or none"></div>
+          <div class="field"><label for="renewal_date">Renewal or desired effective date</label><input type="date" id="renewal_date" name="renewal_date"></div>
+          <div class="field span-2"><label for="current_limit">Current liability limit</label><select id="current_limit" name="current_limit"><option value="">Select if you know it...</option><option value="State minimum">State minimum</option><option value="50/100">50/100</option><option value="100/300">100/300</option><option value="250/500">250/500</option><option value="500/500 or higher">500/500 or higher</option><option value="Not sure">Not sure / please check for me</option><option value="No coverage currently">No coverage currently</option></select></div>
+        </div>
+        <div class="own-grid" style="margin-top:18px">
+          <label class="own-opt"><input type="checkbox" name="drv_cdl" value="Yes"><span>CDL holder in household</span></label>
+          <label class="own-opt"><input type="checkbox" name="drv_violation" value="Yes"><span>Ticket or accident, last 3 to 5 years</span></label>
+          <label class="own-opt"><input type="checkbox" name="drv_sr22" value="Yes"><span>SR-22 filing needed</span></label>
+          <label class="own-opt"><input type="checkbox" name="drv_teen" value="Yes"><span>Teen or under-25 driver</span></label>
+          <label class="own-opt"><input type="checkbox" name="drv_declined" value="Yes"><span>Recently declined or non-renewed</span></label>
+          <label class="own-opt"><input type="checkbox" name="drv_rideshare" value="Yes"><span>Rideshare or delivery driving</span></label>
+        </div>
+        <div class="field" style="margin-top:16px"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" rows="3" maxlength="4000" placeholder="Claims, violations, a quote you want us to review, or anything else that could affect the policy."></textarea></div>
+      </div>
+    </div>
+
+    <div class="wiz-nav"><button type="button" class="btn-back" onclick="wizBack()">&larr; Back</button><button type="button" class="btn-next" onclick="wizNext()">Continue &rarr;</button></div>
+    </div><!-- /step 4 -->
+
+    <div class="wiz-step" data-step="5">
+    <div class="form-section">
+      <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Bundle &amp; <em>Finish</em></span><span class="fs-desc">Optional coverage review and communication preferences</span></div>
       <div class="form-section-body">
         <div class="own-grid">
           <label class="own-opt"><input type="checkbox" name="also_home" value="Yes"><span>Also quote my homeowners</span></label>
@@ -541,7 +602,7 @@ html:not(.pra-js) .pramob-close{display:none}
     </div>
 
     <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Communication <em>Preferences</em></span><span class="fs-desc">Optional</span></div>
+      <div class="form-section-head"><span class="fs-title">Communication <em>Preferences</em></span><span class="fs-desc">Optional</span></div>
       <div class="form-section-body">
         <div class="consent-block">
           <div class="consent-head">SMS Communication Preferences (Optional)</div>
@@ -554,24 +615,26 @@ html:not(.pra-js) .pramob-close{display:none}
             <label for="smsMarketing">I consent to receive marketing text messages from Pinnacle Risk Advisors LLC at the number provided, including insurance-related promotions, risk management resources, service updates, and coverage tips. Message frequency varies. Message and data rates may apply. Text HELP for assistance and reply STOP to opt out.</label>
           </div>
           <div class="sms-note">SMS messaging is only available to people who provide explicit consent. Message and data rates may apply. See our <a href="/privacy-policy.html" style="color:var(--navy);text-decoration:underline;">Privacy Policy</a> and <a href="/terms-of-service.html" style="color:var(--navy);text-decoration:underline;">Terms of Service</a>.</div>
+          <div class="privacy-note" style="margin-top:18px"><span aria-hidden="true">&#128274;</span><div><strong>Sensitive information stays out of email.</strong> Driver dates of birth, license numbers, and VINs are delivered only through the secure CRM intake. The backup notification contains counts and vehicle descriptions only.</div></div>
         </div>
       </div>
     </div>
 
     <div class="submit-row">
-      <div class="wiz-nav" style="margin-top:0;margin-bottom:14px;"><button type="button" class="btn-back" onclick="wizBack()">&larr; Back</button><button type="submit" class="btn-submit" id="submit-btn" style="flex:1;">Get My Auto Quote</button></div>
+      <div class="wiz-nav" style="margin-top:0;margin-bottom:14px;"><button type="button" class="btn-back" onclick="wizBack()">&larr; Back</button><button type="submit" class="btn-submit" id="submit-btn" style="flex:1;">Request My Auto Quote</button></div>
       <p class="disclaimer"><span class="disclaimer-icon">&#9432;</span> Submitting this form is a request for a quote. It does not bind, alter, or extend coverage. Coverage is subject to carrier underwriting approval and the terms of the policy issued.</p>
     </div>
-    </div><!-- /step 4 -->
+    </div><!-- /step 5 -->
   </form>
 
   <div id="success-screen">
     <div class="success-icon">&#10003;</div>
     <h2>Your auto quote request is in.</h2>
-    <p>Derrick or a member of the Pinnacle team will shop your household and reach out, usually within one business day. If you have your current declarations page handy, email it to <strong>dbrown@pinnacleriskad.com</strong> and we can move faster.</p>
+    <p>Derrick or a member of the Pinnacle team will review the verified driver and vehicle information and reach out, usually within one business day. If you have a declarations page or competing quote, send it now so we can compare coverage accurately.</p>
     <div class="success-actions">
-      <a href="/personal-insurance.html" class="success-back">Back to Auto, Home &amp; Umbrella</a>
-      <a href="tel:+17707583197" class="success-back">Call (770) 758-3197</a>
+      <a href="mailto:dbrown@pinnacleriskad.com?subject=Auto%20quote%20documents" class="success-back">Email Documents</a>
+      <a href="sms:+17707583197" class="success-back">Text Derrick</a>
+      <a href="tel:+17707583197" class="success-back">Call Derrick</a>
     </div>
   </div>
 </div>
@@ -580,9 +643,11 @@ html:not(.pra-js) .pramob-close{display:none}
   <div class="info-container" style="text-align:center;">
     <h2 class="section-h2">Already have a quote from <em>someone else?</em></h2>
     <p class="prep-intro" style="margin-left:auto;margin-right:auto;">Send it to us before you accept it. We will tell you within a day whether we can beat it, and if we can&rsquo;t, we will tell you that too.</p>
-    <a class="btn-hero" href="tel:+17707583197">Call (770) 758-3197</a>
+    <div class="cta-actions"><a class="btn-hero" href="mailto:dbrown@pinnacleriskad.com?subject=Auto%20quote%20review">Email My Quote</a><a class="btn-hero secondary" href="sms:+17707583197">Text Derrick</a></div>
   </div>
 </section>
+
+<div class="mobile-quote-bar" aria-label="Auto quote actions"><a href="tel:+17707583197">Call</a><a href="sms:+17707583197">Text</a><a href="#quote-form">Start Quote</a></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="/quote-submission.js"></script>
@@ -595,6 +660,7 @@ catch(e) { console.warn('EmailJS init failed:', e); }
 <script>
 const EMAILJS_SERVICE_ID  = 'service_mefkv18';
 const EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
+const VIN_DECODER_ENDPOINT = 'https://pinnacleriskadvisors.net/api/vin-decode';
 var quoteSession = PinnacleQuote.createSession({ formKey: 'auto-quote', lineOfBusiness: 'personal_auto' });
 
 (function(){
@@ -604,11 +670,277 @@ var quoteSession = PinnacleQuote.createSession({ formKey: 'auto-quote', lineOfBu
   if (rf) rf.value = document.referrer || 'direct';
 })();
 
+/* Put the quote experience directly below the hero. The educational sections
+   remain available after the form without forcing mobile visitors through them. */
+(function(){
+  var hero = document.querySelector('.hero');
+  var formBody = document.getElementById('quote-form');
+  if(hero && formBody) hero.insertAdjacentElement('afterend', formBody);
+})();
+
+var STATE_OPTIONS = [
+  ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],
+  ['CT','Connecticut'],['DE','Delaware'],['DC','District of Columbia'],['FL','Florida'],['GA','Georgia'],
+  ['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],
+  ['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],
+  ['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],
+  ['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],
+  ['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],
+  ['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],
+  ['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],
+  ['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming']
+];
+
+function stateOptions(){
+  return '<option value="">Select state</option>' + STATE_OPTIONS.map(function(s){
+    return '<option value="' + s[0] + '">' + s[1] + '</option>';
+  }).join('');
+}
+
+function snapshotFields(container){
+  var saved = {};
+  if(!container) return saved;
+  container.querySelectorAll('input,select,textarea').forEach(function(el){
+    if(!el.name) return;
+    saved[el.name] = { value: el.value, checked: !!el.checked };
+  });
+  return saved;
+}
+
+function restoreFields(container, saved){
+  if(!container) return;
+  container.querySelectorAll('input,select,textarea').forEach(function(el){
+    var prior = saved[el.name];
+    if(!prior) return;
+    if(el.type === 'checkbox' || el.type === 'radio') el.checked = prior.checked;
+    else el.value = prior.value;
+  });
+}
+
+function dobMax(){
+  var d = new Date();
+  d.setFullYear(d.getFullYear() - 14);
+  return d.toISOString().slice(0,10);
+}
+
+function renderDrivers(){
+  var list = document.getElementById('driver-list');
+  var countEl = document.getElementById('num_drivers');
+  var count = Math.max(1, Math.min(12, parseInt(countEl.value,10) || 1));
+  countEl.value = count;
+  var saved = snapshotFields(list);
+  var html = '';
+  for(var i=1;i<=count;i++){
+    html += '<article class="dynamic-card" data-driver-index="'+i+'">' +
+      '<div class="dynamic-card-head"><strong>Driver '+i+'</strong><span>License information is sent securely</span></div>' +
+      '<div class="dynamic-card-body"><div class="fgrid fgrid-2">' +
+      '<div class="field"><label for="d'+i+'_name">Full name <span class="req">*</span></label><input id="d'+i+'_name" name="d'+i+'_name" type="text" autocomplete="off" required><span class="field-err">Enter this driver&rsquo;s full name.</span></div>' +
+      '<div class="field"><label for="d'+i+'_dob">Date of birth <span class="req">*</span></label><input id="d'+i+'_dob" name="d'+i+'_dob" type="date" min="1900-01-01" max="'+dobMax()+'" autocomplete="off" required><span class="field-err">Enter a valid date of birth.</span></div>' +
+      '<div class="field"><label for="d'+i+'_license_state">License state <span class="req">*</span></label><select id="d'+i+'_license_state" name="d'+i+'_license_state" required>'+stateOptions()+'</select><span class="field-err">Select the license state.</span></div>' +
+      '<div class="field"><label for="d'+i+'_license_number">Driver&rsquo;s license number <span class="req">*</span></label><input id="d'+i+'_license_number" name="d'+i+'_license_number" type="text" minlength="3" maxlength="32" autocomplete="off" autocapitalize="characters" spellcheck="false" required><span class="hint">Enter the number exactly as it appears on the license.</span><span class="field-err">Enter a valid license number.</span></div>' +
+      '<div class="field"><label for="d'+i+'_relationship">Relationship to applicant <span class="req">*</span></label><select id="d'+i+'_relationship" name="d'+i+'_relationship" required><option value="">Select relationship</option><option>Self</option><option>Spouse or partner</option><option>Child</option><option>Parent</option><option>Other household member</option><option>Other</option></select><span class="field-err">Select a relationship.</span></div>' +
+      '<div class="field"><label for="d'+i+'_incidents">Tickets, accidents, or suspensions</label><input id="d'+i+'_incidents" name="d'+i+'_incidents" type="text" maxlength="500" placeholder="None, or briefly describe"></div>' +
+      '<div class="field span-2"><label class="own-opt" style="margin:0"><input type="checkbox" name="d'+i+'_cdl" value="Yes"><span>This driver holds a commercial driver&rsquo;s license (CDL)</span></label></div>' +
+      '</div></div></article>';
+  }
+  list.innerHTML = html;
+  restoreFields(list, saved);
+  refreshDriverAssignments();
+}
+
+function driverChoices(){
+  var choices = [];
+  document.querySelectorAll('[data-driver-index]').forEach(function(card){
+    var i = card.getAttribute('data-driver-index');
+    var name = (card.querySelector('[name="d'+i+'_name"]') || {}).value || '';
+    choices.push({ value:'driver_'+i, label:'Driver '+i+(name.trim() ? ' — '+name.trim() : '') });
+  });
+  return choices;
+}
+
+function refreshDriverAssignments(){
+  var choices = driverChoices();
+  document.querySelectorAll('.primary-driver-select').forEach(function(select){
+    var prior = select.value;
+    select.innerHTML = '<option value="">Select driver</option>' + choices.map(function(c){
+      return '<option value="'+c.value+'">'+c.label.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</option>';
+    }).join('');
+    if(choices.some(function(c){ return c.value === prior; })) select.value = prior;
+  });
+}
+
+function vehicleCard(i){
+  return '<article class="dynamic-card" data-vehicle-index="'+i+'">' +
+    '<div class="dynamic-card-head"><strong>Vehicle '+i+'</strong><span>VIN verified through NHTSA</span></div>' +
+    '<div class="dynamic-card-body">' +
+    '<div class="field vin-field"><label for="v'+i+'_vin">17-character VIN <span class="req">*</span></label><div class="vin-input-row"><input id="v'+i+'_vin" name="v'+i+'_vin" type="text" maxlength="17" pattern="[A-HJ-NPR-Za-hj-npr-z0-9]{17}" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Enter VIN" required><button type="button" class="btn-decode" data-decode-vin="'+i+'">Decode VIN</button></div><span class="hint">Letters I, O, and Q are not used in modern VINs.</span><span class="field-err">Enter and verify a valid VIN.</span></div>' +
+    '<input type="hidden" name="v'+i+'_vin_status" value="unverified">' +
+    '<input type="hidden" name="v'+i+'_trim" value=""><input type="hidden" name="v'+i+'_body_class" value=""><input type="hidden" name="v'+i+'_vehicle_type" value=""><input type="hidden" name="v'+i+'_drive_type" value=""><input type="hidden" name="v'+i+'_fuel_type" value="">' +
+    '<div class="vin-status" data-vin-status role="status" aria-live="polite"></div>' +
+    '<div class="decoded-vehicle" data-decoded-vehicle><strong></strong><span></span></div>' +
+    '<div class="classic-toggle"><label><input type="checkbox" name="v'+i+'_classic" value="Yes" data-classic-vin="'+i+'"><span>This is a pre-1981/classic vehicle, or the NHTSA decoder is temporarily unavailable. Mark it for manual review.</span></label></div>' +
+    '<div class="manual-vehicle" data-manual-vehicle><div class="fgrid fgrid-3">' +
+    '<div class="field"><label for="v'+i+'_year">Year <span class="req">*</span></label><input id="v'+i+'_year" name="v'+i+'_year" type="text" inputmode="numeric" maxlength="4" readonly><span class="field-err">Enter the four-digit year.</span></div>' +
+    '<div class="field"><label for="v'+i+'_make">Make <span class="req">*</span></label><input id="v'+i+'_make" name="v'+i+'_make" type="text" maxlength="80" readonly><span class="field-err">Enter the make.</span></div>' +
+    '<div class="field"><label for="v'+i+'_model">Model <span class="req">*</span></label><input id="v'+i+'_model" name="v'+i+'_model" type="text" maxlength="80" readonly><span class="field-err">Enter the model.</span></div>' +
+    '</div></div>' +
+    '<div class="fgrid fgrid-2" style="margin-top:16px">' +
+    '<div class="field"><label for="v'+i+'_primary_driver">Primary driver <span class="req">*</span></label><select id="v'+i+'_primary_driver" name="v'+i+'_primary_driver" class="primary-driver-select" required><option value="">Select driver</option></select><span class="field-err">Select the primary driver.</span></div>' +
+    '<div class="field"><label for="v'+i+'_ownership">Ownership <span class="req">*</span></label><select id="v'+i+'_ownership" name="v'+i+'_ownership" required><option value="">Select</option><option>Owned</option><option>Financed</option><option>Leased</option></select><span class="field-err">Select the ownership type.</span></div>' +
+    '<div class="field"><label for="v'+i+'_use">Primary use <span class="req">*</span></label><select id="v'+i+'_use" name="v'+i+'_use" required><option value="">Select</option><option>Pleasure</option><option>Commute</option><option>Business</option><option>Rideshare</option><option>Delivery</option></select><span class="field-err">Select the primary use.</span></div>' +
+    '<div class="field"><label for="v'+i+'_annual_mileage">Estimated annual mileage</label><input id="v'+i+'_annual_mileage" name="v'+i+'_annual_mileage" type="number" min="0" max="200000" step="100" inputmode="numeric" placeholder="e.g. 12000"></div>' +
+    '<div class="field span-2"><label for="v'+i+'_coverage">Coverage requested <span class="req">*</span></label><select id="v'+i+'_coverage" name="v'+i+'_coverage" required><option value="">Select</option><option>Liability only</option><option>Comprehensive and collision</option><option>Not sure — recommend options</option></select><span class="field-err">Select a coverage preference.</span></div>' +
+    '</div></div></article>';
+}
+
+function renderVehicles(){
+  var list = document.getElementById('vehicle-list');
+  var countEl = document.getElementById('num_vehicles');
+  var count = Math.max(1, Math.min(10, parseInt(countEl.value,10) || 1));
+  countEl.value = count;
+  var saved = snapshotFields(list);
+  var html = '';
+  for(var i=1;i<=count;i++) html += vehicleCard(i);
+  list.innerHTML = html;
+  restoreFields(list, saved);
+  refreshDriverAssignments();
+  restoreFields(list, saved);
+  list.querySelectorAll('[data-vehicle-index]').forEach(function(card){
+    var classic = card.querySelector('[data-classic-vin]');
+    setClassicMode(card, !!classic.checked, true);
+    if(!classic.checked && fieldInCard(card,'vin_status').value === 'verified') showDecodedVehicle(card);
+  });
+}
+
+function fieldInCard(card, suffix){
+  var i = card.getAttribute('data-vehicle-index');
+  return card.querySelector('[name="v'+i+'_'+suffix+'"]');
+}
+
+function setVinMessage(card, kind, message){
+  var box = card.querySelector('[data-vin-status]');
+  box.className = 'vin-status show ' + kind;
+  box.textContent = message;
+}
+
+function clearDecodedVehicle(card){
+  var status = fieldInCard(card,'vin_status');
+  if(status.value === 'verified') status.value = 'unverified';
+  ['year','make','model','trim','body_class','vehicle_type','drive_type','fuel_type'].forEach(function(k){ fieldInCard(card,k).value = ''; });
+  var decoded = card.querySelector('[data-decoded-vehicle]');
+  decoded.classList.remove('show');
+  decoded.querySelector('strong').textContent = '';
+  decoded.querySelector('span').textContent = '';
+}
+
+function showDecodedVehicle(card){
+  var year = fieldInCard(card,'year').value;
+  var make = fieldInCard(card,'make').value;
+  var model = fieldInCard(card,'model').value;
+  var trim = fieldInCard(card,'trim').value;
+  var body = fieldInCard(card,'body_class').value;
+  var decoded = card.querySelector('[data-decoded-vehicle]');
+  decoded.querySelector('strong').textContent = [year,make,model,trim].filter(Boolean).join(' ');
+  decoded.querySelector('span').textContent = [body,fieldInCard(card,'vehicle_type').value].filter(Boolean).join(' · ');
+  decoded.classList.add('show');
+}
+
+function setClassicMode(card, enabled, restoring){
+  var vin = fieldInCard(card,'vin');
+  var status = fieldInCard(card,'vin_status');
+  var manual = card.querySelector('[data-manual-vehicle]');
+  ['year','make','model'].forEach(function(k){ fieldInCard(card,k).readOnly = !enabled; });
+  manual.classList.toggle('show', enabled);
+  if(enabled){
+    vin.removeAttribute('pattern');
+    vin.maxLength = 17;
+    status.value = 'manual_review';
+    card.querySelector('[data-decoded-vehicle]').classList.remove('show');
+    setVinMessage(card,'loading','Manual review selected. Enter the VIN shown on the vehicle and the year, make, and model.');
+  } else {
+    vin.setAttribute('pattern','[A-HJ-NPR-Za-hj-npr-z0-9]{17}');
+    if(!restoring){ clearDecodedVehicle(card); setVinMessage(card,'loading','Enter the full VIN, then select Decode VIN.'); }
+  }
+}
+
+async function decodeVin(card){
+  var vinInput = fieldInCard(card,'vin');
+  var vin = vinInput.value.toUpperCase().replace(/\s+/g,'');
+  vinInput.value = vin;
+  if(!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)){
+    fieldInCard(card,'vin_status').value = 'unverified';
+    vinInput.closest('.field').classList.add('err');
+    setVinMessage(card,'error','Enter all 17 VIN characters. The letters I, O, and Q are not valid VIN characters.');
+    return;
+  }
+  var button = card.querySelector('[data-decode-vin]');
+  button.disabled = true;
+  button.textContent = 'Checking...';
+  setVinMessage(card,'loading','Checking this VIN with the NHTSA vehicle database...');
+  try{
+    var response = await fetch(VIN_DECODER_ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({vin:vin}),
+      credentials:'omit'
+    });
+    var payload;
+    try{ payload = await response.json(); }catch(e){ payload = null; }
+    if(!response.ok || !payload || !payload.ok || !payload.vehicle) throw new Error(payload && payload.message ? payload.message : 'The VIN could not be verified.');
+    if(payload.vehicle.vin !== vin) throw new Error('The VIN response did not match the VIN entered.');
+    ['year','make','model','trim','body_class','vehicle_type','drive_type','fuel_type'].forEach(function(k){
+      fieldInCard(card,k).value = payload.vehicle[k] || '';
+    });
+    fieldInCard(card,'vin_status').value = 'verified';
+    showDecodedVehicle(card);
+    setVinMessage(card,'success','VIN verified. Confirm the vehicle shown below.');
+    vinInput.closest('.field').classList.remove('err');
+  }catch(error){
+    clearDecodedVehicle(card);
+    fieldInCard(card,'vin_status').value = 'unverified';
+    setVinMessage(card,'error',error.message || 'The VIN decoder is temporarily unavailable. Try again or mark the vehicle for manual review.');
+  }finally{
+    button.disabled = false;
+    button.textContent = 'Decode VIN';
+  }
+}
+
+document.getElementById('num_drivers').addEventListener('change', renderDrivers);
+document.getElementById('num_vehicles').addEventListener('change', renderVehicles);
+document.getElementById('auto-quote-form').addEventListener('click', function(e){
+  var button = e.target.closest('[data-decode-vin]');
+  if(button) decodeVin(button.closest('[data-vehicle-index]'));
+});
+document.getElementById('auto-quote-form').addEventListener('change', function(e){
+  if(e.target.matches('[data-classic-vin]')) setClassicMode(e.target.closest('[data-vehicle-index]'), e.target.checked, false);
+});
+document.getElementById('auto-quote-form').addEventListener('input', function(e){
+  if(/^d\d+_name$/.test(e.target.name || '')) refreshDriverAssignments();
+  if(/^d\d+_license_number$/.test(e.target.name || '')) e.target.value = e.target.value.toUpperCase();
+  if(/^v\d+_vin$/.test(e.target.name || '')){
+    e.target.value = e.target.value.toUpperCase().replace(/\s+/g,'');
+    var card = e.target.closest('[data-vehicle-index]');
+    if(fieldInCard(card,'vin_status').value === 'verified'){
+      clearDecodedVehicle(card);
+      setVinMessage(card,'loading','VIN changed. Decode it again to verify the vehicle.');
+    }
+  }
+});
+document.getElementById('auto-quote-form').addEventListener('focusout', function(e){
+  if(/^v\d+_vin$/.test(e.target.name || '') && e.target.value.length === 17){
+    var card = e.target.closest('[data-vehicle-index]');
+    if(!card.querySelector('[data-classic-vin]').checked && fieldInCard(card,'vin_status').value !== 'verified') decodeVin(card);
+  }
+});
+
+renderDrivers();
+renderVehicles();
+
 /* ══ Step wizard - same mechanics as trucking-quote.html ══
    Controls step visibility, the progress bar, per-step validation,
    and partial lead capture at the contact step. Every field keeps
    its name attribute, so the EmailJS payload is unchanged. */
-var WIZ_LABELS = ['Contact','Your Household','Driver Details','Finish Up'];
+var WIZ_LABELS = ['Contact','Drivers','Vehicles','Coverage & History','Finish Up'];
 var wizSteps = [].slice.call(document.querySelectorAll('#auto-quote-form .wiz-step'));
 var wizIdx = 0;
 
@@ -638,17 +970,54 @@ function wizBack(){ wizGo(wizIdx - 1); }
 function wizValidate(step){
   var first = null;
   step.querySelectorAll('.field.err').forEach(function(f){ f.classList.remove('err'); });
+  step.querySelectorAll('[aria-invalid="true"]').forEach(function(c){ c.removeAttribute('aria-invalid'); });
   step.querySelectorAll('[required]').forEach(function(c){
     var val = (c.value || '').trim();
     var ok  = val !== '';
     if(ok && c.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
     if(ok && c.type === 'tel')   ok = val.replace(/\D/g,'').length >= 10;
     if(ok && c.id === 'garaging_zip') ok = /^[0-9]{5}$/.test(val);
+    if(ok && c.type === 'number'){
+      if(c.min && Number(val) < Number(c.min)) ok = false;
+      if(c.max && Number(val) > Number(c.max)) ok = false;
+    }
+    if(ok && /_dob$/.test(c.name || '')){
+      var date = new Date(val+'T00:00:00');
+      ok = !isNaN(date.getTime()) && val >= '1900-01-01' && val <= dobMax();
+    }
+    if(ok && /_license_number$/.test(c.name || '')) ok = /^[A-Za-z0-9 -]{3,32}$/.test(val);
     if(!ok){
       var wrap = c.closest('.field');
+      c.setAttribute('aria-invalid','true');
       if(wrap){ wrap.classList.add('err'); if(!first) first = wrap; }
     }
   });
+
+  if(step.getAttribute('data-step') === '3'){
+    step.querySelectorAll('[data-vehicle-index]').forEach(function(card){
+      var classic = card.querySelector('[data-classic-vin]').checked;
+      var vin = fieldInCard(card,'vin');
+      var validVehicle = true;
+      if(classic){
+        validVehicle = vin.value.length >= 5 && vin.value.length <= 17
+          && /^\d{4}$/.test(fieldInCard(card,'year').value)
+          && !!fieldInCard(card,'make').value.trim()
+          && !!fieldInCard(card,'model').value.trim();
+      }else{
+        validVehicle = /^[A-HJ-NPR-Z0-9]{17}$/.test(vin.value)
+          && fieldInCard(card,'vin_status').value === 'verified';
+      }
+      if(!validVehicle){
+        var wrap = vin.closest('.field');
+        vin.setAttribute('aria-invalid','true');
+        wrap.classList.add('err');
+        if(!first) first = wrap;
+        setVinMessage(card,'error',classic
+          ? 'Enter the VIN or serial number plus the four-digit year, make, and model for manual review.'
+          : 'Decode and verify this VIN before continuing.');
+      }
+    });
+  }
   if(first){
     first.scrollIntoView({ behavior:'smooth', block:'center' });
     var inp = first.querySelector('input,select,textarea');
@@ -661,10 +1030,12 @@ function wizValidate(step){
 document.getElementById('auto-quote-form').addEventListener('input', function(e){
   var w = e.target.closest ? e.target.closest('.field.err') : null;
   if(w) w.classList.remove('err');
+  if(e.target.removeAttribute) e.target.removeAttribute('aria-invalid');
 }, true);
 document.getElementById('auto-quote-form').addEventListener('change', function(e){
   var w = e.target.closest ? e.target.closest('.field.err') : null;
   if(w) w.classList.remove('err');
+  if(e.target.removeAttribute) e.target.removeAttribute('aria-invalid');
 }, true);
 
 /* Partial capture shares the completed request's stable submission_id. */
@@ -733,6 +1104,10 @@ function buildNotes(d){
   add('Current Carrier', d.current_carrier);
   add('Renewal Date', d.renewal_date);
   add('Current Liability Limit', d.current_limit);
+  for(var vi=1;vi<=Number(d.num_vehicles||0);vi++){
+    add('Vehicle '+vi, [d['v'+vi+'_year'],d['v'+vi+'_make'],d['v'+vi+'_model']].filter(Boolean).join(' ') + (d['v'+vi+'_vin_status'] ? ' — '+d['v'+vi+'_vin_status'] : ''));
+  }
+  L.push('Sensitive driver DOB, license, and VIN values are stored in the secure CRM record and intentionally excluded from this email.');
   L.push('');
   L.push('=== UNDERWRITING FLAGS ===');
   L.push(checkedList([
@@ -761,6 +1136,43 @@ function buildNotes(d){
   add('Source Page', d.source_page);
   add('Referrer', d.referrer);
   return L.join('\n');
+}
+
+function buildSecureCrmNotes(d){
+  var lines = ['=== SECURE PERSONAL AUTO INTAKE ==='];
+  lines.push('Applicant: ' + (d.full_name || 'Not provided'));
+  lines.push('Garaging ZIP: ' + (d.garaging_zip || 'Not provided'));
+  lines.push('');
+  lines.push('=== DRIVERS ===');
+  for(var di=1;di<=Number(d.num_drivers||0);di++){
+    lines.push('Driver '+di+': '+[
+      d['d'+di+'_name'],
+      d['d'+di+'_dob'] ? 'DOB '+d['d'+di+'_dob'] : '',
+      d['d'+di+'_license_state'] && d['d'+di+'_license_number'] ? 'License '+d['d'+di+'_license_state']+' '+d['d'+di+'_license_number'] : '',
+      d['d'+di+'_relationship'],
+      d['d'+di+'_cdl'] ? 'CDL' : '',
+      d['d'+di+'_incidents'] ? 'Incidents: '+d['d'+di+'_incidents'] : ''
+    ].filter(Boolean).join(' | '));
+  }
+  lines.push('');
+  lines.push('=== VEHICLES ===');
+  for(var vi=1;vi<=Number(d.num_vehicles||0);vi++){
+    lines.push('Vehicle '+vi+': '+[
+      d['v'+vi+'_vin'] ? 'VIN '+d['v'+vi+'_vin'] : '',
+      [d['v'+vi+'_year'],d['v'+vi+'_make'],d['v'+vi+'_model'],d['v'+vi+'_trim']].filter(Boolean).join(' '),
+      d['v'+vi+'_vin_status'] ? 'VIN '+d['v'+vi+'_vin_status'] : '',
+      d['v'+vi+'_primary_driver'] ? 'Primary '+d['v'+vi+'_primary_driver'] : '',
+      d['v'+vi+'_ownership'],d['v'+vi+'_use'],d['v'+vi+'_coverage'],
+      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : ''
+    ].filter(Boolean).join(' | '));
+  }
+  lines.push('');
+  lines.push('=== CURRENT COVERAGE / CUSTOMER NOTES ===');
+  lines.push('Carrier: '+(d.current_carrier||'Not provided'));
+  lines.push('Renewal/effective date: '+(d.renewal_date||'Not provided'));
+  lines.push('Current limit: '+(d.current_limit||'Not provided'));
+  lines.push(d.notes||'No additional customer notes.');
+  return lines.join('\n');
 }
 
 document.getElementById('auto-quote-form').addEventListener('submit', async function(e){
@@ -814,7 +1226,7 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
     driver_count:        data.num_drivers || 'N/A',
     coverages_summary:   covSummary,
     notes:               buildNotes(data),
-    files_noted:         'None uploaded',
+    files_noted:         'Sensitive driver and vehicle identifiers captured securely in CRM; excluded from email',
     coverage_type:       'Personal Auto',
     lead_source:         isClient ? 'Website Auto Quote - EXISTING CLIENT' : 'Website Auto Quote Page',
     form_page:           '/auto-quote',
@@ -825,7 +1237,8 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
   try {
     var crmFields = Object.assign({}, data, {
       line_of_business: 'Personal Auto', zip: data.garaging_zip || '',
-      source: 'website', form_page: '/auto-quote', submitted_at: templateParams.submitted_at
+      source: 'website', form_page: '/auto-quote', submitted_at: templateParams.submitted_at,
+      notes: buildSecureCrmNotes(data)
     });
     var primary = await quoteSession.submitComplete(crmFields, honeypot);
     if (!primary.duplicate) {
@@ -839,7 +1252,7 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
     window.scrollTo({top:0,behavior:'smooth'});
   } catch(err) {
     PinnacleQuote.logDiagnostic('auto_complete_submit_failed', err);
-    btn.textContent = 'Get My Auto Quote';
+    btn.textContent = 'Request My Auto Quote';
     btn.disabled = false;
     PinnacleQuote.showFailure(this, err);
   }
