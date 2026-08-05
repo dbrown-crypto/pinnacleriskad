@@ -146,6 +146,10 @@ function truckingDynamicField(field) {
   return /^(?:v(?:[1-9]|1[0-9]|20)_(?:year|make|model|vin|type|gvw|value|zip|cc|comp_collision)|d(?:[1-9]|1[0-9]|20)_(?:name|dob|lic_num|lic_state|exp|cdl|violations))$/.test(field);
 }
 
+function personalAutoDynamicField(field) {
+  return /^(?:d(?:[1-9]|1[0-2])_(?:name|dob|license_number|license_state|relationship|cdl|incidents)|v(?:[1-9]|10)_(?:vin|vin_status|classic|year|make|model|trim|body_class|vehicle_type|drive_type|fuel_type|primary_driver|ownership|use|annual_mileage|coverage))$/.test(field);
+}
+
 function sanitizeValue(value, field) {
   const maxLength = ['notes', 'note', 'details', 'description', 'commodity_details', 'loss_details'].includes(field) ? 12000 : 2000;
   if (Array.isArray(value)) {
@@ -191,7 +195,9 @@ function normalizeContact(input) {
 
 function validateFields(line, state, fields) {
   const allowed = FIELD_ALLOWLISTS[line];
-  const unexpected = Object.keys(fields).filter((field) => !allowed.has(field) && !(line === 'trucking' && truckingDynamicField(field)));
+  const unexpected = Object.keys(fields).filter((field) => !allowed.has(field)
+    && !(line === 'trucking' && truckingDynamicField(field))
+    && !(line === 'personal_auto' && personalAutoDynamicField(field)));
   if (unexpected.length) return ['unexpected_fields', 'The request contains fields that are not accepted for this quote form.'];
   if (state === 'complete' && REQUIRED_COMPLETE[line].some((field) => !fields[field])) {
     return ['missing_required', 'Please complete all required fields before submitting.'];
@@ -204,6 +210,63 @@ function validateFields(line, state, fields) {
   const phoneLength = phone.replace(/\D/g, '').length;
   if (phone && (phoneLength < 10 || phoneLength > 15)) return ['invalid_phone', 'Please enter a valid phone number.'];
   if (state === 'partial' && !email && !phone) return ['missing_contact', 'A phone number or email address is required.'];
+  if (state === 'complete' && line === 'personal_auto') {
+    const personalAutoValidation = validatePersonalAuto(fields);
+    if (personalAutoValidation) return personalAutoValidation;
+  }
+  return null;
+}
+
+function validDob(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) return false;
+  const year = Number(value.slice(0, 4));
+  return year >= 1900 && date.getTime() < Date.now();
+}
+
+function validatePersonalAuto(fields) {
+  const driverCount = Number(fields.num_drivers);
+  const vehicleCount = Number(fields.num_vehicles);
+  if (!Number.isInteger(driverCount) || driverCount < 1 || driverCount > 12) {
+    return ['invalid_driver_count', 'Enter between 1 and 12 household drivers.'];
+  }
+  if (!Number.isInteger(vehicleCount) || vehicleCount < 1 || vehicleCount > 10) {
+    return ['invalid_vehicle_count', 'Enter between 1 and 10 vehicles.'];
+  }
+
+  for (let i = 1; i <= driverCount; i += 1) {
+    const name = String(fields[`d${i}_name`] || '');
+    const dob = String(fields[`d${i}_dob`] || '');
+    const licenseNumber = String(fields[`d${i}_license_number`] || '');
+    const licenseState = String(fields[`d${i}_license_state`] || '');
+    const relationship = String(fields[`d${i}_relationship`] || '');
+    if (name.length < 2 || !validDob(dob) || !/^[A-Za-z0-9 -]{3,32}$/.test(licenseNumber)
+      || !/^[A-Z]{2}$/.test(licenseState) || !relationship) {
+      return ['invalid_driver_details', `Review the required information for Driver ${i}.`];
+    }
+  }
+
+  for (let i = 1; i <= vehicleCount; i += 1) {
+    const prefix = `v${i}_`;
+    const classic = String(fields[`${prefix}classic`] || '').toLowerCase() === 'yes';
+    const vin = String(fields[`${prefix}vin`] || '').toUpperCase();
+    const status = String(fields[`${prefix}vin_status`] || '');
+    const year = String(fields[`${prefix}year`] || '');
+    const make = String(fields[`${prefix}make`] || '');
+    const model = String(fields[`${prefix}model`] || '');
+    if (classic) {
+      if (vin.length < 5 || vin.length > 17 || status !== 'manual_review' || !/^\d{4}$/.test(year) || !make || !model) {
+        return ['invalid_classic_vehicle', `Review the manual vehicle information for Vehicle ${i}.`];
+      }
+    } else if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin) || status !== 'verified' || !year || !make || !model) {
+      return ['vin_not_verified', `Decode and verify the VIN for Vehicle ${i} before submitting.`];
+    }
+    if (!fields[`${prefix}primary_driver`] || !fields[`${prefix}ownership`]
+      || !fields[`${prefix}use`] || !fields[`${prefix}coverage`]) {
+      return ['invalid_vehicle_details', `Review the required information for Vehicle ${i}.`];
+    }
+  }
   return null;
 }
 
@@ -243,7 +306,7 @@ async function handleSubmission(request) {
   if (!FIELD_ALLOWLISTS[line]) return fail(422, 'invalid_line_of_business', 'The quote type is not accepted.');
   if (typeof submissionId !== 'string' || !SUBMISSION_ID.test(submissionId)) return fail(422, 'invalid_submission_id', 'The submission identifier is invalid.');
   if (!['partial', 'complete'].includes(state)) return fail(422, 'invalid_submission_state', 'The submission state is invalid.');
-  if (!data.fields || Array.isArray(data.fields) || typeof data.fields !== 'object' || !Object.keys(data.fields).length || Object.keys(data.fields).length > 200) {
+  if (!data.fields || Array.isArray(data.fields) || typeof data.fields !== 'object' || !Object.keys(data.fields).length || Object.keys(data.fields).length > 300) {
     return fail(422, 'invalid_fields', 'The quote fields are invalid.');
   }
   if (String(data.honeypot || '').trim()) return fail(422, 'spam_detected', 'The submission was rejected.');
@@ -317,4 +380,10 @@ export const config = {
   }
 };
 
-export const testExports = { FIELD_ALLOWLISTS, truckingDynamicField, forwardToCrm };
+export const testExports = {
+  FIELD_ALLOWLISTS,
+  truckingDynamicField,
+  personalAutoDynamicField,
+  validatePersonalAuto,
+  forwardToCrm
+};
