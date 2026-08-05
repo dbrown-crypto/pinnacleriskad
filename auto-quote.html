@@ -659,7 +659,7 @@ catch(e) { console.warn('EmailJS init failed:', e); }
 </script>
 <script>
 const EMAILJS_SERVICE_ID  = 'service_mefkv18';
-const EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
+const EMAILJS_TEMPLATE_ID = 'template_v2008zh';
 const VIN_DECODER_ENDPOINT = 'https://pinnacleriskadvisors.net/api/vin-decode';
 var quoteSession = PinnacleQuote.createSession({ formKey: 'auto-quote', lineOfBusiness: 'personal_auto' });
 
@@ -1175,6 +1175,33 @@ function buildSecureCrmNotes(d){
   return lines.join('\n');
 }
 
+function buildSecureAutoDetails(d){
+  var lines = ['=== DRIVERS ==='];
+  for(var di=1;di<=Number(d.num_drivers||0);di++){
+    lines.push('Driver '+di+': '+[
+      d['d'+di+'_name'],
+      d['d'+di+'_dob'] ? 'DOB '+d['d'+di+'_dob'] : '',
+      d['d'+di+'_license_state'] && d['d'+di+'_license_number'] ? 'License '+d['d'+di+'_license_state']+' '+d['d'+di+'_license_number'] : '',
+      d['d'+di+'_relationship'],
+      d['d'+di+'_cdl'] ? 'CDL' : '',
+      d['d'+di+'_incidents'] ? 'Incidents: '+d['d'+di+'_incidents'] : ''
+    ].filter(Boolean).join(' | '));
+  }
+  lines.push('');
+  lines.push('=== VEHICLES ===');
+  for(var vi=1;vi<=Number(d.num_vehicles||0);vi++){
+    lines.push('Vehicle '+vi+': '+[
+      d['v'+vi+'_vin'] ? 'VIN '+d['v'+vi+'_vin'] : '',
+      [d['v'+vi+'_year'],d['v'+vi+'_make'],d['v'+vi+'_model'],d['v'+vi+'_trim']].filter(Boolean).join(' '),
+      d['v'+vi+'_vin_status'] ? 'VIN '+d['v'+vi+'_vin_status'] : '',
+      d['v'+vi+'_primary_driver'] ? 'Primary '+d['v'+vi+'_primary_driver'] : '',
+      d['v'+vi+'_ownership'],d['v'+vi+'_use'],d['v'+vi+'_coverage'],
+      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : ''
+    ].filter(Boolean).join(' | '));
+  }
+  return lines.join('\n');
+}
+
 document.getElementById('auto-quote-form').addEventListener('submit', async function(e){
   e.preventDefault();
   for(var i = 0; i < wizSteps.length; i++){
@@ -1206,31 +1233,18 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
 
   var isClient = (data.client_type === 'existing');
 
-  /* Mapped onto the same EmailJS template the landlord and trucking forms use,
-     so no new template is required on the EmailJS side. */
   var templateParams = {
-    business_name:       (isClient ? '[EXISTING CLIENT] ' : '') + (data.full_name || 'Not provided'),
     contact_name:        data.full_name || 'Not provided',
     phone:               data.phone || 'Not provided',
     email:               data.email || 'Not provided',
-    usdot:               'N/A - Personal Auto',
-    mc_number:           'N/A',
-    authority_status:    isClient ? 'EXISTING PINNACLE CLIENT - route to account manager' : 'New auto/home/umbrella prospect',
-    operation_type:      'Personal Auto',
-    cargo_type:          flags,
-    haul_radius:         data.renewal_date || 'Renewal date not provided',
-    states_of_operation: data.garaging_zip ? 'Garaging ZIP: ' + data.garaging_zip : 'Not provided',
-    prior_coverage:      data.current_limit || 'Not provided',
+    garaging_zip:        data.garaging_zip || 'Not provided',
+    secure_auto_details: buildSecureAutoDetails(data),
     prior_carrier:       data.current_carrier || 'Not provided',
-    power_unit_count:    data.num_vehicles || 'N/A',
-    driver_count:        data.num_drivers || 'N/A',
+    current_limit:       data.current_limit || 'Not provided',
+    renewal_date:        data.renewal_date || 'Not provided',
     coverages_summary:   covSummary,
-    notes:               buildNotes(data),
-    files_noted:         'Sensitive driver and vehicle identifiers captured securely in CRM; excluded from email',
-    coverage_type:       'Personal Auto',
+    notes:               data.notes || 'None',
     lead_source:         isClient ? 'Website Auto Quote - EXISTING CLIENT' : 'Website Auto Quote Page',
-    form_page:           '/auto-quote',
-    submission_pdf_link: '',
     submitted_at:        new Date().toISOString()
   };
 
