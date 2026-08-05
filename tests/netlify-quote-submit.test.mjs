@@ -25,8 +25,22 @@ function payload(overrides = {}) {
       phone: '(770) 758-3197',
       email: 'DBROWN@EXAMPLE.COM',
       garaging_zip: '30339',
-      num_vehicles: '2',
-      num_drivers: '2'
+      num_vehicles: '1',
+      num_drivers: '1',
+      d1_name: 'Derrick Brown',
+      d1_dob: '1990-01-15',
+      d1_license_number: 'D1234567',
+      d1_license_state: 'GA',
+      d1_relationship: 'Self',
+      v1_vin: '1HGCM82633A004352',
+      v1_vin_status: 'verified',
+      v1_year: '2003',
+      v1_make: 'HONDA',
+      v1_model: 'Accord',
+      v1_primary_driver: 'driver_1',
+      v1_ownership: 'Owned',
+      v1_use: 'Commute',
+      v1_coverage: 'Comprehensive and collision'
     },
     ...overrides
   };
@@ -208,8 +222,34 @@ test('all static form fields are accepted by their line allowlist', () => {
       const tag = control[0];
       if (field === 'website' || field.startsWith('_') || /\btype=["']file["']/i.test(tag)) continue;
       const allowed = testExports.FIELD_ALLOWLISTS[line].has(field)
-        || (line === 'trucking' && testExports.truckingDynamicField(field));
+        || (line === 'trucking' && testExports.truckingDynamicField(field))
+        || (line === 'personal_auto' && testExports.personalAutoDynamicField(field));
       assert.equal(allowed, true, `${filename}: ${field} is not allowlisted`);
     }
   }
+});
+
+test('personal auto dynamic driver and vehicle fields are restricted', () => {
+  assert.equal(testExports.personalAutoDynamicField('d1_license_number'), true);
+  assert.equal(testExports.personalAutoDynamicField('d12_dob'), true);
+  assert.equal(testExports.personalAutoDynamicField('v10_vin_status'), true);
+  assert.equal(testExports.personalAutoDynamicField('d13_license_number'), false);
+  assert.equal(testExports.personalAutoDynamicField('v11_vin'), false);
+  assert.equal(testExports.personalAutoDynamicField('d1_social_security_number'), false);
+});
+
+test('personal auto rejects unverified VINs and incomplete driver identity', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; return new Response('{}', { status: 200 }); };
+
+  const badVinFields = { ...payload().fields, v1_vin_status: 'unverified' };
+  const badVin = await quoteSubmit(request(payload({ fields: badVinFields })));
+  assert.equal(badVin.status, 422);
+  assert.equal((await bodyOf(badVin)).code, 'vin_not_verified');
+
+  const badDriverFields = { ...payload().fields, d1_dob: 'not-a-date' };
+  const badDriver = await quoteSubmit(request(payload({ fields: badDriverFields })));
+  assert.equal(badDriver.status, 422);
+  assert.equal((await bodyOf(badDriver)).code, 'invalid_driver_details');
+  assert.equal(calls, 0);
 });
