@@ -210,7 +210,9 @@ test('all static form fields are accepted by their line allowlist', () => {
     'umbrella-quote.html': ['umbrella-quote-form', 'personal_umbrella'],
     'trucking-quote.html': ['truckingQuoteForm', 'trucking'],
     'landlord-insurance-quote.html': ['landlord-quote-form', 'landlord'],
-    'quote.html': ['quoteForm', 'commercial']
+    'quote.html': ['quoteForm', 'commercial'],
+    'georgia-motor-carrier-insurance.html': ['motor-carrier-lead-form', 'trucking'],
+    'georgia-bobtail-non-trucking-liability.html': ['bobtail-lead-form', 'trucking']
   };
   for (const [filename, [formId, line]] of Object.entries(forms)) {
     const html = fs.readFileSync(path.join(ROOT, filename), 'utf8');
@@ -227,6 +229,59 @@ test('all static form fields are accepted by their line allowlist', () => {
       assert.equal(allowed, true, `${filename}: ${field} is not allowlisted`);
     }
   }
+});
+
+test('short trucking landing form is complete with contact, company, and operation type', async () => {
+  let upstream;
+  globalThis.fetch = async (_url, options) => {
+    upstream = JSON.parse(options.body);
+    return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
+  };
+  const short = payload({
+    line_of_business: 'trucking',
+    fields: {
+      form_depth: 'short',
+      contact_name: 'Derrick Brown',
+      phone: '(770) 758-3197',
+      email: 'dbrown@example.com',
+      business_name: 'Pinnacle Transport LLC',
+      operation_type: 'Own authority motor carrier',
+      gclid: 'test-click-id',
+      campaign_id: '1001',
+      ad_group_id: '2002',
+      keyword: 'motor carrier insurance',
+      match_type: 'e',
+      creative_id: '3003',
+      device: 'm',
+      landing_page_variant: 'ga-motor-carrier',
+      smsService: 'yes'
+    }
+  });
+  const response = await quoteSubmit(request(short));
+  assert.equal(response.status, 200);
+  assert.equal((await bodyOf(response)).ok, true);
+  assert.equal(upstream.form_depth, 'short');
+  assert.equal(upstream.ad_group_id, '2002');
+  assert.equal(upstream.submission_state, 'complete');
+});
+
+test('short trucking landing form still enforces its five required fields', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; return new Response('{}', { status: 200 }); };
+  const short = payload({
+    line_of_business: 'trucking',
+    fields: {
+      form_depth: 'short',
+      contact_name: 'Derrick Brown',
+      phone: '(770) 758-3197',
+      email: 'dbrown@example.com',
+      business_name: 'Pinnacle Transport LLC'
+    }
+  });
+  const response = await quoteSubmit(request(short));
+  assert.equal(response.status, 422);
+  assert.equal((await bodyOf(response)).code, 'missing_required');
+  assert.equal(calls, 0);
 });
 
 test('personal auto dynamic driver and vehicle fields are restricted', () => {
