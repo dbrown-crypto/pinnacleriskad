@@ -98,6 +98,16 @@
     .section-title em { font-style: italic; color: var(--gold-light); }
     .section-sub { color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 3.5rem; }
 
+    /* COVERAGE PATHS */
+    .path-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .path-card { display: block; background: var(--bg2); padding: 2.5rem; color: inherit; text-decoration: none; transition: background 0.2s; }
+    .path-card:hover { background: var(--bg3); }
+    .path-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .path-label { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; }
+    .path-card h3 { color: var(--cream); font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 0.75rem; }
+    .path-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.25rem; }
+    .path-link { color: var(--gold-light); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
     /* OPERATION TYPES */
     .ops-grid {
       display: grid;
@@ -203,6 +213,7 @@
       .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
       .hero-sub { font-size: 0.95rem; }
       .hero-actions { flex-direction: column; }
+      .path-grid { grid-template-columns: 1fr; }
       .hero-actions a { text-align: center; }
       .hero-tags { gap: 0.5rem; }
       section { padding: 4rem 1.5rem; }
@@ -337,6 +348,8 @@ html:not(.pra-js) .pramob-close{display:none}
 <button type="button" class="pradd-t" id="ddt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="ddm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
 <div class="pradd-m" id="ddm-truck" aria-labelledby="ddt-truck">
 <a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/georgia-motor-carrier-insurance.html">Georgia Motor Carrier</a>
+<a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a>
 <a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
 <a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
 <a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
@@ -382,6 +395,8 @@ html:not(.pra-js) .pramob-close{display:none}
 <button type="button" class="pradd-t" id="mdt-truck" aria-haspopup="true" aria-expanded="false" aria-controls="mdm-truck">Trucking<span class="pradd-ar" aria-hidden="true"></span></button>
 <div class="pradd-m" id="mdm-truck" aria-labelledby="mdt-truck">
 <a href="/new-authority-trucking-insurance.html">Owner-Operator &amp; New Authority</a>
+<a href="/georgia-motor-carrier-insurance.html">Georgia Motor Carrier</a>
+<a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a>
 <a href="/trucking.html">Truck Coverage &amp; Vehicle Types</a>
 <a href="/nemt-insurance.html">NEMT &amp; Ambulette</a>
 <a class="pradd-q" href="/trucking-quote.html">Get a Trucking Quote</a>
@@ -456,6 +471,38 @@ html:not(.pra-js) .pramob-close{display:none}
       <div class="tag active">Long Haul</div>
       <div class="tag">Owner-Operators</div>
       <div class="tag">New Ventures</div>
+    </div>
+  </section>
+
+  <section id="coverage-paths" style="background: var(--bg2);">
+    <div class="section-eyebrow">Choose Your Coverage Path</div>
+    <h2 class="section-title">Start With <em>How You Operate</em></h2>
+    <p class="section-sub">Select the page that matches your operation so the coverage information and quote path fit your situation.</p>
+    <div class="path-grid">
+      <a class="path-card" href="/georgia-motor-carrier-insurance.html">
+        <div class="path-label">Own Authority</div>
+        <h3>Georgia Motor Carrier Insurance</h3>
+        <p>For motor carriers operating under their own authority, including new ventures, single truck operations and small fleets.</p>
+        <span class="path-link">Explore Motor Carrier Coverage</span>
+      </a>
+      <a class="path-card" href="/georgia-bobtail-non-trucking-liability.html">
+        <div class="path-label">Leased On Operators</div>
+        <h3>Georgia Bobtail and Nontrucking Liability</h3>
+        <p>For owner operators leased to a motor carrier who need coverage based on their lease and certificate requirements.</p>
+        <span class="path-link">Explore Bobtail Coverage</span>
+      </a>
+      <a class="path-card" href="/new-authority-trucking-insurance.html">
+        <div class="path-label">Starting a Carrier</div>
+        <h3>New Authority Insurance</h3>
+        <p>For operators preparing a new DOT or MC authority and learning what markets need before coverage can be bound.</p>
+        <span class="path-link">Explore New Authority Coverage</span>
+      </a>
+      <a class="path-card" href="/nemt-insurance.html">
+        <div class="path-label">Passenger Transportation</div>
+        <h3>NEMT and Ambulette Insurance</h3>
+        <p>For nonemergency medical transportation and ambulette operators with specialized vehicle and passenger exposures.</p>
+        <span class="path-link">Explore NEMT Coverage</span>
+      </a>
     </div>
   </section>
 
@@ -676,7 +723,7 @@ html:not(.pra-js) .pramob-close{display:none}
 <p>Independent commercial insurance for landlords, truckers, and business owners across Georgia and Florida.</p>
 <p class="praft-addr">2700 Cumberland Pkwy SE, Atlanta, GA 30339</p></div>
 <div><h5>Property &amp; Landlord</h5><a href="/landlord.html">Landlord Overview</a><a href="/landlord-insurance-georgia.html">Georgia Landlord</a><a href="/landlord-insurance-florida.html">Florida Landlord</a><a href="/landlord-insurance-quote.html">Get a Property Quote</a></div>
-<div><h5>Trucking</h5><a href="/trucking.html">Trucking Overview</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT &amp; Ambulette</a><a href="/trucking-quote.html">Get a Trucking Quote</a></div>
+<div><h5>Trucking</h5><a href="/trucking.html">Trucking Overview</a><a href="/georgia-motor-carrier-insurance.html">Georgia Motor Carrier</a><a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT &amp; Ambulette</a><a href="/trucking-quote.html">Get a Trucking Quote</a></div>
 <div><h5>Business &amp; Commercial</h5><a href="/quote.html">Commercial Insurance</a><a href="/commercial-property-insurance-georgia.html">Georgia Commercial Property</a><a href="/commercial-property-insurance-florida.html">Florida Commercial Property</a><a href="/quote.html?coverage=workers-comp">Workers' Compensation</a><a href="/quote.html?coverage=commercial">Get a Business Quote</a></div>
 <div><h5>Auto, Home &amp; Umbrella</h5><a href="/personal-insurance.html">Overview</a><a href="/personal-auto-insurance.html">Auto Insurance</a><a href="/homeowners-insurance.html">Homeowners Insurance</a><a href="/personal-umbrella-insurance.html">Umbrella Insurance</a></div>
 <div><h5>Company</h5><a href="/">Home</a><a href="/#founder">About</a><a href="/#founder">Meet Derrick</a><a href="/quote.html">Contact</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/terms-of-service.html">Terms of Service</a></div>
