@@ -36,9 +36,9 @@
     .info{border-color:var(--gold)}.info h3{color:var(--cream);font-weight:500}.info p{color:var(--muted)}.steps li{border-color:var(--line);color:var(--ink)}.steps b{color:var(--gold)}
     .faq{gap:1px;background:var(--line);border:1px solid var(--line)}.faq details{background:var(--navy2);border:0;padding:22px 24px}.faq details[open]{background:var(--blue)}.faq summary{color:var(--cream);font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:500}.faq p{color:var(--muted);line-height:1.7}
     .cta{background:var(--navy);padding:88px 20px;border-top:1px solid var(--line)}.cta h2{color:var(--cream);font-weight:400}.cta p{color:var(--muted)}.cta a{letter-spacing:.08em;text-transform:uppercase}
-    .legal{background:#061428;border-top:1px solid var(--line);color:#8A9099;padding:30px 0}.legal a{color:var(--muted)}.legal a:hover{color:var(--gold2)}
-    @media(max-width:850px){.hero{min-height:auto;padding-top:112px}section.content{padding:72px 0}.hero-grid{gap:38px}.proof-item{border-color:var(--line)}}
-    @media(max-width:520px){.brand img{height:34px}.hero{padding-top:96px}.hero h1{font-size:39px}section.content{padding:58px 0}.section-head{margin-bottom:34px}.card{padding:28px 22px}.phone{font-size:13px}}
+    .legal{background:#061428;border-top:1px solid var(--line);color:#8A9099;padding:48px 0 26px}.legal-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}.legal-brand img{height:42px;width:auto;margin-bottom:14px}.legal p{margin:0 0 9px;max-width:390px}.legal h3{color:var(--gold);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}.legal-links a{display:block;color:var(--muted);text-decoration:none;margin-bottom:8px}.legal a:hover{color:var(--gold2)}.legal-bottom{border-top:1px solid var(--line);margin-top:30px;padding-top:18px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media(max-width:850px){.hero{min-height:auto;padding-top:112px}section.content{padding:72px 0}.hero-grid{gap:38px}.proof-item{border-color:var(--line)}.legal-grid{grid-template-columns:1fr 1fr}.legal-brand{grid-column:1/-1}}
+    @media(max-width:520px){.brand img{height:34px}.hero{padding-top:96px}.hero h1{font-size:39px}section.content{padding:58px 0}.section-head{margin-bottom:34px}.card{padding:28px 22px}.phone{font-size:13px}.legal-grid{grid-template-columns:1fr}.legal-brand{grid-column:auto}}
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[{"@type":"InsuranceAgency","@id":"https://pinnacleriskad.com/#agency","name":"Pinnacle Risk Advisors LLC","url":"https://pinnacleriskad.com/","telephone":"+1-770-758-3197","email":"dbrown@pinnacleriskad.com","logo":"https://pinnacleriskad.com/pra-logo.png","address":{"@type":"PostalAddress","streetAddress":"2700 Cumberland Pkwy SE, Ste 410","addressLocality":"Atlanta","addressRegion":"GA","postalCode":"30339","addressCountry":"US"},"areaServed":["Georgia","Florida","Texas","Indiana","Utah","North Carolina","South Carolina"],"founder":{"@type":"Person","name":"Derrick Brown"}},{"@type":"Service","@id":"https://pinnacleriskad.com/georgia-motor-carrier-insurance.html#service","name":"Georgia Motor Carrier Insurance","serviceType":"Commercial motor carrier insurance","areaServed":{"@type":"State","name":"Georgia"},"provider":{"@id":"https://pinnacleriskad.com/#agency"},"url":"https://pinnacleriskad.com/georgia-motor-carrier-insurance.html"}]}
@@ -129,7 +129,14 @@
     <section class="cta"><h2>Ready to <em>discuss your operation?</em></h2><p>Call Derrick or use the short form above to start your Georgia motor carrier review.</p><a href="tel:+17707583197" data-call-link>Call (770) 758-3197</a></section>
   </main>
 
-  <footer class="legal"><div class="wrap legal-grid"><span>© 2026 Pinnacle Risk Advisors LLC · NPN 21112890 · 2700 Cumberland Pkwy SE, Ste 410, Atlanta, GA 30339</span><span><a href="/privacy-policy.html">Privacy</a> · <a href="/terms-of-service.html">Terms</a></span></div></footer>
+  <footer class="legal"><div class="wrap">
+    <div class="legal-grid">
+      <div class="legal-brand"><a href="/"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors"></a><p>Independent commercial insurance for truckers, landlords and business owners.</p><p>2700 Cumberland Pkwy SE, Ste 410, Atlanta, GA 30339</p></div>
+      <div class="legal-links"><h3>Trucking</h3><a href="/trucking.html">Trucking Insurance</a><a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT and Ambulette</a><a href="/trucking-quote.html">Start a Trucking Quote</a></div>
+      <div class="legal-links"><h3>Pinnacle</h3><a href="/">Home</a><a href="/#founder">About Pinnacle</a><a href="tel:+17707583197" data-call-link>(770) 758-3197</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/terms-of-service.html">Terms of Service</a></div>
+    </div>
+    <div class="legal-bottom"><span>© 2026 Pinnacle Risk Advisors LLC · NPN 21112890</span><span>Licensed in GA, FL, TX, IN, UT, NC and SC</span></div>
+  </div></footer>
   <script src="/quote-submission.js"></script>
   <script src="/trucking-landing.js"></script>
 </body>
