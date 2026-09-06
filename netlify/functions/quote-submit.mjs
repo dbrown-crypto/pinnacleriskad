@@ -12,7 +12,10 @@ const COMMON_FIELDS = new Set([
   'first_name', 'last_name', 'full_name', 'contact_name', 'phone', 'email',
   'contact_phone', 'contact_email', 'coverage_type', 'line_of_business',
   'client_type', 'source', 'form_page', 'page_url', 'referrer', 'gclid',
-  'campaign', 'ad_group', 'lead_source', 'submitted_at', 'notes',
+  'gbraid', 'wbraid', 'campaign', 'campaign_id', 'ad_group', 'ad_group_id',
+  'keyword', 'match_type', 'creative_id', 'device', 'landing_page_variant',
+  'source_page', 'form_depth', 'campaign_source', 'campaign_medium',
+  'lead_source', 'submitted_at', 'notes',
   'description', 'files_noted', 'form', 'lead_status', 'note', 'partial'
 ]);
 
@@ -51,7 +54,7 @@ const FIELD_ALLOWLISTS = {
     'driver_count', 'trailer_count', 'al_limit', 'cargo_limit', 'deductible',
     'cov_auto_liability', 'cov_physical_damage', 'cov_cargo',
     'cov_general_liability', 'cov_bobtail', 'cov_trailer_interchange',
-    'cov_workers_comp', 'cov_occ_accident', 'cov_excess'
+    'cov_workers_comp', 'cov_occ_accident', 'cov_excess', 'smsService'
   ),
   landlord: fields(
     'property_address', 'property_type', 'effective_date', 'year_built', 'roof_age',
@@ -199,7 +202,10 @@ function validateFields(line, state, fields) {
     && !(line === 'trucking' && truckingDynamicField(field))
     && !(line === 'personal_auto' && personalAutoDynamicField(field)));
   if (unexpected.length) return ['unexpected_fields', 'The request contains fields that are not accepted for this quote form.'];
-  if (state === 'complete' && REQUIRED_COMPLETE[line].some((field) => !fields[field])) {
+  const required = line === 'trucking' && fields.form_depth === 'short'
+    ? ['contact_name', 'phone', 'email', 'business_name', 'operation_type']
+    : REQUIRED_COMPLETE[line];
+  if (state === 'complete' && required.some((field) => !fields[field])) {
     return ['missing_required', 'Please complete all required fields before submitting.'];
   }
   const name = fields.full_name || fields.contact_name || '';
