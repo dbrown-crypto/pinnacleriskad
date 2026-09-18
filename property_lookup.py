@@ -4,6 +4,7 @@ import os
 import httpx
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 app = FastAPI(title="Pinnacle Property Lookup")
 
@@ -107,7 +108,11 @@ async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
     if not dot_clean:
         return {"found": False, "error": "Invalid DOT number"}
     if not FMCSA_WEB_KEY:
-        return {"found": False, "error": "Server not configured"}
+        return JSONResponse(
+            status_code=503,
+            content={"found": False, "error": "Server not configured"},
+            headers={"Cache-Control": "no-store"},
+        )
 
     async with httpx.AsyncClient(timeout=15) as client:
         try:

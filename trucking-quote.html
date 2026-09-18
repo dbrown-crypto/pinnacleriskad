@@ -444,7 +444,7 @@ html:not(.pra-js) .pramob-close{display:none}
       <input type="text" id="hero-dot" inputmode="numeric" autocomplete="off" placeholder="e.g. 1234567" aria-label="USDOT number">
       <button type="button" class="btn-hero" id="dot-lookup-btn" onclick="heroLookup()">Look Up My DOT</button>
     </div>
-    <p class="hero-dot-note">Takes about 3 seconds. <a onclick="skipDOT()">I don't have a DOT number yet</a></p>
+    <p class="hero-dot-note">You can also enter your details manually. <a onclick="skipDOT()">I don't have a DOT number yet</a></p>
   </div>
   <div class="hero-cta-row" style="margin-top:26px;">
     <p class="hero-trust">Serving trucking accounts in <strong>Georgia, Florida, South Carolina, and Texas.</strong></p>
@@ -543,6 +543,7 @@ html:not(.pra-js) .pramob-close{display:none}
       <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Contact &amp; <em>Business</em></span><span class="fs-desc">So we can send your quote</span></div>
       <div class="form-section-body">
         <p class="step-intro">Just the basics so we can reach you with your quote. Anything we pulled from FMCSA is already filled in. Edit it if it's out of date.</p>
+        <p class="step-intro" id="dot-manual-note" role="status" hidden></p>
         <div class="fgrid fgrid-2">
           <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Please enter your name.</span></div>
           <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" required><span class="hint">Mobile preferred so we can text your quote</span><span class="field-err">Please enter a valid 10-digit phone number.</span></div>
@@ -1050,19 +1051,27 @@ async function lookupDOT() {
   var resultGrid= document.getElementById('dot-result-grid');
   var filledNote= document.getElementById('dot-filled-note');
   var errorBox  = document.getElementById('dot-error');
+  var manualNote = document.getElementById('dot-manual-note');
+  if (btn.disabled) return;
   var dot = dotInput.value.trim().replace(/\D/g, '');
   if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; dotState('dot-empty'); focusHeroDot(); return; }
   var btnText = btn.textContent;
   btn.textContent = 'Looking up…';
   btn.disabled = true;
   errorBox.textContent = '';
+  manualNote.hidden = true;
   resultBox.classList.remove('show');
   var backendUrl = 'https://pinnacleriskad.onrender.com/dot-lookup?dot=' + dot;
+  var controller = typeof AbortController === 'function' ? new AbortController() : null;
+  var timer;
   function validCarrier(data) {
     return data && data.content && data.content.carrier ? data : null;
   }
   async function fetchBackend() {
-    var res = await fetch(backendUrl, { headers: { 'Accept': 'application/json' } });
+    var res = await fetch(backendUrl, {
+      headers: { 'Accept': 'application/json' },
+      signal: controller ? controller.signal : undefined
+    });
     var text = await res.text();
     if (!res.ok) throw new Error('DOT lookup service rejected the request');
     var data = JSON.parse(text);
@@ -1071,7 +1080,13 @@ async function lookupDOT() {
     return ok;
   }
   try {
-    var json = await fetchBackend();
+    var deadline = new Promise(function (_, reject) {
+      timer = setTimeout(function () {
+        reject(new Error('DOT lookup timed out'));
+        if (controller) controller.abort();
+      }, 6000);
+    });
+    var json = await Promise.race([fetchBackend(), deadline]);
     var c = json.content.carrier;
     var fields = [];
     if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
@@ -1131,9 +1146,18 @@ async function lookupDOT() {
     dotState('dot-found');
   } catch (err) {
     dotState('dot-empty');
-    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again, or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
+    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number is saved. Enter your business name to continue.';
+    errorBox.textContent = fallbackMessage;
+    manualNote.textContent = fallbackMessage;
+    manualNote.hidden = false;
+    if (wizIdx === 0) {
+      wizGo(1, true);
+      var businessInput = document.querySelector('input[name="business_name"]');
+      if (businessInput) businessInput.focus();
+    }
     console.error('DOT lookup error:', err);
   } finally {
+    clearTimeout(timer);
     btn.textContent = btnText;
     btn.disabled = false;
   }
