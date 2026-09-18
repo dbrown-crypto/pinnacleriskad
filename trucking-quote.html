@@ -1146,7 +1146,9 @@ async function lookupDOT() {
     dotState('dot-found');
   } catch (err) {
     dotState('dot-empty');
-    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number is saved. Enter your business name to continue.';
+    // Keep the form payload populated even if the hidden mirror was cleared while waiting.
+    if (!dotInput.value) dotInput.value = dot;
+    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number (' + dotInput.value + ') is saved. Enter your business name to continue.';
     errorBox.textContent = fallbackMessage;
     manualNote.textContent = fallbackMessage;
     manualNote.hidden = false;

@@ -116,6 +116,29 @@ test('quote: late failure does not navigate away from a later wizard step', asyn
   await f.start(); assert.deepEqual(f.moves, []); assert.equal(f.business.focused, false);
 });
 
+test('quote: failed lookup restores an emptied payload mirror and confirms the retained DOT', async () => {
+  let rejectFetch;
+  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
+  const pending = f.start();
+  f.dot.value = '';
+  rejectFetch(new Error('offline'));
+  await pending;
+  assert.equal(f.dot.value, '1234567');
+  assert.match(f.manual.textContent, /USDOT number \(1234567\) is saved/);
+  assert.deepEqual(f.moves, [1]);
+});
+
+test('quote: fallback retains a newer DOT already present in the payload mirror', async () => {
+  let rejectFetch;
+  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
+  const pending = f.start();
+  f.dot.value = '7654321';
+  rejectFetch(new Error('offline'));
+  await pending;
+  assert.equal(f.dot.value, '7654321');
+  assert.match(f.manual.textContent, /USDOT number \(7654321\) is saved/);
+});
+
 test('landing: explicit no-DOT path works without requesting a lookup', () => {
   const f = fixture('landing', () => { throw new Error('must not fetch'); });
   f.skip.handlers.click(); assert.equal(f.dot.value, ''); assert.equal(f.business.focused, true);

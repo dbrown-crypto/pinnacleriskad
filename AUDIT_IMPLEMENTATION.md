@@ -210,3 +210,9 @@ The connected Google Ads account confirms that `AW-18335963415/EQMqCIG2sNMcEJeyo
 Enabled ad final URLs were verified directly: owner-operator/new authority uses `/new-authority-trucking-insurance.html`; vehicle-specific uses `/trucking.html`; core trucking uses `/trucking-quote.html`; NEMT uses `/nemt-insurance.html`. These enabled ads have no mobile final-URL override. All six protected pages remain in the deployment checklist, including motor carrier and bobtail.
 
 The release rerun passed 60 Node and 3 Python tests. Git whitespace verification excludes saved `.patch` artifacts, whose blank context lines are valid unified-diff syntax; application source and documentation are checked normally. The discovered Netlify deploy preview permits a real browser check without changing production CORS.
+
+### Preview release gate follow-up
+
+PR #16 preview confirmed the detailed form moves to Contact & Business after a CORS-blocked lookup, focuses the business field, retains the visible DOT, and enables retry. The shared motor-carrier form also retains its visible DOT and focuses manual entry; the no-DOT button works after initialization. The NEMT quote CTA reaches the unchanged form. Desktop visual checks passed. Production CORS remains unchanged; no quote was submitted.
+
+Automatic merge review initially rejected Phase 1B because the browser's hidden-field inspection returned an empty DOT payload mirror while the visible field retained the number. The release is held until resolved. A defensive fallback now restores an emptied mirror from the requested DOT, preserves any newer populated value, and displays the actual retained payload number in the manual-entry message. Two added tests cover those cases; all 62 Node tests pass. The updated preview must display the expected saved number before retrying release. Mobile verification remains an owner check; the available cloud browser has no advertised viewport-resize API.

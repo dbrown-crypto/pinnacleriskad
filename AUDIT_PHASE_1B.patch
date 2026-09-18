@@ -61,10 +61,10 @@ index bf72b95..32a17a0 100644
          try:
 diff --git a/tests/dot-lookup.test.js b/tests/dot-lookup.test.js
 new file mode 100644
-index 0000000..9b78eab
+index 0000000..1652bdd
 --- /dev/null
 +++ b/tests/dot-lookup.test.js
-@@ -0,0 +1,123 @@
+@@ -0,0 +1,146 @@
 +const test = require('node:test');
 +const assert = require('node:assert/strict');
 +const fs = require('node:fs');
@@ -181,6 +181,29 @@ index 0000000..9b78eab
 +test('quote: late failure does not navigate away from a later wizard step', async () => {
 +  const f = fixture('quote', async () => reply({}, false), { step: 3 });
 +  await f.start(); assert.deepEqual(f.moves, []); assert.equal(f.business.focused, false);
++});
++
++test('quote: failed lookup restores an emptied payload mirror and confirms the retained DOT', async () => {
++  let rejectFetch;
++  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
++  const pending = f.start();
++  f.dot.value = '';
++  rejectFetch(new Error('offline'));
++  await pending;
++  assert.equal(f.dot.value, '1234567');
++  assert.match(f.manual.textContent, /USDOT number \(1234567\) is saved/);
++  assert.deepEqual(f.moves, [1]);
++});
++
++test('quote: fallback retains a newer DOT already present in the payload mirror', async () => {
++  let rejectFetch;
++  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
++  const pending = f.start();
++  f.dot.value = '7654321';
++  rejectFetch(new Error('offline'));
++  await pending;
++  assert.equal(f.dot.value, '7654321');
++  assert.match(f.manual.textContent, /USDOT number \(7654321\) is saved/);
 +});
 +
 +test('landing: explicit no-DOT path works without requesting a lookup', () => {
@@ -381,7 +404,7 @@ index 32f2e5d..8f900d8 100644
        }).finally(function () {
          button.disabled = false;
 diff --git a/trucking-quote.html b/trucking-quote.html
-index 00a97d9..6ada1d5 100644
+index 00a97d9..c752da8 100644
 --- a/trucking-quote.html
 +++ b/trucking-quote.html
 @@ -444,7 +444,7 @@ html:not(.pra-js) .pramob-close{display:none}
@@ -445,12 +468,14 @@ index 00a97d9..6ada1d5 100644
      var c = json.content.carrier;
      var fields = [];
      if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
-@@ -1131,9 +1146,18 @@ async function lookupDOT() {
+@@ -1131,9 +1146,20 @@ async function lookupDOT() {
      dotState('dot-found');
    } catch (err) {
      dotState('dot-empty');
 -    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again, or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
-+    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number is saved. Enter your business name to continue.';
++    // Keep the form payload populated even if the hidden mirror was cleared while waiting.
++    if (!dotInput.value) dotInput.value = dot;
++    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number (' + dotInput.value + ') is saved. Enter your business name to continue.';
 +    errorBox.textContent = fallbackMessage;
 +    manualNote.textContent = fallbackMessage;
 +    manualNote.hidden = false;
