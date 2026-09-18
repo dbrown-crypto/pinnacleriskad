@@ -8,9 +8,6 @@
   <link rel="canonical" href="https://pinnacleriskad.com/nemt-insurance.html">
   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
   {
@@ -38,8 +35,8 @@
       --text: #d8d3c8;
       --muted: #7a7568;
       --border: rgba(201,169,78,0.15);
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'DM Sans', sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Raleway', 'Segoe UI', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -245,7 +242,7 @@ body{overflow-x:hidden}
 .praft{background:#061428;border-top:1px solid rgba(201,169,78,.12);padding:58px 0 26px;font-family:'Raleway',sans-serif;color:#B7BCC4}
 .praft-in{max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
 .praft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:28px}
-.praft-grid h5{color:#C9A94E;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px;font-weight:600}
+.praft-grid h3{color:#C9A94E;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin:0 0 14px;font-weight:600}
 .praft-grid a{display:block;color:#B7BCC4;font-size:.85rem;margin-bottom:9px;text-decoration:none}
 .praft-grid a:hover{color:#E2CA7B}
 .praft-brand p{font-size:.84rem;max-width:280px;line-height:1.6}
@@ -718,7 +715,7 @@ html:not(.pra-js) .pramob-close{display:none}
 <p class="nemt-note">Submitting a request does not bind or confirm coverage.</p>
 </div>
 <div class="nemt-form-box">
-<form id="nemtForm">
+<form id="nemtForm" method="post">
 <div class="form-grid">
 <label for="nemt-company">Company Name<input id="nemt-company" name="company" type="text" autocomplete="organization" required maxlength="200">
 </label>
@@ -760,12 +757,13 @@ html:not(.pra-js) .pramob-close{display:none}
 <label class="nemt-consent">
 <input type="checkbox" name="smsService" value="yes"> <span>I consent to receive non-marketing texts from Pinnacle Risk Advisors LLC about my quote request and policy service. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase.</span>
 </label>
-<button class="btn-primary" type="submit">Request My NEMT Quote</button>
+<button class="btn-primary" type="submit" disabled>Request My NEMT Quote</button>
 <p class="nemt-note">By submitting, you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.</p>
 <noscript>
 <p>Please call (770) 758-3197 to request a quote. This form requires JavaScript.</p>
 </noscript>
 </form>
+<div id="nemtUnavailable" hidden tabindex="-1" role="alert"><p>The quote form could not load. Please refresh this page or <a href="tel:+17707583197">call (770) 758-3197</a> to discuss your operation.</p></div>
 <div id="nemtSuccess" hidden tabindex="-1" role="status">
 <h3>Your request has been received.</h3>
 <p>Derrick will review your operation and follow up for the next steps. Coverage is subject to underwriting approval.</p>
@@ -807,11 +805,11 @@ html:not(.pra-js) .pramob-close{display:none}
 <div class="praft-brand"><a class="prahd-logo" href="/" style="margin-bottom:14px"><img src="/pra-logo.png" alt="Pinnacle Risk Advisors" class="pra-logo-img"></a>
 <p>Independent commercial insurance for landlords, truckers, and business owners across Georgia and Florida.</p>
 <p class="praft-addr">2700 Cumberland Pkwy SE, Atlanta, GA 30339</p></div>
-<div><h5>Property &amp; Landlord</h5><a href="/landlord.html">Landlord Overview</a><a href="/landlord-insurance-georgia.html">Georgia Landlord</a><a href="/landlord-insurance-florida.html">Florida Landlord</a><a href="/landlord-insurance-quote.html">Get a Property Quote</a></div>
-<div><h5>Trucking</h5><a href="/trucking.html">Trucking Overview</a><a href="/georgia-motor-carrier-insurance.html">Georgia Motor Carrier</a><a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT &amp; Ambulette</a><a href="/trucking-quote.html">Get a Trucking Quote</a></div>
-<div><h5>Business &amp; Commercial</h5><a href="/quote.html">Commercial Insurance</a><a href="/commercial-property-insurance-georgia.html">Georgia Commercial Property</a><a href="/commercial-property-insurance-florida.html">Florida Commercial Property</a><a href="/quote.html?coverage=workers-comp">Workers' Compensation</a><a href="/quote.html?coverage=commercial">Get a Business Quote</a></div>
-<div><h5>Auto, Home &amp; Umbrella</h5><a href="/personal-insurance.html">Overview</a><a href="/personal-auto-insurance.html">Auto Insurance</a><a href="/homeowners-insurance.html">Homeowners Insurance</a><a href="/personal-umbrella-insurance.html">Umbrella Insurance</a></div>
-<div><h5>Company</h5><a href="/">Home</a><a href="/#founder">About</a><a href="/#founder">Meet Derrick</a><a href="/quote.html">Contact</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/terms-of-service.html">Terms of Service</a></div>
+<div><h3>Property &amp; Landlord</h3><a href="/landlord.html">Landlord Overview</a><a href="/landlord-insurance-georgia.html">Georgia Landlord</a><a href="/landlord-insurance-florida.html">Florida Landlord</a><a href="/landlord-insurance-quote.html">Get a Property Quote</a></div>
+<div><h3>Trucking</h3><a href="/trucking.html">Trucking Overview</a><a href="/georgia-motor-carrier-insurance.html">Georgia Motor Carrier</a><a href="/georgia-bobtail-non-trucking-liability.html">Georgia Bobtail and NTL</a><a href="/new-authority-trucking-insurance.html">New Authority</a><a href="/nemt-insurance.html">NEMT &amp; Ambulette</a><a href="/trucking-quote.html">Get a Trucking Quote</a></div>
+<div><h3>Business &amp; Commercial</h3><a href="/quote.html">Commercial Insurance</a><a href="/commercial-property-insurance-georgia.html">Georgia Commercial Property</a><a href="/commercial-property-insurance-florida.html">Florida Commercial Property</a><a href="/quote.html?coverage=workers-comp">Workers' Compensation</a><a href="/quote.html?coverage=commercial">Get a Business Quote</a></div>
+<div><h3>Auto, Home &amp; Umbrella</h3><a href="/personal-insurance.html">Overview</a><a href="/personal-auto-insurance.html">Auto Insurance</a><a href="/homeowners-insurance.html">Homeowners Insurance</a><a href="/personal-umbrella-insurance.html">Umbrella Insurance</a></div>
+<div><h3>Company</h3><a href="/">Home</a><a href="/#founder">About</a><a href="/#founder">Meet Derrick</a><a href="/quote.html">Contact</a><a href="/privacy-policy.html">Privacy Policy</a><a href="/terms-of-service.html">Terms of Service</a></div>
 </div><div class="praft-bot"><span>&copy; 2026 Pinnacle Risk Advisors LLC &middot; Licensed in GA, FL, TX, IN, UT, NC &amp; SC</span><span>(770) 758-3197 &middot; dbrown@pinnacleriskad.com</span></div></div></div><script id="pra-chrome-js">(function(){
 var hd=document.getElementById('prahd');
 if(hd){window.addEventListener('scroll',function(){hd.classList.toggle('solid',window.scrollY>40)});}
@@ -867,13 +865,102 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Es
 /* ===== typography unified with brand: Raleway + Playfair Display ===== */
 :root{--font-sans:'Raleway','Segoe UI',sans-serif;--font-serif:'Playfair Display',Georgia,serif}
 </style>
-<script src="/quote-submission.js"></script><script>
-(function(){'use strict';var form=document.getElementById('nemtForm');if(!form||!window.PinnacleQuote)return;
-var session=PinnacleQuote.createSession({formKey:'nemt-insurance',lineOfBusiness:'commercial'});
-form.addEventListener('submit',function(e){e.preventDefault();if(!form.reportValidity())return;PinnacleQuote.clearFailure(form);var data=PinnacleQuote.formToObject(form),button=form.querySelector('[type="submit"]'),query=new URLSearchParams(location.search),sms=data.smsService==='yes';
-var fields={firstName:data.firstName,lastName:data.lastName,full_name:data.firstName+' '+data.lastName,phone:data.phone,email:data.email,company:data.company,state:data.state,coverage:'NEMT Insurance',coverage_type:'NEMT Insurance',line_of_business:'NEMT Insurance',details:'Business status: '+data.status+'; Vehicles: '+data.vehicles+'; Operation: '+data.operation,form_depth:'short',landing_page_variant:'nemt-insurance',form_page:location.pathname,source_page:location.pathname,page_url:location.href,referrer:document.referrer,submitted_at:new Date().toISOString(),smsServiceConsent:String(sms),smsMarketingConsent:'false',smsOptInTimestamp:sms?new Date().toISOString():'',smsOptInSource:'NEMT insurance quote form',smsOptInPageUrl:location.href,smsDisclosureVersion:'nemt-v1'};
-var map={gclid:'gclid',gbraid:'gbraid',wbraid:'wbraid',campaign:'utm_campaign',campaign_id:'campaignid',ad_group_id:'adgroupid',keyword:'keyword',match_type:'matchtype',creative_id:'creative',device:'device',campaign_source:'utm_source',campaign_medium:'utm_medium',ad_group:'utm_content'};Object.keys(map).forEach(function(k){fields[k]=query.get(map[k])||'';});fields.source=fields.gclid||fields.gbraid||fields.wbraid?'google-ads':fields.campaign_source||'website';fields.lead_source=fields.source==='google-ads'?'Google Ads NEMT Page':'Website NEMT Page';if(sms)fields.smsService='yes';
-button.disabled=true;button.textContent='Sending…';session.submitComplete(fields,data.website||'').then(function(response){if(!response.duplicate){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'nemt_quote_form_submit',submission_id:response.submission_id,form_name:'nemt-insurance',lead_source:fields.lead_source});}form.hidden=true;var success=document.getElementById('nemtSuccess');success.hidden=false;success.focus();}).catch(function(error){PinnacleQuote.showFailure(form,error);button.disabled=false;button.textContent='Request My NEMT Quote';});});})();
+<script src="/quote-submission.js"></script>
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('nemtForm');
+  if (!form) return;
+  var api = window.PinnacleQuote;
+  var session = api ? api.createSession({ formKey: 'nemt-insurance', lineOfBusiness: 'commercial' }) : null;
+  var pending = false;
+  if (session) form.querySelector('[type="submit"]').disabled = false;
+  else document.getElementById('nemtUnavailable').hidden = false;
+
+  function attribution() {
+    var query = new URLSearchParams(location.search);
+    var map = {
+      gclid: 'gclid', gbraid: 'gbraid', wbraid: 'wbraid',
+      campaign: 'utm_campaign', campaign_id: 'campaignid',
+      ad_group_id: 'adgroupid', keyword: 'keyword', match_type: 'matchtype',
+      creative_id: 'creative', device: 'device', campaign_source: 'utm_source',
+      campaign_medium: 'utm_medium', ad_group: 'utm_content'
+    };
+    var result = {};
+    Object.keys(map).forEach(function (key) { result[key] = query.get(map[key]) || ''; });
+    result.ad_group = query.get('adgroup') || result.ad_group;
+    var paid = result.gclid || result.gbraid || result.wbraid || /^(cpc|ppc|paidsearch|paid_search|paid-social|paid_social|display)$/i.test(result.campaign_medium);
+    var source = result.campaign_source;
+    if (paid) {
+      result.source = source && !/^google$/i.test(source) ? source.toLowerCase() + '-ads' : 'google-ads';
+      result.lead_source = 'Paid NEMT Page';
+    } else if (source) {
+      result.source = source.toLowerCase();
+      result.lead_source = /^organic$/i.test(result.campaign_medium) ? 'Organic NEMT Page' : 'Website NEMT Page';
+    } else {
+      var host = '';
+      try { host = new URL(document.referrer).hostname; } catch (error) { /* Direct visit. */ }
+      if (/(^|\.)(google\.(?:[a-z]{2,3}|(?:co|com)\.[a-z]{2})|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(host)) {
+        result.source = 'organic-search';
+        result.lead_source = 'Organic NEMT Page';
+      } else {
+        result.source = host && host !== location.hostname ? 'referral' : 'website';
+        result.lead_source = 'Website NEMT Page';
+      }
+    }
+    return result;
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (pending || !form.reportValidity()) return;
+    if (!session) {
+      var unavailable = document.getElementById('nemtUnavailable');
+      unavailable.hidden = false;
+      unavailable.focus();
+      return;
+    }
+    api.clearFailure(form);
+    var data = api.formToObject(form);
+    var button = form.querySelector('[type="submit"]');
+    var sms = data.smsService === 'yes';
+    var fields = Object.assign(attribution(), {
+      firstName: data.firstName, lastName: data.lastName,
+      full_name: data.firstName + ' ' + data.lastName,
+      phone: data.phone, email: data.email, company: data.company, state: data.state,
+      coverage: 'NEMT Insurance', coverage_type: 'NEMT Insurance', line_of_business: 'NEMT Insurance',
+      details: 'Business status: ' + data.status + '; Vehicles: ' + data.vehicles + '; Operation: ' + data.operation,
+      form_depth: 'short', landing_page_variant: 'nemt-insurance',
+      form_page: location.pathname, source_page: location.pathname, page_url: location.href,
+      referrer: document.referrer, submitted_at: new Date().toISOString(),
+      smsServiceConsent: String(sms), smsMarketingConsent: 'false',
+      smsOptInTimestamp: sms ? new Date().toISOString() : '',
+      smsOptInSource: 'NEMT insurance quote form', smsOptInPageUrl: location.href,
+      smsDisclosureVersion: 'nemt-v1'
+    });
+    if (sms) fields.smsService = 'yes';
+    pending = true;
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    session.submitComplete(fields, data.website || '').then(function (response) {
+      if (!response.duplicate) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'nemt_quote_form_submit', submission_id: response.submission_id,
+          form_name: 'nemt-insurance', lead_source: fields.lead_source
+        });
+      }
+      form.hidden = true;
+      var success = document.getElementById('nemtSuccess');
+      success.hidden = false;
+      success.focus();
+    }).catch(function (error) {
+      api.showFailure(form, error);
+      button.disabled = false;
+      button.textContent = 'Request My NEMT Quote';
+    }).finally(function () { pending = false; });
+  });
+})();
 </script>
 </body>
 </html>
