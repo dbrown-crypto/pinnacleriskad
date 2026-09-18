@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you.html
 
 Sitemap: https://pinnacleriskad.com/sitemap.xml
