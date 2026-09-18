@@ -2,10 +2,13 @@
 
 Source: `pinnacleriskad.com Site Audit.pdf`, September 18, 2026 (25 pages).
 Baseline: `18b5adad74a048a622c3a93965c5c0a561285c52` on `main`.
-Working branch: `audit/2026-09-18-phase-1b` (based on the local Phase 1A commits).
-Status: Phase 1A pushed as draft PR #15. The approved Phase 1B lookup/NEMT slice is implemented, tested, and committed locally; not pushed or deployed. Other work remains open unless stated otherwise.
+Release: Phase 1A and Phase 1B merged to `main` and verified live on September 18, 2026. Application release commit: `4b8d15455373d32f5f19845fd9434ad07914ab16`.
 
-Delivery history: automatic approval review initially rejected the Phase 1A push. The owner then explicitly approved pushing Phase 1A without merging and implementing the four disclosed paid-page changes. Terminal Git lacked credentials, so Phase 1A was uploaded through the connected GitHub account in the same three logical commits. [Draft PR #15](https://github.com/dbrown-crypto/pinnacleriskad/pull/15) has remote head `d237a9a17bf6255ae81fc76fab90fde01fa08a38`; API-created commit IDs differ from the equivalent local commits. No merge or deployment has occurred. `AUDIT_PHASE_1A.patch` contains its code diff; `AUDIT_PHASE_1B.patch` contains the newly approved slice and focused tests.
+- [Phase 1A diff / PR #15](https://github.com/dbrown-crypto/pinnacleriskad/pull/15/files): crawl controls, dead social links and four pages' metadata. Merge `ffd8b138b0c5ecf96fef7d840dd9ea86ea23c9ae`.
+- [Phase 1B diff / PR #16](https://github.com/dbrown-crypto/pinnacleriskad/pull/16/files): resilient DOT lookup and verified NEMT Ads conversion. Merge `4b8d15455373d32f5f19845fd9434ad07914ab16`.
+- Individual remote rollback commits: `7ca9699` (lookup), `d3d2400` (NEMT), `601e449` (DOT payload safeguard). Phase 1A code commits: `b83bbad` (crawl/links) and `0b2999b` (metadata).
+
+Earlier verification sections below record what was known at each stage; the final release verification section supersedes pre-deployment status statements. The owner explicitly approved release after checks. Code diffs remain available as `AUDIT_PHASE_1A.patch` and `AUDIT_PHASE_1B.patch`. Other audit work is still open unless explicitly closed.
 
 ## Verified architecture
 
@@ -43,7 +46,7 @@ These checks do not certify live end-to-end delivery, current indexation, mobile
 ### Owner review before the next phase
 
 1. Review the GitHub diff and the four revised metadata descriptions.
-2. In a checkout of this branch, run `git diff 18b5ada...HEAD --check` and `git diff 18b5ada...HEAD -- robots.txt landlord.html quote.html commercial-property-insurance-georgia.html commercial-property-insurance-florida.html privacy-policy.html terms-of-service.html`.
+2. In a checkout of this branch, run `git diff 18b5ada...HEAD --check -- . ":(exclude)*.patch"` and `git diff 18b5ada...HEAD -- robots.txt landlord.html quote.html commercial-property-insurance-georgia.html commercial-property-insurance-florida.html privacy-policy.html terms-of-service.html`.
 3. Run `python -m http.server 8080 --bind 127.0.0.1` and open the modified pages locally. Check legal-page footers at desktop and mobile widths; inspect page source for complete descriptions and matching social metadata. Do not submit local forms to production.
 4. Review/merge this phase separately from paid-page changes. After deploy, check `/robots.txt` no longer blocks thank-you, then view `/thank-you.html` source to confirm `noindex` remains. Inspect changed metadata on the live pages.
 
@@ -111,7 +114,7 @@ From this branch (Python dependencies are in `requirements.txt`):
 ```bash
 node --test tests/dot-lookup.test.js tests/trucking-landing.test.js tests/nemt-page.test.mjs tests/quote-submission.test.js tests/netlify-quote-submit.test.mjs
 python -m unittest discover -s tests -p test_dot_lookup.py -v
-git diff 75ede84...HEAD --check -- . ":(exclude)*.patch"
+git diff ffd8b138...HEAD --check -- . ":(exclude)*.patch"
 ```
 
 Before merging/deploying: review `AUDIT_PHASE_1B.patch`; confirm the intended Ads conversion destination and campaign goals. The owner has now restored the Render key, as verified below. Confirm the classic layout at 375px and desktop in a browser. On a controlled preview with production submissions blocked, mock/block `/dot-lookup`, enter a DOT, and verify automatic manual entry, preserved DOT, and a usable retry button. Do not weaken production CORS to run preview tests. After deployment, follow the paid-page checklist at the end, including one controlled successful lead and negative cases.
@@ -216,3 +219,23 @@ The release rerun passed 60 Node and 3 Python tests. Git whitespace verification
 PR #16 preview confirmed the detailed form moves to Contact & Business after a CORS-blocked lookup, focuses the business field, retains the visible DOT, and enables retry. The shared motor-carrier form also retains its visible DOT and focuses manual entry; the no-DOT button works after initialization. The NEMT quote CTA reaches the unchanged form. Desktop visual checks passed. Production CORS remains unchanged; no quote was submitted.
 
 Automatic merge review initially rejected Phase 1B because the browser's hidden-field inspection returned an empty DOT payload mirror while the visible field retained the number. The release is held until resolved. A defensive fallback now restores an emptied mirror from the requested DOT, preserves any newer populated value, and displays the actual retained payload number in the manual-entry message. Two added tests cover those cases; all 62 Node tests pass. The updated preview must display the expected saved number before retrying release. Mobile verification remains an owner check; the available cloud browser has no advertised viewport-resize API.
+
+## Final Phase 1A/1B release verification
+
+- GitHub Pages run 35381731766 succeeded for release `4b8d154`; all seven Phase 1A files and both edited paid HTML pages plus the shared lookup script match the repository on production.
+- All six protected commercial URLs return HTTP 200 without changing their URLs. Their canonicals remain correct, no accidental robots noindex was found, and no HTTP `src` or form action was found. This is not a claim that every third-party network request was inspected.
+- The DOT safeguard passed the updated preview: the visible confirmation reported USDOT `4300421` from the retained form payload field, Contact & Business was open, and retry was enabled. Automatic approval review then accepted the merge.
+- Render's superseded Phase 1A build stalled during repository cloning. It was canceled without stopping the live service; the queued Phase 1B deployment (`dep-damoc3jlp5dc73bsikig`) then completed successfully in 54.4 seconds, with source `4b8d154` marked Live. No hosting plan or environment secret was changed.
+- Post-release Render health returned HTTP 200, with both FMCSA and RentCast configured. Live browser checks of detailed trucking, bobtail, and motor-carrier lookup returned DAWSON HAULING LLC and one power unit for USDOT 4300421. The final motor-carrier check ran after the new backend became Live.
+- Live NEMT loads with its quote button enabled and the released Ads loader/success-only event in the source. The exact action/label and campaign website-lead goal were verified through the connected Google Ads account.
+- The production Netlify quote endpoint answered OPTIONS with HTTP 204 and the correct production CORS origin. This verifies preflight availability, not delivery. Netlify serves the released shared lookup script; HTML rewriting means its alternate-domain HTML is not byte-identical to GitHub Pages.
+- Final automated coverage: 62 Node tests plus 3 Python tests. Failure/duplicate behavior and conversion dispatch were tested with controlled fixtures. No production lead was submitted, no test conversion was generated, and no Ads settings were changed.
+
+### Owner acceptance before the next phase
+
+1. On a phone, open the six protected URLs listed above. Confirm usable form layout, quote CTAs and phone links; test a known DOT and the no-DOT route. Mobile visual verification remains open.
+2. In a coordinated test, send one clearly identified NEMT test request, confirm one GHL record with the intended source/submission ID and visible success, and verify the conversion request using Tag Assistant. Use test contact details you control and remove/mark the resulting CRM test record. Confirm subsequent Ads reporting; code-level dispatch alone does not certify ingestion.
+3. Check a controlled trucking submission for delivery and attribution. Existing quote-delivery code was unchanged and its tests passed, but production CRM delivery was not exercised in this pass.
+4. Monitor landing-page errors, traffic and leads over the next 24-48 hours. Read-only pre-release campaign metrics were inspected; account performance data was not committed to this public repository.
+
+Remaining work: Render Free cold starts; GA4 configuration; mobile font/video/phone improvements; remaining metadata/schema; image work; COI landing page and commercial architecture; the external account/content items above. Each next paid-page edit still requires disclosure of its exact URL and proposed change before implementation.
