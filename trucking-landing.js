@@ -64,15 +64,29 @@
     if (!clean) return Promise.reject(new Error('Enter a USDOT number.'));
     var request = fetchFn || root.fetch;
     if (typeof request !== 'function') return Promise.reject(new Error('Lookup is unavailable.'));
-    return request(LOOKUP_ENDPOINT + encodeURIComponent(clean), {
-      headers: { Accept: 'application/json' }
+    var controller = typeof root.AbortController === 'function' ? new root.AbortController() : null;
+    var timer;
+    var deadline = new Promise(function (_, reject) {
+      timer = root.setTimeout(function () {
+        reject(new Error('Lookup timed out. Continue with your business details.'));
+        if (controller) controller.abort();
+      }, 6000);
+    });
+    var lookup = Promise.resolve().then(function () {
+      return request(LOOKUP_ENDPOINT + encodeURIComponent(clean), {
+        headers: { Accept: 'application/json' },
+        signal: controller ? controller.signal : undefined
+      });
     }).then(function (response) {
       if (!response.ok) throw new Error('Lookup service rejected the request.');
       return response.json();
-    }).then(function (payload) {
+    });
+    return Promise.race([lookup, deadline]).then(function (payload) {
       var carrier = safeCarrier(payload);
       if (!carrier) throw new Error('No carrier record was returned.');
       return carrier;
+    }).finally(function () {
+      root.clearTimeout(timer);
     });
   }
 
@@ -116,7 +130,7 @@
         show(result, true);
         if (business) business.focus();
       }).catch(function () {
-        text(error, 'We could not retrieve that record. Check the number or continue without it.');
+        text(error, 'We could not retrieve that record. You can enter your business name below and continue.');
         if (business) business.focus();
       }).finally(function () {
         button.disabled = false;

@@ -2,17 +2,17 @@
 
 Source: `pinnacleriskad.com Site Audit.pdf`, September 18, 2026 (25 pages).
 Baseline: `18b5adad74a048a622c3a93965c5c0a561285c52` on `main`.
-Working branch: `audit/2026-09-18-phase-1a`.
-Status: Phase 1A implemented and locally verified; not deployed. All other work below remains open unless stated otherwise.
+Working branch: `audit/2026-09-18-phase-1b` (based on the local Phase 1A commits).
+Status: Phase 1A pushed as draft PR #15. The approved Phase 1B lookup/NEMT slice is implemented, tested, and committed locally; not pushed or deployed. Other work remains open unless stated otherwise.
 
-Delivery status: automatic approval review rejected the attempted GitHub branch push because explicit permission to push was not established. Commits remain local; no PR or production deployment was created. Owner approval is required to push this review branch. `AUDIT_PHASE_1A.patch` contains the complete code diff against the baseline, excluding this register.
+Delivery history: automatic approval review initially rejected the Phase 1A push. The owner then explicitly approved pushing Phase 1A without merging and implementing the four disclosed paid-page changes. Terminal Git lacked credentials, so Phase 1A was uploaded through the connected GitHub account in the same three logical commits. [Draft PR #15](https://github.com/dbrown-crypto/pinnacleriskad/pull/15) has remote head `d237a9a17bf6255ae81fc76fab90fde01fa08a38`; API-created commit IDs differ from the equivalent local commits. No merge or deployment has occurred. `AUDIT_PHASE_1A.patch` contains its code diff; `AUDIT_PHASE_1B.patch` contains the newly approved slice and focused tests.
 
 ## Verified architecture
 
 - Root HTML files contain the content, inline CSS, repeated headers/footers, and page scripts. There is no package manifest, frontend framework, template engine, or shared header partial in the tracked tree.
 - GitHub Pages deploys `main`; the latest successful Pages run at inspection was 35299340398 for the baseline commit. `CNAME` specifies `pinnacleriskad.com`; `.nojekyll` bypasses Jekyll processing.
 - `quote-submission.js` delivers to `https://pinnacleriskadvisors.net/api/quote-submit`, implemented in `netlify/functions/quote-submit.mjs`. The Netlify dashboard's deployment configuration was not inspected.
-- `property_lookup.py` contains both RentCast and FMCSA handlers. `render.yaml` declares a free Python service, server-only `RENTCAST_API_KEY` and `FMCSA_WEB_KEY`, and the uvicorn start command. Live instance configuration still needs dashboard confirmation.
+- `property_lookup.py` contains both RentCast and FMCSA handlers. `render.yaml` declares a free Python service, server-only `RENTCAST_API_KEY` and `FMCSA_WEB_KEY`, and the uvicorn start command. Subsequent Render dashboard inspection confirmed the live `pinnacleriskad` service uses this repository's `main` branch and the Free instance plan.
 - `_redirects` is Netlify syntax, not an effective GitHub Pages redirect mechanism. No URL is renamed or consolidated in this phase. A future slug change needs a real hosting-level 301, not just a new line in this file.
 - Existing Node tests live in `tests/`; no dependencies are required for the core Node test suites.
 
@@ -51,8 +51,8 @@ These checks do not certify live end-to-end delivery, current indexation, mobile
 
 | Item | Work | Current state / dependency |
 | --- | --- | --- |
-| 1 | Repair existing USDOT lookup | Missing key confirmed live. Backend status handling, six-second client timeout, and graceful manual entry remain open; paid-page approval required. |
-| 2 | NEMT Ads conversion | Confirmed absent in source; existing `nemt_quote_form_submit` dataLayer event is present. Add Ads delivery only after authoritative success and deduplicate by submission ID; approval required. |
+| 1 | Repair existing USDOT lookup | Owner restored the Render key; live carrier lookup now verified on all three consuming pages. Six-second timeouts/manual fallback and missing-key HTTP 503 remain local Phase 1B changes. Hosting/cold-start decision remains open. |
+| 2 | NEMT Ads conversion | Success-only Ads call and submission-ID deduplication implemented and tested locally in Phase 1B. Ads account destination/goals and live reporting still require confirmation. |
 | 3 | Sitewide GA4 | No GA4 destination found in HTML. Confirm measurement ID and account configuration before adding; coordinate with existing Ads tags and avoid duplicate pageviews. |
 | 4 | Render-blocking fonts | Pending technical phase; actual source also uses DM Sans, so preserve actual families/weights rather than copying the audit's font list blindly. Paid-page approval required for those pages. |
 | 5 | Mobile homepage video | Pending technical phase; serve an optimized still on mobile and verify the video is not downloaded. No redesign required. |
@@ -72,7 +72,7 @@ These checks do not certify live end-to-end delivery, current indexation, mobile
 
 Additional audit findings retained: auto-quote JavaScript-disabled fallback (page 6); trucking keyboard/main/heading/contrast fixes (page 8); contextual quote CTAs, trust content, service-state consistency, lead-magnet click tracking, and About page (pages 16-18); portal login indexing and navigation (pages 18-19). These are pending, not silently closed.
 
-## Exact paid-page proposal requiring approval
+## Paid-page scope approved by the owner
 
 The current audit/source identifies the four first URLs below. The last two are conservatively protected because the user includes core trucking and owner-operator/new-authority traffic. Google Ads final-URL assignments, including semi/tow ad groups, have not been independently verified; do not infer assignments from ad display paths.
 
@@ -86,6 +86,48 @@ The current audit/source identifies the four first URLs below. The last two are 
 | https://pinnacleriskad.com/trucking.html | No change in the next slice. Later: metadata, fonts, schema, internal linking; separate disclosed scope. |
 
 Files for this next slice: `property_lookup.py`, `trucking-landing.js`, `trucking-quote.html`, `nemt-insurance.html`, and focused lookup/conversion regression tests. Render environment changes remain external. Do not change `render.yaml` to a paid plan without an explicit hosting decision.
+
+## Phase 1B implementation and review
+
+Owner approval covers the four URLs above and backend support. Local code changes:
+
+- `trucking-landing.js`: a six-second deadline covers both the fetch and response body, cancels the request when AbortController exists, and still releases the UI when it does not. Failure preserves the entered DOT and focuses manual business-name entry. Late responses cannot overwrite entries after the deadline.
+- `trucking-quote.html`: the equivalent six-second deadline; automatic move to contact/business entry only if the visitor remains on the lookup step; visible manual-entry explanation and retained DOT. The unsupported three-second promise is replaced with a manual-entry option. Existing no-DOT functionality remains. No URL, form-field, or tracking-script order change.
+- `property_lookup.py`: missing FMCSA configuration now produces HTTP 503 with the existing JSON error shape and `Cache-Control: no-store`. Valid carrier response and CORS behavior are preserved. The code cannot supply the missing secret.
+- `nemt-insurance.html`: add the existing Google Ads account loader and a conversion after confirmed submission, using the returned submission ID as transaction ID. Existing duplicate suppression and `nemt_quote_form_submit` event remain. An absent or throwing analytics tag cannot change delivered-lead confirmation into a form error. No personal fields are added to the conversion payload.
+
+### Phase 1B verification performed
+
+60 Node tests and 3 Python ASGI tests passed. Scenarios include success, no record, missing configuration, offline/malformed responses, six-second timeout with/without AbortController, stalled response bodies, late responses after manual entry, a visitor already on a later step, duplicate/pending/failed NEMT submissions, tag failure, attribution, and existing quote-delivery/CRM validation.
+
+Static comparison confirms unchanged input/select/textarea/form markup, canonical/link elements, phone destinations, JSON-LD, and existing external script order on the two edited HTML pages. Shared quote delivery, other protected paid-page HTML, and `render.yaml` remain byte-identical. JavaScript syntax and Git whitespace checks passed.
+
+The browser visual check could not run because the runtime has no installed browser executable. DOM tests use controlled fixtures, not a real browser. No production form was submitted; no live conversion or Render change was made. No live performance improvement or end-to-end delivery is claimed.
+
+### Repeatable owner checks for Phase 1B
+
+From this branch (Python dependencies are in `requirements.txt`):
+
+```bash
+node --test tests/dot-lookup.test.js tests/trucking-landing.test.js tests/nemt-page.test.mjs tests/quote-submission.test.js tests/netlify-quote-submit.test.mjs
+python -m unittest discover -s tests -p test_dot_lookup.py -v
+git diff 75ede84...HEAD --check -- . ":(exclude)*.patch"
+```
+
+Before merging/deploying: review `AUDIT_PHASE_1B.patch`; confirm the intended Ads conversion destination and campaign goals. The owner has now restored the Render key, as verified below. Confirm the classic layout at 375px and desktop in a browser. On a controlled preview with production submissions blocked, mock/block `/dot-lookup`, enter a DOT, and verify automatic manual entry, preserved DOT, and a usable retry button. Do not weaken production CORS to run preview tests. After deployment, follow the paid-page checklist at the end, including one controlled successful lead and negative cases.
+
+### Live follow-up: FMCSA lookup restored
+
+After the owner reported saving the key and deploying in Render:
+
+- Live health returned HTTP 200 with `fmcsa_configured: true` and `rentcast_configured: true`.
+- A real request for DOT `4300421` returned `DAWSON HAULING LLC`, DOT `4300421`, and `totalPowerUnits: 1`. CORS permits `https://pinnacleriskad.com`.
+- Using the shared cloud browser, the live motor-carrier and bobtail pages both filled the business-name input and displayed `DAWSON HAULING LLC · 1 power unit`.
+- The live `trucking-quote.html` lookup displayed the same company, the Power Units record, and its company-confirmation button.
+- No quote was submitted, no lead or lead conversion was created, and no secret value was read or recorded.
+- The initial concurrent health/lookup requests took about 15-16 seconds from the test environment. This does not by itself prove a cold start; loading performance remains an open concern.
+
+This verifies the owner's live environment fix and the current production lookup UI. It does not deploy or certify the unmerged Phase 1A/1B code changes. The earlier local browser-executable limitation applied to local preview testing; the shared cloud browser subsequently became available for this live check.
 
 ## Running outside-the-repository action list
 
@@ -158,3 +200,19 @@ This was described by the owner as planned, but the audit and repository already
 9. Check Tag Assistant and browser console/network errors; verify original analytics/call/EmailJS/GHL-related scripts remain in their intended order. Confirm GA4 only if it was configured in that phase.
 10. Repeat mobile performance measurements under comparable settings for homepage, trucking quote, motor carrier, and NEMT after asset work. Confirm requested performance changes actually happen in the network panel.
 11. Monitor Ads landing-page errors, clicks, spend, leads, and CRM delivery for 24-48 hours; compare weekly conversion rate/cost with a suitable baseline. Check Search Console crawl/index status after recrawl. Roll back the specific commit if a regression appears.
+
+## Release verification: September 18, 2026
+
+The owner approved release of the prepared Phase 1A/1B fixes after checks. Phase 1A merged via PR #15 at `ffd8b138b0c5ecf96fef7d840dd9ea86ea23c9ae`.
+
+The connected Google Ads account confirms that `AW-18335963415/EQMqCIG2sNMcEJeyoqdE` belongs to enabled primary website action `Trucking Quote Form Submit` (7691049729), counting one per click. The NEMT ad group belongs to `Trucking - High Intent Search`, whose website lead goal is biddable. The approved reuse is consistent with this account configuration. No Ads settings were changed; no duplicate GA4-imported action appeared among enabled actions. Actual conversion receipt after deployment remains a separate live check.
+
+Enabled ad final URLs were verified directly: owner-operator/new authority uses `/new-authority-trucking-insurance.html`; vehicle-specific uses `/trucking.html`; core trucking uses `/trucking-quote.html`; NEMT uses `/nemt-insurance.html`. These enabled ads have no mobile final-URL override. All six protected pages remain in the deployment checklist, including motor carrier and bobtail.
+
+The release rerun passed 60 Node and 3 Python tests. Git whitespace verification excludes saved `.patch` artifacts, whose blank context lines are valid unified-diff syntax; application source and documentation are checked normally. The discovered Netlify deploy preview permits a real browser check without changing production CORS.
+
+### Preview release gate follow-up
+
+PR #16 preview confirmed the detailed form moves to Contact & Business after a CORS-blocked lookup, focuses the business field, retains the visible DOT, and enables retry. The shared motor-carrier form also retains its visible DOT and focuses manual entry; the no-DOT button works after initialization. The NEMT quote CTA reaches the unchanged form. Desktop visual checks passed. Production CORS remains unchanged; no quote was submitted.
+
+Automatic merge review initially rejected Phase 1B because the browser's hidden-field inspection returned an empty DOT payload mirror while the visible field retained the number. The release is held until resolved. A defensive fallback now restores an emptied mirror from the requested DOT, preserves any newer populated value, and displays the actual retained payload number in the manual-entry message. Two added tests cover those cases; all 62 Node tests pass. The updated preview must display the expected saved number before retrying release. Mobile verification remains an owner check; the available cloud browser has no advertised viewport-resize API.

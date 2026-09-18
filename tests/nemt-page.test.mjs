@@ -9,9 +9,10 @@ const inlineScripts = [...page.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script
 const source = inlineScripts.at(-1)[1];
 const flush = () => new Promise(resolve => setImmediate(resolve));
 
-function fixture({ query = '', referrer = '', apiAvailable = true, consent = false, valid = true, send } = {}) {
+function fixture({ query = '', referrer = '', apiAvailable = true, consent = false, valid = true, tracking = true, trackingThrows = false, send } = {}) {
   let onSubmit;
   const sent = [];
+  const conversions = [];
   const button = { disabled: true };
   const success = { hidden: true, focus() {} };
   const unavailable = { hidden: true, focus() {} };
@@ -26,13 +27,16 @@ function fixture({ query = '', referrer = '', apiAvailable = true, consent = fal
     clearFailure() {}, showFailure(form, error) { failures.push(error); }
   };
   const context = {
-    window: { ...(apiAvailable ? { PinnacleQuote: api } : {}) },
+    window: {
+      ...(apiAvailable ? { PinnacleQuote: api } : {}),
+      ...(tracking ? { gtag(...args) { if (trackingThrows) throw new Error('Tag blocked'); conversions.push(args); } } : {})
+    },
     document: { referrer, getElementById: id => ({ nemtForm: form, nemtSuccess: success, nemtUnavailable: unavailable })[id] },
     location: { pathname: '/nemt-insurance.html', hostname: 'pinnacleriskad.com', href: 'https://pinnacleriskad.com/nemt-insurance.html' + query, search: query },
     URLSearchParams, URL, Date
   };
   vm.runInNewContext(source, context);
-  return { sent, button, success, unavailable, failures, form, context, submit() { let prevented = false; onSubmit({ preventDefault() { prevented = true; } }); assert.ok(prevented); return flush(); } };
+  return { sent, conversions, button, success, unavailable, failures, form, context, submit() { let prevented = false; onSubmit({ preventDefault() { prevented = true; } }); assert.ok(prevented); return flush(); } };
 }
 
 test('NEMT content has valid scripts, matching visible FAQs, canonical URL and only brand fonts', () => {
@@ -48,20 +52,62 @@ test('NEMT content has valid scripts, matching visible FAQs, canonical URL and o
 
 test('invalid input and missing delivery script never send or show success', async () => {
   const invalid = fixture({ valid: false }); await invalid.submit(); assert.equal(invalid.sent.length, 0);
+  assert.equal(invalid.conversions.length, 0);
   const missing = fixture({ apiAvailable: false }); await missing.submit(); assert.equal(missing.sent.length, 0); assert.equal(missing.success.hidden, true); assert.equal(missing.unavailable.hidden, false); assert.equal(missing.button.disabled, true);
+  assert.equal(missing.conversions.length, 0);
 });
 
 test('failed delivery retains the form and permits a successful retry', async () => {
   let attempt = 0;
   const f = fixture({ send: () => { if (!attempt++) throw new Error('offline'); return { submission_id: 'test' }; } });
   await f.submit(); assert.equal(f.success.hidden, true); assert.equal(f.form.hidden, false); assert.equal(f.button.disabled, false); assert.equal(f.failures.length, 1); assert.equal(f.context.window.dataLayer, undefined);
+  assert.equal(f.conversions.length, 0);
   await f.submit(); assert.equal(f.success.hidden, false); assert.equal(f.form.hidden, true); assert.equal(f.context.window.dataLayer.length, 1);
+  assert.equal(f.conversions.length, 1);
 });
 
 test('rapid repeated submission sends one request and suppresses duplicate success events', async () => {
   let complete;
   const f = fixture({ send: () => new Promise(resolve => { complete = resolve; }) });
   await f.submit(); await f.submit(); assert.equal(f.sent.length, 1); complete({ submission_id: 'test', duplicate: true }); await flush(); assert.equal(f.context.window.dataLayer, undefined);
+  assert.equal(f.conversions.length, 0);
+});
+
+test('NEMT emits one Ads conversion only after confirmed delivery using the submission ID', async () => {
+  let complete;
+  const f = fixture({ send: () => new Promise(resolve => { complete = resolve; }) });
+  await f.submit(); await f.submit();
+  assert.equal(f.conversions.length, 0); assert.equal(f.sent.length, 1);
+  complete({ submission_id: 'confirmed-nemt-lead' }); await flush();
+  assert.equal(f.conversions.length, 1);
+  const [kind, event, detail] = f.conversions[0];
+  assert.equal(kind, 'event'); assert.equal(event, 'conversion');
+  assert.equal(detail.send_to, 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE');
+  assert.equal(detail.transaction_id, 'confirmed-nemt-lead');
+  assert.deepEqual(Object.keys(detail).sort(), ['send_to', 'transaction_id']);
+  assert.equal(f.context.window.dataLayer[0].event, 'nemt_quote_form_submit');
+  assert.equal(f.success.hidden, false);
+});
+
+test('missing or throwing Ads tag cannot turn a delivered lead into a failed form', async () => {
+  for (const options of [{ tracking: false }, { trackingThrows: true }]) {
+    const f = fixture(options); await f.submit();
+    assert.equal(f.sent.length, 1); assert.equal(f.success.hidden, false);
+    assert.equal(f.form.hidden, true); assert.equal(f.failures.length, 0);
+    assert.equal(f.context.window.dataLayer[0].event, 'nemt_quote_form_submit');
+  }
+});
+
+test('Ads bootstrap preserves an existing queue and uses the existing account once', () => {
+  const bootstrap = inlineScripts.find(match => match[1].includes("gtag('config'"))[1];
+  const existing = { event: 'existing_event' };
+  const context = { dataLayer: [existing], Date }; context.window = context;
+  vm.runInNewContext(bootstrap, context);
+  assert.equal(context.dataLayer[0], existing);
+  assert.equal(context.dataLayer.length, 3);
+  assert.equal(context.dataLayer[2][0], 'config');
+  assert.equal(context.dataLayer[2][1], 'AW-18335963415');
+  assert.equal((page.match(/src="https:\/\/www.googletagmanager.com\/gtag\/js\?id=AW-18335963415"/g) || []).length, 1);
 });
 
 test('click IDs and paid UTMs identify paid traffic; search referrers identify organic traffic', async () => {

@@ -9,6 +9,15 @@
   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <!-- Google Ads: preserve the existing account used by the trucking pages. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18335963415"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18335963415');
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -944,6 +953,15 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Es
     button.textContent = 'Sending…';
     session.submitComplete(fields, data.website || '').then(function (response) {
       if (!response.duplicate) {
+        // Analytics failure must never turn a delivered lead into a form error.
+        try {
+          if (typeof window.gtag === 'function' && response.submission_id) {
+            window.gtag('event', 'conversion', {
+              send_to: 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE',
+              transaction_id: response.submission_id
+            });
+          }
+        } catch (trackingError) { /* Submission success remains authoritative. */ }
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: 'nemt_quote_form_submit', submission_id: response.submission_id,

@@ -1,0 +1,492 @@
+diff --git a/nemt-insurance.html b/nemt-insurance.html
+index 1bf1f39..6e32708 100644
+--- a/nemt-insurance.html
++++ b/nemt-insurance.html
+@@ -9,6 +9,15 @@
+   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+   <link rel="icon" type="image/x-icon" href="favicon.ico">
+ 
++  <!-- Google Ads: preserve the existing account used by the trucking pages. -->
++  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18335963415"></script>
++  <script>
++    window.dataLayer = window.dataLayer || [];
++    function gtag(){dataLayer.push(arguments);}
++    gtag('js', new Date());
++    gtag('config', 'AW-18335963415');
++  </script>
++
+   <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+@@ -944,6 +953,15 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Es
+     button.textContent = 'Sending…';
+     session.submitComplete(fields, data.website || '').then(function (response) {
+       if (!response.duplicate) {
++        // Analytics failure must never turn a delivered lead into a form error.
++        try {
++          if (typeof window.gtag === 'function' && response.submission_id) {
++            window.gtag('event', 'conversion', {
++              send_to: 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE',
++              transaction_id: response.submission_id
++            });
++          }
++        } catch (trackingError) { /* Submission success remains authoritative. */ }
+         window.dataLayer = window.dataLayer || [];
+         window.dataLayer.push({
+           event: 'nemt_quote_form_submit', submission_id: response.submission_id,
+diff --git a/property_lookup.py b/property_lookup.py
+index bf72b95..32a17a0 100644
+--- a/property_lookup.py
++++ b/property_lookup.py
+@@ -4,6 +4,7 @@ import os
+ import httpx
+ from fastapi import FastAPI, Query
+ from fastapi.middleware.cors import CORSMiddleware
++from fastapi.responses import JSONResponse
+ 
+ app = FastAPI(title="Pinnacle Property Lookup")
+ 
+@@ -107,7 +108,11 @@ async def dot_lookup(dot: str = Query(..., min_length=1, max_length=12)):
+     if not dot_clean:
+         return {"found": False, "error": "Invalid DOT number"}
+     if not FMCSA_WEB_KEY:
+-        return {"found": False, "error": "Server not configured"}
++        return JSONResponse(
++            status_code=503,
++            content={"found": False, "error": "Server not configured"},
++            headers={"Cache-Control": "no-store"},
++        )
+ 
+     async with httpx.AsyncClient(timeout=15) as client:
+         try:
+diff --git a/tests/dot-lookup.test.js b/tests/dot-lookup.test.js
+new file mode 100644
+index 0000000..1652bdd
+--- /dev/null
++++ b/tests/dot-lookup.test.js
+@@ -0,0 +1,146 @@
++const test = require('node:test');
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const vm = require('node:vm');
++
++const landingSource = fs.readFileSync(require.resolve('../trucking-landing.js'), 'utf8');
++const quotePage = fs.readFileSync(require.resolve('../trucking-quote.html'), 'utf8');
++const quoteLookup = quotePage.slice(quotePage.indexOf('async function lookupDOT()'), quotePage.indexOf('function onVinInput('));
++const flush = () => new Promise(resolve => setImmediate(resolve));
++const payload = { content: { carrier: { legalName: 'Example Transport LLC', totalPowerUnits: 2 } } };
++const reply = (body = payload, ok = true) => ({ ok, json: async () => body, text: async () => JSON.stringify(body) });
++
++function node(value = '') {
++  return {
++    value, textContent: '', innerHTML: '', hidden: false, disabled: false, dataset: {},
++    handlers: {}, classes: new Set(), focused: false,
++    focus() { this.focused = true; },
++    addEventListener(type, fn) { this.handlers[type] = fn; },
++    get classList() { return { add: name => this.classes.add(name), remove: name => this.classes.delete(name) }; }
++  };
++}
++
++function fixture(kind, fetchFn, { abort = true, businessName = '', step = 0 } = {}) {
++  const timers = new Map(); let serial = 0; const requests = []; const moves = [];
++  const dot = node('1234567'); const business = node(businessName); const units = node();
++  const button = node(); button.textContent = 'Look Up My DOT';
++  const error = node(); const result = node(); const skip = node(); const manual = node(); manual.hidden = true;
++  const byId = {
++    'usdot-input': dot, 'dot-lookup-btn': button, 'dot-error': error, 'dot-result': result,
++    'dot-result-grid': node(), 'dot-filled-note': node(), 'dot-manual-note': manual, 'dot-confirm': node()
++  };
++  const fields = {
++    '[name="usdot"]': dot, '[name="business_name"]': business, '[name="power_unit_count"]': units,
++    'input[name="business_name"]': business, 'select[name="power_unit_count"]': units,
++    '[data-dot-lookup]': button, '[data-dot-result]': result, '[data-dot-error]': error, '[data-no-dot]': skip,
++    '[type="submit"]': node()
++  };
++  const form = { querySelector: key => fields[key] || null, getAttribute: () => '', parentElement: { querySelector: () => null }, addEventListener() {} };
++  const context = {
++    URLSearchParams, ...(abort ? { AbortController } : {}), wizIdx: step,
++    console: { error() {} },
++    setTimeout(fn, ms) { const id = ++serial; timers.set(id, { fn, ms }); return id; },
++    clearTimeout(id) { timers.delete(id); },
++    fetch(url, options) { requests.push({ url, options }); return fetchFn(url, options); },
++    document: {
++      readyState: 'complete', getElementById: id => byId[id] || null,
++      querySelector: key => fields[key] || null,
++      querySelectorAll: key => key === '.pra-landing-form' ? [form] : []
++    },
++    PinnacleQuote: { createSession: () => ({}) },
++    dotState(state) { context.state = state; }, focusHeroDot() {},
++    wizGo(i) { context.wizIdx = i; moves.push(i); }
++  };
++  vm.runInNewContext(kind === 'landing' ? landingSource : quoteLookup, context);
++  return {
++    context, dot, business, units, button, error, result, skip, manual, timers, requests, moves,
++    start() { return kind === 'landing' ? button.handlers.click() : context.lookupDOT(); },
++    expire() { const entry = [...timers.values()][0]; assert.equal(entry.ms, 6000); entry.fn(); }
++  };
++}
++
++for (const kind of ['landing', 'quote']) {
++  test(`${kind}: successful lookup fills carrier name/units and clears timeout`, async () => {
++    const f = fixture(kind, async () => reply());
++    await f.start(); await flush();
++    assert.equal(f.business.value, 'Example Transport LLC');
++    assert.equal(f.units.value, '2'); assert.equal(f.dot.value, '1234567');
++    assert.equal(f.button.disabled, false); assert.equal(f.timers.size, 0);
++    assert.equal(f.error.textContent, '');
++  });
++
++  test(`${kind}: lookup respects visitor-entered business name`, async () => {
++    const f = fixture(kind, async () => reply(), { businessName: 'My entered name' });
++    await f.start(); await flush(); assert.equal(f.business.value, 'My entered name');
++  });
++
++  for (const [label, fetchFn] of [
++    ['missing configuration', async () => reply({ found: false, error: 'Server not configured' }, false)],
++    ['not found', async () => reply({ content: { carrier: null } })],
++    ['network failure', async () => { throw new Error('offline'); }],
++    ['malformed JSON', async () => ({ ok: true, json: async () => { throw new Error('bad json'); }, text: async () => '<html>' })]
++  ]) {
++    test(`${kind}: ${label} preserves DOT and opens manual entry`, async () => {
++      const f = fixture(kind, fetchFn);
++      await f.start(); await flush();
++      assert.equal(f.dot.value, '1234567'); assert.equal(f.business.focused, true);
++      assert.equal(f.button.disabled, false); assert.equal(f.timers.size, 0);
++      assert.match(f.error.textContent, /business name/);
++      if (kind === 'quote') { assert.deepEqual(f.moves, [1]); assert.equal(f.manual.hidden, false); }
++    });
++  }
++
++  for (const abort of [true, false]) {
++    test(`${kind}: deadline works ${abort ? 'with' : 'without'} AbortController and ignores late success`, async () => {
++      let resolveFetch;
++      const f = fixture(kind, () => new Promise(resolve => { resolveFetch = resolve; }), { abort });
++      const pending = f.start(); await flush(); f.expire(); await pending; await flush();
++      assert.equal(f.button.disabled, false); assert.equal(f.business.focused, true);
++      assert.equal(f.dot.value, '1234567'); assert.equal(f.timers.size, 0);
++      if (abort) assert.equal(f.requests[0].options.signal.aborted, true);
++      f.business.value = 'Manually entered after timeout';
++      resolveFetch(reply()); await flush();
++      assert.equal(f.business.value, 'Manually entered after timeout'); assert.equal(f.units.value, '');
++    });
++  }
++
++  test(`${kind}: timeout covers a stalled response body`, async () => {
++    const f = fixture(kind, async () => ({ ok: true, json: () => new Promise(() => {}), text: () => new Promise(() => {}) }));
++    const pending = f.start(); await flush(); f.expire(); await pending; await flush();
++    assert.equal(f.button.disabled, false); assert.equal(f.business.focused, true);
++  });
++}
++
++test('quote: late failure does not navigate away from a later wizard step', async () => {
++  const f = fixture('quote', async () => reply({}, false), { step: 3 });
++  await f.start(); assert.deepEqual(f.moves, []); assert.equal(f.business.focused, false);
++});
++
++test('quote: failed lookup restores an emptied payload mirror and confirms the retained DOT', async () => {
++  let rejectFetch;
++  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
++  const pending = f.start();
++  f.dot.value = '';
++  rejectFetch(new Error('offline'));
++  await pending;
++  assert.equal(f.dot.value, '1234567');
++  assert.match(f.manual.textContent, /USDOT number \(1234567\) is saved/);
++  assert.deepEqual(f.moves, [1]);
++});
++
++test('quote: fallback retains a newer DOT already present in the payload mirror', async () => {
++  let rejectFetch;
++  const f = fixture('quote', () => new Promise((_, reject) => { rejectFetch = reject; }));
++  const pending = f.start();
++  f.dot.value = '7654321';
++  rejectFetch(new Error('offline'));
++  await pending;
++  assert.equal(f.dot.value, '7654321');
++  assert.match(f.manual.textContent, /USDOT number \(7654321\) is saved/);
++});
++
++test('landing: explicit no-DOT path works without requesting a lookup', () => {
++  const f = fixture('landing', () => { throw new Error('must not fetch'); });
++  f.skip.handlers.click(); assert.equal(f.dot.value, ''); assert.equal(f.business.focused, true);
++  assert.equal(f.requests.length, 0);
++});
+diff --git a/tests/nemt-page.test.mjs b/tests/nemt-page.test.mjs
+index c8adc7a..98a4590 100644
+--- a/tests/nemt-page.test.mjs
++++ b/tests/nemt-page.test.mjs
+@@ -9,9 +9,10 @@ const inlineScripts = [...page.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script
+ const source = inlineScripts.at(-1)[1];
+ const flush = () => new Promise(resolve => setImmediate(resolve));
+ 
+-function fixture({ query = '', referrer = '', apiAvailable = true, consent = false, valid = true, send } = {}) {
++function fixture({ query = '', referrer = '', apiAvailable = true, consent = false, valid = true, tracking = true, trackingThrows = false, send } = {}) {
+   let onSubmit;
+   const sent = [];
++  const conversions = [];
+   const button = { disabled: true };
+   const success = { hidden: true, focus() {} };
+   const unavailable = { hidden: true, focus() {} };
+@@ -26,13 +27,16 @@ function fixture({ query = '', referrer = '', apiAvailable = true, consent = fal
+     clearFailure() {}, showFailure(form, error) { failures.push(error); }
+   };
+   const context = {
+-    window: { ...(apiAvailable ? { PinnacleQuote: api } : {}) },
++    window: {
++      ...(apiAvailable ? { PinnacleQuote: api } : {}),
++      ...(tracking ? { gtag(...args) { if (trackingThrows) throw new Error('Tag blocked'); conversions.push(args); } } : {})
++    },
+     document: { referrer, getElementById: id => ({ nemtForm: form, nemtSuccess: success, nemtUnavailable: unavailable })[id] },
+     location: { pathname: '/nemt-insurance.html', hostname: 'pinnacleriskad.com', href: 'https://pinnacleriskad.com/nemt-insurance.html' + query, search: query },
+     URLSearchParams, URL, Date
+   };
+   vm.runInNewContext(source, context);
+-  return { sent, button, success, unavailable, failures, form, context, submit() { let prevented = false; onSubmit({ preventDefault() { prevented = true; } }); assert.ok(prevented); return flush(); } };
++  return { sent, conversions, button, success, unavailable, failures, form, context, submit() { let prevented = false; onSubmit({ preventDefault() { prevented = true; } }); assert.ok(prevented); return flush(); } };
+ }
+ 
+ test('NEMT content has valid scripts, matching visible FAQs, canonical URL and only brand fonts', () => {
+@@ -48,20 +52,62 @@ test('NEMT content has valid scripts, matching visible FAQs, canonical URL and o
+ 
+ test('invalid input and missing delivery script never send or show success', async () => {
+   const invalid = fixture({ valid: false }); await invalid.submit(); assert.equal(invalid.sent.length, 0);
++  assert.equal(invalid.conversions.length, 0);
+   const missing = fixture({ apiAvailable: false }); await missing.submit(); assert.equal(missing.sent.length, 0); assert.equal(missing.success.hidden, true); assert.equal(missing.unavailable.hidden, false); assert.equal(missing.button.disabled, true);
++  assert.equal(missing.conversions.length, 0);
+ });
+ 
+ test('failed delivery retains the form and permits a successful retry', async () => {
+   let attempt = 0;
+   const f = fixture({ send: () => { if (!attempt++) throw new Error('offline'); return { submission_id: 'test' }; } });
+   await f.submit(); assert.equal(f.success.hidden, true); assert.equal(f.form.hidden, false); assert.equal(f.button.disabled, false); assert.equal(f.failures.length, 1); assert.equal(f.context.window.dataLayer, undefined);
++  assert.equal(f.conversions.length, 0);
+   await f.submit(); assert.equal(f.success.hidden, false); assert.equal(f.form.hidden, true); assert.equal(f.context.window.dataLayer.length, 1);
++  assert.equal(f.conversions.length, 1);
+ });
+ 
+ test('rapid repeated submission sends one request and suppresses duplicate success events', async () => {
+   let complete;
+   const f = fixture({ send: () => new Promise(resolve => { complete = resolve; }) });
+   await f.submit(); await f.submit(); assert.equal(f.sent.length, 1); complete({ submission_id: 'test', duplicate: true }); await flush(); assert.equal(f.context.window.dataLayer, undefined);
++  assert.equal(f.conversions.length, 0);
++});
++
++test('NEMT emits one Ads conversion only after confirmed delivery using the submission ID', async () => {
++  let complete;
++  const f = fixture({ send: () => new Promise(resolve => { complete = resolve; }) });
++  await f.submit(); await f.submit();
++  assert.equal(f.conversions.length, 0); assert.equal(f.sent.length, 1);
++  complete({ submission_id: 'confirmed-nemt-lead' }); await flush();
++  assert.equal(f.conversions.length, 1);
++  const [kind, event, detail] = f.conversions[0];
++  assert.equal(kind, 'event'); assert.equal(event, 'conversion');
++  assert.equal(detail.send_to, 'AW-18335963415/EQMqCIG2sNMcEJeyoqdE');
++  assert.equal(detail.transaction_id, 'confirmed-nemt-lead');
++  assert.deepEqual(Object.keys(detail).sort(), ['send_to', 'transaction_id']);
++  assert.equal(f.context.window.dataLayer[0].event, 'nemt_quote_form_submit');
++  assert.equal(f.success.hidden, false);
++});
++
++test('missing or throwing Ads tag cannot turn a delivered lead into a failed form', async () => {
++  for (const options of [{ tracking: false }, { trackingThrows: true }]) {
++    const f = fixture(options); await f.submit();
++    assert.equal(f.sent.length, 1); assert.equal(f.success.hidden, false);
++    assert.equal(f.form.hidden, true); assert.equal(f.failures.length, 0);
++    assert.equal(f.context.window.dataLayer[0].event, 'nemt_quote_form_submit');
++  }
++});
++
++test('Ads bootstrap preserves an existing queue and uses the existing account once', () => {
++  const bootstrap = inlineScripts.find(match => match[1].includes("gtag('config'"))[1];
++  const existing = { event: 'existing_event' };
++  const context = { dataLayer: [existing], Date }; context.window = context;
++  vm.runInNewContext(bootstrap, context);
++  assert.equal(context.dataLayer[0], existing);
++  assert.equal(context.dataLayer.length, 3);
++  assert.equal(context.dataLayer[2][0], 'config');
++  assert.equal(context.dataLayer[2][1], 'AW-18335963415');
++  assert.equal((page.match(/src="https:\/\/www.googletagmanager.com\/gtag\/js\?id=AW-18335963415"/g) || []).length, 1);
+ });
+ 
+ test('click IDs and paid UTMs identify paid traffic; search referrers identify organic traffic', async () => {
+diff --git a/tests/test_dot_lookup.py b/tests/test_dot_lookup.py
+new file mode 100644
+index 0000000..cc676d3
+--- /dev/null
++++ b/tests/test_dot_lookup.py
+@@ -0,0 +1,42 @@
++"""Exercise the real ASGI route without external FMCSA calls or API keys."""
++import unittest
++from unittest.mock import patch, AsyncMock
++
++import httpx
++import property_lookup
++
++
++class DotLookupTests(unittest.IsolatedAsyncioTestCase):
++    async def test_missing_key_returns_uncacheable_503_with_cors(self):
++        transport = httpx.ASGITransport(app=property_lookup.app)
++        async with httpx.AsyncClient(transport=transport, base_url="https://lookup.test") as client:
++            with patch.object(property_lookup, "FMCSA_WEB_KEY", ""), patch.object(property_lookup.httpx, "AsyncClient") as upstream:
++                response = await client.get("/dot-lookup?dot=1234567", headers={"Origin": "https://pinnacleriskad.com"})
++                upstream.assert_not_called()
++        self.assertEqual(response.status_code, 503)
++        self.assertEqual(response.json(), {"found": False, "error": "Server not configured"})
++        self.assertEqual(response.headers["cache-control"], "no-store")
++        self.assertEqual(response.headers["access-control-allow-origin"], "https://pinnacleriskad.com")
++
++    async def test_configured_lookup_retains_carrier_response_contract(self):
++        carrier = {"legalName": "Example Transport LLC", "totalPowerUnits": 2, "mcNumber": "12345"}
++        transport = httpx.ASGITransport(app=property_lookup.app)
++        async with httpx.AsyncClient(transport=transport, base_url="https://lookup.test") as client:
++            with patch.object(property_lookup, "FMCSA_WEB_KEY", "test-only-key"), patch.object(property_lookup.httpx, "AsyncClient") as upstream:
++                upstream.return_value.__aenter__.return_value.get = AsyncMock(return_value=httpx.Response(200, json={"content": {"carrier": carrier}}))
++                response = await client.get("/dot-lookup?dot=1234567")
++        self.assertEqual(response.status_code, 200)
++        self.assertEqual(response.json()["content"]["carrier"], carrier)
++
++    async def test_no_record_remains_a_normal_lookup_result(self):
++        transport = httpx.ASGITransport(app=property_lookup.app)
++        async with httpx.AsyncClient(transport=transport, base_url="https://lookup.test") as client:
++            with patch.object(property_lookup, "FMCSA_WEB_KEY", "test-only-key"), patch.object(property_lookup.httpx, "AsyncClient") as upstream:
++                upstream.return_value.__aenter__.return_value.get = AsyncMock(return_value=httpx.Response(200, json={"content": {"carrier": None}}))
++                response = await client.get("/dot-lookup?dot=1234567")
++        self.assertEqual(response.status_code, 200)
++        self.assertIsNone(response.json()["content"]["carrier"])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/trucking-landing.js b/trucking-landing.js
+index 32f2e5d..8f900d8 100644
+--- a/trucking-landing.js
++++ b/trucking-landing.js
+@@ -64,15 +64,29 @@
+     if (!clean) return Promise.reject(new Error('Enter a USDOT number.'));
+     var request = fetchFn || root.fetch;
+     if (typeof request !== 'function') return Promise.reject(new Error('Lookup is unavailable.'));
+-    return request(LOOKUP_ENDPOINT + encodeURIComponent(clean), {
+-      headers: { Accept: 'application/json' }
++    var controller = typeof root.AbortController === 'function' ? new root.AbortController() : null;
++    var timer;
++    var deadline = new Promise(function (_, reject) {
++      timer = root.setTimeout(function () {
++        reject(new Error('Lookup timed out. Continue with your business details.'));
++        if (controller) controller.abort();
++      }, 6000);
++    });
++    var lookup = Promise.resolve().then(function () {
++      return request(LOOKUP_ENDPOINT + encodeURIComponent(clean), {
++        headers: { Accept: 'application/json' },
++        signal: controller ? controller.signal : undefined
++      });
+     }).then(function (response) {
+       if (!response.ok) throw new Error('Lookup service rejected the request.');
+       return response.json();
+-    }).then(function (payload) {
++    });
++    return Promise.race([lookup, deadline]).then(function (payload) {
+       var carrier = safeCarrier(payload);
+       if (!carrier) throw new Error('No carrier record was returned.');
+       return carrier;
++    }).finally(function () {
++      root.clearTimeout(timer);
+     });
+   }
+ 
+@@ -116,7 +130,7 @@
+         show(result, true);
+         if (business) business.focus();
+       }).catch(function () {
+-        text(error, 'We could not retrieve that record. Check the number or continue without it.');
++        text(error, 'We could not retrieve that record. You can enter your business name below and continue.');
+         if (business) business.focus();
+       }).finally(function () {
+         button.disabled = false;
+diff --git a/trucking-quote.html b/trucking-quote.html
+index 00a97d9..c752da8 100644
+--- a/trucking-quote.html
++++ b/trucking-quote.html
+@@ -444,7 +444,7 @@ html:not(.pra-js) .pramob-close{display:none}
+       <input type="text" id="hero-dot" inputmode="numeric" autocomplete="off" placeholder="e.g. 1234567" aria-label="USDOT number">
+       <button type="button" class="btn-hero" id="dot-lookup-btn" onclick="heroLookup()">Look Up My DOT</button>
+     </div>
+-    <p class="hero-dot-note">Takes about 3 seconds. <a onclick="skipDOT()">I don't have a DOT number yet</a></p>
++    <p class="hero-dot-note">You can also enter your details manually. <a onclick="skipDOT()">I don't have a DOT number yet</a></p>
+   </div>
+   <div class="hero-cta-row" style="margin-top:26px;">
+     <p class="hero-trust">Serving trucking accounts in <strong>Georgia, Florida, South Carolina, and Texas.</strong></p>
+@@ -543,6 +543,7 @@ html:not(.pra-js) .pramob-close{display:none}
+       <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Contact &amp; <em>Business</em></span><span class="fs-desc">So we can send your quote</span></div>
+       <div class="form-section-body">
+         <p class="step-intro">Just the basics so we can reach you with your quote. Anything we pulled from FMCSA is already filled in. Edit it if it's out of date.</p>
++        <p class="step-intro" id="dot-manual-note" role="status" hidden></p>
+         <div class="fgrid fgrid-2">
+           <div class="field"><label>Primary Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Please enter your name.</span></div>
+           <div class="field"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" required><span class="hint">Mobile preferred so we can text your quote</span><span class="field-err">Please enter a valid 10-digit phone number.</span></div>
+@@ -1050,19 +1051,27 @@ async function lookupDOT() {
+   var resultGrid= document.getElementById('dot-result-grid');
+   var filledNote= document.getElementById('dot-filled-note');
+   var errorBox  = document.getElementById('dot-error');
++  var manualNote = document.getElementById('dot-manual-note');
++  if (btn.disabled) return;
+   var dot = dotInput.value.trim().replace(/\D/g, '');
+   if (!dot) { errorBox.textContent = 'Please enter a USDOT number first.'; dotState('dot-empty'); focusHeroDot(); return; }
+   var btnText = btn.textContent;
+   btn.textContent = 'Looking up…';
+   btn.disabled = true;
+   errorBox.textContent = '';
++  manualNote.hidden = true;
+   resultBox.classList.remove('show');
+   var backendUrl = 'https://pinnacleriskad.onrender.com/dot-lookup?dot=' + dot;
++  var controller = typeof AbortController === 'function' ? new AbortController() : null;
++  var timer;
+   function validCarrier(data) {
+     return data && data.content && data.content.carrier ? data : null;
+   }
+   async function fetchBackend() {
+-    var res = await fetch(backendUrl, { headers: { 'Accept': 'application/json' } });
++    var res = await fetch(backendUrl, {
++      headers: { 'Accept': 'application/json' },
++      signal: controller ? controller.signal : undefined
++    });
+     var text = await res.text();
+     if (!res.ok) throw new Error('DOT lookup service rejected the request');
+     var data = JSON.parse(text);
+@@ -1071,7 +1080,13 @@ async function lookupDOT() {
+     return ok;
+   }
+   try {
+-    var json = await fetchBackend();
++    var deadline = new Promise(function (_, reject) {
++      timer = setTimeout(function () {
++        reject(new Error('DOT lookup timed out'));
++        if (controller) controller.abort();
++      }, 6000);
++    });
++    var json = await Promise.race([fetchBackend(), deadline]);
+     var c = json.content.carrier;
+     var fields = [];
+     if (c.legalName)          fields.push({ label: 'Legal Name',         value: c.legalName });
+@@ -1131,9 +1146,20 @@ async function lookupDOT() {
+     dotState('dot-found');
+   } catch (err) {
+     dotState('dot-empty');
+-    errorBox.innerHTML = 'We couldn\'t pull that carrier record right now. Double-check the number and try again, or just <a href="#" onclick="wizNext();return false;" style="color:var(--navy);font-weight:600;">continue without it</a> and we\'ll look it up on our end.';
++    // Keep the form payload populated even if the hidden mirror was cleared while waiting.
++    if (!dotInput.value) dotInput.value = dot;
++    var fallbackMessage = 'We could not retrieve your carrier record. Your USDOT number (' + dotInput.value + ') is saved. Enter your business name to continue.';
++    errorBox.textContent = fallbackMessage;
++    manualNote.textContent = fallbackMessage;
++    manualNote.hidden = false;
++    if (wizIdx === 0) {
++      wizGo(1, true);
++      var businessInput = document.querySelector('input[name="business_name"]');
++      if (businessInput) businessInput.focus();
++    }
+     console.error('DOT lookup error:', err);
+   } finally {
++    clearTimeout(timer);
+     btn.textContent = btnText;
+     btn.disabled = false;
+   }
