@@ -76,6 +76,11 @@ nav{background:var(--navy);display:flex;align-items:center;justify-content:space
 .field input,.field select,.field textarea{width:100%;border:1px solid var(--border);border-radius:4px;padding:10px 13px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--text);background:var(--white);outline:none;transition:border-color 0.15s,box-shadow 0.15s;appearance:none;-webkit-appearance:none;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,78,0.12);}
 .field .hint{font-size:10.5px;color:var(--muted);line-height:1.5;font-style:italic;}
+.garaging-fields{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);}
+.garaging-fields[hidden]{display:none;}
+.garaging-heading{font-size:15px;color:var(--navy);margin:0 0 6px;}
+.garaging-help{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 14px;}
+.garaging-summary{overflow-wrap:anywhere;}
 .field label .hint-inline{text-transform:none;font-weight:400;letter-spacing:0;font-size:10px;color:var(--muted);font-style:italic;}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555b63' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
 .upload-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
@@ -493,7 +498,7 @@ html:not(.pra-js) .pramob-close{display:none}
       <div class="prep-item"><div class="prep-icon">&#128203;</div><div><strong>Your Current Dec Page</strong><p>The single most useful thing you can send. It answers most questions in one shot and lets us compare coverage honestly.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128100;</div><div><strong>Driver Information</strong><p>Names, dates of birth, license numbers, and license states for everyone who drives.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128663;</div><div><strong>Vehicle VINs</strong><p>Enter each VIN and the form will verify and identify the vehicle through NHTSA.</p></div></div>
-      <div class="prep-item"><div class="prep-icon">&#128205;</div><div><strong>Garaging ZIP Code</strong><p>Where the vehicles sleep at night. It drives rating more than most people expect.</p></div></div>
+      <div class="prep-item"><div class="prep-icon">&#128205;</div><div><strong>Full Garaging Address</strong><p>Have the street address, unit, city, state, and ZIP where your vehicles are usually parked overnight. You can list a different address for each vehicle.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128196;</div><div><strong>Any Violations or Claims</strong><p>Last three to five years. Being upfront lets us pick the right market the first time.</p></div></div>
       <div class="prep-item"><div class="prep-icon">&#128176;</div><div><strong>Your Renewal Date</strong><p>You can review coverage at any time. The renewal date helps us avoid a lapse and compare the right policy term.</p></div></div>
     </div>
@@ -504,7 +509,7 @@ html:not(.pra-js) .pramob-close{display:none}
   <div class="section-eyebrow">Get Your Quote</div>
   <h2>Start Your Auto Insurance Quote</h2>
   <p class="sub">Five secure steps, usually five to seven minutes. Your VINs are verified automatically so the vehicles reach us correctly.</p>
-  <div class="secure-intro"><span aria-hidden="true">&#128274;</span><div><strong>Secure intake for accurate quoting</strong>Date of birth, driver&rsquo;s-license, and VIN information is sent directly to our protected quote intake and excluded from backup email notifications.</div></div>
+  <div class="secure-intro"><span aria-hidden="true">&#128274;</span><div><strong>Your information helps us prepare your quote</strong>Your garaging addresses, driver dates of birth, driver&rsquo;s-license details, and VINs are sent to Pinnacle Risk Advisors through our quote intake and email notification service for quote preparation.</div></div>
   <div class="wiz-progress" id="wiz-progress">
     <div class="wiz-bar"><div class="wiz-bar-fill" id="wiz-bar-fill" style="width:20%"></div></div>
     <div class="wiz-meta"><span class="wiz-step-label" id="wiz-step-label">Contact</span><span class="wiz-step-count" id="wiz-step-count">Step 1 of 5</span></div>
@@ -514,6 +519,7 @@ html:not(.pra-js) .pramob-close{display:none}
     <input type="hidden" name="coverage_type"    id="coverage_type"    value="Personal Auto">
     <input type="hidden" name="line_of_business" id="line_of_business" value="auto">
     <input type="hidden" name="form_depth"       id="form_depth"       value="full">
+    <input type="hidden" name="garaging_address_version" value="1">
     <input type="hidden" name="client_type"      id="client_type"      value="new">
     <input type="hidden" name="source_page"      id="source_page"      value="">
     <input type="hidden" name="referrer"         id="referrer"         value="">
@@ -537,7 +543,17 @@ html:not(.pra-js) .pramob-close{display:none}
           <div class="field"><label for="full_name">Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" placeholder="Full name" autocomplete="name" required><span class="field-err">Enter your full name.</span></div>
           <div class="field"><label for="phone">Phone Number <span class="req">*</span></label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required><span class="field-err">Enter a valid phone number.</span></div>
           <div class="field"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required><span class="field-err">Enter a valid email address.</span></div>
-          <div class="field"><label for="garaging_zip">Garaging ZIP Code <span class="req">*</span></label><input type="text" id="garaging_zip" name="garaging_zip" inputmode="numeric" autocomplete="postal-code" placeholder="e.g. 30339" pattern="[0-9]{5}" maxlength="5" required><span class="hint">Where the vehicles are kept overnight.</span><span class="field-err">Enter a five-digit ZIP code.</span></div>
+        </div>
+        <div class="garaging-fields">
+          <h3 class="garaging-heading">Where is your vehicle usually parked overnight?</h3>
+          <p class="garaging-help" id="garaging-help">Enter the physical garaging address, even if your mailing address is different. You can specify another address for an individual vehicle in Step 3.</p>
+          <div class="fgrid fgrid-2">
+            <div class="field"><label for="garaging_street">Street Address <span class="req">*</span></label><input type="text" id="garaging_street" name="garaging_street" autocomplete="section-garaging address-line1" maxlength="150" placeholder="Street number and street name" aria-describedby="garaging-help" required><span class="field-err">Enter the street address where the vehicle is kept.</span></div>
+            <div class="field"><label for="garaging_unit">Apartment / Unit <span class="hint-inline">Optional</span></label><input type="text" id="garaging_unit" name="garaging_unit" autocomplete="section-garaging address-line2" maxlength="80" placeholder="Apt, unit, or suite"></div>
+            <div class="field"><label for="garaging_city">City <span class="req">*</span></label><input type="text" id="garaging_city" name="garaging_city" autocomplete="section-garaging address-level2" maxlength="100" required><span class="field-err">Enter the city.</span></div>
+            <div class="field"><label for="garaging_state">State <span class="req">*</span></label><select id="garaging_state" name="garaging_state" autocomplete="section-garaging address-level1" required><option value="">Select state</option></select><span class="field-err">Select the state.</span></div>
+            <div class="field"><label for="garaging_zip">Garaging ZIP Code <span class="req">*</span></label><input type="text" id="garaging_zip" name="garaging_zip" inputmode="numeric" autocomplete="section-garaging postal-code" placeholder="e.g. 30339" pattern="[0-9]{5}" maxlength="5" required><span class="field-err">Enter a five-digit ZIP code.</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -619,7 +635,7 @@ html:not(.pra-js) .pramob-close{display:none}
             <label for="smsMarketing">I consent to receive marketing text messages from Pinnacle Risk Advisors LLC at the number provided, including insurance-related promotions, risk management resources, service updates, and coverage tips. Message frequency varies. Message and data rates may apply. Text HELP for assistance and reply STOP to opt out.</label>
           </div>
           <div class="sms-note">SMS messaging is only available to people who provide explicit consent. Message and data rates may apply. See our <a href="/privacy-policy.html" style="color:var(--navy);text-decoration:underline;">Privacy Policy</a> and <a href="/terms-of-service.html" style="color:var(--navy);text-decoration:underline;">Terms of Service</a>.</div>
-          <div class="privacy-note" style="margin-top:18px"><span aria-hidden="true">&#128274;</span><div><strong>Sensitive information stays out of email.</strong> Driver dates of birth, license numbers, and VINs are delivered only through the secure CRM intake. The backup notification contains counts and vehicle descriptions only.</div></div>
+          <div class="privacy-note" style="margin-top:18px"><span aria-hidden="true">&#128274;</span><div><strong>Review your details before submitting.</strong> Your quote request includes garaging addresses, driver dates of birth, license details, and VINs. These details are delivered to our agency through our quote intake and email notification service so we can prepare your quote.</div></div>
         </div>
       </div>
     </div>
@@ -699,6 +715,51 @@ function stateOptions(){
   return '<option value="">Select state</option>' + STATE_OPTIONS.map(function(s){
     return '<option value="' + s[0] + '">' + s[1] + '</option>';
   }).join('');
+}
+
+document.getElementById('garaging_state').innerHTML = stateOptions();
+
+function garagingAddress(d, prefix){
+  prefix = prefix || '';
+  return [d[prefix+'garaging_street'], d[prefix+'garaging_unit'], d[prefix+'garaging_city'],
+    [d[prefix+'garaging_state'], d[prefix+'garaging_zip']].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+}
+
+function vehicleGaragingAddress(d, i){
+  return garagingAddress(d, d['v'+i+'_same_garaging'] === 'no' ? 'v'+i+'_' : '');
+}
+
+function vehicleGaragingFields(i){
+  var prefix = 'v'+i+'_';
+  return '<div class="garaging-fields">' +
+    '<div class="field"><label for="'+prefix+'same_garaging">Is Vehicle '+i+' kept at the address below? <span class="req">*</span></label>' +
+    '<p class="garaging-help garaging-summary" id="'+prefix+'garaging_summary" data-garaging-summary></p>' +
+    '<select id="'+prefix+'same_garaging" name="'+prefix+'same_garaging" data-same-garaging aria-describedby="'+prefix+'garaging_summary" aria-controls="'+prefix+'garaging_fields" required><option value="yes">Yes, use this address</option><option value="no">No, use a different address</option></select></div>' +
+    '<div class="garaging-fields" id="'+prefix+'garaging_fields" data-other-garaging hidden><p class="garaging-help">Where is Vehicle '+i+' usually parked overnight?</p><div class="fgrid fgrid-2">' +
+    '<div class="field"><label for="'+prefix+'garaging_street">Street Address <span class="req">*</span></label><input type="text" id="'+prefix+'garaging_street" name="'+prefix+'garaging_street" autocomplete="section-vehicle'+i+' address-line1" maxlength="150" data-address-required disabled><span class="field-err">Enter this vehicle&#39;s street address.</span></div>' +
+    '<div class="field"><label for="'+prefix+'garaging_unit">Apartment / Unit <span class="hint-inline">Optional</span></label><input type="text" id="'+prefix+'garaging_unit" name="'+prefix+'garaging_unit" autocomplete="section-vehicle'+i+' address-line2" maxlength="80" disabled></div>' +
+    '<div class="field"><label for="'+prefix+'garaging_city">City <span class="req">*</span></label><input type="text" id="'+prefix+'garaging_city" name="'+prefix+'garaging_city" autocomplete="section-vehicle'+i+' address-level2" maxlength="100" data-address-required disabled><span class="field-err">Enter the city.</span></div>' +
+    '<div class="field"><label for="'+prefix+'garaging_state">State <span class="req">*</span></label><select id="'+prefix+'garaging_state" name="'+prefix+'garaging_state" autocomplete="section-vehicle'+i+' address-level1" data-address-required disabled>'+stateOptions()+'</select><span class="field-err">Select the state.</span></div>' +
+    '<div class="field"><label for="'+prefix+'garaging_zip">Garaging ZIP Code <span class="req">*</span></label><input type="text" id="'+prefix+'garaging_zip" name="'+prefix+'garaging_zip" inputmode="numeric" autocomplete="section-vehicle'+i+' postal-code" pattern="[0-9]{5}" maxlength="5" data-address-required disabled><span class="field-err">Enter a five-digit ZIP code.</span></div>' +
+    '</div></div></div>';
+}
+
+function updateVehicleGaraging(card){
+  var different = fieldInCard(card, 'same_garaging').value === 'no';
+  var fields = card.querySelector('[data-other-garaging]');
+  fields.hidden = !different;
+  fields.querySelectorAll('input,select').forEach(function(el){
+    el.disabled = !different;
+    el.required = different && el.hasAttribute('data-address-required');
+    if(!different){ el.removeAttribute('aria-invalid'); el.closest('.field').classList.remove('err'); }
+  });
+  var address = {};
+  ['street','unit','city','state','zip'].forEach(function(k){ address['garaging_'+k] = fieldVal('garaging_'+k); });
+  card.querySelector('[data-garaging-summary]').textContent = garagingAddress(address) || 'Enter your garaging address in Step 1.';
+}
+
+function refreshGaragingSummaries(){
+  document.querySelectorAll('[data-vehicle-index]').forEach(updateVehicleGaraging);
 }
 
 function snapshotFields(container){
@@ -794,7 +855,7 @@ function vehicleCard(i){
     '<div class="field"><label for="v'+i+'_use">Primary use <span class="req">*</span></label><select id="v'+i+'_use" name="v'+i+'_use" required><option value="">Select</option><option>Pleasure</option><option>Commute</option><option>Business</option><option>Rideshare</option><option>Delivery</option></select><span class="field-err">Select the primary use.</span></div>' +
     '<div class="field"><label for="v'+i+'_annual_mileage">Estimated annual mileage</label><input id="v'+i+'_annual_mileage" name="v'+i+'_annual_mileage" type="number" min="0" max="200000" step="100" inputmode="numeric" placeholder="e.g. 12000"></div>' +
     '<div class="field span-2"><label for="v'+i+'_coverage">Coverage requested <span class="req">*</span></label><select id="v'+i+'_coverage" name="v'+i+'_coverage" required><option value="">Select</option><option>Liability only</option><option>Comprehensive and collision</option><option>Not sure — recommend options</option></select><span class="field-err">Select a coverage preference.</span></div>' +
-    '</div></div></article>';
+    '</div>'+vehicleGaragingFields(i)+'</div></article>';
 }
 
 function renderVehicles(){
@@ -813,6 +874,7 @@ function renderVehicles(){
     var classic = card.querySelector('[data-classic-vin]');
     setClassicMode(card, !!classic.checked, true);
     if(!classic.checked && fieldInCard(card,'vin_status').value === 'verified') showDecodedVehicle(card);
+    updateVehicleGaraging(card);
   });
 }
 
@@ -917,8 +979,11 @@ document.getElementById('auto-quote-form').addEventListener('click', function(e)
 });
 document.getElementById('auto-quote-form').addEventListener('change', function(e){
   if(e.target.matches('[data-classic-vin]')) setClassicMode(e.target.closest('[data-vehicle-index]'), e.target.checked, false);
+  if(e.target.matches('[data-same-garaging]')) updateVehicleGaraging(e.target.closest('[data-vehicle-index]'));
+  if(/^garaging_/.test(e.target.name || '')) refreshGaragingSummaries();
 });
 document.getElementById('auto-quote-form').addEventListener('input', function(e){
+  if(/^garaging_/.test(e.target.name || '')) refreshGaragingSummaries();
   if(/^d\d+_name$/.test(e.target.name || '')) refreshDriverAssignments();
   if(/^d\d+_license_number$/.test(e.target.name || '')) e.target.value = e.target.value.toUpperCase();
   if(/^v\d+_vin$/.test(e.target.name || '')){
@@ -943,7 +1008,7 @@ renderVehicles();
 /* ══ Step wizard - same mechanics as trucking-quote.html ══
    Controls step visibility, the progress bar, per-step validation,
    and partial lead capture at the contact step. Every field keeps
-   its name attribute, so the EmailJS payload is unchanged. */
+   its existing name attribute for delivery compatibility. */
 var WIZ_LABELS = ['Contact','Drivers','Vehicles','Coverage & History','Finish Up'];
 var wizSteps = [].slice.call(document.querySelectorAll('#auto-quote-form .wiz-step'));
 var wizIdx = 0;
@@ -980,7 +1045,9 @@ function wizValidate(step){
     var ok  = val !== '';
     if(ok && c.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
     if(ok && c.type === 'tel')   ok = val.replace(/\D/g,'').length >= 10;
-    if(ok && c.id === 'garaging_zip') ok = /^[0-9]{5}$/.test(val);
+    if(ok && /(?:^|_)garaging_zip$/.test(c.name || '')) ok = /^[0-9]{5}$/.test(val);
+    if(ok && /(?:^|_)garaging_street$/.test(c.name || '')) ok = val.length >= 3 && val.length <= 150;
+    if(ok && /(?:^|_)garaging_city$/.test(c.name || '')) ok = val.length >= 2 && val.length <= 100;
     if(ok && c.type === 'number'){
       if(c.min && Number(val) < Number(c.min)) ok = false;
       if(c.max && Number(val) > Number(c.max)) ok = false;
@@ -1053,6 +1120,11 @@ async function captureLead(){
       full_name: fieldVal('full_name'), phone: phone, email: email,
       coverage_type: 'Personal Auto', line_of_business: 'Personal Auto',
       client_type: fieldVal('client_type') || 'new',
+      garaging_address_version: '1',
+      garaging_street: fieldVal('garaging_street'),
+      garaging_unit: fieldVal('garaging_unit'),
+      garaging_city: fieldVal('garaging_city'),
+      garaging_state: fieldVal('garaging_state'),
       garaging_zip: fieldVal('garaging_zip'),
       source: qp.get('gclid') ? 'google-ads' : 'website',
       gclid: qp.get('gclid') || '', campaign: qp.get('utm_campaign') || '',
@@ -1111,7 +1183,7 @@ function buildNotes(d){
   for(var vi=1;vi<=Number(d.num_vehicles||0);vi++){
     add('Vehicle '+vi, [d['v'+vi+'_year'],d['v'+vi+'_make'],d['v'+vi+'_model']].filter(Boolean).join(' ') + (d['v'+vi+'_vin_status'] ? ' — '+d['v'+vi+'_vin_status'] : ''));
   }
-  L.push('Sensitive driver DOB, license, and VIN values are stored in the secure CRM record and intentionally excluded from this email.');
+  L.push('Driver DOB, license, VIN, and garaging details are included in the quote intake and agency email notification.');
   L.push('');
   L.push('=== UNDERWRITING FLAGS ===');
   L.push(checkedList([
@@ -1145,7 +1217,7 @@ function buildNotes(d){
 function buildSecureCrmNotes(d){
   var lines = ['=== SECURE PERSONAL AUTO INTAKE ==='];
   lines.push('Applicant: ' + (d.full_name || 'Not provided'));
-  lines.push('Garaging ZIP: ' + (d.garaging_zip || 'Not provided'));
+  lines.push('Garaging address: ' + (garagingAddress(d) || 'Not provided'));
   lines.push('');
   lines.push('=== DRIVERS ===');
   for(var di=1;di<=Number(d.num_drivers||0);di++){
@@ -1167,7 +1239,8 @@ function buildSecureCrmNotes(d){
       d['v'+vi+'_vin_status'] ? 'VIN '+d['v'+vi+'_vin_status'] : '',
       d['v'+vi+'_primary_driver'] ? 'Primary '+d['v'+vi+'_primary_driver'] : '',
       d['v'+vi+'_ownership'],d['v'+vi+'_use'],d['v'+vi+'_coverage'],
-      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : ''
+      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : '',
+      'Garaging address: '+(vehicleGaragingAddress(d, vi) || 'Not provided')
     ].filter(Boolean).join(' | '));
   }
   lines.push('');
@@ -1180,7 +1253,7 @@ function buildSecureCrmNotes(d){
 }
 
 function buildSecureAutoDetails(d){
-  var lines = ['=== DRIVERS ==='];
+  var lines = ['=== GARAGING ADDRESS ===', garagingAddress(d) || 'Not provided', '', '=== DRIVERS ==='];
   for(var di=1;di<=Number(d.num_drivers||0);di++){
     lines.push('Driver '+di+': '+[
       d['d'+di+'_name'],
@@ -1200,7 +1273,8 @@ function buildSecureAutoDetails(d){
       d['v'+vi+'_vin_status'] ? 'VIN '+d['v'+vi+'_vin_status'] : '',
       d['v'+vi+'_primary_driver'] ? 'Primary '+d['v'+vi+'_primary_driver'] : '',
       d['v'+vi+'_ownership'],d['v'+vi+'_use'],d['v'+vi+'_coverage'],
-      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : ''
+      d['v'+vi+'_annual_mileage'] ? d['v'+vi+'_annual_mileage']+' annual miles' : '',
+      'Garaging address: '+(vehicleGaragingAddress(d, vi) || 'Not provided')
     ].filter(Boolean).join(' | '));
   }
   return lines.join('\n');
@@ -1242,6 +1316,7 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
     phone:               data.phone || 'Not provided',
     email:               data.email || 'Not provided',
     garaging_zip:        data.garaging_zip || 'Not provided',
+    garaging_address:    garagingAddress(data),
     secure_auto_details: buildSecureAutoDetails(data),
     prior_carrier:       data.current_carrier || 'Not provided',
     current_limit:       data.current_limit || 'Not provided',
