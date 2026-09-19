@@ -308,3 +308,56 @@ test('personal auto rejects unverified VINs and incomplete driver identity', asy
   assert.equal((await bodyOf(badDriver)).code, 'invalid_driver_details');
   assert.equal(calls, 0);
 });
+
+function addressedAutoFields() {
+  return { ...payload().fields, garaging_address_version: '1', garaging_street: '123 Test Street',
+    garaging_unit: 'Unit 2', garaging_city: 'Atlanta', garaging_state: 'GA', v1_same_garaging: 'yes' };
+}
+
+test('auto addresses reach CRM, with shared addresses resolved and vehicle overrides preserved', async () => {
+  let upstream;
+  globalThis.fetch = async (_url, options) => { upstream = JSON.parse(options.body); return new Response('{}', { status: 200 }); };
+  const fields = { ...addressedAutoFields(), num_vehicles: '2', v1_garaging_street: 'Stale hidden address' };
+  for (const [key, value] of Object.entries(payload().fields)) if (key.startsWith('v1_')) fields[key.replace('v1_', 'v2_')] = value;
+  Object.assign(fields, { v2_same_garaging: 'no', v2_garaging_street: '456 Sample Avenue', v2_garaging_unit: 'Apt 9',
+    v2_garaging_city: 'Miami', v2_garaging_state: 'FL', v2_garaging_zip: '33101' });
+  assert.equal((await quoteSubmit(request(payload({ fields })))).status, 200);
+  assert.equal(upstream.garaging_street, '123 Test Street');
+  assert.equal(upstream.v1_garaging_street, '123 Test Street');
+  assert.equal(upstream.v1_garaging_unit, 'Unit 2');
+  assert.equal(upstream.v2_garaging_street, '456 Sample Avenue');
+  assert.equal(upstream.v2_garaging_zip, '33101');
+  assert.equal(upstream.d1_license_number, 'D1234567');
+});
+
+test('full-address auto requests reject missing or malformed addresses before CRM', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response('{}', { status: 200 }); };
+  for (const overrides of [
+    { garaging_street: '' }, { garaging_city: '' }, { garaging_state: 'ZZ' }, { garaging_zip: 'ABC12' },
+    { garaging_unit: 'x'.repeat(81) }, { garaging_street: ['123 Street', '456 Street'] },
+    { v1_same_garaging: '' }, { v1_same_garaging: 'no' },
+    { v1_same_garaging: 'no', v1_garaging_street: '456 Street', v1_garaging_city: 'Miami', v1_garaging_state: 'FL', v1_garaging_zip: '1234' }
+  ]) {
+    const response = await quoteSubmit(request(payload({ fields: { ...addressedAutoFields(), ...overrides } })));
+    assert.equal(response.status, 422, JSON.stringify(overrides));
+  }
+  assert.equal(calls, 0);
+});
+
+test('maximum household size fits the new field limit with all vehicle garaging addresses', async () => {
+  let upstream;
+  globalThis.fetch = async (_url, options) => { upstream = JSON.parse(options.body); return new Response('{}', { status: 200 }); };
+  const fields = { ...addressedAutoFields(), num_drivers: '12', num_vehicles: '10' };
+  const driver = { name: 'TEST ONLY Driver', dob: '1990-01-15', license_number: 'TEST12345', license_state: 'GA', relationship: 'Other', cdl: '', incidents: '' };
+  const vehicle = { vin: '1HGCM82633A004352', vin_status: 'verified', classic: '', year: '2003', make: 'HONDA', model: 'Accord',
+    trim: '', body_class: '', vehicle_type: '', drive_type: '', fuel_type: '', primary_driver: 'driver_1', ownership: 'Owned', use: 'Pleasure', annual_mileage: '', coverage: 'Liability only',
+    same_garaging: 'no', garaging_street: '456 Sample Avenue', garaging_unit: '', garaging_city: 'Miami', garaging_state: 'FL', garaging_zip: '33101' };
+  for (let i = 1; i <= 12; i++) for (const [key, value] of Object.entries(driver)) fields[`d${i}_${key}`] = value;
+  for (let i = 1; i <= 10; i++) for (const [key, value] of Object.entries(vehicle)) fields[`v${i}_${key}`] = value;
+  assert.ok(Object.keys(fields).length > 300);
+  assert.equal((await quoteSubmit(request(payload({ fields })))).status, 200);
+  assert.equal(upstream.v10_garaging_zip, '33101');
+  assert.equal(upstream.d12_license_number, 'TEST12345');
+  assert.equal(testExports.personalAutoDynamicField('v11_garaging_street'), false);
+});

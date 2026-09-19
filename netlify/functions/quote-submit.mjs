@@ -26,6 +26,7 @@ function fields(...names) {
 const FIELD_ALLOWLISTS = {
   personal_auto: fields(
     'is_client', 'form_depth', 'source_page', 'garaging_zip', 'zip',
+    'garaging_address_version', 'garaging_street', 'garaging_unit', 'garaging_city', 'garaging_state',
     'num_vehicles', 'num_drivers', 'current_carrier', 'current_limit',
     'renewal_date', 'drv_cdl', 'drv_violation', 'drv_sr22', 'drv_teen',
     'drv_declined', 'drv_rideshare', 'also_home', 'also_umbrella',
@@ -150,7 +151,7 @@ function truckingDynamicField(field) {
 }
 
 function personalAutoDynamicField(field) {
-  return /^(?:d(?:[1-9]|1[0-2])_(?:name|dob|license_number|license_state|relationship|cdl|incidents)|v(?:[1-9]|10)_(?:vin|vin_status|classic|year|make|model|trim|body_class|vehicle_type|drive_type|fuel_type|primary_driver|ownership|use|annual_mileage|coverage))$/.test(field);
+  return /^(?:d(?:[1-9]|1[0-2])_(?:name|dob|license_number|license_state|relationship|cdl|incidents)|v(?:[1-9]|10)_(?:vin|vin_status|classic|year|make|model|trim|body_class|vehicle_type|drive_type|fuel_type|primary_driver|ownership|use|annual_mileage|coverage|same_garaging|garaging_street|garaging_unit|garaging_city|garaging_state|garaging_zip))$/.test(field);
 }
 
 function sanitizeValue(value, field) {
@@ -240,6 +241,15 @@ function validatePersonalAuto(fields) {
   if (!Number.isInteger(vehicleCount) || vehicleCount < 1 || vehicleCount > 10) {
     return ['invalid_vehicle_count', 'Enter between 1 and 10 vehicles.'];
   }
+  // Old open tabs may still send ZIP-only requests while Pages and Netlify deploy independently.
+  const fullGaraging = Object.keys(fields).some(key => key === 'garaging_address_version'
+    || /^(?:v\d+_)?garaging_(?:street|unit|city|state)$/.test(key) || /^v\d+_same_garaging$/.test(key));
+  if (fields.garaging_address_version && fields.garaging_address_version !== '1') {
+    return ['invalid_garaging_version', 'Please reload the quote form and try again.'];
+  }
+  if (fullGaraging && !validGaragingAddress(fields)) {
+    return ['invalid_garaging_address', 'Enter the full garaging street address, city, state and five-digit ZIP.'];
+  }
 
   for (let i = 1; i <= driverCount; i += 1) {
     const name = String(fields[`d${i}_name`] || '');
@@ -255,6 +265,18 @@ function validatePersonalAuto(fields) {
 
   for (let i = 1; i <= vehicleCount; i += 1) {
     const prefix = `v${i}_`;
+    if (fullGaraging) {
+      const same = fields[`${prefix}same_garaging`];
+      if (!['yes', 'no'].includes(same) || (same === 'no' && !validGaragingAddress(fields, prefix))) {
+        return ['invalid_vehicle_garaging', `Review the garaging address for Vehicle ${i}.`];
+      }
+      if (same === 'yes') {
+        // Resolve the shared address on the server, never trust stale hidden overrides.
+        for (const part of ['street', 'unit', 'city', 'state', 'zip']) {
+          fields[`${prefix}garaging_${part}`] = fields[`garaging_${part}`] || '';
+        }
+      }
+    }
     const classic = String(fields[`${prefix}classic`] || '').toLowerCase() === 'yes';
     const vin = String(fields[`${prefix}vin`] || '').toUpperCase();
     const status = String(fields[`${prefix}vin_status`] || '');
@@ -274,6 +296,15 @@ function validatePersonalAuto(fields) {
     }
   }
   return null;
+}
+
+const ADDRESS_STATES = new Set('AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' '));
+function validGaragingAddress(fields, prefix = '') {
+  const value = part => fields[`${prefix}garaging_${part}`];
+  return typeof value('street') === 'string' && value('street').length >= 3 && value('street').length <= 150
+    && typeof value('city') === 'string' && value('city').length >= 2 && value('city').length <= 100
+    && (value('unit') === undefined || (typeof value('unit') === 'string' && value('unit').length <= 80))
+    && ADDRESS_STATES.has(value('state')) && typeof value('zip') === 'string' && /^\d{5}$/.test(value('zip'));
 }
 
 async function forwardToCrm(webhookUrl, upstreamPayload, timeoutMs = UPSTREAM_TIMEOUT_MS) {
@@ -312,7 +343,7 @@ async function handleSubmission(request) {
   if (!FIELD_ALLOWLISTS[line]) return fail(422, 'invalid_line_of_business', 'The quote type is not accepted.');
   if (typeof submissionId !== 'string' || !SUBMISSION_ID.test(submissionId)) return fail(422, 'invalid_submission_id', 'The submission identifier is invalid.');
   if (!['partial', 'complete'].includes(state)) return fail(422, 'invalid_submission_state', 'The submission state is invalid.');
-  if (!data.fields || Array.isArray(data.fields) || typeof data.fields !== 'object' || !Object.keys(data.fields).length || Object.keys(data.fields).length > 300) {
+  if (!data.fields || Array.isArray(data.fields) || typeof data.fields !== 'object' || !Object.keys(data.fields).length || Object.keys(data.fields).length > (line === 'personal_auto' ? 400 : 300)) {
     return fail(422, 'invalid_fields', 'The quote fields are invalid.');
   }
   if (String(data.honeypot || '').trim()) return fail(422, 'spam_detected', 'The submission was rejected.');
