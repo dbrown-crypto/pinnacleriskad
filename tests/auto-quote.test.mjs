@@ -16,8 +16,8 @@ function fixture() {
   w.HTMLElement.prototype.scrollIntoView = () => {};
   w.eval(shared);
   const sent = { crm: [], email: [], partial: [] };
-  w.PinnacleQuote.createSession = () => ({
-    async submitComplete(data) { sent.crm.push(data); return { ok: true }; },
+  w.PinnacleQuote.createSession = options => (sent.sessionOptions = options, {
+    async submitComplete(data) { if(sent.failure) throw sent.failure; sent.crm.push(data); return { ok: true }; },
     async submitPartial(data) { sent.partial.push(data); return { ok: true }; }
   });
   w.emailjs = { async send(service, template, data) { sent.email.push({ service, template, data }); } };
@@ -54,6 +54,35 @@ test('contact step requires a full garaging address and keeps leading-zero ZIPs'
   f.set('garaging_zip', '01234'); assert.equal(f.w.wizValidate(f.step(1)), true);
   await f.w.captureLead(); assert.equal(f.sent.partial[0].garaging_zip, '01234');
   assert.equal(f.sent.partial[0].garaging_street, '123 Test Street');
+  f.dom.window.close();
+});
+
+test('auto delivery failures preserve entered data, suppress email and allow retry', async () => {
+  const f = fixture(); contact(f); vehicle(f, 1);
+  for (const [k, v] of Object.entries({ name: 'TEST ONLY Driver', dob: '1990-01-15', license_state: 'GA', license_number: 'TEST12345', relationship: 'Self' })) f.set(`d1_${k}`, v);
+  assert.equal(f.sent.sessionOptions.timeoutMs, 30000);
+  const form = f.w.document.getElementById('auto-quote-form');
+  for (const [failure, reference] of [
+    [{ code: 'timeout' }, 'AUTO-TIMEOUT'],
+    [{ code: 'network' }, 'AUTO-NETWORK'],
+    [{ code: 'invalid_driver_details', status: 422 }, 'AUTO-DRIVER'],
+    [{ code: 'crm_timeout', status: 504 }, 'AUTO-CRM-TIMEOUT'],
+    [{ code: 'malformed_response', status: 429 }, 'AUTO-RATE-LIMIT']
+  ]) {
+    f.sent.failure = failure;
+    form.dispatchEvent(new f.w.Event('submit', { bubbles: true, cancelable: true }));
+    await new Promise(resolve => setImmediate(resolve));
+    assert.ok(form.querySelector('.quote-submit-error').textContent.includes(reference));
+    assert.equal(f.field('garaging_street').value, '123 Test Street');
+    assert.equal(f.w.document.getElementById('submit-btn').disabled, false);
+    assert.notEqual(form.style.display, 'none');
+    assert.equal(f.sent.email.length, 0);
+  }
+  f.sent.failure = null;
+  form.dispatchEvent(new f.w.Event('submit', { bubbles: true, cancelable: true }));
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(f.sent.email.length, 1);
+  assert.equal(f.w.document.getElementById('success-screen').style.display, 'block');
   f.dom.window.close();
 });
 

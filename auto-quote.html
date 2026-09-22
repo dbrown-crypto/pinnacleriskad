@@ -681,7 +681,29 @@ catch(e) { console.warn('EmailJS init failed:', e); }
 const EMAILJS_SERVICE_ID  = 'service_mefkv18';
 const EMAILJS_TEMPLATE_ID = 'template_v2008zh';
 const VIN_DECODER_ENDPOINT = 'https://pinnacleriskadvisors.net/api/vin-decode';
-var quoteSession = PinnacleQuote.createSession({ formKey: 'auto-quote', lineOfBusiness: 'personal_auto' });
+var quoteSession = PinnacleQuote.createSession({ formKey: 'auto-quote', lineOfBusiness: 'personal_auto', timeoutMs: 30000 });
+
+function autoSubmissionFailure(error){
+  var messages = {
+    timeout: 'We did not receive confirmation in time. Your information is still here. Please try again. Reference: AUTO-TIMEOUT.',
+    network: 'We could not connect to the quote service. Check your connection and try again. Your information is still here. Reference: AUTO-NETWORK.',
+    crm_timeout: 'Our quote system took too long to respond. Your information is still here. Please try again. Reference: AUTO-CRM-TIMEOUT.',
+    crm_not_configured: 'Our quote system is temporarily unavailable. Your information is still here. Please call or email us. Reference: AUTO-CRM-CONFIG.',
+    crm_rejected: 'Our quote system could not accept the request. Your information is still here. Please call or email us. Reference: AUTO-CRM-REJECTED.',
+    crm_network_error: 'Our quote system could not be reached. Your information is still here. Please try again. Reference: AUTO-CRM-CONNECTION.',
+    invalid_garaging_address: 'Please go back to Step 1 and check the street address, city, state and five-digit garaging ZIP. Reference: AUTO-ADDRESS.',
+    invalid_vehicle_garaging: 'Please go back to Step 3 and check the full garaging address for each vehicle. Reference: AUTO-VEHICLE-ADDRESS.',
+    invalid_driver_details: 'Please go back to Step 2 and check every driver’s name, date of birth, license number, license state and relationship. Reference: AUTO-DRIVER.',
+    vin_not_verified: 'Please go back to Step 3 and decode each VIN, or select manual review and enter the vehicle details. Reference: AUTO-VIN.',
+    invalid_classic_vehicle: 'Please go back to Step 3 and check the VIN, year, make and model for vehicles marked for manual review. Reference: AUTO-MANUAL-VEHICLE.',
+    invalid_vehicle_details: 'Please go back to Step 3 and select a primary driver, ownership, use and coverage for every vehicle. Reference: AUTO-VEHICLE.',
+    missing_required: 'Please go back and check all required fields before submitting again. Reference: AUTO-REQUIRED.'
+  };
+  var message = error && messages[error.code];
+  if(error && error.status === 429) message = 'Too many attempts were received. Keep this form open and wait five minutes before trying again. Reference: AUTO-RATE-LIMIT.';
+  if(!message && error && (error.code === 'validation' || error.code === 'too_fast')) return error;
+  return { code: 'validation', message: message || 'We could not confirm delivery of your quote. Your information is still here. Please try again or call us. Reference: AUTO-DELIVERY.' };
+}
 
 (function(){
   var sp = document.getElementById('source_page');
@@ -1347,7 +1369,7 @@ document.getElementById('auto-quote-form').addEventListener('submit', async func
     PinnacleQuote.logDiagnostic('auto_complete_submit_failed', err);
     btn.textContent = 'Request My Auto Quote';
     btn.disabled = false;
-    PinnacleQuote.showFailure(this, err);
+    PinnacleQuote.showFailure(this, autoSubmissionFailure(err));
   }
 });
 </script>
