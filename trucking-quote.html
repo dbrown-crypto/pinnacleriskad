@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 31936)
+Total output lines: 1564
+
 <!DOCTYPE html> 
 <html lang="en">
 <head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -572,253 +575,7 @@ html:not(.pra-js) .pramob-close{display:none}
           <div class="field"><label>MC Number &#9670;</label><input type="text" name="mc_number" id="mc-number-input" placeholder="e.g. MC-987654"><span class="hint">Motor carrier authority number, if applicable</span></div>
           <div class="field"><label>Authority Status</label><select name="authority_status" id="authority-status-select"><option value="">Select one</option><option>Active</option><option>Pending</option><option>Inactive / Not Applied</option></select></div>
           <div class="field"><label>Operation Type <span class="req">*</span></label><select name="operation_type" required><option value="">Select one</option><option>Owner Operator</option><option>Fleet</option><option>Box Truck</option><option>Hotshot</option><option>Long Haul</option><option>Local Delivery</option><option>General Freight</option><option>Other</option></select></div>
-          <div class="field"><label>New Venture?</label><div class="toggle-group" data-name="new_venture"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="new_venture" value=""><span class="hint">New venture means less than 1 year under this authority</span></div>
-          <div class="field"><label>Prior Trucking Coverage?</label><div class="toggle-group" data-name="prior_coverage"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="prior_coverage" value=""></div>
-          <div class="field span-2 conditional" id="prior_carrier_field"><label>Current or Prior Carrier Name &#9670;</label><input type="text" name="prior_carrier" placeholder="Insurance company name"></div>
-          <div class="field span-2"><label>Haul Radius <span class="req">*</span></label><select name="haul_radius" required><option value="">Select one</option><option>Local (under 50 miles)</option><option>Intermediate (50 to 200 miles)</option><option>Long Haul (over 200 miles)</option></select><span class="hint">Select the range that describes most of your runs</span></div>
-          <div class="field span-2"><label>States of Operation</label><input type="text" name="states_of_operation" id="states-input" placeholder="e.g. GA, FL, TX, SC, TN"><span class="hint">List the states where you primarily operate</span></div>
-          <div class="field span-2"><label>Primary Cargo Type <span class="req">*</span></label><select name="cargo_type" required><option value="">Select one</option><option>General Freight</option><option>Building Materials</option><option>Auto Parts</option><option>Consumer Goods</option><option>Paper or Packaging</option><option>Produce</option><option>Refrigerated Food</option><option>Beverages</option><option>Furniture</option><option>Appliances</option><option>Electronics</option><option>Metal or Steel</option><option>Machinery or Equipment</option><option>Intermodal Containers</option><option>Last Mile or Parcel</option><option>Hazmat</option><option>Oversized or Heavy Haul</option><option>Other</option></select><span class="hint">Choose the type that represents most of your loads</span></div>
-          <div class="field span-2"><label>Commodity Details &#9670;</label><textarea name="commodity_details" placeholder="Describe what you usually haul, average load value, and any special handling requirements."></textarea></div>
-        </div>
-        <div class="wiz-nav">
-          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
-          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- ══ STEP 4 · VEHICLES ══ -->
-    <div class="wiz-step" data-step="4">
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">04</span><span class="fs-title">Vehicle <em>Information</em></span><span class="fs-desc">Power units and trailers</span></div>
-      <div class="form-section-body">
-        <p class="step-intro">Pick your number of power units and we'll open a block for each one. Paste a VIN and we'll decode the year, make, and model for you.</p>
-        <div class="fgrid fgrid-2" style="margin-bottom:20px;">
-          <div class="field"><label>Number of Power Units <span class="req">*</span></label><select name="power_unit_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>11 to 20</option><option>More than 20</option></select></div>
-          <div class="field"><label>Number of Trailers &#9670;</label><select name="trailer_count"><option value="">Select one</option><option>None</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select></div>
-        </div>
-        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. Upload your vehicle schedule at the last step (or skip it) and we'll pick up the rest from there. no need to type every unit.</div>
-        <div class="repeat-wrap" id="vehicle-list">
-          <div class="repeat-item" id="vehicle-1">
-            <div class="repeat-header"><span class="repeat-label">Vehicle 1</span></div>
-            <div class="fgrid fgrid-4">
-              <div class="field"><label>Year</label><input type="text" name="v1_year" placeholder="e.g. 2019"></div>
-              <div class="field"><label>Make</label><input type="text" name="v1_make" placeholder="e.g. Freightliner"></div>
-              <div class="field"><label>Model</label><input type="text" name="v1_model" placeholder="e.g. Cascadia"></div>
-              <div class="field"><label>GVW (lbs)</label><input type="text" name="v1_gvw" placeholder="e.g. 80,000"></div>
-              <div class="field span-2"><label>Vehicle Type</label><select name="v1_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>
-              <div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap"><input type="text" name="v1_vin" id="v1_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,'v1')" onpaste="setTimeout(function(){onVinInput(document.getElementById('v1_vin'),'v1')},50)"><button type="button" class="vin-decode-btn show" id="v1_vin_btn" onclick="decodeVIN('v1')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button><div class="vin-result" id="v1_vin_result"></div></div></div>
-              <div class="field span-2"><label>Stated Value</label><input type="text" name="v1_value" placeholder="e.g. $85,000"><span class="hint">Approximate current market value of this unit</span></div>
-              <div class="field"><label>Garaging ZIP</label><input type="text" name="v1_zip" placeholder="ZIP code" maxlength="5"></div>
-              <div class="field"><label>Comp &amp; Collision?</label><div class="toggle-group" data-name="v1_comp_collision"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="v1_comp_collision" value=""></div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-add" id="add-vehicle">+ Add Another Vehicle</button>
-        <div class="wiz-nav">
-          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
-          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- ══ STEP 5 · DRIVERS ══ -->
-    <div class="wiz-step" data-step="5">
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Driver <em>Information</em></span><span class="fs-desc">All scheduled drivers</span></div>
-      <div class="form-section-body">
-        <div class="field" style="max-width:280px;margin-bottom:20px;"><label>Total Number of Drivers <span class="req">*</span></label><select name="driver_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select><span class="field-err">Please select how many drivers you have.</span></div>
-        <div class="fleet-note" id="fleet-note-drivers"><strong>More than 5 drivers?</strong> Enter your first 5 here. Upload a driver list at the last step (or skip it) and we'll follow up for the remainder.</div>
-        <div class="repeat-wrap" id="driver-list">
-          <div class="repeat-item" id="driver-1">
-            <div class="repeat-header"><span class="repeat-label">Driver 1</span></div>
-            <div class="fgrid fgrid-3">
-              <div class="field span-2"><label>Full Name <span class="req">*</span></label><input type="text" name="d1_name" placeholder="First and last name" required></div>
-              <div class="field"><label>Date of Birth</label><input type="date" name="d1_dob"></div>
-              <div class="field"><label>License State</label><select name="d1_lic_state"><option value="">Select a state</option><option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option></select></div>
-              <div class="field"><label>License Number &#9670;</label><input type="text" name="d1_lic_num" placeholder="License number"></div>
-              <div class="field"><label>CDL Class</label><select name="d1_cdl"><option value="">Select one</option><option>Class A</option><option>Class B</option><option>Class C</option><option>No CDL</option></select></div>
-              <div class="field"><label>Years Commercial Experience</label><select name="d1_exp"><option value="">Select one</option><option>Less than 1 year</option><option>1 to 2 years</option><option>3 to 5 years</option><option>6 to 10 years</option><option>More than 10 years</option></select></div>
-              <div class="field span-3"><label>Accidents or Violations in Past 3 Years?</label><div class="toggle-group" data-name="d1_violations"><button type="button" class="toggle-btn" data-val="None">None</button><button type="button" class="toggle-btn" data-val="Yes, please describe below">Yes, please describe below</button></div><input type="hidden" name="d1_violations" value=""></div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-add" id="add-driver">+ Add Another Driver</button>
-        <div class="wiz-nav">
-          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
-          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- ══ STEP 6 · COVERAGE ══ -->
-    <div class="wiz-step" data-step="6">
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">06</span><span class="fs-title">Coverage <em>Requested</em></span><span class="fs-desc">Select all that apply</span></div>
-      <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;">We've pre-selected the three lines most trucking operations carry. Add or remove anything, not sure? Leave your best guess and we'll help you refine it.</p>
-        <div class="cov-grid">
-          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_auto_liability" value="Yes" checked><div class="cov-card-text"><strong>Auto Liability</strong><p>Required for most trucking operations</p></div></label>
-          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_physical_damage" value="Yes" checked><div class="cov-card-text"><strong>Physical Damage</strong><p>Comprehensive and collision for your trucks</p></div></label>
-          <label class="cov-card active" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_cargo" value="Yes" checked><div class="cov-card-text"><strong>Motor Truck Cargo</strong><p>Protects freight you haul for customers</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_general_liability" value="Yes"><div class="cov-card-text"><strong>General Liability</strong><p>Premises and operations coverage</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_bobtail" value="Yes"><div class="cov-card-text"><strong>Bobtail / Non-Trucking Liability</strong><p>Personal use of truck without a load</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_trailer_interchange" value="Yes"><div class="cov-card-text"><strong>Trailer Interchange</strong><p>Physical damage for non-owned trailers</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_workers_comp" value="Yes"><div class="cov-card-text"><strong>Workers Compensation</strong><p>For your employees if applicable</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_occ_accident" value="Yes"><div class="cov-card-text"><strong>Occupational Accident</strong><p>Alternative to WC for owner operators</p></div></label>
-          <label class="cov-card" onclick="toggleCovCard(this)"><input type="checkbox" name="cov_excess" value="Yes"><div class="cov-card-text"><strong>Excess / Umbrella</strong><p>Additional limits above primary coverage</p></div></label>
-        </div>
-        <div class="fdivider"></div>
-        <div class="fgrid fgrid-3">
-          <div class="field"><label>Auto Liability Limit &#9670;</label><select name="al_limit"><option value="">Select if known</option><option>$750,000 CSL</option><option>$1,000,000 CSL</option><option>$1,500,000 CSL</option><option>$2,000,000 CSL</option><option>Not sure, please advise</option></select><span class="hint">Many carriers require $1M minimum</span></div>
-          <div class="field"><label>Cargo Limit &#9670;</label><select name="cargo_limit"><option value="">Select if known</option><option>$25,000</option><option>$50,000</option><option>$100,000</option><option>$150,000</option><option>$250,000</option><option>Other, I will describe in notes</option></select></div>
-          <div class="field"><label>Deductible Preference &#9670;</label><select name="deductible"><option value="">Select if known</option><option>$1,000</option><option>$2,500</option><option>$5,000</option><option>$10,000</option><option>No preference, please advise</option></select></div>
-        </div>
-        <div class="wiz-nav">
-          <button type="button" class="btn-back" onclick="wizBack()">Back</button>
-          <button type="button" class="btn-next" onclick="wizNext()">Continue</button>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- ══ STEP 7 · DOCUMENTS & NOTES ══ -->
-    <div class="wiz-step" data-step="7">
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">07</span><span class="fs-title">Documents &amp; <em>Notes</em></span><span class="fs-desc">Everything here is optional</span></div>
-      <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Uploading supporting documents helps us start your quote faster, but <strong>nothing on this step is required.</strong> You can submit right now and we'll request anything else we need.</p>
-        <p style="font-size:11.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-style:italic;">If uploads are not completed, we will request them after reviewing your quote request.</p>
-        <div class="upload-grid">
-          <div class="upload-zone"><div class="upload-icon">&#x1FAFB;</div><div class="upload-label">Driver Licenses</div><div class="upload-hint">PDF, JPG, or PNG</div><div class="upload-status" id="status_upload_dl">&#x2713; File selected</div><input type="file" id="upload_dl" name="upload_dl" accept=".pdf,.jpg,.jpeg,.png" multiple onchange="showStatus(this,'status_upload_dl')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4C4;</div><div class="upload-label">Current Declarations Page</div><div class="upload-hint">PDF preferred</div><div class="upload-status" id="status_upload_dec">&#x2713; File selected</div><input type="file" id="upload_dec" name="upload_dec" accept=".pdf,.jpg,.jpeg,.png" onchange="showStatus(this,'status_upload_dec')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CA;</div><div class="upload-label">Loss Runs</div><div class="upload-hint">3 to 5 years preferred</div><div class="upload-status" id="status_upload_loss">&#x2713; File selected</div><input type="file" id="upload_loss" name="upload_loss" accept=".pdf,.xls,.xlsx,.csv" multiple onchange="showStatus(this,'status_upload_loss')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CB;</div><div class="upload-label">Vehicle Schedule</div><div class="upload-hint">List of all units</div><div class="upload-status" id="status_upload_sched">&#x2713; File selected</div><input type="file" id="upload_sched" name="upload_sched" accept=".pdf,.xls,.xlsx,.csv" onchange="showStatus(this,'status_upload_sched')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CE;</div><div class="upload-label">Other Supporting Documents</div><div class="upload-hint">Contracts, safety plans, etc.</div><div class="upload-status" id="status_upload_other">&#x2713; File selected</div><input type="file" id="upload_other" name="upload_other" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple onchange="showStatus(this,'status_upload_other')"></div>
-        </div>
-        <div class="fdivider"></div>
-        <div class="field"><label>Notes for Your Agent &#9670;</label><textarea name="notes" rows="4" placeholder="Contracts you're on, safety practices, prior coverage history, losses, or anything else that matters for underwriting. The more context you provide, the better we can shop your account."></textarea></div>
-      </div>
-    </div>
-    <div class="disclaimer"><div class="disclaimer-icon">&#x2139;&#xFE0F;</div><p><strong>No coverage is bound by submitting this form.</strong> Coverage is subject to underwriting review, carrier approval, complete documentation, and final eligibility. Pinnacle Risk Advisors will contact you to review your options before any policy is issued.</p></div>
-    <div class="wiz-nav">
-      <button type="button" class="btn-back" onclick="wizBack()">Back</button>
-      <button type="submit" class="btn-next" id="submit-btn" style="padding:17px 32px;font-size:13px;">Submit Trucking Quote Request</button>
-    </div>
-    <p class="submit-note" style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:12px;">We'll review your request and reach out if anything additional is needed.</p>
-    </div>
-
-  </form>
-  <div id="success-screen">
-    <div class="success-icon">&#x2713;</div>
-    <h2>Quote Request Received</h2>
-    <p>Thank you. Your trucking quote request has been received. Pinnacle Risk Advisors will review your information and contact you if anything else is needed.</p>
-    <p style="font-size:12px;color:var(--muted);margin-top:-10px;">Your carrier submission PDF is downloading now. Check your downloads folder.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-      <button onclick="redownloadPDF()" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--navy);border:none;border-radius:3px;padding:11px 24px;cursor:pointer;">Download PDF Again</button>
-      <a class="success-back" href="https://pinnacleriskad.com/">Return to Homepage</a>
-    </div>
-  </div>
-</div>
-<footer>
-  <strong>Pinnacle Risk Advisors</strong><br>
-  Licensed Insurance Agency &middot; Licensed in GA, FL, TX, IN, UT, NC &amp; SC<br>
-  <a href="https://pinnacleriskad.com/">pinnacleriskad.com</a>
-  &nbsp;|&nbsp; <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>
-  &nbsp;|&nbsp; <a href="tel:+17707583197">(770) 758-3197</a><br>
-  <span style="font-size:10px;opacity:0.6;">Submitting this form does not bind coverage. Coverage is subject to underwriting review and carrier approval. All information submitted is confidential.</span>
-</footer>
-<script>
-document.querySelectorAll('.toggle-group').forEach(function(group){
-  group.querySelectorAll('.toggle-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      group.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      var hidden=group.parentElement.querySelector('input[type=hidden]');
-      if(hidden)hidden.value=btn.dataset.val;
-      if(group.dataset.name==='prior_coverage'){
-        var field=document.getElementById('prior_carrier_field');
-        if(btn.dataset.val==='Yes'){field.classList.add('show');}else{field.classList.remove('show');}
-      }
-    });
-  });
-});
-function toggleCovCard(label){
-  setTimeout(function(){
-    var cb=label.querySelector('input[type=checkbox]');
-    if(cb.checked){label.classList.add('active');}else{label.classList.remove('active');}
-  },0);
-}
-var vehicleCount=1;
-document.getElementById('add-vehicle').addEventListener('click',function(){
-  vehicleCount++;var n=vehicleCount;
-  var html='<div class="repeat-item" id="vehicle-'+n+'">'+
-    '<div class="repeat-header"><span class="repeat-label">Vehicle '+n+'</span><button type="button" class="btn-remove" onclick="removeItem(\'vehicle-'+n+'\')">Remove</button></div>'+
-    '<div class="fgrid fgrid-4">'+
-    '<div class="field"><label>Year</label><input type="text" name="v'+n+'_year" placeholder="e.g. 2019"></div>'+
-    '<div class="field"><label>Make</label><input type="text" name="v'+n+'_make" placeholder="e.g. Freightliner"></div>'+
-    '<div class="field"><label>Model</label><input type="text" name="v'+n+'_model" placeholder="e.g. Cascadia"></div>'+
-    '<div class="field"><label>GVW (lbs)</label><input type="text" name="v'+n+'_gvw" placeholder="e.g. 80,000"></div>'+
-    '<div class="field span-2"><label>Vehicle Type</label><select name="v'+n+'_type"><option value="">Select one</option><option>Semi Truck</option><option>Box Truck</option><option>Flatbed</option><option>Tanker</option><option>Reefer / Refrigerated</option><option>Dump Truck</option><option>Hotshot / Pickup &amp; Gooseneck</option><option>Cargo Van</option><option>Other</option></select></div>'+
-    '<div class="field span-2"><label>VIN ◆</label><div class="vin-decode-wrap">' +
-    '<input type="text" name="v'+n+'_vin" id="v'+n+'_vin" placeholder="17-character VIN" maxlength="17" oninput="onVinInput(this,\'v'+n+'\')" onpaste="setTimeout(function(){onVinInput(document.getElementById(\'v'+n+'_vin\'),\'v'+n+'\')},50)">' +
-    '<button type="button" class="vin-decode-btn show" id="v'+n+'_vin_btn" onclick="decodeVIN(\'v'+n+'\')" disabled style="opacity:0.4;cursor:not-allowed;">Decode VIN</button>' +
-    '<div class="vin-result" id="v'+n+'_vin_result"></div>' +
-    '</div></div>' +
-    '<div class="field span-2"><label>Stated Value</label><input type="text" name="v'+n+'_value" placeholder="e.g. $85,000"></div>'+
-    '<div class="field"><label>Garaging ZIP</label><input type="text" name="v'+n+'_zip" placeholder="ZIP code" maxlength="5"></div>'+
-    '<div class="field"><label>Comp &amp; Collision?</label><div class="toggle-group" data-name="v'+n+'_cc"><button type="button" class="toggle-btn" data-val="No">No</button><button type="button" class="toggle-btn" data-val="Yes">Yes</button></div><input type="hidden" name="v'+n+'_comp_collision" value=""></div>'+
-    '</div></div>';
-  document.getElementById('vehicle-list').insertAdjacentHTML('beforeend',html);
-  var newItem=document.getElementById('vehicle-'+n);
-  newItem.querySelectorAll('.toggle-group').forEach(function(group){
-    group.querySelectorAll('.toggle-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        group.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        var hidden=group.parentElement.querySelector('input[type=hidden]');
-        if(hidden)hidden.value=btn.dataset.val;
-      });
-    });
-  });
-});
-var driverCount=1;
-document.getElementById('add-driver').addEventListener('click',function(){
-  driverCount++;var n=driverCount;
-  var stateOpts='';
-  ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'].forEach(function(s){stateOpts+='<option>'+s+'</option>';});
-  var html='<div class="repeat-item" id="driver-'+n+'">'+
-    '<div class="repeat-header"><span class="repeat-label">Driver '+n+'</span><button type="button" class="btn-remove" onclick="removeItem(\'driver-'+n+'\')">Remove</button></div>'+
-    '<div class="fgrid fgrid-3">'+
-    '<div class="field span-2"><label>Full Name</label><input type="text" name="d'+n+'_name" placeholder="First and last name"></div>'+
-    '<div class="field"><label>Date of Birth</label><input type="date" name="d'+n+'_dob"></div>'+
-    '<div class="field"><label>License State</label><select name="d'+n+'_lic_state"><option value="">Select a state</option>'+stateOpts+'</select></div>'+
-    '<div class="field"><label>License Number</label><input type="text" name="d'+n+'_lic_num" placeholder="License number"></div>'+
-    '<div class="field"><label>CDL Class</label><select name="d'+n+'_cdl"><option value="">Select one</option><option>Class A</option><option>Class B</option><option>Class C</option><option>No CDL</option></select></div>'+
-    '<div class="field"><label>Years Exp.</label><select name="d'+n+'_exp"><option value="">Select one</option><option>Less than 1 year</option><option>1 to 2 years</option><option>3 to 5 years</option><option>6 to 10 years</option><option>More than 10 years</option></select></div>'+
-    '<div class="field span-3"><label>Accidents or Violations in Past 3 Years?</label><div class="toggle-group" data-name="d'+n+'_violations"><button type="button" class="toggle-btn" data-val="None">None</button><button type="button" class="toggle-btn" data-val="Yes, please describe below">Yes, please describe below</button></div><input type="hidden" name="d'+n+'_violations" value=""></div>'+
-    '</div></div>';
-  document.getElementById('driver-list').insertAdjacentHTML('beforeend',html);
-  var newItem=document.getElementById('driver-'+n);
-  newItem.querySelectorAll('.toggle-group').forEach(function(group){
-    group.querySelectorAll('.toggle-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        group.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        var hidden=group.parentElement.querySelector('input[type=hidden]');
-        if(hidden)hidden.value=btn.dataset.val;
-      });
-    });
-  });
-});
-function removeItem(id){var el=document.getElementById(id);if(el)el.remove();}
-function showStatus(input,statusId){
-  var el=document.getElementById(statusId);
-  if(el&&input.files.length>0){
-    el.style.display='block';
+          <div class="field"><label>New Venture?</label><div class="toggle-group" data-name="new_venture"><button type="butt…6936 tokens truncated…play='block';
     el.textContent=input.files.length===1?'\u2713 '+input.files[0].name:'\u2713 '+input.files.length+' files selected';
   }
 }
@@ -838,7 +595,20 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
     if(input&&input.files.length>0){Array.from(input.files).forEach(function(f){uploadedFileNames.push(id+': '+f.name);});}
   });
   data['files_noted']=uploadedFileNames.length>0?uploadedFileNames.join(' | '):'No files uploaded at time of submission. Follow up required.';
+function truckingEntryPage() {
+  var allowed=['/trucking','/new-authority-trucking-insurance','/georgia-motor-carrier-insurance','/georgia-bobtail-non-trucking-liability'];
+  function clean(value){return '/'+String(value||'').replace(/^\//,'').replace(/\.html$/,'').replace(/\/$/,'');}
+  try {
+    var q=new URLSearchParams(window.location.search);
+    var entry=clean(q.get('entry_page')||q.get('source_page'));
+    if(allowed.indexOf(entry)!==-1)return entry;
+    if(document.referrer){var ref=new URL(document.referrer);entry=clean(ref.pathname);if(ref.origin===window.location.origin&&allowed.indexOf(entry)!==-1)return entry;}
+  }catch(e){}
+  return '';
+}
   data['lead_source']='Website Trucking Quote Page';
+  var entryPage=truckingEntryPage();
+  if(entryPage){data['source_page']=entryPage;data['notes']=(data['notes']?data['notes']+'\n':'')+'Trucking entry page: '+entryPage;}
   data['submitted_at']=new Date().toISOString();
   data['form_page']='/trucking-quote';
   data['contact_email']=data['email']||'';
@@ -1547,4 +1317,5 @@ body{font-size:15px}
 </style>
 </body>
 </html>
+
 
