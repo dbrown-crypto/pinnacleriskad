@@ -32,7 +32,7 @@
     };
   }
 
-  function continuationUrl(dot, search) {
+  function continuationUrl(dot, search, entryPage) {
     var params = new URLSearchParams();
     var current = new URLSearchParams(search || '');
     var cleanDot = String(dot || '').replace(/\D/g, '');
@@ -41,8 +41,10 @@
       var value = current.get(key);
       if (value) params.set(key, value);
     });
+    var entry = String(entryPage || '').replace(/\.html$/, '').replace(/^\//, '');
+    if (['georgia-motor-carrier-insurance', 'georgia-bobtail-non-trucking-liability'].indexOf(entry) !== -1) params.set('entry_page', entry);
     var suffix = params.toString();
-    return '/trucking-quote.html' + (suffix ? '?' + suffix : '');
+    return '/trucking-quote' + (suffix ? '?' + suffix : '');
   }
 
   function text(node, value) {
@@ -207,7 +209,7 @@
           form_name: variant,
           landing_page_variant: variant
         });
-        if (continueLink) continueLink.href = continuationUrl(fields.usdot, root.location ? root.location.search : '');
+        if (continueLink) continueLink.href = continuationUrl(fields.usdot, root.location ? root.location.search : '', root.location ? root.location.pathname : '');
         form.hidden = true;
         show(success, true);
         if (success) success.focus();
@@ -258,3 +260,4 @@
     conversionDestination: CONVERSION_DESTINATION
   };
 });
+
