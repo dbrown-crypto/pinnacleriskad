@@ -168,11 +168,6 @@ footer a:hover{color:var(--gold);}
 .dec-page-nudge{font-size:12px;color:var(--muted);font-style:italic;margin:0 0 16px;line-height:1.6;}
 .dec-page-nudge strong{color:var(--navy);font-weight:600;font-style:normal;}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  try { if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: 'b_6fDJMzlssZabLR7' }); }
-  catch (error) { console.warn('EmailJS initialization failed.'); }
-</script>
 <script src="/quote-submission.js"></script>
 
 <meta property="og:title" content="Landlord Insurance Quote | Georgia &amp; Florida Rental Property Coverage"><meta property="og:description" content="Get landlord insurance quotes for rental properties, vacant homes, small multifamily buildings, and investor portfolios in Georgia and Florida. Pinnacle Risk."><meta property="og:type" content="website"><meta property="og:url" content="https://pinnacleriskad.com/landlord-insurance-quote.html"><meta property="og:image" content="https://pinnacleriskad.com/atlanta-hero-poster.jpg"><meta property="og:site_name" content="Pinnacle Risk Advisors LLC"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Landlord Insurance Quote | Georgia &amp; Florida Rental Property Coverage"><meta name="twitter:description" content="Get landlord insurance quotes for rental properties, vacant homes, small multifamily buildings, and investor portfolios in Georgia and Florida. Pinnacle Risk.">
@@ -660,8 +655,6 @@ html:not(.pra-js) .pramob-close{display:none}
   <a href="/privacy-policy.html">Privacy Policy</a>
 </footer>
 <script>
-const EMAILJS_SERVICE_ID  = 'service_mefkv18';
-const EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
 var quoteSession = PinnacleQuote.createSession({ formKey: 'landlord-quote', lineOfBusiness: 'landlord' });
 
 function wireUpload(inputId, statusId) {
@@ -893,8 +886,6 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   var honeypot = data.website || '';
   delete data.website;
   var fileNames = allFileNames();
-  var notesBlock = buildNotes(data);
-  var covSummary = buildCoveragesSummary(data);
   var submissionData = Object.assign({}, data, {
     coverage_type:'Landlord Insurance', lead_source:'Website Landlord Quote Page',
     form_page:'/landlord-insurance-quote', files_noted:fileNames,
@@ -903,39 +894,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   ['construction_type','sq_footage','num_stories','num_units','roof_material','roof_shape','electrical_panel','plumbing_type','update_roof','update_electrical','update_plumbing','update_hvac','valuation_pref','monthly_rent','deductible_pref','form_pref','rental_type','commercial_space','commercial_pct','vacant_how_long','vacant_reason','vacant_secured','vacant_utilities','vacant_renovation','reno_scope','reno_pct_complete','reno_gc','reno_occupied','has_pool','pool_fenced','pool_diving','has_trampoline','has_dogs','dog_breeds','has_wood_stove','loss_details','has_lapse','lapse_explain','fl_coast_distance','fl_wind_mit','fl_sinkhole','mortgagee_info'].forEach(function(id){
     var v = opt(id); if (v) submissionData[id] = v;
   });
-  var templateParams = {
-    business_name: data.full_name||'Not provided',
-    contact_name:  data.full_name||'Not provided',
-    phone:         data.phone||'Not provided',
-    email:         data.email||'Not provided',
-    usdot:         'N/A - Landlord Insurance',
-    mc_number:     'N/A',
-    authority_status: 'N/A',
-    operation_type:   data.property_type||'Not provided',
-    cargo_type:       data.occupancy_status||'Not provided',
-    haul_radius:      data.effective_date||'Not provided',
-    states_of_operation: 'Georgia / Florida',
-    prior_coverage:   data.currently_insured||fileNames,
-    prior_carrier:    opt('mortgagee_info')||'Not provided',
-    power_unit_count: data.dwelling_limit||'N/A',
-    driver_count:     data.liability_limit||'N/A',
-    coverages_summary: covSummary,
-    notes:            notesBlock,
-    files_noted:      fileNames,
-    coverage_type:    'Landlord Insurance',
-    lead_source:      'Website Landlord Quote Page',
-    form_page:        '/landlord-insurance-quote',
-    submission_pdf_link: buildSubmissionLink(submissionData),
-    submitted_at:     submissionData.submitted_at
-  };
   try {
     var primary = await quoteSession.submitComplete(submissionData, honeypot);
-    if (!primary.duplicate) {
-      await PinnacleQuote.notifySecondary(function(){
-        if (typeof emailjs === 'undefined') throw new Error('EmailJS unavailable');
-        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      });
-    }
+    // Landlord leads are delivered by the primary landlord/commercial submission route.
+    // Do not reuse the trucking EmailJS template here; it mislabeled landlord leads.
     document.getElementById('landlord-quote-form').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
     window.scrollTo({top:0,behavior:'smooth'});
