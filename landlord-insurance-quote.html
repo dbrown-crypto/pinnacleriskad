@@ -524,6 +524,15 @@ html:not(.pra-js) .pramob-close{display:none}
   <a href="/privacy-policy.html">Privacy Policy</a>
 </footer>
 <script>
+// A fresh visit after a completed request starts a new request; retries keep their ID.
+try {
+  var landlordStorage = window.sessionStorage;
+  if (landlordStorage && landlordStorage.getItem('pra_quote:landlord-quote:complete_sent') === 'true') {
+    ['submission_id','started_at_ms','partial_sent','partial_attempts','complete_sent'].forEach(function(key) {
+      landlordStorage.removeItem('pra_quote:landlord-quote:' + key);
+    });
+  }
+} catch (error) { /* The shared submission helper supports browsers without storage. */ }
 var quoteSession = PinnacleQuote.createSession({ formKey: 'landlord-quote', lineOfBusiness: 'landlord' });
 
 var wizardForm = document.getElementById('landlord-quote-form');
