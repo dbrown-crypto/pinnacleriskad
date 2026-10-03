@@ -193,6 +193,27 @@ footer a:hover{color:var(--gold);}
 .wizard-consent{display:flex;gap:12px;align-items:flex-start;font-size:12px;line-height:1.6;padding:18px;border:1px solid var(--border);border-radius:6px;margin:20px 0}
 .review-group{margin-bottom:18px}.review-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.review-head h4{font-size:16px;color:var(--navy)}.review-edit{font-size:12px;padding:7px 12px}.review-group dl{margin:0}.review-row{display:grid;grid-template-columns:1fr 1.4fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}.review-row dt{color:var(--muted)}.review-row dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--navy)}
 @media(max-width:600px){.wizard-progress li{flex-direction:column;gap:5px;font-size:11px;padding:10px 2px}.wizard-nav .btn-submit{padding:15px 14px;font-size:11px}.review-row{grid-template-columns:1fr;gap:4px}.wizard-secondary{padding:14px}.form-section-head .fs-title{font-size:22px}}
+#success-screen .print-help{font-size:12px;margin:18px auto 28px}
+#submission-receipt{margin-top:28px;padding-top:24px;border-top:2px solid var(--gold);text-align:left}
+#submission-receipt[hidden]{display:none!important}
+#submission-receipt h3{font-size:21px;margin-bottom:8px;color:var(--navy)}
+#submission-receipt p{max-width:none;margin:0 0 14px;font-size:12px;overflow-wrap:anywhere}
+#submission-receipt .receipt-brand{font-size:15px;font-weight:700;color:var(--navy)}
+#submission-receipt .receipt-meta{white-space:pre-line}
+@media print{
+  @page{size:auto;margin:16mm}
+  html,body{background:white!important;color:#111!important}
+  body>:not(#success-screen){display:none!important}
+  #success-screen{display:block!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+  #success-screen.receipt-ready>:not(#submission-receipt),#success-screen .success-actions,#success-screen .print-help{display:none!important}
+  #submission-receipt{margin:0!important;padding:0!important;border:0!important}
+  #submission-receipt h3{font-size:20px!important}
+  #submission-receipt .review-head{margin-bottom:5px;break-after:avoid}
+  #submission-receipt .review-head h4{font-size:14px;color:#111}
+  #submission-receipt .review-group{margin:16px 0}
+  #submission-receipt .review-row{grid-template-columns:1fr 1.4fr;font-size:11px;gap:12px;padding:6px 0;break-inside:avoid}
+  #submission-receipt .review-row dt,#submission-receipt .review-row dd{color:#111}
+}
 </style></head>
 <body><style id="pra-chrome-css">
 /* hide old chrome */
@@ -485,9 +506,11 @@ html:not(.pra-js) .pramob-close{display:none}
   <p id="receipt-status" role="status">A receipt email is on its way. If you opted in to service texts, you’ll also receive a confirmation text.</p>
   <p>Have a question? Call <a href="tel:+17707583197">(770) 758-3197</a>. Send supporting documents to <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a> with your name and property address. Coverage is not bound by this request.</p>
   <div class="success-actions">
-    <button class="btn-print" onclick="window.print()">Save / Print a Copy</button>
+    <button type="button" class="btn-print" id="print-copy" onclick="window.print()">Print / Save PDF</button>
     <a class="success-back" href="https://pinnacleriskad.com/">Return to Homepage</a>
   </div>
+  <p class="print-help">Choose “Save as PDF” in the print window to save a copy, or select your printer. Save your copy before leaving this page.</p>
+  <article id="submission-receipt" aria-label="Your submitted quote request" hidden></article>
 </div>
 <footer>
   <strong>Pinnacle Risk Advisors</strong><br>
@@ -565,6 +588,42 @@ function wizardShow(step, focus) {
   }
 }
 function wizardAdvance() { if (wizardValidate(wizardCurrent)) wizardShow(Math.min(3,wizardCurrent + 1)); }
+function captureReceiptAnswers() {
+  wizardRenderReview();
+  var answers = document.getElementById('quote-review').cloneNode(true);
+  answers.removeAttribute('id');
+  answers.removeAttribute('aria-live');
+  answers.querySelectorAll('button').forEach(function(button) { button.remove(); });
+  return answers;
+}
+function renderSubmissionReceipt(answers, submittedAt, reference, smsConsent) {
+  var receipt = document.getElementById('submission-receipt');
+  receipt.replaceChildren();
+  function add(tag, text, className) {
+    var node = document.createElement(tag); node.textContent = text;
+    if (className) node.className = className;
+    receipt.appendChild(node); return node;
+  }
+  add('p', 'Pinnacle Risk Advisors LLC', 'receipt-brand');
+  add('h3', 'Landlord Insurance Quote Request — Your Copy');
+  add('p', 'Submitted: ' + new Date(submittedAt).toLocaleString('en-US', {timeZoneName:'short'}) + '\nRequest reference: ' + reference, 'receipt-meta');
+  receipt.appendChild(answers);
+  add('p', 'Service text consent: ' + (smsConsent ? 'Yes' : 'No'));
+  add('p', 'This copy records your submitted answers. It is a quote request, not an insurance policy, quote, or binder. Coverage is subject to carrier underwriting and approval. Coverage is not bound by this request.');
+  add('p', 'Derrick Brown | (770) 758-3197 | dbrown@pinnacleriskad.com\npinnacleriskad.com', 'receipt-meta');
+  receipt.hidden = false;
+  document.getElementById('success-screen').classList.add('receipt-ready');
+}
+var receiptPageTitle;
+window.addEventListener('beforeprint', function() {
+  if (!document.getElementById('submission-receipt').hidden) {
+    receiptPageTitle = document.title;
+    document.title = 'Pinnacle-Landlord-Quote-Request-' + new Date().toISOString().slice(0,10);
+  }
+});
+window.addEventListener('afterprint', function() {
+  if (receiptPageTitle) { document.title = receiptPageTitle; receiptPageTitle = ''; }
+});
 function wizardRenderReview() {
   var container = document.getElementById('quote-review');
   container.replaceChildren();
@@ -582,6 +641,7 @@ function wizardRenderReview() {
     group[2].forEach(function(pair){
       var control=document.getElementById(pair[0]);if(!control||control.disabled)return;
       var value=(control.value||'').trim();
+      if(value && control.tagName === 'SELECT') value=control.options[control.selectedIndex].textContent;
       if(!value) { if(['year_built','sq_footage','owner_name','dwelling_limit','monthly_rent'].indexOf(pair[0]) < 0)return; value=pair[0]==='dwelling_limit'?'Help me choose':'Not provided'; }
       var row=document.createElement('div');row.className='review-row';var label=document.createElement('dt');label.textContent=pair[1];var answer=document.createElement('dd');answer.textContent=value;row.appendChild(label);row.appendChild(answer);list.appendChild(row);
     });
@@ -753,6 +813,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   delete data.current_carrier;
   var submittedAt = new Date().toISOString();
   var smsServiceOptIn = data.smsService === 'yes';
+  var receiptAnswers = captureReceiptAnswers();
   var submissionData = Object.assign({}, data, {
     coverage_type:'Landlord Insurance',
     source:'website',
@@ -777,6 +838,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     var primary = await quoteSession.submitComplete(submissionData, honeypot);
     // Landlord leads are delivered by the primary landlord/commercial submission route.
     // Do not reuse the trucking EmailJS template here; it mislabeled landlord leads.
+    renderSubmissionReceipt(receiptAnswers, submittedAt, primary.submission_id || quoteSession.submissionId, smsServiceOptIn);
     document.getElementById('landlord-quote-form').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
     document.getElementById('receipt-status').textContent = smsServiceOptIn
@@ -990,4 +1052,3 @@ body{font-size:15px}
 </style>
 </body>
 </html>
-
