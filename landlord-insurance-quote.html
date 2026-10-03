@@ -175,7 +175,25 @@ footer a:hover{color:var(--gold);}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"InsuranceAgency","@id":"https://pinnacleriskad.com/#agency","name":"Pinnacle Risk Advisors LLC","url":"https://pinnacleriskad.com/","telephone":"+1-770-758-3197","email":"dbrown@pinnacleriskad.com","image":"https://pinnacleriskad.com/atlanta-hero-poster.jpg","logo":"https://pinnacleriskad.com/pra-logo.png","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"2700 Cumberland Pkwy SE","addressLocality":"Atlanta","addressRegion":"GA","postalCode":"30339","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.8797,"longitude":-84.4682},"areaServed":["Georgia","Florida","Texas","Indiana","Utah","North Carolina","South Carolina"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:30"},"founder":{"@type":"Person","name":"Derrick Brown"},"sameAs":["https://g.page/r/CYpx_oi8HBDZEBM"]}
 </script>
-</head>
+<style>
+/* Guided landlord quote intake */
+.wizard-step[hidden],.wizard-conditional[hidden],.wizard-nav [hidden]{display:none!important}
+.wizard-step{scroll-margin-top:100px}.form-body{scroll-margin-top:90px}
+.wizard-progress{margin:0 0 24px}.wizard-progress ol{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;list-style:none;padding:0;margin:0}
+.wizard-progress li{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;padding:12px 10px;border-bottom:3px solid var(--border)}
+.wizard-progress li span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--border);color:var(--navy);font-weight:700}
+.wizard-progress li[aria-current=step]{color:var(--navy);border-color:var(--gold);font-weight:700}.wizard-progress li[aria-current=step] span{background:var(--gold)}
+#wizard-status{font-size:12px;margin-top:12px;color:var(--muted)}.wizard-intro{margin-bottom:22px;font-size:14px;color:var(--muted)}
+.wizard-nav{display:flex;justify-content:space-between;gap:12px;align-items:center}.wizard-nav .btn-submit{min-width:0;font-size:12px;padding:16px 24px;margin-left:auto}
+.wizard-secondary,.review-edit{border:1px solid var(--border);background:white;color:var(--navy);border-radius:4px;padding:14px 22px;cursor:pointer;font-family:inherit}
+.wizard-footnote{font-size:12px;line-height:1.6;color:var(--muted);margin-top:16px}.wizard-conditional{margin-top:20px;padding:18px;background:var(--off);border:1px solid var(--border);border-radius:6px}
+.portfolio-choice{margin-top:24px}.portfolio-choice>label,.wizard-check{display:flex;align-items:center;gap:10px;font-size:14px}.portfolio-choice input[type=checkbox],.wizard-check input[type=checkbox],.wizard-consent input{width:18px;height:18px;flex:0 0 18px}
+#portfolio_addresses{width:100%;margin-top:8px;padding:12px;font:inherit;border:1px solid var(--border);border-radius:4px}.wizard-check{margin-top:16px}
+.wizard-extra{margin-top:24px;border-top:1px solid var(--border);padding-top:18px}.wizard-extra summary{cursor:pointer;font-size:14px;color:var(--navy);margin-bottom:16px}
+.wizard-consent{display:flex;gap:12px;align-items:flex-start;font-size:12px;line-height:1.6;padding:18px;border:1px solid var(--border);border-radius:6px;margin:20px 0}
+.review-group{margin-bottom:18px}.review-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.review-head h4{font-size:16px;color:var(--navy)}.review-edit{font-size:12px;padding:7px 12px}.review-group dl{margin:0}.review-row{display:grid;grid-template-columns:1fr 1.4fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}.review-row dt{color:var(--muted)}.review-row dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--navy)}
+@media(max-width:600px){.wizard-progress li{flex-direction:column;gap:5px;font-size:11px;padding:10px 2px}.wizard-nav .btn-submit{padding:15px 14px;font-size:11px}.review-row{grid-template-columns:1fr;gap:4px}.wizard-secondary{padding:14px}.form-section-head .fs-title{font-size:22px}}
+</style></head>
 <body><style id="pra-chrome-css">
 /* hide old chrome */
 body>header,body>nav,body>footer,header#header,header#hd,.nav-mobile{display:none!important}
@@ -378,179 +396,11 @@ html:not(.pra-js) .pramob-close{display:none}
 <div class="form-body" id="quote-form">
   <div class="section-eyebrow">Get Your Quote</div>
   <h2>Start Your Landlord Insurance Quote</h2>
-  <p class="sub">I’m Derrick, your independent insurance agent at Pinnacle Risk Advisors. Share the basics below and I’ll review your property details and shop available coverage options. No documents needed to get started.</p>
-  <form id="landlord-quote-form" novalidate>
-    <input type="hidden" name="coverage_type" id="coverage_type" value="Landlord Insurance">
-    <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label for="landlord-website">Leave this field empty</label><input type="text" id="landlord-website" name="website" tabindex="-1" autocomplete="off"></div>
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">01</span><span class="fs-title">Your <em>Contact</em> Information</span><span class="fs-desc">Required to follow up on your quote</span></div>
-      <div class="form-section-body">
-        <div class="fgrid fgrid-2">
-          <div class="field"><label for="full_name">Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" autocomplete="name" placeholder="Full name" required></div>
-          <div class="field"><label for="phone">Phone Number <span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 000-0000" required></div>
-          <div class="field span-2"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">02</span><span class="fs-title">Property <em>Details</em></span><span class="fs-desc">Start with the basics. Add what you know.</span></div>
-      <div class="form-section-body">
-        <div class="fgrid fgrid-2">
-          <div class="field span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" placeholder="123 Main St, Atlanta, GA 30301" required><span class="hint" id="autofill-hint">Enter the full street address, city, state, and ZIP. We’ll look up available details. You can fill in anything missing and continue while the lookup runs.</span></div>
-          <div class="field"><label for="property_type">Property Type</label><select id="property_type" name="property_type"><option value="">Select property type...</option><option value="Single-Family Rental">Single-Family Rental</option><option value="Duplex/Triplex/Fourplex">Duplex/Triplex/Fourplex</option><option value="Small Multifamily">Small Multifamily</option><option value="Apartment Building">Apartment Building</option><option value="Vacant Property">Vacant Property</option><option value="Renovation Property">Renovation Property</option></select></div>
-          <div class="field"><label for="occupancy_status">Occupancy Status <span class="req">*</span></label><select id="occupancy_status" name="occupancy_status" required><option value="">Select occupancy...</option><option value="Tenant Occupied">Tenant Occupied</option><option value="Vacant">Vacant</option><option value="Owner Occupied">Owner Occupied</option><option value="Renovation">Renovation</option><option value="Mixed Occupancy">Mixed Occupancy</option></select></div>
-          <div class="field"><label for="effective_date">Desired Effective Date</label><input type="date" id="effective_date" name="effective_date"></div>
-          <div class="field"><label for="year_built">Year Built</label><input type="number" id="year_built" name="year_built" placeholder="e.g. 1998" min="1800" max="2026"></div>
-          <div class="field" style="display:none;"><label for="roof_age">Roof Age or Year Last Replaced</label><input type="text" id="roof_age" name="roof_age" placeholder="e.g. 2018 or 6 years old"></div>
-          <div class="field"><label for="dwelling_limit">Building Coverage Amount <span class="hint-inline">(optional)</span></label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="Amount, or help me choose"><span class="hint">Estimated cost to rebuild the building, excluding land. This may differ from the purchase price or market value. Leave blank if you’d like help.</span></div>
-          <div class="field"><label for="liability_limit">Liability Limit <span class="req">*</span></label><select id="liability_limit" name="liability_limit" required><option value="">Select liability limit...</option><option value="$300,000">$300,000</option><option value="$500,000">$500,000</option><option value="$1,000,000">$1,000,000</option><option value="Not sure">Help me choose</option></select><span class="hint">Liability coverage helps protect you against covered claims for injuries or property damage. I can help you review an appropriate limit.</span></div>
-          <div class="field span-2" style="display:none;">
-            <label>Prior losses in last 3&ndash;5 years? <span class="req">*</span></label>
-            <div class="yes-no-group"><button type="button" class="yn-btn" data-yn="prior_losses" data-val="No">No</button><button type="button" class="yn-btn" data-yn="prior_losses" data-val="Yes">Yes</button></div>
-            <input type="hidden" id="prior_losses" name="prior_losses" value="">
-          </div>
-          <div class="field cond-block span-2" id="cond-prior-losses" style="display:none;"><label for="prior_losses_describe">Briefly describe (date, cause, amount) <span class="req">*</span></label><textarea id="prior_losses_describe" name="prior_losses_describe" placeholder="e.g. 2022, wind damage, $6,500 paid, repaired" rows="2"></textarea></div>
-          <div class="field span-2" style="display:none;">
-            <label>Currently insured / any lapse or cancellation? <span class="req">*</span></label>
-            <div class="yes-no-group"><button type="button" class="yn-btn" data-yn="currently_insured" data-val="No">No</button><button type="button" class="yn-btn" data-yn="currently_insured" data-val="Yes">Yes</button></div>
-            <input type="hidden" id="currently_insured" name="currently_insured" value="">
-          </div>
-          <div class="field cond-block span-2" id="cond-insured-lapse" style="display:none;"><label for="insured_lapse_explain">Please explain <span class="req">*</span></label><textarea id="insured_lapse_explain" name="insured_lapse_explain" placeholder="Dates, reason, carrier, any lapse or non-renewal..." rows="2"></textarea></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-section">
-      <div class="form-section-head"><span class="fs-num">03</span><span class="fs-title">More Than <em>One Property?</em></span><span class="fs-desc">Optional</span></div>
-      <div class="form-section-body">
-        <label for="multiple_properties" style="display:flex;gap:10px;align-items:center;cursor:pointer;"><input type="checkbox" id="multiple_properties" style="width:18px;height:18px;"> I have multiple properties to quote</label>
-        <div class="field" id="portfolio-details" hidden style="margin-top:16px;">
-          <label for="portfolio_addresses">Additional property addresses</label>
-          <textarea id="portfolio_addresses" rows="4" maxlength="1500" placeholder="One address per line. Add property type and occupancy if you know them."></textarea>
-          <span class="hint">Use the main address field for your first property. For a longer property list, email it after submitting your request.</span>
-        </div>
-        <p class="dec-page-nudge" style="margin-top:18px;"><strong>Have a current policy or property list?</strong> Submit your request first, then email your declarations page, property list, photos, or inspection reports to <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>. Include your name and property address so I can match them to your request.</p>
-      </div>
-    </div>
-    <div class="disclaimer"><div class="disclaimer-icon">&#8505;&#65039;</div><p>Submitting this form does not bind coverage or create a policy. Pinnacle Risk Advisors will review your information and reach out to discuss available options. Coverage is subject to carrier underwriting and approval.</p></div>
-    <div class="submit-row">
-      <div style="width:100%;max-width:760px;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin-bottom:6px;">
-        <label for="smsService" style="display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.55;color:var(--muted);cursor:pointer;">
-          <input type="checkbox" id="smsService" name="smsService" value="yes" style="width:16px;height:16px;margin-top:2px;flex:0 0 auto;">
-          <span>I consent to receive non-marketing text messages from Pinnacle Risk Advisors LLC about this quote request, policy service, and follow-up. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase.</span>
-        </label>
-      </div>
-      <button type="submit" class="btn-submit" id="submit-btn">Get My Landlord Quote</button>
-      <p style="font-size:11px;color:var(--muted);">We confirm receipt immediately and review landlord quote requests as quickly as possible during business hours.</p>
-    </div>
-    <div class="opt-toggle-row">
-      <button type="button" class="opt-toggle-btn" id="opt-toggle-btn" aria-expanded="false" aria-controls="opt-panel">
-        <span>+ Add property details for a faster, more accurate quote</span>
-        <span class="opt-arrow">&#9654;</span>
-      </button>
-    </div>
-    <div class="opt-panel" id="opt-panel" role="region">
-      <p class="opt-intro">Optional: already covered the essentials above. Add more here, or email your declarations page after submitting, for a more complete quote.</p>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Building &amp; <em>Construction</em></span><span class="fs-desc">All optional</span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field"><label for="construction_type">Construction Type</label><select id="construction_type" name="construction_type"><option value="">Select...</option><option>Frame</option><option>Masonry</option><option>Masonry Veneer</option><option>Other</option></select></div>
-            <div class="field"><label for="bedrooms">Bedrooms</label><input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 3" min="0" max="50"></div>
-            <div class="field"><label for="bathrooms">Bathrooms</label><input type="number" id="bathrooms" name="bathrooms" placeholder="e.g. 2" min="0" max="50" step="0.5"></div>
-            <div class="field"><label for="sq_footage">Square Footage</label><input type="number" id="sq_footage" name="sq_footage" placeholder="e.g. 1400"></div>
-            
-            <div class="field"><label for="num_stories">Number of Stories</label><select id="num_stories" name="num_stories"><option value="">Select...</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
-            <div class="field cond-block" id="cond-units" style="display:none;"><label for="num_units">Number of Units</label><input type="number" id="num_units" name="num_units" placeholder="e.g. 4" min="2" max="100"></div>
-            <div class="field"><label for="roof_material">Roof Material</label><select id="roof_material" name="roof_material"><option value="">Select...</option><option>Asphalt Shingle</option><option>Metal</option><option>Tile</option><option>Flat/Membrane</option><option>Other</option></select></div>
-            <div class="field"><label for="roof_shape">Roof Shape</label><select id="roof_shape" name="roof_shape"><option value="">Select...</option><option>Hip</option><option>Gable</option><option>Flat</option><option>Other</option></select></div>
-            <div class="field span-2"><label for="electrical_panel">Electrical Panel Type</label><input type="text" id="electrical_panel" name="electrical_panel" placeholder="e.g. 200-amp Square D"><span class="hint">Flag Federal Pacific (FPE), Zinsco, knob-and-tube, or aluminum wiring. Carriers scrutinize these.</span></div>
-            <div class="field span-2"><label for="plumbing_type">Plumbing Type</label><select id="plumbing_type" name="plumbing_type"><option value="">Select...</option><option>Copper</option><option>PEX</option><option>CPVC</option><option>Polybutylene</option><option>Galvanized</option><option>Other</option></select></div>
-          </div>
-          <div class="opt-subhead" id="updates-subhead" style="display:none;">Year Updated (Roof / Electrical / Plumbing / HVAC), for homes 30+ years old</div>
-          <div class="fgrid fgrid-2" id="updates-grid" style="display:none;">
-            <div class="field"><label for="update_roof">Roof Last Updated</label><input type="text" id="update_roof" name="update_roof" placeholder="Year or N/A"></div>
-            <div class="field"><label for="update_electrical">Electrical Last Updated</label><input type="text" id="update_electrical" name="update_electrical" placeholder="Year or N/A"></div>
-            <div class="field"><label for="update_plumbing">Plumbing Last Updated</label><input type="text" id="update_plumbing" name="update_plumbing" placeholder="Year or N/A"></div>
-            <div class="field"><label for="update_hvac">HVAC Last Updated</label><input type="text" id="update_hvac" name="update_hvac" placeholder="Year or N/A"></div>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Coverage <em>Preferences</em></span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field"><label for="valuation_pref">Valuation Preference</label><select id="valuation_pref" name="valuation_pref"><option value="">Select...</option><option>Replacement Cost</option><option>Actual Cash Value</option><option>Not sure</option></select></div>
-            <div class="field"><label for="monthly_rent">Monthly Rent Amount</label><input type="text" id="monthly_rent" name="monthly_rent" placeholder="e.g. $1,800/mo, loss of rents"></div>
-            <div class="field"><label for="deductible_pref">Deductible Preference</label><input type="text" id="deductible_pref" name="deductible_pref" placeholder="e.g. $1,000 or 1%"><span class="hint">FL policies carry a separate wind/hurricane deductible (often 2&ndash;5% of Coverage A).</span></div>
-            <div class="field"><label for="form_pref">Form Preference</label><select id="form_pref" name="form_pref"><option value="">Select...</option><option>DP1 (Basic Form)</option><option>DP3 (Special Form)</option><option>Not sure? Let Pinnacle advise</option></select></div>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Occupancy <em>Detail</em></span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field span-2"><label for="rental_type">Rental Type</label><select id="rental_type" name="rental_type"><option value="">Select...</option><option>Long-term lease</option><option>Short-term rental / Airbnb</option><option>Section 8</option><option>Student</option><option>Other</option></select></div>
-            <div class="field span-2"><label>Any commercial/retail space in the building?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="commercial_space" data-val="No">No</button><button type="button" class="yn-btn" data-yn="commercial_space" data-val="Yes">Yes</button></div><input type="hidden" id="commercial_space" name="commercial_space" value=""></div>
-            <div class="field cond-block span-2" id="cond-commercial" style="display:none;"><label for="commercial_pct">Approximate % that is commercial</label><input type="text" id="commercial_pct" name="commercial_pct" placeholder="e.g. 20%"></div>
-          </div>
-          <div class="cond-block" id="cond-vacant" style="display:none;">
-            <div class="opt-subhead">Vacant Property Details</div>
-            <div class="fgrid fgrid-2">
-              <div class="field"><label for="vacant_how_long">How Long Vacant?</label><input type="text" id="vacant_how_long" name="vacant_how_long" placeholder="e.g. 3 months"></div>
-              <div class="field"><label for="vacant_reason">Reason for Vacancy</label><input type="text" id="vacant_reason" name="vacant_reason" placeholder="e.g. Between tenants, estate"></div>
-              <div class="field"><label>Property secured?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_secured" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_secured" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_secured" name="vacant_secured" value=""></div>
-              <div class="field"><label>Utilities on?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_utilities" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_utilities" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_utilities" name="vacant_utilities" value=""></div>
-              <div class="field span-2"><label>Under renovation?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="vacant_renovation" data-val="No">No</button><button type="button" class="yn-btn" data-yn="vacant_renovation" data-val="Yes">Yes</button></div><input type="hidden" id="vacant_renovation" name="vacant_renovation" value=""></div>
-            </div>
-          </div>
-          <div class="cond-block" id="cond-renovation" style="display:none;">
-            <div class="opt-subhead">Renovation Details</div>
-            <div class="fgrid fgrid-2">
-              <div class="field span-2"><label for="reno_scope">Scope of Work</label><textarea id="reno_scope" name="reno_scope" placeholder="e.g. Full kitchen/bath gut renovation, new electrical, new roof"></textarea></div>
-              <div class="field"><label for="reno_pct_complete">Percent Complete</label><input type="text" id="reno_pct_complete" name="reno_pct_complete" placeholder="e.g. 40%"></div>
-              <div class="field"><label>Licensed General Contractor?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="reno_gc" data-val="No">No</button><button type="button" class="yn-btn" data-yn="reno_gc" data-val="Yes">Yes</button></div><input type="hidden" id="reno_gc" name="reno_gc" value=""></div>
-              <div class="field span-2"><label>Occupied during renovation?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="reno_occupied" data-val="No">No</button><button type="button" class="yn-btn" data-yn="reno_occupied" data-val="Yes">Yes</button></div><input type="hidden" id="reno_occupied" name="reno_occupied" value=""></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Liability <em>Hazards</em></span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field"><label>Pool on property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_pool" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_pool" data-val="Yes">Yes</button></div><input type="hidden" id="has_pool" name="has_pool" value=""></div>
-            <div class="field"><label>Trampoline on property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_trampoline" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_trampoline" data-val="Yes">Yes</button></div><input type="hidden" id="has_trampoline" name="has_trampoline" value=""></div>
-            <div class="cond-block span-2" id="cond-pool" style="display:none;"><div class="fgrid fgrid-2"><div class="field"><label>Pool fenced?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="pool_fenced" data-val="No">No</button><button type="button" class="yn-btn" data-yn="pool_fenced" data-val="Yes">Yes</button></div><input type="hidden" id="pool_fenced" name="pool_fenced" value=""></div><div class="field"><label>Diving board or slide?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="pool_diving" data-val="No">No</button><button type="button" class="yn-btn" data-yn="pool_diving" data-val="Yes">Yes</button></div><input type="hidden" id="pool_diving" name="pool_diving" value=""></div></div></div>
-            <div class="field span-2"><label>Dogs on the property?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_dogs" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_dogs" data-val="Yes">Yes</button></div><input type="hidden" id="has_dogs" name="has_dogs" value=""></div>
-            <div class="field cond-block span-2" id="cond-dogs" style="display:none;"><label for="dog_breeds">Dog Breed(s)</label><input type="text" id="dog_breeds" name="dog_breeds" placeholder="e.g. Labrador, German Shepherd"></div>
-            <div class="field span-2"><label>Wood stove or supplemental heat?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_wood_stove" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_wood_stove" data-val="Yes">Yes</button></div><input type="hidden" id="has_wood_stove" name="has_wood_stove" value=""></div>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Additional Loss &amp; <em>Coverage Detail</em></span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field span-2"><label for="loss_details">Loss Details (dates, cause, amounts, repaired?)</label><textarea id="loss_details" name="loss_details" placeholder="e.g. 2023, water damage, $8,400 paid, repaired"></textarea></div>
-            <div class="field span-2"><label>Any lapse, cancellation, or non-renewal?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="has_lapse" data-val="No">No</button><button type="button" class="yn-btn" data-yn="has_lapse" data-val="Yes">Yes</button></div><input type="hidden" id="has_lapse" name="has_lapse" value=""></div>
-            <div class="field cond-block span-2" id="cond-lapse" style="display:none;"><label for="lapse_explain">Please explain the lapse/cancellation</label><textarea id="lapse_explain" name="lapse_explain" placeholder="Dates, reason, carrier..."></textarea></div>
-          </div>
-        </div>
-      </div>
-      <div class="form-section">
-        <div class="form-section-head"><span class="fs-num">&#8857;</span><span class="fs-title">Georgia &amp; Florida <em>Specifics</em></span></div>
-        <div class="form-section-body">
-          <div class="fgrid fgrid-2">
-            <div class="field"><label for="fl_coast_distance">FL: Distance to Coast / Windstorm Zone</label><input type="text" id="fl_coast_distance" name="fl_coast_distance" placeholder="e.g. 3 miles, wind zone 3"></div>
-            <div class="field"><label>FL: Wind mitigation inspection available?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="fl_wind_mit" data-val="No">No</button><button type="button" class="yn-btn" data-yn="fl_wind_mit" data-val="Yes">Yes</button></div><input type="hidden" id="fl_wind_mit" name="fl_wind_mit" value=""><span class="hint">OIR-B1-1802 wind mitigation report can drive major premium credits in FL.</span></div>
-            <div class="field span-2"><label>FL: Any sinkhole activity or prior ground movement?</label><div class="yes-no-group"><button type="button" class="yn-btn" data-yn="fl_sinkhole" data-val="No">No</button><button type="button" class="yn-btn" data-yn="fl_sinkhole" data-val="Yes">Yes</button></div><input type="hidden" id="fl_sinkhole" name="fl_sinkhole" value=""></div>
-            <div class="field span-2"><label for="mortgagee_info">Lender / Mortgagee Name, Address &amp; Loan Number</label><textarea id="mortgagee_info" name="mortgagee_info" placeholder="e.g. Wells Fargo Home Mortgage, PO Box 10335, Des Moines IA 50306, Loan #1234567890"></textarea></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
+  <p class="sub">I’m Derrick, your independent insurance agent at Pinnacle Risk Advisors. Answer a few questions in four short steps, then review and send your request. I’ll use your details to shop available coverage options. No documents needed to get started.</p>
+<form id="landlord-quote-form" novalidate>
+<input type="hidden" name="coverage_type" id="coverage_type" value="Landlord Insurance">
+<div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label for="landlord-website">Leave this field empty</label><input type="text" id="landlord-website" name="website" tabindex="-1" autocomplete="off"></div>
+<nav aria-label="Quote request progress" class="wizard-progress"><ol><li data-progress="0" aria-current="step"><span>1</span>Contact</li><li data-progress="1" ><span>2</span>Property</li><li data-progress="2" ><span>3</span>Coverage</li><li data-progress="3" ><span>4</span>Review</li></ol><p id="wizard-status" role="status">Step 1 of 4: Contact</p></nav><section class="wizard-step form-section" data-step="0" aria-labelledby="step-title-0" ><div class="form-section-head"><span class="fs-num">01</span><h3 class="fs-title" id="step-title-0" tabindex="-1">Your Contact Information</h3></div><div class="form-section-body"><p class="wizard-intro">Tell me how to reach you about your quote.</p><div class="fgrid fgrid-2"><div class="field "><label for="full_name">Your Full Name <span class="req">*</span></label><input type="text" id="full_name" name="full_name" required placeholder="First and last name" autocomplete="name" maxlength="100"></div><div class="field "><label for="phone">Mobile Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" required placeholder="(555) 000-0000" autocomplete="tel"></div><div class="field "><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email"></div><div class="field "><label for="owner_name">Property Owner / LLC Name</label><input type="text" id="owner_name" name="owner_name" placeholder="If different from your name" maxlength="120"><span class="hint">Optional. Enter the legal owner listed on the deed.</span></div></div></div></section><section class="wizard-step form-section" data-step="1" aria-labelledby="step-title-1" hidden><div class="form-section-head"><span class="fs-num">02</span><h3 class="fs-title" id="step-title-1" tabindex="-1">Your Rental Property</h3></div><div class="form-section-body"><p class="wizard-intro">These details help me identify the right markets. You can select “Not sure” where needed.</p><div class="fgrid fgrid-2"><div class="field "><label for="property_address">First Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" required placeholder="Street, city, state, ZIP" maxlength="200"></div><div class="field "><label for="property_type">Property Type <span class="req">*</span></label><select id="property_type" name="property_type" required><option value="">Select...</option><option value="Single-Family Rental">Single-Family Rental</option><option value="Duplex/Triplex/Fourplex">Duplex/Triplex/Fourplex</option><option value="Small Multifamily">Small Multifamily</option><option value="Apartment Building">Apartment Building</option><option value="Vacant Property">Vacant Property</option><option value="Renovation Property">Renovation Property</option></select></div><div class="field "><label for="occupancy_status">Current Occupancy <span class="req">*</span></label><select id="occupancy_status" name="occupancy_status" required><option value="">Select...</option><option value="Tenant Occupied">Tenant Occupied</option><option value="Vacant">Vacant</option><option value="Owner Occupied">Owner Occupied</option><option value="Renovation">Renovation</option><option value="Mixed Occupancy">Mixed Occupancy</option></select></div><div class="field "><label for="year_built">Year Built (if known)</label><input type="number" id="year_built" name="year_built" placeholder="e.g. 1998" min="1800" max="2026"><span class="hint">Leave blank if you’re not sure.</span></div><div class="field "><label for="sq_footage">Building Square Footage (if known)</label><input type="number" id="sq_footage" name="sq_footage" placeholder="e.g. 1800" min="1" max="1000000"><span class="hint">Approximate is fine. Leave blank if you’re not sure.</span></div><div class="field "><label for="roof_age">Roof Age or Year Replaced <span class="req">*</span></label><input type="text" id="roof_age" name="roof_age" required placeholder="e.g. 2018, 8 years old, or Not sure" maxlength="80"></div><div class="field "><label for="construction_type">Construction Type <span class="req">*</span></label><select id="construction_type" name="construction_type" required><option value="">Select...</option><option value="Frame">Frame</option><option value="Masonry">Masonry</option><option value="Masonry Veneer">Masonry Veneer</option><option value="Other">Other</option><option value="Not sure">Not sure</option></select></div></div><p class="hint" id="autofill-hint">We’ll look up available property details. Review anything filled in and add what you know. You can continue without waiting.</p><div class="wizard-conditional" id="cond-units" hidden><div class="field "><label for="num_units">Number of Rental Units (if known)</label><input type="number" id="num_units" name="num_units" placeholder="e.g. 4" min="1" max="10000"></div></div><div class="wizard-conditional" id="cond-rental" hidden><div class="field "><label for="rental_type">Rental Use <span class="req">*</span></label><select id="rental_type" name="rental_type" required><option value="">Select...</option><option value="Long-term lease">Long-term lease</option><option value="Short-term rental / Airbnb">Short-term rental / Airbnb</option><option value="Section 8">Section 8</option><option value="Student">Student</option><option value="Other">Other</option><option value="Not sure">Not sure</option></select></div></div><div class="wizard-conditional" id="cond-vacant" hidden><div class="fgrid fgrid-2"><div class="field "><label for="vacant_how_long">How Long Has It Been Vacant? <span class="req">*</span></label><input type="text" id="vacant_how_long" name="vacant_how_long" required placeholder="e.g. 2 months, newly purchased, or Not sure" maxlength="100"></div><div class="field "><label for="vacant_reason">Reason for Vacancy</label><input type="text" id="vacant_reason" name="vacant_reason" placeholder="e.g. between tenants or awaiting renovation" maxlength="150"></div></div></div><div class="wizard-conditional" id="cond-renovation" hidden><div class="field "><label for="reno_scope">What Work Is Being Done? <span class="req">*</span></label><textarea id="reno_scope" name="reno_scope" rows="3" maxlength="500" required placeholder="Brief scope of work, or Not sure"></textarea></div></div><div class="portfolio-choice"><label for="multiple_properties"><input type="checkbox" id="multiple_properties"> I have multiple properties to quote</label><div class="wizard-conditional" id="portfolio-details" hidden><label for="portfolio_addresses">Additional property addresses</label><textarea id="portfolio_addresses" rows="3" maxlength="1000" placeholder="One address per line, with property type and occupancy if known."></textarea><p class="hint">For a longer list, email it after submitting your request.</p></div></div></div></section><section class="wizard-step form-section" data-step="2" aria-labelledby="step-title-2" hidden><div class="form-section-head"><span class="fs-num">03</span><h3 class="fs-title" id="step-title-2" tabindex="-1">Coverage &amp; Insurance History</h3></div><div class="form-section-body"><p class="wizard-intro">Share your coverage needs and insurance history. I’ll help you review the limits.</p><div class="fgrid fgrid-2"><div class="field "><label for="effective_date">When Should Coverage Start? <span class="req">*</span></label><input type="date" id="effective_date" name="effective_date" required placeholder="" ></div><div class="field "><label for="dwelling_limit">Building Coverage Amount (if known)</label><input type="text" id="dwelling_limit" name="dwelling_limit" placeholder="Amount, or help me choose" maxlength="80"><span class="hint">Cost to rebuild the building, excluding land. It may differ from purchase price or market value. Leave blank for help.</span></div><div class="field "><label for="liability_limit">Liability Limit <span class="req">*</span></label><select id="liability_limit" name="liability_limit" required><option value="">Select...</option><option value="$300,000">$300,000</option><option value="$500,000">$500,000</option><option value="$1,000,000">$1,000,000</option><option value="Not sure">Help me choose</option></select></div><div class="field "><label for="monthly_rent">Monthly Rental Income (if known)</label><input type="text" id="monthly_rent" name="monthly_rent" placeholder="e.g. $1,800 total per month" maxlength="80"><span class="hint">Include all units at this property. Leave blank if not applicable.</span></div><div class="field "><label for="currently_insured">Is This Property Currently Insured? <span class="req">*</span></label><select id="currently_insured" name="currently_insured" required><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div><div class="field "><label for="prior_losses">Any Property Insurance Claims in the Last 5 Years? <span class="req">*</span></label><select id="prior_losses" name="prior_losses" required><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div><div class="field "><label for="has_lapse">Any Lapse, Cancellation, or Non-Renewal? <span class="req">*</span></label><select id="has_lapse" name="has_lapse" required><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div></div><label class="wizard-check" for="effective_date_unknown"><input type="checkbox" id="effective_date_unknown"> I’m not sure of the start date yet</label><div class="wizard-conditional" id="cond-current-carrier" hidden><div class="field "><label for="current_carrier">Current Insurance Company (if known)</label><input type="text" id="current_carrier" name="current_carrier" placeholder="Carrier name" maxlength="80"></div></div><div class="wizard-conditional" id="cond-prior-losses" hidden><div class="field "><label for="prior_losses_describe">Tell Us About the Claim(s) <span class="req">*</span></label><textarea id="prior_losses_describe" name="prior_losses_describe" rows="3" maxlength="800" required placeholder="Date, cause, amount, and whether repairs are complete. Share what you know; “Not sure” is okay."></textarea></div></div><div class="wizard-conditional" id="cond-lapse" hidden><div class="field "><label for="lapse_explain">Tell Us About the Lapse or Cancellation <span class="req">*</span></label><textarea id="lapse_explain" name="lapse_explain" rows="3" maxlength="500" required placeholder="Approximate dates and reason, or Not sure"></textarea></div></div><details class="wizard-extra"><summary>Add building updates or property hazards (optional)</summary><div class="fgrid fgrid-2"><div class="field "><label for="roof_material">Roof Material</label><select id="roof_material" name="roof_material" ><option value="">Select...</option><option value="Asphalt Shingle">Asphalt Shingle</option><option value="Metal">Metal</option><option value="Tile">Tile</option><option value="Flat/Membrane">Flat/Membrane</option><option value="Other">Other</option><option value="Not sure">Not sure</option></select></div><div class="field "><label for="update_electrical">Electrical Last Updated</label><input type="text" id="update_electrical" name="update_electrical" placeholder="Year or Not sure" maxlength="80"></div><div class="field "><label for="update_plumbing">Plumbing Last Updated</label><input type="text" id="update_plumbing" name="update_plumbing" placeholder="Year or Not sure" maxlength="80"></div><div class="field "><label for="update_hvac">HVAC Last Updated</label><input type="text" id="update_hvac" name="update_hvac" placeholder="Year or Not sure" maxlength="80"></div><div class="field "><label for="has_pool">Pool on Property?</label><select id="has_pool" name="has_pool" ><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div><div class="field "><label for="has_trampoline">Trampoline on Property?</label><select id="has_trampoline" name="has_trampoline" ><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div><div class="field "><label for="has_dogs">Dogs on Property?</label><select id="has_dogs" name="has_dogs" ><option value="">Select...</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div></div></details></div></section><section class="wizard-step form-section" data-step="3" aria-labelledby="step-title-3" hidden><div class="form-section-head"><span class="fs-num">04</span><h3 class="fs-title" id="step-title-3" tabindex="-1">Review &amp; Send Your Request</h3></div><div class="form-section-body"><p class="wizard-intro">Check your answers. Use Edit or Back to make changes before sending.</p><div id="quote-review" class="quote-review" aria-live="polite"></div><p class="dec-page-nudge"><strong>Have supporting documents?</strong> After submitting, email your declarations page, property list, photos, or inspection reports to <a href="mailto:dbrown@pinnacleriskad.com">dbrown@pinnacleriskad.com</a>. Include your name and property address.</p><label class="wizard-consent" for="smsService"><input type="checkbox" id="smsService" name="smsService" value="yes"><span>I consent to receive non-marketing text messages from Pinnacle Risk Advisors LLC about this quote request, policy service, and follow-up. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase.</span></label><div class="disclaimer"><div class="disclaimer-icon">&#8505;&#65039;</div><p>This is a quote request, not an instant quote or a binder. Coverage is subject to carrier underwriting and approval. I may need additional details to finalize your quote.</p></div></div></section><div class="wizard-nav"><button type="button" id="wizard-back" class="wizard-secondary" hidden>Back</button><button type="button" id="wizard-next" class="btn-submit">Continue to Property</button><button type="submit" class="btn-submit" id="submit-btn" hidden>Send My Quote Request</button></div><p class="wizard-footnote">Your request is sent when you select “Send My Quote Request.” You’ll receive an email confirmation, plus a text if you opt in.</p><noscript><p>Please enable JavaScript to use this guided form, or call <a href="tel:+17707583197">(770) 758-3197</a> for help.</p></noscript></form>
 </div>
 <section class="info-section">
   <div class="info-container">
@@ -653,67 +503,99 @@ html:not(.pra-js) .pramob-close{display:none}
 <script>
 var quoteSession = PinnacleQuote.createSession({ formKey: 'landlord-quote', lineOfBusiness: 'landlord' });
 
-document.getElementById('multiple_properties').addEventListener('change', function() {
-  document.getElementById('portfolio-details').hidden = !this.checked;
-});
-
-document.getElementById('opt-toggle-btn').addEventListener('click', function() {
-  var panel = document.getElementById('opt-panel');
-  var isOpen = panel.classList.toggle('open');
-  this.classList.toggle('open', isOpen);
-  this.setAttribute('aria-expanded', String(isOpen));
-  this.querySelector('span:first-child').textContent = isOpen
-    ? '\u2013 Hide property details'
-    : '+ Add property details for a faster, more accurate quote';
-});
-
-document.querySelectorAll('.yn-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var yn = this.dataset.yn;
-    var val = this.dataset.val;
-    document.querySelectorAll('.yn-btn[data-yn="' + yn + '"]').forEach(function(b){b.classList.remove('active');});
-    this.classList.add('active');
-    var hidden = document.getElementById(yn);
-    if (hidden) hidden.value = val;
-    handleYNCond(yn, val);
+var wizardForm = document.getElementById('landlord-quote-form');
+var wizardSteps = Array.from(wizardForm.querySelectorAll('.wizard-step'));
+var wizardCurrent = 0;
+var wizardLabels = ['Contact', 'Property', 'Coverage', 'Review'];
+function wizardToggle(id, visible) {
+  var panel = document.getElementById(id);
+  if (!panel) return;
+  panel.hidden = !visible;
+  panel.querySelectorAll('input,select,textarea').forEach(function(el) { el.disabled = !visible; });
+}
+function updatePropertyTypeConds() { wizardSyncConditions(); }
+function updateOccupancyConds() { wizardSyncConditions(); }
+function wizardSyncConditions() {
+  var pt = document.getElementById('property_type').value;
+  var occ = document.getElementById('occupancy_status').value;
+  wizardToggle('cond-units', ['Duplex/Triplex/Fourplex','Small Multifamily','Apartment Building'].indexOf(pt) >= 0);
+  wizardToggle('cond-rental', ['Tenant Occupied','Mixed Occupancy'].indexOf(occ) >= 0);
+  wizardToggle('cond-vacant', pt === 'Vacant Property' || occ === 'Vacant');
+  wizardToggle('cond-renovation', pt === 'Renovation Property' || occ === 'Renovation');
+  wizardToggle('cond-current-carrier', document.getElementById('currently_insured').value === 'Yes');
+  wizardToggle('cond-prior-losses', document.getElementById('prior_losses').value === 'Yes');
+  wizardToggle('cond-lapse', document.getElementById('has_lapse').value === 'Yes');
+  wizardToggle('portfolio-details', document.getElementById('multiple_properties').checked);
+  var date = document.getElementById('effective_date');
+  date.disabled = document.getElementById('effective_date_unknown').checked;
+  if (wizardCurrent === 3) wizardRenderReview();
+}
+function wizardValidate(step) {
+  var controls = Array.from(wizardSteps[step].querySelectorAll('input,select,textarea'));
+  if (step === 0) {
+    var name = document.getElementById('full_name');
+    name.setCustomValidity(name.value.trim() ? '' : 'Please enter your name.');
+    var phone = document.getElementById('phone');
+    var digits = phone.value.replace(/\D/g, '');
+    phone.setCustomValidity(digits.length === 10 || (digits.length === 11 && digits.charAt(0) === '1') ? '' : 'Please enter a 10-digit US phone number.');
+  }
+  var invalid = controls.find(function(el) { return !el.disabled && !el.checkValidity(); });
+  if (invalid) { wizardShow(step, false); invalid.focus(); invalid.reportValidity(); return false; }
+  return true;
+}
+function wizardValidateAll() {
+  for (var i = 0; i < wizardSteps.length; i++) if (!wizardValidate(i)) return false;
+  return true;
+}
+function wizardShow(step, focus) {
+  wizardCurrent = step;
+  wizardSteps.forEach(function(panel, i) { panel.hidden = i !== step; });
+  wizardForm.querySelectorAll('[data-progress]').forEach(function(el, i) {
+    if (i === step) el.setAttribute('aria-current','step'); else el.removeAttribute('aria-current');
   });
-});
-
-function showCond(id, show) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  if (show) { el.style.display = ''; el.classList.add('show'); }
-  else { el.style.display = 'none'; el.classList.remove('show'); }
+  document.getElementById('wizard-status').textContent = 'Step ' + (step + 1) + ' of 4: ' + wizardLabels[step];
+  document.getElementById('wizard-back').hidden = step === 0;
+  document.getElementById('wizard-next').hidden = step === 3;
+  document.getElementById('submit-btn').hidden = step !== 3;
+  document.getElementById('wizard-next').textContent = step === 2 ? 'Review My Request' : 'Continue to ' + wizardLabels[step + 1];
+  if (step === 3) wizardRenderReview();
+  if (focus !== false) {
+    document.getElementById('step-title-' + step).focus({preventScroll:true});
+    document.getElementById('quote-form').scrollIntoView({behavior:'smooth',block:'start'});
+  }
 }
-function handleYNCond(yn, val) {
-  var yes = val === 'Yes';
-  if (yn === 'prior_losses')      showCond('cond-prior-losses', yes);
-  if (yn === 'currently_insured') showCond('cond-insured-lapse', yes);
-  if (yn === 'has_pool')          showCond('cond-pool', yes);
-  if (yn === 'has_dogs')          showCond('cond-dogs', yes);
-  if (yn === 'has_lapse')         showCond('cond-lapse', yes);
-  if (yn === 'commercial_space')  showCond('cond-commercial', yes);
+function wizardAdvance() { if (wizardValidate(wizardCurrent)) wizardShow(Math.min(3,wizardCurrent + 1)); }
+function wizardRenderReview() {
+  var container = document.getElementById('quote-review');
+  container.replaceChildren();
+  var groups = [
+    ['Contact', 0, [['full_name','Your name'],['phone','Phone'],['email','Email'],['owner_name','Property owner / LLC']]],
+    ['Property', 1, [['property_address','Property address'],['property_type','Property type'],['occupancy_status','Occupancy'],['rental_type','Rental use'],['num_units','Rental units'],['year_built','Year built'],['sq_footage','Square footage'],['roof_age','Roof age / replaced'],['construction_type','Construction'],['vacant_how_long','Vacancy length'],['vacant_reason','Vacancy reason'],['reno_scope','Renovation work'],['portfolio_addresses','Additional properties']]],
+    ['Coverage & insurance history', 2, [['effective_date','Coverage start'],['dwelling_limit','Building coverage'],['liability_limit','Liability limit'],['monthly_rent','Monthly rental income'],['currently_insured','Currently insured'],['current_carrier','Current carrier'],['prior_losses','Claims in last 5 years'],['prior_losses_describe','Claim details'],['has_lapse','Lapse / cancellation'],['lapse_explain','Lapse details'],['roof_material','Roof material'],['update_electrical','Electrical updated'],['update_plumbing','Plumbing updated'],['update_hvac','HVAC updated'],['has_pool','Pool'],['has_trampoline','Trampoline'],['has_dogs','Dogs']]]
+  ];
+  groups.forEach(function(group) {
+    var section = document.createElement('div'); section.className = 'review-group';
+    var head = document.createElement('div');head.className='review-head';
+    var title=document.createElement('h4');title.textContent=group[0];head.appendChild(title);
+    var edit=document.createElement('button');edit.type='button';edit.className='review-edit';edit.textContent='Edit';edit.setAttribute('aria-label','Edit '+group[0]);edit.addEventListener('click',function(){wizardShow(group[1]);});head.appendChild(edit);section.appendChild(head);
+    var list=document.createElement('dl');
+    group[2].forEach(function(pair){
+      var control=document.getElementById(pair[0]);if(!control||control.disabled)return;
+      var value=(control.value||'').trim();
+      if(!value) { if(['year_built','sq_footage','owner_name','dwelling_limit','monthly_rent'].indexOf(pair[0]) < 0)return; value=pair[0]==='dwelling_limit'?'Help me choose':'Not provided'; }
+      var row=document.createElement('div');row.className='review-row';var label=document.createElement('dt');label.textContent=pair[1];var answer=document.createElement('dd');answer.textContent=value;row.appendChild(label);row.appendChild(answer);list.appendChild(row);
+    });
+    if(group[1]===2&&document.getElementById('effective_date_unknown').checked){var row=document.createElement('div');row.className='review-row';var dt=document.createElement('dt');dt.textContent='Coverage start';var dd=document.createElement('dd');dd.textContent='Not sure yet';row.appendChild(dt);row.appendChild(dd);list.prepend(row);}
+    if(group[1]===1&&document.getElementById('multiple_properties').checked&&!document.getElementById('portfolio_addresses').value.trim()){var p=document.createElement('p');p.className='hint';p.textContent='Multiple properties requested. Additional addresses will be provided by email.';section.appendChild(p);}
+    section.appendChild(list);container.appendChild(section);
+  });
 }
-function updateOccupancyConds() {
-  var occ = (document.getElementById('occupancy_status').value || '').toLowerCase();
-  showCond('cond-vacant',     occ.indexOf('vacant') >= 0);
-  showCond('cond-renovation', occ.indexOf('renovation') >= 0);
-}
-document.getElementById('occupancy_status').addEventListener('change', updateOccupancyConds);
-function updatePropertyTypeConds() {
-  var pt = (document.getElementById('property_type').value || '').toLowerCase();
-  showCond('cond-units', pt.indexOf('duplex') >= 0 || pt.indexOf('multifamily') >= 0 || pt.indexOf('apartment') >= 0);
-}
-document.getElementById('property_type').addEventListener('change', updatePropertyTypeConds);
-function updateAgeFields() {
-  var yr = parseInt(document.getElementById('year_built').value, 10);
-  var show = !isNaN(yr) && (new Date().getFullYear() - yr) >= 30;
-  var sh = document.getElementById('updates-subhead');
-  var gr = document.getElementById('updates-grid');
-  if (sh) sh.style.display = show ? '' : 'none';
-  if (gr) gr.style.display = show ? '' : 'none';
-}
-document.getElementById('year_built').addEventListener('input', updateAgeFields);
+document.getElementById('wizard-next').addEventListener('click',wizardAdvance);
+document.getElementById('wizard-back').addEventListener('click',function(){wizardShow(Math.max(0,wizardCurrent-1));});
+['property_type','occupancy_status','currently_insured','prior_losses','has_lapse','multiple_properties','effective_date_unknown'].forEach(function(id){document.getElementById(id).addEventListener('change',wizardSyncConditions);});
+document.getElementById('year_built').max = String(new Date().getFullYear());
+wizardSyncConditions();
+wizardShow(0,false);
 
 function buildSubmissionLink(data) {
   try { return window.location.origin + '/landlord-insurance-quote.html?view_submission=' + btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
@@ -721,7 +603,7 @@ function buildSubmissionLink(data) {
 }
 function opt(id) {
   var el = document.getElementById(id);
-  return el ? (el.value || '').trim() : '';
+  return el && !el.disabled ? (el.value || '').trim() : '';
 }
 
 function buildNotes(data) {
@@ -852,9 +734,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('landlord-quote-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  // Roof age, prior losses, and current-insurance are deferred to post-contact underwriting,
-  // so they no longer block the customer from starting a quote.
-  if (!this.checkValidity()) { this.reportValidity(); return; }
+  if (wizardCurrent < 3) { wizardAdvance(); return; }
+  if (!wizardValidateAll()) return;
 
   var btn = document.getElementById('submit-btn');
   btn.textContent = 'Sending...';
@@ -866,7 +747,10 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   var portfolio = document.getElementById('multiple_properties').checked
     ? 'Multiple properties requested. Additional addresses: ' + (opt('portfolio_addresses') || 'To be provided by email.')
     : 'Single property request.';
-  var fileNames = 'Documents are sent separately by email. ' + portfolio;
+  var details = 'Owner: ' + (opt('owner_name') || data.full_name) + '; Property type: ' + data.property_type + '; Construction: ' + data.construction_type + '; Carrier: ' + (opt('current_carrier') || 'Not provided') + '; Start date: ' + (data.effective_date || 'Not sure') + '. ';
+  var fileNames = details + portfolio + ' Documents are sent separately by email.';
+  delete data.owner_name;
+  delete data.current_carrier;
   var submittedAt = new Date().toISOString();
   var smsServiceOptIn = data.smsService === 'yes';
   var submissionData = Object.assign({}, data, {
@@ -877,7 +761,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     form:'landlord_quote',
     form_page:'/landlord-insurance-quote',
     files_noted:fileNames,
-    notes:portfolio,
+    notes:details + portfolio,
     submitted_at:submittedAt,
     smsService: smsServiceOptIn ? 'yes' : '',
     smsServiceConsent: smsServiceOptIn ? 'yes' : 'no',
@@ -901,7 +785,7 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     document.getElementById('success-screen').scrollIntoView({behavior:'smooth', block:'start'});
   } catch(err) {
     PinnacleQuote.logDiagnostic('landlord_complete_submit_failed', err);
-    btn.textContent = 'Get My Landlord Quote';
+    btn.textContent = 'Send My Quote Request';
     btn.disabled = false;
     PinnacleQuote.showFailure(this, err);
   }
@@ -991,7 +875,6 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
       }
       if (data.units && parseInt(data.units, 10) > 1) {
         var cond = document.getElementById("cond-units");
-        if (cond) cond.style.display = "";
         setInput("num_units", data.units);
       }
       setSelect("roof_material", data.roof_material);
