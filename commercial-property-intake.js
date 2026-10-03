@@ -26,9 +26,8 @@
     toggle('insured-panel',value('currently_insured') === 'Yes');
     toggle('claims-panel',value('claims') === 'Yes');
     toggle('lapse-panel',value('lapse') === 'Yes');
-    var tenant = value('ownership') === 'I lease space for my business';
     var coverage = value('coverage_needs');
-    toggle('building-panel',!tenant && coverage !== 'Business contents / tenant improvements');
+    toggle('building-panel',coverage !== 'Business contents / tenant improvements');
     toggle('contents-panel',coverage !== 'Building only');
     el('effective_date').disabled = el('effective_date_unknown').checked;
     if (current === 3) review();
