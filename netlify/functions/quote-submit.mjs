@@ -70,7 +70,9 @@ const FIELD_ALLOWLISTS = {
     'reno_pct_complete', 'reno_gc', 'reno_occupied', 'has_pool', 'pool_fenced',
     'pool_diving', 'has_trampoline', 'has_dogs', 'dog_breeds', 'has_wood_stove',
     'loss_details', 'has_lapse', 'lapse_explain', 'fl_coast_distance',
-    'fl_wind_mit', 'fl_sinkhole', 'mortgagee_info', 'bathrooms', 'bedrooms'
+    'fl_wind_mit', 'fl_sinkhole', 'mortgagee_info', 'bathrooms', 'bedrooms',
+    'smsService', 'smsOptInTimestamp', 'smsOptInSource', 'smsOptInPageUrl',
+    'smsServiceConsent', 'smsDisclosureVersion'
   ),
   commercial: fields(
     'firstName', 'lastName', 'company', 'state', 'coverage', 'details',
