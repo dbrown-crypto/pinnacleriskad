@@ -535,6 +535,23 @@ try {
 } catch (error) { /* The shared submission helper supports browsers without storage. */ }
 var quoteSession = PinnacleQuote.createSession({ formKey: 'landlord-quote', lineOfBusiness: 'landlord' });
 
+
+// Record the referring landing page without labeling every visitor as organic.
+function landlordEntryPage() {
+  var allowed = ['/landlord-insurance-florida', '/landlord-insurance-georgia', '/landlord'];
+  try {
+    var entry = new URLSearchParams(window.location.search).get('entry_page');
+    var path = entry ? '/' + entry.replace(/^\//, '').replace(/\.html$/, '') : '';
+    if (allowed.indexOf(path) !== -1) return path;
+    if (document.referrer) {
+      var ref = new URL(document.referrer);
+      var refPath = ref.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+      if (ref.origin === window.location.origin && allowed.indexOf(refPath) !== -1) return refPath;
+    }
+  } catch (error) { /* Attribution must never block a quote request. */ }
+  return '';
+}
+
 var wizardForm = document.getElementById('landlord-quote-form');
 var wizardSteps = Array.from(wizardForm.querySelectorAll('.wizard-step'));
 var wizardCurrent = 0;
@@ -817,6 +834,8 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
     ? 'Multiple properties requested. Additional addresses: ' + (opt('portfolio_addresses') || 'To be provided by email.')
     : 'Single property request.';
   var details = 'Owner: ' + (opt('owner_name') || data.full_name) + '; Property type: ' + data.property_type + '; Construction: ' + data.construction_type + '; Carrier: ' + (opt('current_carrier') || 'Not provided') + '; Start date: ' + (data.effective_date || 'Not sure') + '. ';
+  var entryPage = landlordEntryPage();
+  if (entryPage) details += 'Entry page: ' + entryPage + '. ';
   var fileNames = details + portfolio + ' Documents are sent separately by email.';
   delete data.owner_name;
   delete data.current_carrier;
