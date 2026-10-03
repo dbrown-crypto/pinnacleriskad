@@ -480,8 +480,14 @@ html:not(.pra-js) .pramob-close{display:none}
     </div>
     <div class="disclaimer"><div class="disclaimer-icon">&#8505;&#65039;</div><p>Submitting this form does not bind coverage or create a policy. Pinnacle Risk Advisors will review your information and reach out to discuss available options. Coverage is subject to carrier underwriting and approval.</p></div>
     <div class="submit-row">
+      <div style="width:100%;max-width:760px;text-align:left;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin-bottom:6px;">
+        <label for="smsService" style="display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.55;color:var(--muted);cursor:pointer;">
+          <input type="checkbox" id="smsService" name="smsService" value="yes" style="width:16px;height:16px;margin-top:2px;flex:0 0 auto;">
+          <span>I consent to receive non-marketing text messages from Pinnacle Risk Advisors LLC about this quote request, policy service, and follow-up. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is optional and is not a condition of purchase.</span>
+        </label>
+      </div>
       <button type="submit" class="btn-submit" id="submit-btn">Get My Landlord Quote</button>
-      <p style="font-size:11px;color:var(--muted);">We typically respond within one business day.</p>
+      <p style="font-size:11px;color:var(--muted);">We confirm receipt immediately and review landlord quote requests as quickly as possible during business hours.</p>
     </div>
     <div class="opt-toggle-row">
       <button type="button" class="opt-toggle-btn" id="opt-toggle-btn" aria-expanded="false" aria-controls="opt-panel">
@@ -817,6 +823,8 @@ function buildNotes(data) {
   add('FL Wind Mitigation Report', opt('fl_wind_mit'));
   add('FL Sinkhole / Ground Movement', opt('fl_sinkhole'));
   add('Mortgagee / Lender Info', opt('mortgagee_info'));
+  lines.push('--- Communication Consent ---');
+  add('SMS Service Consent', data.smsService === 'yes' ? 'Yes' : 'No');
   lines.push('--- Files Uploaded ---');
   lines.push(allFileNames());
   return lines.join('\n');
@@ -886,10 +894,23 @@ document.getElementById('landlord-quote-form').addEventListener('submit', async 
   var honeypot = data.website || '';
   delete data.website;
   var fileNames = allFileNames();
+  var submittedAt = new Date().toISOString();
+  var smsServiceOptIn = data.smsService === 'yes';
   var submissionData = Object.assign({}, data, {
-    coverage_type:'Landlord Insurance', lead_source:'Website Landlord Quote Page',
-    form_page:'/landlord-insurance-quote', files_noted:fileNames,
-    submitted_at:new Date().toISOString()
+    coverage_type:'Landlord Insurance',
+    source:'website',
+    lead_source:'Website Landlord Quote Page',
+    lead_status:'new',
+    form:'landlord_quote',
+    form_page:'/landlord-insurance-quote',
+    files_noted:fileNames,
+    submitted_at:submittedAt,
+    smsService: smsServiceOptIn ? 'yes' : '',
+    smsServiceConsent: smsServiceOptIn ? 'yes' : 'no',
+    smsOptInTimestamp: smsServiceOptIn ? submittedAt : '',
+    smsOptInSource: smsServiceOptIn ? 'Website Landlord Quote Page' : '',
+    smsOptInPageUrl: smsServiceOptIn ? window.location.href : '',
+    smsDisclosureVersion:'landlord-service-v1'
   });
   ['construction_type','sq_footage','num_stories','num_units','roof_material','roof_shape','electrical_panel','plumbing_type','update_roof','update_electrical','update_plumbing','update_hvac','valuation_pref','monthly_rent','deductible_pref','form_pref','rental_type','commercial_space','commercial_pct','vacant_how_long','vacant_reason','vacant_secured','vacant_utilities','vacant_renovation','reno_scope','reno_pct_complete','reno_gc','reno_occupied','has_pool','pool_fenced','pool_diving','has_trampoline','has_dogs','dog_breeds','has_wood_stove','loss_details','has_lapse','lapse_explain','fl_coast_distance','fl_wind_mit','fl_sinkhole','mortgagee_info'].forEach(function(id){
     var v = opt(id); if (v) submissionData[id] = v;
