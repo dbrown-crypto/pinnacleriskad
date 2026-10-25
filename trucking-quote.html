@@ -1,7 +1,20 @@
 <!DOCTYPE html> 
 <html lang="en">
-<head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<head>
 <meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
+<script>
+/* Retire data-bearing links before analytics or other third-party code runs.
+   This cannot erase URLs already retained in mail, history, or server logs. */
+(function () {
+  var url = new URL(window.location.href);
+  if (!url.searchParams.has('view_submission')) return;
+  window.pinnacleRetiredSubmissionLink = true;
+  url.searchParams.delete('view_submission');
+  window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Commercial Trucking Insurance Quote | Pinnacle Risk Advisors</title>
 <!-- Google tag (gtag.js) - Google Ads -->
@@ -890,7 +903,26 @@ function truckingEntryPage() {
 });
 var lastSubmissionData={};
 function redownloadPDF(){if(Object.keys(lastSubmissionData).length>0){generateSubmissionPDF(lastSubmissionData);}}
+/* Only scalar, known packet fields enter the fixed HTML template. Encoding
+   through textContent makes applicant markup display literally in the packet. */
+function packetText(value) {
+  if (typeof value !== 'string' && typeof value !== 'number') return '';
+  var span = document.createElement('span');
+  span.textContent = String(value);
+  return span.innerHTML;
+}
+function packetFields(input) {
+  var output = Object.create(null);
+  var names = new Set(('business_name entity_type contact_name phone email address years_in_business effective_date annual_revenue usdot mc_number authority_status operation_type new_venture prior_coverage prior_carrier haul_radius states_of_operation cargo_type commodity_details power_unit_count trailer_count al_limit cargo_limit deductible files_noted notes cov_auto_liability cov_physical_damage cov_cargo cov_general_liability cov_bobtail cov_trailer_interchange cov_workers_comp cov_occ_accident cov_excess').split(' '));
+  Object.keys(input || {}).forEach(function (key) {
+    if (names.has(key) || /^(?:v(?:[1-9]|1[0-9]|20)_(?:year|make|model|type|vin|gvw|value|zip|comp_collision)|d(?:[1-9]|1[0-9]|20)_(?:name|dob|lic_state|lic_num|cdl|exp|violations))$/.test(key)) {
+      output[key] = packetText(input[key]);
+    }
+  });
+  return output;
+}
 function buildSubmissionDoc(d){
+  d = packetFields(d);
   var today=new Date();
   var dateStr=(today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
   var bizName=d.business_name||'Unknown';
@@ -935,7 +967,10 @@ function openPrintWindow(fullDoc){
     alert('Please allow pop-ups for this site to save your application copy. Your details have already been sent to our team.');
     return;
   }
-  win.document.open(); win.document.write(fullDoc); win.document.close(); win.focus();
+  var parsed = new DOMParser().parseFromString(fullDoc, 'text/html');
+  win.document.replaceChild(win.document.importNode(parsed.documentElement, true), win.document.documentElement);
+  win.opener = null;
+  win.focus();
   setTimeout(function(){
     try { win.print(); }
     catch(error) { PinnacleQuote.logDiagnostic('submission_print_failed', error); }
@@ -945,24 +980,14 @@ function generateSubmissionPDF(d){
   if(!d || Object.keys(d).length===0) return;
   openPrintWindow(buildSubmissionDoc(d));
 }
-/* Encode a submission into a link so the agent can re-open the same packet */
-function buildSubmissionLink(d){
-  try{
-    var copy={}; for(var k in d){ if(k!=='your_copy_link') copy[k]=d[k]; }
-    return window.location.origin + '/trucking-quote.html?view_submission=' +
-           btoa(unescape(encodeURIComponent(JSON.stringify(copy))));
-  }catch(error){ PinnacleQuote.logDiagnostic('submission_link_failed', error); return ''; }
-}
-/* If opened via an agent copy link, render the packet ready to Save-as-PDF */
-window.addEventListener('DOMContentLoaded', function(){
-  try{
-    var enc = new URLSearchParams(window.location.search).get('view_submission');
-    if(!enc) return;
-    var d = JSON.parse(decodeURIComponent(escape(atob(enc))));
-    var bar = '<div style="position:fixed;top:0;left:0;right:0;background:#0A1A30;color:#fff;padding:11px 20px;font-family:Arial,sans-serif;font-size:13px;z-index:99999;display:flex;justify-content:space-between;align-items:center;"><span><b>Pinnacle Risk Advisors</b>. Submission Copy</span><button onclick="window.print()" style="background:#C9A94E;color:#0A1A30;border:none;padding:8px 18px;font-weight:700;border-radius:3px;cursor:pointer;font-family:Arial,sans-serif;">Save as PDF / Print</button></div><div style="height:46px;"></div>';
-    var doc = buildSubmissionDoc(d).replace('<body>', '<body>'+bar);
-    document.open(); document.write(doc); document.close();
-  }catch(e){ console.error('Could not render submission link:', e); }
+/* Legacy links no longer decode or render submitted data. */
+window.addEventListener('DOMContentLoaded', function () {
+  if (!window.pinnacleRetiredSubmissionLink) return;
+  var notice = document.createElement('p');
+  notice.setAttribute('role', 'status');
+  notice.style.cssText = 'padding:16px;background:#fff4d6;color:#0A1A30;text-align:center;';
+  notice.textContent = 'This submission-copy link has been retired to protect personal information. Contact Pinnacle Risk Advisors at (770) 758-3197 for your application copy. You do not need to submit another quote request.';
+  document.body.prepend(notice);
 });
 
 var EMAILJS_SERVICE_ID  = 'service_mefkv18';
@@ -1033,7 +1058,7 @@ async function sendPDFByEmail(data) {
 
       lead_source:         data.lead_source         || 'Website Trucking Quote Page',
 
-      submission_pdf_link: buildSubmissionLink(data),
+      submission_pdf_link: '', // No personal data or bearer link in notification emails.
 
       submitted_at:        data.submitted_at        || new Date().toISOString()
 
