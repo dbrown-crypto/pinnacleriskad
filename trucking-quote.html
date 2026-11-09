@@ -611,7 +611,7 @@ html:not(.pra-js) .pramob-close{display:none}
           <div class="field"><label>Number of Power Units <span class="req">*</span></label><select name="power_unit_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>11 to 20</option><option>More than 20</option></select></div>
           <div class="field"><label>Number of Trailers &#9670;</label><select name="trailer_count"><option value="">Select one</option><option>None</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select></div>
         </div>
-        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. Upload your vehicle schedule at the last step (or skip it) and we'll pick up the rest from there. no need to type every unit.</div>
+        <div class="fleet-note" id="fleet-note-vehicles"><strong>Larger fleet?</strong> Just enter your first 5 units here. We'll request your complete vehicle schedule after reviewing your quote request.</div>
         <div class="repeat-wrap" id="vehicle-list">
           <div class="repeat-item" id="vehicle-1">
             <div class="repeat-header"><span class="repeat-label">Vehicle 1</span></div>
@@ -643,7 +643,7 @@ html:not(.pra-js) .pramob-close{display:none}
       <div class="form-section-head"><span class="fs-num">05</span><span class="fs-title">Driver <em>Information</em></span><span class="fs-desc">All scheduled drivers</span></div>
       <div class="form-section-body">
         <div class="field" style="max-width:280px;margin-bottom:20px;"><label>Total Number of Drivers <span class="req">*</span></label><select name="driver_count" required><option value="">Select one</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6 to 10</option><option>More than 10</option></select><span class="field-err">Please select how many drivers you have.</span></div>
-        <div class="fleet-note" id="fleet-note-drivers"><strong>More than 5 drivers?</strong> Enter your first 5 here. Upload a driver list at the last step (or skip it) and we'll follow up for the remainder.</div>
+        <div class="fleet-note" id="fleet-note-drivers"><strong>More than 5 drivers?</strong> Enter your first 5 here. We'll request your complete driver list after reviewing your quote request.</div>
         <div class="repeat-wrap" id="driver-list">
           <div class="repeat-item" id="driver-1">
             <div class="repeat-header"><span class="repeat-label">Driver 1</span></div>
@@ -703,15 +703,7 @@ html:not(.pra-js) .pramob-close{display:none}
     <div class="form-section">
       <div class="form-section-head"><span class="fs-num">07</span><span class="fs-title">Documents &amp; <em>Notes</em></span><span class="fs-desc">Everything here is optional</span></div>
       <div class="form-section-body">
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Uploading supporting documents helps us start your quote faster, but <strong>nothing on this step is required.</strong> You can submit right now and we'll request anything else we need.</p>
-        <p style="font-size:11.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-style:italic;">If uploads are not completed, we will request them after reviewing your quote request.</p>
-        <div class="upload-grid">
-          <div class="upload-zone"><div class="upload-icon">&#x1FAFB;</div><div class="upload-label">Driver Licenses</div><div class="upload-hint">PDF, JPG, or PNG</div><div class="upload-status" id="status_upload_dl">&#x2713; File selected</div><input type="file" id="upload_dl" name="upload_dl" accept=".pdf,.jpg,.jpeg,.png" multiple onchange="showStatus(this,'status_upload_dl')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4C4;</div><div class="upload-label">Current Declarations Page</div><div class="upload-hint">PDF preferred</div><div class="upload-status" id="status_upload_dec">&#x2713; File selected</div><input type="file" id="upload_dec" name="upload_dec" accept=".pdf,.jpg,.jpeg,.png" onchange="showStatus(this,'status_upload_dec')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CA;</div><div class="upload-label">Loss Runs</div><div class="upload-hint">3 to 5 years preferred</div><div class="upload-status" id="status_upload_loss">&#x2713; File selected</div><input type="file" id="upload_loss" name="upload_loss" accept=".pdf,.xls,.xlsx,.csv" multiple onchange="showStatus(this,'status_upload_loss')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CB;</div><div class="upload-label">Vehicle Schedule</div><div class="upload-hint">List of all units</div><div class="upload-status" id="status_upload_sched">&#x2713; File selected</div><input type="file" id="upload_sched" name="upload_sched" accept=".pdf,.xls,.xlsx,.csv" onchange="showStatus(this,'status_upload_sched')"></div>
-          <div class="upload-zone"><div class="upload-icon">&#x1F4CE;</div><div class="upload-label">Other Supporting Documents</div><div class="upload-hint">Contracts, safety plans, etc.</div><div class="upload-status" id="status_upload_other">&#x2713; File selected</div><input type="file" id="upload_other" name="upload_other" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple onchange="showStatus(this,'status_upload_other')"></div>
-        </div>
+        <p class="step-intro"><strong>Submit your quote details now.</strong> We will contact you to collect driver licenses, current declarations, loss runs, and any vehicle or driver schedules. Documents are collected separately; this page does not upload files.</p>
         <div class="fdivider"></div>
         <div class="field"><label>Notes for Your Agent &#9670;</label><textarea name="notes" rows="4" placeholder="Contracts you're on, safety practices, prior coverage history, losses, or anything else that matters for underwriting. The more context you provide, the better we can shop your account."></textarea></div>
       </div>
@@ -729,9 +721,9 @@ html:not(.pra-js) .pramob-close{display:none}
     <div class="success-icon">&#x2713;</div>
     <h2>Quote Request Received</h2>
     <p>Thank you. Your trucking quote request has been received. Pinnacle Risk Advisors will review your information and contact you if anything else is needed.</p>
-    <p style="font-size:12px;color:var(--muted);margin-top:-10px;">Your carrier submission PDF is downloading now. Check your downloads folder.</p>
+    <p style="font-size:12px;color:var(--muted);margin-top:-10px;">Use the button below to print or save a copy of your application as a PDF. Your entered details have been sent to Pinnacle Risk Advisors.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-      <button onclick="redownloadPDF()" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--navy);border:none;border-radius:3px;padding:11px 24px;cursor:pointer;">Download PDF Again</button>
+      <button onclick="redownloadPDF()" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--navy);border:none;border-radius:3px;padding:11px 24px;cursor:pointer;">Print / Save Application PDF</button>
       <a class="success-back" href="https://pinnacleriskad.com/">Return to Homepage</a>
     </div>
   </div>
@@ -845,12 +837,7 @@ document.getElementById('truckingQuoteForm').addEventListener('submit',async fun
   var data=PinnacleQuote.formToObject(this);
   var honeypot=data.website||'';
   delete data.website;
-  var uploadedFileNames=[];
-  ['upload_dl','upload_dec','upload_loss','upload_sched','upload_other'].forEach(function(id){
-    var input=document.getElementById(id);
-    if(input&&input.files.length>0){Array.from(input.files).forEach(function(f){uploadedFileNames.push(id+': '+f.name);});}
-  });
-  data['files_noted']=uploadedFileNames.length>0?uploadedFileNames.join(' | '):'No files uploaded at time of submission. Follow up required.';
+  data['files_noted']='Documents not uploaded. Agency to request supporting documents separately.';
 function truckingEntryPage() {
   var allowed=['/trucking','/new-authority-trucking-insurance','/georgia-motor-carrier-insurance','/georgia-bobtail-non-trucking-liability'];
   function clean(value){return '/'+String(value||'').replace(/^\//,'').replace(/\.html$/,'').replace(/\/$/,'');}
@@ -883,7 +870,8 @@ function truckingEntryPage() {
     data['cargo']=data['cargo_type']||'';
     data['states']=data['states_of_operation']||'';
     data['current_carrier']=data['prior_carrier']||'';
-    var primary=await quoteSession.submitComplete(data,honeypot);
+    var crmFields=Object.assign({},data,{notes:buildTruckingDetails(data)});
+    var primary=await quoteSession.submitComplete(crmFields,honeypot);
     if(!primary.duplicate){
       await PinnacleQuote.notifySecondary(function(){return sendPDFByEmail(data);});
       if (typeof gtag === 'function') {
@@ -894,7 +882,7 @@ function truckingEntryPage() {
     document.getElementById('truckingQuoteForm').style.display='none';
     document.getElementById('success-screen').style.display='block';
     document.getElementById('success-screen').scrollIntoView({behavior:'smooth'});
-    setTimeout(function(){generateSubmissionPDF(data);},800);
+    // Open the printable copy only from the customer button to avoid popup blocking.
   }catch(err){
     btn.textContent='Submit Trucking Quote Request';btn.disabled=false;
     PinnacleQuote.logDiagnostic('trucking_complete_submit_failed',err);
@@ -929,13 +917,13 @@ function buildSubmissionDoc(d){
   var safeFileName='Pinnacle-Trucking-Submission-'+bizName.replace(/[^a-z0-9]/gi,'_')+'-'+today.getFullYear()+(today.getMonth()+1).toString().padStart(2,'0')+today.getDate().toString().padStart(2,'0')+'.pdf';
   var vehicleRows='';
   for(var vi=1;vi<=20;vi++){
-    if(!d['v'+vi+'_year']&&!d['v'+vi+'_make'])break;
+    if(!Object.keys(d).some(function(k){return k.indexOf('v'+vi+'_')===0 && d[k];}))continue;
     vehicleRows+='<tr><td>'+vi+'</td><td>'+(d['v'+vi+'_year']||'')+'</td><td>'+(d['v'+vi+'_make']||'')+'</td><td>'+(d['v'+vi+'_model']||'')+'</td><td>'+(d['v'+vi+'_type']||'')+'</td><td style="font-size:9px;">'+(d['v'+vi+'_vin']||'')+'</td><td>'+(d['v'+vi+'_gvw']||'')+'</td><td>'+(d['v'+vi+'_value']||'')+'</td><td>'+(d['v'+vi+'_zip']||'')+'</td><td>'+(d['v'+vi+'_comp_collision']||'')+'</td></tr>';
   }
   if(!vehicleRows)vehicleRows='<tr><td colspan="10" style="color:#999;font-style:italic;text-align:center;">No vehicle details entered</td></tr>';
   var driverRows='';
   for(var di=1;di<=20;di++){
-    if(!d['d'+di+'_name'])break;
+    if(!Object.keys(d).some(function(k){return k.indexOf('d'+di+'_')===0 && d[k];}))continue;
     driverRows+='<tr><td>'+di+'</td><td>'+(d['d'+di+'_name']||'')+'</td><td>'+(d['d'+di+'_dob']||'')+'</td><td>'+(d['d'+di+'_lic_state']||'')+'</td><td>'+(d['d'+di+'_lic_num']||'')+'</td><td>'+(d['d'+di+'_cdl']||'')+'</td><td>'+(d['d'+di+'_exp']||'')+'</td><td>'+(d['d'+di+'_violations']||'')+'</td></tr>';
   }
   if(!driverRows)driverRows='<tr><td colspan="8" style="color:#999;font-style:italic;text-align:center;">No driver details entered</td></tr>';
@@ -994,6 +982,49 @@ var EMAILJS_SERVICE_ID  = 'service_mefkv18';
 
 var EMAILJS_TEMPLATE_ID = 'template_fc0ufgx';
 
+/* Keep the application in the existing notes field, which the current email
+   template already displays and CRM workflows can save without per-row mapping.
+   No applicant details are placed in URLs or public documents. */
+function buildTruckingDetails(data) {
+  var lines=['COMPLETE TRUCKING APPLICATION',
+    'Application details are included below. Print or save this email as PDF; no external PDF link is required.'];
+  function value(key){var v=data[key];return v===undefined||v===null||v===''?'Not provided':String(v);}
+  function section(title,entries){lines.push('',title);entries.forEach(function(entry){lines.push(entry[1]+': '+value(entry[0]));});}
+  section('CONTACT & BUSINESS',[
+    ['business_name','Business name'],['contact_name','Contact name'],['phone','Phone'],['email','Email'],
+    ['entity_type','Entity type'],['years_in_business','Years in business'],['address','Mailing address'],
+    ['effective_date','Requested effective date'],['annual_revenue','Estimated annual revenue']]);
+  section('OPERATIONS',[
+    ['usdot','USDOT'],['mc_number','MC number'],['authority_status','Authority status'],['operation_type','Operation type'],
+    ['new_venture','New venture'],['prior_coverage','Prior coverage'],['prior_carrier','Prior carrier'],
+    ['haul_radius','Haul radius'],['states_of_operation','States of operation'],['cargo_type','Primary cargo'],
+    ['commodity_details','Commodity details'],['power_unit_count','Power unit count'],['trailer_count','Trailer count'],['driver_count','Driver count']]);
+  function schedule(prefix,title,fields){
+    var found=false;
+    for(var i=1;i<=20;i++){
+      var key=prefix+i+'_';
+      if(!fields.some(function(f){return data[key+f[0]]!==undefined&&data[key+f[0]]!=='';}))continue;
+      found=true;section(title+' '+i,fields.map(function(f){return[key+f[0],f[1]];}));
+    }
+    if(!found)lines.push('',title+' DETAILS: Not provided');
+  }
+  schedule('v','VEHICLE',[
+    ['year','Year'],['make','Make'],['model','Model'],['type','Vehicle type'],['vin','VIN'],
+    ['gvw','GVW (lbs)'],['value','Stated value'],['zip','Garaging ZIP'],['comp_collision','Comp & collision']]);
+  schedule('d','DRIVER',[
+    ['name','Full name'],['dob','Date of birth'],['lic_state','License state'],['lic_num','License number'],
+    ['cdl','CDL class'],['exp','Commercial experience'],['violations','Accidents / violations']]);
+  lines.push('','COVERAGE REQUESTED');
+  [['cov_auto_liability','Auto liability'],['cov_physical_damage','Physical damage'],['cov_cargo','Motor truck cargo'],
+   ['cov_general_liability','General liability'],['cov_bobtail','Bobtail / NTL'],['cov_trailer_interchange','Trailer interchange'],
+   ['cov_workers_comp','Workers compensation'],['cov_occ_accident','Occupational accident'],['cov_excess','Excess / umbrella']]
+    .forEach(function(f){lines.push(f[1]+': '+(data[f[0]]==='Yes'?'Requested':'Not selected'));});
+  section('LIMITS & DEDUCTIBLE',[['al_limit','Auto liability limit'],['cargo_limit','Cargo limit'],['deductible','Deductible preference']]);
+  section('DOCUMENTS & CUSTOMER NOTES',[['files_noted','Documents'],['notes','Customer notes']]);
+  section('SUBMISSION',[['lead_source','Source'],['source_page','Entry page'],['submitted_at','Submitted at']]);
+  return lines.join('\n');
+}
+
 async function sendPDFByEmail(data) {
 
   try {
@@ -1041,6 +1072,7 @@ async function sendPDFByEmail(data) {
       haul_radius:         data.haul_radius         || 'Not provided',
 
       states_of_operation: data.states_of_operation || 'Not provided',
+      states:              data.states_of_operation || 'Not provided',
 
       prior_coverage:      data.prior_coverage      || 'Not provided',
 
@@ -1052,13 +1084,13 @@ async function sendPDFByEmail(data) {
 
       coverages_summary:   covs.length > 0 ? covs.join(', ') : 'None selected',
 
-      notes:               data.notes               || 'None',
+      notes:               buildTruckingDetails(data),
 
       files_noted:         data.files_noted         || 'No files uploaded',
 
       lead_source:         data.lead_source         || 'Website Trucking Quote Page',
 
-      submission_pdf_link: '', // No personal data or bearer link in notification emails.
+      submission_pdf_link: '', // Full application is in notes; never restore data-bearing URLs.
 
       submitted_at:        data.submitted_at        || new Date().toISOString()
 

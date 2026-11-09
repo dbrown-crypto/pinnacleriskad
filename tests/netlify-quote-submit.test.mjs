@@ -361,3 +361,22 @@ test('maximum household size fits the new field limit with all vehicle garaging 
   assert.equal(upstream.d12_license_number, 'TEST12345');
   assert.equal(testExports.personalAutoDynamicField('v11_garaging_street'), false);
 });
+
+
+test('trucking application notes exceeding 12k reach CRM intact with individual fields', async () => {
+  const notes='COMPLETE TRUCKING APPLICATION\n'+'TEST DRIVER DETAILS\n'.repeat(700);
+  let forwarded;
+  globalThis.fetch=async (_url,options)=>{forwarded=JSON.parse(options.body);return new Response('{}',{status:200});};
+  const body=payload({line_of_business:'trucking',fields:{
+    contact_name:'TEST CONTACT',phone:'2025550196',email:'test@example.invalid',business_name:'TEST TRUCKING',
+    operation_type:'Fleet',haul_radius:'Long Haul',cargo_type:'General Freight',power_unit_count:'5',driver_count:'5',
+    d1_name:'TEST DRIVER',d1_lic_num:'TEST-LICENSE',v1_vin:'TEST-VIN',notes
+  }});
+  const response=await quoteSubmit(request(body));
+  assert.equal(response.status,200);
+  assert.equal(forwarded.notes,notes.trim());
+  assert.equal(forwarded.d1_lic_num,'TEST-LICENSE');
+  assert.equal(forwarded.v1_vin,'TEST-VIN');
+  body.fields.notes='x'.repeat(48001);
+  assert.equal((await quoteSubmit(request(body))).status,422);
+});
