@@ -156,11 +156,11 @@ function personalAutoDynamicField(field) {
   return /^(?:d(?:[1-9]|1[0-2])_(?:name|dob|license_number|license_state|relationship|cdl|incidents)|v(?:[1-9]|10)_(?:vin|vin_status|classic|year|make|model|trim|body_class|vehicle_type|drive_type|fuel_type|primary_driver|ownership|use|annual_mileage|coverage|same_garaging|garaging_street|garaging_unit|garaging_city|garaging_state|garaging_zip))$/.test(field);
 }
 
-function sanitizeValue(value, field) {
-  const maxLength = ['notes', 'note', 'details', 'description', 'commodity_details', 'loss_details'].includes(field) ? 12000 : 2000;
+function sanitizeValue(value, field, line) {
+  const maxLength = line === 'trucking' && field === 'notes' ? 48000 : ['notes', 'note', 'details', 'description', 'commodity_details', 'loss_details'].includes(field) ? 12000 : 2000;
   if (Array.isArray(value)) {
     if (value.length > 20) throw new Error('too_many_values');
-    return value.map((item) => sanitizeValue(item, field));
+    return value.map((item) => sanitizeValue(item, field, line));
   }
   if (value !== null && !['string', 'number', 'boolean'].includes(typeof value)) throw new Error('invalid_type');
   const clean = value === null ? '' : String(value).trim();
@@ -358,7 +358,7 @@ async function handleSubmission(request) {
 
   let cleanFields = {};
   try {
-    for (const [field, value] of Object.entries(data.fields)) cleanFields[field] = sanitizeValue(value, field);
+    for (const [field, value] of Object.entries(data.fields)) cleanFields[field] = sanitizeValue(value, field, line);
   } catch {
     return fail(422, 'invalid_field_value', 'One or more quote fields are invalid.');
   }
